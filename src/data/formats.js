@@ -1,0 +1,589 @@
+﻿import { T } from "@/lib/theme";
+
+const IMG={
+  /* HOME. Hero atmospheric: Long candlelit table, crystal, warm amber glow.
+     Aspect: 21/9 | Mood: Anticipation. The room before everyone arrives.
+     File: hero-dinner-table.webp | PLACEHOLDER. replace with commissioned photo */
+  table:"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&q=85&fit=crop",
+
+  /* HOME. How it works: Intimate table set, dark moody, candles and wine glasses.
+     Aspect: 21/9 | Mood: Warmth. Proof the room is real.
+     File: composed-room-candles.webp | PLACEHOLDER */
+  dinner:"https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85&fit=crop",
+
+  /* CIRCLE. Atmosphere: Taper candles in dark room, amber bokeh.
+     Aspect: 21/9 | Mood: Intimacy. The light people gather around.
+     File: taper-candles-dark.webp | PLACEHOLDER */
+  candles:"https://images.unsplash.com/photo-1602920838667-3c5c1b83a835?w=1400&q=85&fit=crop",
+
+  /* HOME. Guest section: Close crop of hands, wine, warm tones. No faces.
+     Aspect: 21/9 | Mood: Togetherness without identity.
+     File: guests-warm-light.webp | PLACEHOLDER */
+  hands:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1400&q=85&fit=crop",
+
+  /* EXCHANGE. Grand Journeys: Tuscan/Provencal vineyard at golden hour.
+     Aspect: 21/9 | Mood: Cinematic possibility. The destination as character.
+     File: journey-vineyard-golden.webp | PLACEHOLDER */
+  vineyard:"https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=85&fit=crop",
+
+  /* EXCHANGE. Threshold: Grand entrance with warm light spilling outward.
+     Aspect: 21/9 | Mood: The moment before you walk in.
+     File: entrance-warm-light.webp | PLACEHOLDER */
+  door:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=85&fit=crop",
+
+  /* EXCHANGE. Atmospheric: Wine being poured, dark background, luxury.
+     Aspect: 21/9 | Mood: Ceremony. The pour as ritual.
+     File: wine-pour-close.webp | PLACEHOLDER */
+  wine:"https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1400&q=85&fit=crop",
+
+  /* EXCHANGE. City Escapes: European courtyard, stone, dappled light.
+     Aspect: 21/9 | Mood: Discovery. A table in a place you did not know existed.
+     File: courtyard-stone-table.webp | PLACEHOLDER */
+  courtyard:"https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=1400&q=85&fit=crop",
+
+  /* APPLY. Writing: Notebook, heavy paper, close crop, editorial.
+     Aspect: 21/9 | Mood: Considered words. The introduction as craft.
+     File: handwritten-invitation.webp | PLACEHOLDER */
+  pen:"https://images.unsplash.com/photo-1517842645767-c639042777db?w=1400&q=85&fit=crop",
+
+  /* FOUNDER. Coast: Italian/Ligurian coast at golden hour.
+     Aspect: 21/9 | Mood: Origin. Where the practice began.
+     File: ligurian-coast-golden.webp | PLACEHOLDER */
+  coast:"https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1400&q=85&fit=crop",
+
+  /* JOURNAL. End of evening: Empty glasses, candle stubs, warmth, nobody left.
+     Aspect: 21/9 | Mood: The room ran late. Nobody wanted to leave.
+     File: evening-end-warmth.webp | PLACEHOLDER */
+  dessert:"https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1400&q=85&fit=crop",
+
+  /* HOUSE. Architecture: Grand interior, warm stone corridor.
+     Aspect: 21/9 | Mood: Institutional permanence. The building remembers.
+     File: grand-interior-corridor.webp | PLACEHOLDER */
+  hallway:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=85&fit=crop",
+};
+/* === DATA === */
+const CW=[
+  {lBg:T.copper,rBg:"rgba(160,80,37,.85)",txt:T.cream,sub:"rgba(250,244,238,.7)",acc:T.goldL,roleC:T.goldL,qm:"rgba(250,244,238,.15)",lbl:T.goldL,div:`linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`,border:"rgba(250,244,238,.12)"},
+  {lBg:T.bg,rBg:"rgba(201,149,108,.015)",txt:T.cream,sub:"rgba(250,244,238,.72)",acc:T.gold,roleC:T.gold,qm:"rgba(201,168,76,.2)",lbl:T.gold,div:`linear-gradient(90deg,${T.gold},${T.rose})`,border:"rgba(201,168,76,.08)"},
+  {lBg:T.damson,rBg:"rgba(45,11,56,.8)",txt:T.cream,sub:"rgba(250,244,238,.72)",acc:T.goldL,roleC:T.goldL,qm:"rgba(226,201,126,.18)",lbl:T.goldL,div:`linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`,border:"rgba(226,201,126,.08)"},
+  {lBg:T.offW,rBg:T.white,txt:"#2E1240",sub:"#4A2660",acc:T.gold,roleC:T.gold,qm:"rgba(201,168,76,.12)",lbl:T.gold,div:`linear-gradient(90deg,${T.gold},${T.rose})`,border:"rgba(201,168,76,.06)"},
+];
+const FOUNDERS=[
+  {name:"Gigi Brown",city:"London · Accra · Liguria",quote:"I know what a good room smells like. Sounds like. Tastes like. I learned it in three kitchens: one in Accra where strangers were fed before they were asked their name, one in Ealing where the door was never locked, and one on the Ligurian coast where lunch began at one and nobody noticed the stars were out until someone reached for a candle. I spent twenty years composing that feeling for other people. Then I came home and realised I could not find it for myself. So I composed the first room.",interests:"Why the best conversations happen after midnight, la bella figura as a philosophy of attention, West African hospitality as a way of life, the Ligurian coastline from a racing bike at dawn",cw:0},
+  {name:"Lesley Sackey",city:"Hertfordshire · Accra",quote:"I built a business from my kitchen while my children were asleep upstairs. Nobody tells you the loneliest part of running a company is having nobody to talk to who is not on your payroll. I do not need another advisor. I need someone to have dinner with who understands what it costs.",interests:"What it takes to build something alone, the gap between ambition and support, how women carry businesses and families in the same hands",cw:1},
+  {name:"Samuel Appiah",city:"London · Accra · Cape Town",quote:"Most people hate being photographed. They stiffen. They perform. Around the fourth minute something shifts. The face they arrived with falls away and the real one appears. That is the photograph. Everything before it is noise. I spend my life waiting for that fourth minute. The Ɔuse is the only place I have found where it happens in conversation too.",interests:"The four minutes before a person stops performing, why the best portraits are taken mid-sentence, how light and trust arrive at the same moment",cw:2},
+  {name:"Michael Pearce",city:"London · Dubai · Kabul",quote:"I have sat in rooms where the stakes were life and death and rooms where the stakes were a quarterly report. After Kabul I came back with no tolerance left for small talk. I would rather sit in silence with someone honest than make conversation with someone polished. If you have ever felt that, you already know why I am here.",interests:"What people reveal when they stop performing, the distance between a polished life and an honest one, why the most interesting people in any room rarely speak first",cw:3},
+  {name:"Emma Wainwright",city:"London · Aberdeen · Edinburgh",quote:"I have spent twenty years studying what makes people feel they belong somewhere. The research says it is not the building or the programme or the price of entry. It is whether someone noticed you arrived. Whether the room was designed so you did not have to perform. Whether you left feeling more yourself than when you walked in. I read about these things for a living. The Ɔuse is the first place I have experienced them.",interests:"Why belonging is spatial before it is emotional, what a room does to the people inside it, the geography of who gets to feel at home and who does not",cw:0},
+  {name:"Ilaria Ferretti",city:"Florence · London",quote:"My grandfather opened his restaurant in 1962 with eleven places and a handshake with the landlord. I am the third generation. I have watched food become content. Photographs of plates nobody tasted. Reviews from people who ate alone. I miss the room where nobody took a photograph because they were too busy talking.",interests:"The Italian kitchen as a philosophy of life, why the best meals are the ones nobody photographs, hospitality as a form of love that does not ask for anything back",cw:1},
+  {name:"Priya Sharma",city:"Jaipur · London",quote:"I built my first company from a bedroom in Jaipur and sold it to a firm in San Francisco without ever meeting them in person. The money was good. The silence afterwards was not. I built the second company because I missed having people in the room. Turns out the room was the thing I was building all along.",interests:"Why the loneliest people in any city are often the ones building the most, Mughal garden design as a way of thinking about what belongs beside what, the difference between connection and proximity",cw:3},
+  {name:"Laïla Lamey",city:"London",quote:"I have cooked for eight Champions League and Premier League finals. Forty thousand people in the stadium and I am underneath it making sure the timing is right. Nobody sees you. Nobody knows your name. You just make sure the room is fed and the room is good. I write the same way. Quietly. Late at night. Books nobody has read yet because I have not shown them to anyone. Arsenal is the only place I am loud.",interests:"What feeding people at scale teaches you about attention to detail, why the best writing happens when nobody is watching, the discipline of working where no one sees you",cw:0},
+];
+
+const FAQ_DATA=[
+  {q:"What is the Ɔuse ɔf Clio?",a:"A private house in London that composes rooms. Before each gathering, a host reads every profile and decides who sits beside whom. You arrive knowing who is in the room. The person beside you was placed there for a reason. You pay only for the rooms you attend. There is no membership fee."},
+  {q:"How is the Ɔuse ɔf Clio different from Soho House?",a:"Soho House is a place you go. The Ɔuse ɔf Clio is a room composed for you. There is no building, no lounge, no open bar. Before each gathering you receive a written portrait of every person at your table. A host decides who sits beside whom. Every room is composed once and never repeated. The rooms are capped at twenty-two. Soho House has 250,000 members. The Ɔuse caps each city at 600."},
+  {q:"What are the best private dining experiences in London?",a:"The Ɔuse ɔf Clio offers composed private dinners where every guest is selected and every seat is placed by hand. Before you arrive, you receive a portrait of every person at your table. A host greets you by name. The format is designed so the same people meet again across different tables. Gatherings run seasonally in private rooms across London."},
+  {q:"How do I meet interesting people in London?",a:"The Ɔuse ɔf Clio solves this by composing rooms where every person is selected and placed beside someone specific. You receive portraits before arrival. A host introduces you. The Returning Table meets every two to three weeks so the same people cross paths again. Entry is by introduction or expression of interest."},
+  {q:"I am nervous about walking in alone.",a:"You will not walk into an open room and hope for the best. A host meets you at the door. Says your name. Introduces you to the first person you should meet. Within ten minutes, you are in conversation, not because you forced it, but because the room was designed for it. Every person at the table received a portrait of you before they arrived. They already know what fascinates you."},
+  {q:"What makes the Ɔuse different from a private members club?",a:"You will not stand in a room hoping someone talks to you. Before each gathering, you receive a written portrait of every person at your table. A host has decided who sits beside whom. The conversation does not start from zero. There is no building, no lounge, no open bar. Every room is composed once and never repeated."},
+  {q:"Where is the Ɔuse ɔf Clio based?",a:"London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people."},
+  {q:"Who founded the Ɔuse ɔf Clio?",a:"Gigi Brown. Born in Ghana, based in London. Twenty years composing rooms across three continents in tourism, conference production, and incentive travel. Co-founder of Inska Hub and Accra Konnect."},
+  {q:"What kind of people are in the room?",a:"People whose lives have taken them somewhere interesting. Founders, architects, surgeons, writers, venture capitalists, cultural thinkers. There is no single type. The House is shaped by range, not by any one profile. People who are curious about others and have a point of view."},
+  {q:"How are people selected?",a:"Every person is introduced by someone already in the room, or selected from the register of interest. We look for curiosity, range, and warmth. Not everyone who applies is accepted. That is what protects the quality of the room."},
+  {q:"What is a composed gathering?",a:"A gathering where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. A host greets each person by name. The conversation does not start from zero. Pioneered by the Ɔuse ɔf Clio in London."},
+  {q:"What happens after I write to you?",a:"A person reads your words. If there is alignment, we reply with a conversation. If there is not, we say so directly."},
+  {q:"How often does the House meet?",a:"The Returning Table runs every two to three weeks. The Walk runs fortnightly. A Distance Day happens quarterly. Two Societies, culture evenings and a riding group, keep the Circle alive between those. There is always a reason to return. There is never pressure to attend everything."},
+  {q:"I am an introvert. Is this for me?",a:"Yes. The House is designed for people who prefer real conversation to small talk. Profiles mean you never introduce yourself cold. The format is built for depth, not volume."},
+  {q:"What if I do not connect with anyone?",a:"Connection does not happen in a single evening. It happens through repetition. The Returning Table meets every two to three weeks. Some of the people at your next table were at your last one. Research shows it takes roughly 50 hours of shared time to form a genuine friendship. The programme is designed to deliver those hours."},
+  {q:"What is a supper lecture?",a:"A speaker talks for thirty minutes on a subject that changes how the room thinks. Then the speaker stays for dinner. The talk gives the table a shared reference. The dinner is where the real conversation happens. Supper lectures at the Ɔuse ɔf Clio seat thirty to sixty people."},
+  {q:"Does the Ɔuse ɔf Clio organise cycling journeys?",a:"Yes. Grand Journeys include cycling routes through Tuscany led by a professional cyclist, with composed company and composed tables every evening. The Ride, a fortnightly cycling Society, meets in London at conversational pace and ends at a table."},
+  {q:"How is my information handled?",a:"With complete discretion. Profiles are visible only to confirmed members before each sitting. Nothing is shared externally, sold, or used for any purpose beyond composing the room."},
+  {q:"What if the House is not for me?",a:"You may step away at any time. No contract. No obligation. You are part of the House for as long as it adds something to your life."},
+  {q:"Is the Ɔuse ɔf Clio a dating service?",a:"No. The Ɔuse is a cultural house designed for friendship, conversation, and belonging. Gatherings are mixed-gender, composed for range and curiosity, and the Standard explicitly protects the room from romantic pursuit. People come to meet people worth knowing, not to date."},
+  {q:"How much does the Ɔuse ɔf Clio cost?",a:"There is no membership fee. You pay only for the gatherings you attend. Prices reflect the venue, the food, and the craft of composition. They are shared after your introduction is accepted. There is no contract and no obligation."},
+  {q:"How does the Circle grow?",a:"Through the people inside it. Each member of the Circle holds a limited number of nominations per season. The people recruit the people. There is no advertising, no open application, and no public waitlist. Growth is governed by the quality of each introduction. The circle compounds because every new person is chosen by someone who already understands the standard."},
+  {q:"Will the Ɔuse expand to other cities?",a:"London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people. Each city opens only when the host, the format, and the circle are ready. The model is designed to travel. The standard is not negotiable."},
+  {q:"Why is there no building?",a:"The Ɔuse has no fixed premises. That is by design. The rooms change with each gathering. A Georgian townhouse for one evening. A private gallery for another. A vineyard for a journey. The format, the host, and the standard travel. The venue serves the room, not the other way around. This means every gathering can be held in the best possible space for that specific composition of people."},
+];
+
+
+export const JOURNAL_ARTICLES = [
+  {
+    id: 0,
+    slug: "i-had-900-contacts-and-nobody-to-call-on-a-sunday",
+    tag: "On the Lie We Tell",
+    title: "I Had 900 Contacts and Nobody to Call on a Sunday",
+    date: "June MMXXVI",
+    excerpt: "Nine hundred names. No one to call when the room goes quiet.",
+    bg: `linear-gradient(145deg,${T.copper},#7A3A18)`,
+    dark: true,
+    body: [
+      { t: "There is a man I know. Successful. Busy. Respected.", s: "b" },
+      { t: null },
+      { t: "Nine hundred people in his phone. Dinner invitations he declines because he has three others that week. A calendar so full his assistant manages his social life.", s: "b" },
+      { t: null },
+      { t: "Last Sunday he sat in his kitchen for forty minutes trying to think of one person he could call. Not for business. Not for a favour. Just to talk. Just to say I have been thinking about you, how are you, tell me something I do not know.", s: "b" },
+      { t: null },
+      { t: "He could not think of a single one.", s: "e" },
+      { t: null },
+      { t: "This is not a story about loneliness. Loneliness is too easy a word for it. This is about something harder to name. It is the thing that happens when your life is full and your world is small. When you know many people and none of them know you. When the last time someone asked you a question that was not about work was so long ago you cannot remember the answer.", s: "b" },
+      { t: null },
+      { t: "He is not unusual. He is normal.", s: "e" },
+      { t: null },
+      { t: "That is the terrifying part.", s: "b" },
+      { t: null },
+      { t: "Here is how it happens. You do not lose your friends in a fire. You lose them in a fog. One dinner you cancel because you are tired. One birthday you forget because it fell on a Thursday. One person you meant to call back who stopped trying after the third time. Nobody is angry. Nobody leaves. They just stop arriving. And one morning you look up from your life and the room is empty and you cannot remember when it happened because it happened so slowly it felt like nothing at all.", s: "b" },
+      { t: null },
+      { t: "The lie: I have people.", s: "e" },
+      { t: null },
+      { t: "The truth: you had people. You let the room empty because you were busy. It was not enough. It never is.", s: "b" },
+      { t: null },
+      { t: "The most expensive thing in your life is not your mortgage. It is every evening spent in a room that did not change you. Every dinner where you performed instead of spoke. Every year you told yourself next month I will make more effort and next month came and went and came and went until the version of you that believed in extraordinary rooms stopped existing.", s: "b" },
+      { t: null },
+      { t: "You lower the bar so slowly it feels like the floor.", s: "e" },
+      { t: null },
+      { t: "And then one Sunday you sit in your kitchen with nine hundred names in your phone and nobody to call and you think: how did I get here? But you know how. You got here the way everyone gets here. By waiting.", s: "b" },
+      { t: null },
+      { t: "The next room is being composed. The question is not whether you belong in it. The question is whether you will do something about it or whether you will read this, feel something, and then go back to your life exactly as it was.", s: "b" },
+      { t: null },
+      { t: "The room is not for most people.", s: "e" }
+    ]
+  },
+  {
+    id: 1,
+    slug: "forty-people-one-room-not-a-single-real-conversation",
+    tag: "On Performing",
+    title: "Forty People. One Room. Not a Single Real Conversation.",
+    date: "June MMXXVI",
+    excerpt: "A crowded room can still be emotionally vacant.",
+    bg: `linear-gradient(145deg,${T.offW},#EDE5DA)`,
+    dark: false,
+    body: [
+      { t: "Forty people. Beautiful room.", s: "b" },
+      { t: null },
+      { t: "And every single person was performing.", s: "e" },
+      { t: null },
+      { t: "I watched it from the corner because that is where you go when you have given up trying. Two men laughing at something neither found funny. A woman nodding at a story she had already heard twice. Three people standing in a loose circle, their bodies angled toward the room, scanning for someone more important than the person talking to them.", s: "b" },
+      { t: null },
+      { t: "Everyone was there. Nobody had arrived.", s: "e" },
+      { t: null },
+      { t: "You know this room. You have been in this room. You have been the person scanning and the person being scanned and you have gone home afterwards and felt something you could not quite name. Not loneliness. Something worse. The feeling of having been surrounded by people for three hours and not once being seen.", s: "b" },
+      { t: null },
+      { t: "Here is what nobody tells you about adult social life. It is not that you are alone. It is that you are performing. All the time. In every room. You are performing competence and confidence and ease and interest and the specific kind of charm that makes people want to keep talking to you. And underneath all of it you are exhausted. Because performing is tiring. And you have been doing it for so long you have forgotten what you sound like when you stop.", s: "b" },
+      { t: null },
+      { t: "I have a theory about why most rooms fail.", s: "e" },
+      { t: null },
+      { t: "They have no host. Not a person who booked the venue and sent the invitations. A host. Someone who knows every name. Someone who considered who should stand beside whom and why. Someone who has done the invisible work of composition so that when you walk in you do not have to perform because the room has already been designed to hold you.", s: "b" },
+      { t: null },
+      { t: "Without a host, every room is a stage. Everyone auditioning for attention nobody is giving.", s: "b" },
+      { t: null },
+      { t: "That is the room you have been going to for the past ten years. That is the room you are tired of. That is the room that made you stop believing evenings with strangers could be worth your time.", s: "b" },
+      { t: null },
+      { t: "You were not wrong to be tired. You were wrong about what was broken.", s: "e" },
+      { t: null },
+      { t: "It was not you. It was the room.", s: "b" }
+    ]
+  },
+  {
+    id: 2,
+    slug: "nobody-asked-what-i-did-for-a-living-it-was-the-best-night-in-years",
+    tag: "On Liberation",
+    title: "Nobody Asked What I Did for a Living. It Was the Best Night in Years.",
+    date: "July MMXXVI",
+    excerpt: "The right opening question changes the altitude of the whole room.",
+    bg: `linear-gradient(145deg,${T.bg},#0E0113)`,
+    dark: true,
+    body: [
+      { t: "I walked into a room of strangers and for three hours nobody asked me what I do for a living.", s: "b" },
+      { t: null },
+      { t: "I nearly wept. That sounds dramatic. It is not. If you have spent your adult life being sorted by your job title within ninety seconds of meeting someone, you know exactly what I mean.", s: "b" },
+      { t: null },
+      { t: "The question is a sorting mechanism.", s: "e" },
+      { t: null },
+      { t: "The answer determines how much eye contact you get. How much attention. Whether the person asking decides you are worth their evening. Lawyer. They lean in. Teacher. They look over your shoulder. Founder. They put their phone away. Retired. They are already gone.", s: "b" },
+      { t: null },
+      { t: "We have built an entire social architecture around a question that reduces a human being to their invoice. And the cruellest part is that most of us have internalised it so completely we introduce ourselves with it. Hi, I am Sarah, I work in consulting. As if that is the most interesting thing about you. As if the thing that pays your rent is the same thing that makes you worth knowing.", s: "b" },
+      { t: null },
+      { t: "It is not. It never was. And every room that opens with that question has already failed.", s: "e" },
+      { t: null },
+      { t: "What are you paying attention to right now. What changed the way you see something. What do you wish someone would ask you. What have you recently changed your mind about.", s: "b" },
+      { t: null },
+      { t: "These questions do not sort. They open. They take the conversation from the surface to the floor beneath it. They give the other person permission to be more than their job title.", s: "b" },
+      { t: null },
+      { t: "The profile system at the ?use was designed around this principle. Before each occasion, you receive a short portrait of every person who will be in the room. Not their job. What fascinates them. Where they have lived. What holds their attention when nobody is watching.", s: "b" },
+      { t: null },
+      { t: "By the time you arrive, you already know that the person beside you spent three years restoring a farmhouse in Puglia. That the person across from you has a private obsession with the mathematics of sound. That the person at the far end changed careers at forty five and has never looked back.", s: "b" },
+      { t: null },
+      { t: "You already know something better than their job title.", s: "b" },
+      { t: null },
+      { t: "The evening begins at a different altitude.", s: "e" },
+      { t: null },
+      { t: "The programme runs across four seasons. London first. Then Dublin. Then the cities that follow. Each room composed by hand for people who would rather be interesting than important.", s: "b" }
+    ]
+  },
+  {
+    id: 3,
+    slug: "the-seven-minutes-before-you-walk-in",
+    tag: "On the Door",
+    title: "The Seven Minutes Before You Walk In",
+    date: "July MMXXVI",
+    excerpt: "The hardest part of social life is often the walk to the door.",
+    bg: `linear-gradient(145deg,${T.damson},#1E0628)`,
+    dark: true,
+    body: [
+      { t: "I was standing outside the restaurant. I could see candles through the window. I could hear voices. I was seven minutes early and I did not know a single person inside.", s: "b" },
+      { t: null },
+      { t: "My thumb was already on my phone. The text was half written. So sorry, something came up. Will definitely make the next one. The lie was composed before I had even decided to send it.", s: "b" },
+      { t: null },
+      { t: "I have sent that text more times than I have walked through the door. I have cancelled more plans than I have kept. I have told myself I am tired when the truth is I am scared.", s: "b" },
+      { t: null },
+      { t: "Not scared of anything specific. Scared of the seven minutes. The walk from the station. The moment you see the door and your body says: turn around. Go home. Order something. Watch something. Nobody will notice. Nobody will care.", s: "b" },
+      { t: null },
+      { t: "This is the part of adult social life that nobody talks about. Not the event. Not the room. Not the conversation. The seven minutes before.", s: "e" },
+      { t: null },
+      { t: "I know this feeling because I have felt it a thousand times. The specific, physical vulnerability of being visible without purpose. Standing in a doorway with no one expecting you. No plus one. No name on a list you can see. Just you, your coat, and the question of whether you belong on the other side of that glass.", s: "b" },
+      { t: null },
+      { t: "That night, I went in. A woman at the door said my name before I said anything. She already knew who I was. She walked me to my place and introduced me to the person I was sitting next to. This is James. He spent three years in Oaxaca learning to cook mole from scratch. He is also terrified of being here.", s: "b" },
+      { t: null },
+      { t: "James laughed. I laughed. And the fear evaporated in about four seconds.", s: "b" },
+      { t: null },
+      { t: "The hand on the door is the price of entry. Everything good happens afterwards.", s: "e" },
+      { t: null },
+      { t: "The ?use is designed around that moment. Not the venue. Not the food. Not the conversation that comes later. The seven minutes before. The walk from the station. The hand on the door. Because every person at the ?use arrived alone the first time. Every single one of them knows what it cost.", s: "b" },
+      { t: null },
+      { t: "The next evening is being composed now. A host is writing profiles. Choosing who belongs beside whom. Preparing the room so that when you arrive, the seven minutes are already behind you.", s: "b" }
+    ]
+  },
+  {
+    id: 4,
+    slug: "you-cannot-remember-a-single-thing-anyone-said-last-friday",
+    tag: "On Forgetting",
+    title: "You Cannot Remember a Single Thing Anyone Said Last Friday",
+    date: "August MMXXVI",
+    excerpt: "Forgettable rooms cost more than an evening. They cost belief.",
+    bg: `linear-gradient(145deg,${T.damson},${T.bg})`,
+    dark: true,
+    body: [
+      { t: "You were there. You stayed two hours. You held a glass. You spoke to four people. Maybe five.", s: "b" },
+      { t: null },
+      { t: "And right now, sitting here, you cannot remember a single thing any of them said.", s: "e" },
+      { t: null },
+      { t: "Not one name. Not one moment where you thought: I will remember that.", s: "b" },
+      { t: null },
+      { t: "Two hours of your life. Gone. Not because the evening was bad. It was fine. Everyone was pleasant. The wine was good. The venue was nice. And it left absolutely no mark on you whatsoever.", s: "b" },
+      { t: null },
+      { t: "This is what most rooms are. This is what most rooms have always been for you. And the thing that should frighten you is not that it happened. It is that you have stopped noticing.", s: "b" },
+      { t: null },
+      { t: "", s: "e" },
+      { t: null },
+      { t: "You have been attending forgettable rooms for five years. Ten years. Some of you, fifteen. You have spent hundreds of evenings in rooms where people talked without saying anything and laughed without meaning it and swapped numbers they would never use. And at some point, so quietly you did not hear it happen, you decided this is just what it is. This is adult life. You show up. You perform. You go home. You forget. You do it again next week.", s: "b" },
+      { t: null },
+      { t: "You lowered the bar so slowly it felt like the floor.", s: "e" },
+      { t: null },
+      { t: "And now you do not even know what a good room feels like. You have forgotten what it is to sit across from someone who says something that rearranges your thinking. You have forgotten what it is to laugh so hard you forget where you are. You have forgotten what it is to leave a room and call someone on the way home just to say you will not believe what just happened.", s: "b" },
+      { t: null },
+      { t: "You have not lost the ability to connect. You have lost the expectation that connection is possible. Because the person who has given up looking is the hardest person to reach.", s: "b" },
+      { t: null },
+      { t: "The cost of a forgettable room is not the evening.", s: "e" },
+      { t: null },
+      { t: "It is the hope.", s: "b" },
+      { t: null },
+      { t: "Somewhere right now a room is being composed where you would remember every word. Where someone would say something at eleven that you would still be thinking about at three in the morning. Where you would leave and feel more alive than you have felt in months. That room exists. It is being composed right now. The only question is whether you still believe a room like that is possible. Because if you do not, no one can help you. And if you do, even a little, then you already know what to do next.", s: "b" }
+    ]
+  },
+  {
+    id: 5,
+    slug: "she-said-my-name-before-i-said-anything",
+    tag: "On Being Known",
+    title: "She Said My Name Before I Said Anything",
+    date: "August MMXXVI",
+    excerpt: "A real introduction gives two people a thread, not just a name.",
+    bg: `linear-gradient(145deg,${T.offW},#EDE5DA)`,
+    dark: false,
+    body: [
+      { t: "I watched a host ruin a room in eleven seconds.", s: "b" },
+      { t: null },
+      { t: "She walked two people toward each other, smiled, and said: Sarah, this is Michael. Michael, Sarah. I will leave you two to it. Then she left.", s: "b" },
+      { t: null },
+      { t: "Sarah and Michael stood there. Two adults with nothing to say. Because they had been given nothing to say. No hook. No thread. No reason to be interested in each other beyond the fact that they were both holding a glass of wine in the same postcode.", s: "b" },
+      { t: null },
+      { t: "Within thirty seconds they were asking what each other did for a living. Within two minutes they had exhausted that. Within four minutes one of them found an excuse to refill their glass. They never spoke again for the rest of the night.", s: "b" },
+      { t: null },
+      { t: "That introduction was not an introduction. It was an abandonment.", s: "e" },
+      { t: null },
+      { t: "A real introduction sounds different. It sounds like this:", s: "b" },
+      { t: null },
+      { t: "Sarah, this is Michael. He just came back from three months in Kyoto where he was learning the science behind fermentation. Sarah spent last year writing about why British pubs are disappearing. I think you two are going to have a lot to talk about.", s: "b" },
+      { t: null },
+      { t: "Now Sarah and Michael have a reason. Fermentation and disappearing pubs are not the same subject but they share something. Craft. Patience. Things that are vanishing. A good host sees the invisible thread between two people and makes it visible. That is the introduction. Not the names. The thread.", s: "b" },
+      { t: null },
+      { t: "Never leave the first hello to chance.", s: "e" },
+      { t: null },
+      { t: "At the ?use, nobody introduces themselves cold. Before every gathering, you receive a profile of every person in the room. What fascinates them. What they carry. By the time you arrive, the conversation has already begun.", s: "b" },
+      { t: null },
+      { t: "I have been in rooms where the host did this for every single person in the room. By the time the first course arrived, nobody needed rescuing. Nobody was stranded. Nobody was performing the desperate small talk of two people who have been abandoned beside each other with nothing but a name.", s: "b" },
+      { t: null },
+      { t: "The difference between a dead room and an electric one is almost never the venue, the food, or the wine. It is whether someone thought about what would happen when two people were placed beside each other. And whether that someone did the work before the first glass was poured.", s: "b" }
+    ]
+  },
+  {
+    id: 6,
+    slug: "i-paid-thousands-a-year-to-drink-alone-in-beautiful-rooms",
+    tag: "On Beautiful Loneliness",
+    title: "I Paid Thousands a Year to Drink Alone in Beautiful Rooms",
+    date: "September MMXXVI",
+    excerpt: "Recognition is not the same thing as being known.",
+    bg: `linear-gradient(145deg,${T.bg},#0E0113)`,
+    dark: true,
+    body: [
+      { t: "I paid three thousand pounds a year for a place where nobody knew my name.", s: "e" },
+      { t: null },
+      { t: "The rooms were beautiful. The drinks were excellent. The furniture was designed by someone whose name I was supposed to recognise. And every time I walked in, I had the same experience: a nod from the staff, a seat at the bar, and an evening spent among people who were also paying thousands a year to be alone in beautiful rooms.", s: "b" },
+      { t: null },
+      { t: "There is a distinction that most people feel but few have words for.", s: "b" },
+      { t: null },
+      { t: "Being seen is what happens when you walk into a restaurant and the host recognises your face. When your name is on the list. When you receive the place by the window because someone remembers that you asked for it last time.", s: "b" },
+      { t: null },
+      { t: "Being seen is transactional.", s: "l" },
+      { t: null },
+      { t: "Being known is something else entirely.", s: "e" },
+      { t: null },
+      { t: "Being known is when the person beside you at dinner asks about the book you mentioned three months ago. When someone remembers that your mother is unwell and enquires without being prompted. When you walk into a room and someone smiles not because you are important but because they are genuinely pleased you came.", s: "b" },
+      { t: null },
+      { t: "Being known cannot be bought. It cannot be faked. It can only be built, slowly, through the accumulation of shared time and honest conversation.", s: "b" },
+      { t: null },
+      { t: "The modern world has built an entire infrastructure of recognition. Cards, lists, queues, ropes. All of it designed to make you feel noticed. None of it designed to make you feel known.", s: "b" },
+      { t: null },
+      { t: "It is less good at being known.", s: "e" },
+      { t: null },
+      { t: "Being known requires the thing the modern world is structured to prevent: repeated encounters with the same people over time. Not a single evening. Not a one-off gathering. A rhythm. A cadence. The kind of regularity that turns a stranger into someone you recognise, and someone you recognise into someone you trust, and someone you trust into someone you call when things go wrong.", s: "b" },
+      { t: null },
+      { t: "The ?use is designed around this rhythm. Four principal sittings a year. Smaller rooms between them. The same faces appearing and reappearing across seasons. Until the person who was once a profile you read before dinner becomes someone whose opinion you value, whose company you seek, whose absence you notice.", s: "b" },
+      { t: null },
+      { t: "That is the difference.", s: "b" },
+      { t: null },
+      { t: "", s: "l" },
+      { t: "Everything else offers to be seen. The ?use offers to be known.", s: "e" },
+      { t: null },
+      { t: "The programme is built around return. Four principal gatherings a year. Smaller rooms between them. The same people reappearing across seasons until belonging is not a word but a feeling you notice when you walk in.", s: "b" }
+    ]
+  },
+  {
+    id: 7,
+    slug: "you-came-alone-that-is-the-bravest-thing-anyone-did-tonight",
+    tag: "On Arriving Alone",
+    title: "You Came Alone. That Is the Bravest Thing Anyone Did Tonight.",
+    date: "September MMXXVI",
+    excerpt: "The person nearest the door is often the bravest person in the room.",
+    bg: `linear-gradient(145deg,${T.copper},#7A3A18)`,
+    dark: true,
+    body: [
+      { t: "You are standing near the door. Your glass is too full because you have not drunk from it yet. Your eyes are moving across the room looking for a signal that it is safe to come closer.", s: "b" },
+      { t: null },
+      { t: "You are not shy. You are brave. You walked through that door without knowing what was on the other side.", s: "e" },
+      { t: null },
+      { t: "Every room has one.", s: "b" },
+      { t: null },
+      { t: "The person standing near the door. The one holding their glass a little too tightly. The one whose eyes are moving across the room looking for a signal that it is safe to approach. They are not shy. They are not socially incompetent. They are brave. They walked through the door without knowing what was on the other side. That takes more courage than most people in the room will ever understand.", s: "b" },
+      { t: null },
+      { t: "The instinct in most rooms is to gravitate toward the familiar. Toward the person you already know. Toward the group that is already laughing. This is human. It is also the reason most gatherings fail. Because the person who arrived alone is often the most interesting person in the room. They came because something mattered to them more than comfort.", s: "b" },
+      { t: null },
+      { t: "At the ?use, there is a principle that sits above every other. It is not about what you say or how you dress or what you have accomplished. It is this: look after the person who arrived alone.", s: "b" },
+      { t: null },
+      { t: "Walk toward them. Introduce yourself. Ask them what brought them here tonight. Ask them what they are curious about. Do not ask what they do for a living. That question is a wall disguised as a door.", s: "b" },
+      { t: null },
+      { t: "The generosity of a room is not measured by what is served. It is measured by what happens in the first four minutes after someone walks in. If those minutes are warm, the rest of the evening follows. If those minutes are cold, no amount of good wine will rescue it.", s: "b" },
+      { t: null },
+      { t: "The person who arrived alone chose to be here. Honour that choice.", s: "e" },
+      { t: null },
+      { t: "Four minutes to turn a stranger into a guest. Four minutes to make the room worthy of the courage it took to walk through the door.", s: "b" },
+      { t: null },
+      { t: "That is devotion to the room.", s: "e" },
+      { t: null },
+      { t: "Every person at the ?use arrived alone the first time. Someone walked toward them. The room opened. That is not a memory. It is a system designed to happen every single time.", s: "b" }
+    ]
+  },
+  {
+    id: 8,
+    slug: "the-room-went-quiet-then-someone-said-what-everyone-was-thinking",
+    tag: "On Silence",
+    title: "The Room Went Quiet. Then Someone Said What Everyone Was Thinking.",
+    date: "October MMXXVI",
+    excerpt: "The true thing is harder to say and far more worth hearing.",
+    bg: `linear-gradient(145deg,${T.damson},#1E0628)`,
+    dark: true,
+    body: [
+      { t: "The room went quiet. Not awkward quiet. Full quiet. The kind of silence that happens when someone has just said something so honest that everybody needs a moment to decide whether to match it.", s: "b" },
+      { t: null },
+      { t: "That silence is the rarest sound in any room. Most people will never hear it.", s: "e" },
+      { t: null },
+      { t: "In every real conversation there is a fork.", s: "b" },
+      { t: null },
+      { t: "One path leads to the clever thing. The thing that sounds good. The thing that makes you appear well-read or worldly or sharp. The thing that earns a nod and a smile and moves the conversation forward without disturbing anything.", s: "b" },
+      { t: null },
+      { t: "The other path leads to the true thing.", s: "e" },
+      { t: null },
+      { t: "The true thing is harder to say. It might be awkward. It might be too personal. It might reveal that you do not actually agree with the consensus forming around the room. It might make people uncomfortable. It might make you uncomfortable.", s: "b" },
+      { t: null },
+      { t: "The true thing is almost always more interesting.", s: "b" },
+      { t: null },
+      { t: "Most rooms are built on the clever thing. That is why most rooms are forgettable. The conversation is fluent but frictionless. Everyone agrees in slightly different words. The evening passes pleasantly. You go home and you cannot remember a single thing that anyone said.", s: "b" },
+      { t: null },
+      { t: "The rooms that stay with you, the ones you are still thinking about weeks later, are the ones where someone said the true thing. Where someone disagreed. Where someone admitted they did not know. Where someone asked a question so direct that the room went quiet for a moment before someone else had the courage to answer it honestly.", s: "b" },
+      { t: null },
+      { t: "Rooms built on honesty do not need to be rebuilt.", s: "e" },
+      { t: null },
+      { t: "At the ?use, the fifth principle is Courage. Not the courage of grand gestures. The courage of choosing the true thing over the impressive thing, in a room where it would be easier to perform.", s: "b" },
+      { t: null },
+      { t: "The clever thing gets a nod. The true thing gets remembered.", s: "e" },
+      { t: null },
+      { t: "The ?use is composed for that kind of room. The right number of people. A question that matters. A host who chose every person for a reason. The evening runs late because nobody wants to leave a room where something real is happening.", s: "b" }
+    ]
+  }
+];
+
+export const FEATURED_JOURNAL_SLUG = "the-seven-minutes-before-you-walk-in";
+
+export function getJournalArticle(slug) {
+  return JOURNAL_ARTICLES.find((article) => article.slug === slug);
+}
+
+
+export const PROGRAMME_ROOMS = [
+  {
+    slug: "the-first-house",
+    index: "I",
+    title: "The First House",
+    strap: "Twenty-four people. The opening of each season.",
+    kicker: "24 places · London · Seasonal",
+    accent: T.copper,
+    text: T.copperDk,
+    shell: `linear-gradient(145deg,${T.copper} 0%,#C47A3A 40%,#8A4A1A 100%)`,
+    description:
+      "Twenty-four people. The opening of each season. Not an evening. A morning. An activity designed so people work side by side before they sit down together. By the time lunch arrives, nobody is introducing themselves. The room has already formed. The First House does in half a day what most events fail to do in an entire weekend: it turns a room of strangers into people who will see each other again. This is where the Circle begins.",
+    aside:
+      "Everyone remembers their First House. Most say it felt like arriving somewhere they had always been.",
+    detail: [
+      "You do not begin with a chair and a name card. You begin shoulder to shoulder, doing something with other people before conversation asks anything of you.",
+      "That is why lunch lands differently here. By the time everyone sits down, the room is already warm. The first friction has gone. People are speaking mid-thought rather than from zero.",
+      "The First House is where the social architecture becomes visible. It proves that timing, sequence, and composition matter more than volume ever will.",
+    ],
+  },
+  {
+    slug: "the-evening",
+    index: "II",
+    title: "The Evening",
+    strap: "Eighteen strangers. One room. One evening. Never this configuration again.",
+    kicker: "The flagship room",
+    accent: T.rose,
+    text: T.bg,
+    shell: `linear-gradient(160deg,${T.cream},${T.offW})`,
+    description:
+      "The flagship room. Every person is new to you and to each other. The seating is composed so the most unexpected conversations happen between people who would never otherwise meet. Low light. Three courses. By dessert, nobody wants to leave. This room is composed once and never repeated. The next Evening will hold entirely different people. That is the point. You come for the electricity of the unknown.",
+    aside: "Not everyone who asks is placed.",
+    detail: [
+      "This is the room most people think they are looking for when they say they want to meet remarkable people. The difference is that this one is actually hosted.",
+      "Profiles are read beforehand. The sequence of the table is deliberate. The pairings are chosen for surprise, not similarity.",
+      "Because the room is never repeated, it carries the charge of a thing that can only happen once. That is what gives it its voltage.",
+    ],
+  },
+  {
+    slug: "the-supper-lecture",
+    index: "III",
+    title: "The Supper Lecture",
+    strap: "A formidable mind speaks for thirty minutes. Then stays for dinner with twenty-eight guests.",
+    kicker: "The speaker is announced. The guest list is not.",
+    accent: T.gold,
+    text: T.cream,
+    shell: `linear-gradient(160deg,#0F051A,${T.bg})`,
+    description:
+      "Thirty minutes. One person. Something they have never said on a stage. Then the room opens and the speaker sits down at the table with everyone else. The talk gives the room a shared reference. The dinner is where the real conversation happens. The most interesting exchanges happen in the third hour, when the speaker has loosened their tie and the person beside them has asked the question nobody else would.",
+    aside: "The talk gives the room a shared reference. The dinner is where the real conversation happens.",
+    detail: [
+      "The lecture is not the product. It is the ignition source. Everyone in the room is handed the same piece of intellectual material at the same time.",
+      "That shared reference changes the first question, which changes the second hour, which changes the room.",
+      "The best moments happen after the formal edge has disappeared and the speaker has become another person at the table.",
+    ],
+  },
+  {
+    slug: "city-escapes",
+    index: "IV",
+    title: "City Escapes",
+    strap: "Two to three nights. Eighteen people. A city you know, seen through people you did not.",
+    kicker: "Each city once per season. Never repeated.",
+    accent: T.roseL,
+    text: T.cream,
+    shell: `linear-gradient(160deg,${T.damson},#1E0628,${T.bg})`,
+    description:
+      "Paris. Dublin. Milan. Manchester. The ?use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.",
+    aside: "Doors that do not open for a booking engine.",
+    detail: [
+      "These are not city breaks assembled from recommendations. They are lived itineraries built from places that have already been tested in person.",
+      "The city changes because the company changes it. Streets feel different when the people beside you were selected for the same room.",
+      "The practical burden is removed so that attention can stay on the company, the access, and the feeling of being carried through a place well.",
+    ],
+  },
+  {
+    slug: "grand-journeys",
+    index: "V",
+    title: "Grand Journeys",
+    strap: "Four to five days. Ten people. Destinations that change how you see the world.",
+    kicker: "Limited places. Once composed, never repeated.",
+    accent: T.roseL,
+    text: T.cream,
+    shell: `linear-gradient(160deg,${T.damson},#1E0628,#140420)`,
+    description:
+      "Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the ?use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.",
+    aside: "Not capital cities. Not the obvious route.",
+    detail: [
+      "The destination matters, but not in the usual way. It is chosen for atmosphere, rhythm, and how well it can hold a composed group.",
+      "Routes are field-tested. Access is personal. The table at the end of the day is as deliberate as the road that led there.",
+      "Grand Journeys are where the architecture of the house leaves London and proves it can still hold in motion.",
+    ],
+  },
+  {
+    slug: "the-private-house",
+    index: "VI",
+    title: "The Private House",
+    strap: "Twelve to forty guests. A room composed entirely around your world.",
+    kicker: "By arrangement only. Begin with a conversation.",
+    accent: T.rose,
+    text: T.cream,
+    shell: `linear-gradient(160deg,#0E0113,${T.bg2})`,
+    description:
+      "You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The ?use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.",
+    aside: "You arrive as a guest in your own room.",
+    detail: [
+      "This is the most intimate expression of the method: social architecture applied to a room that begins with your people and your purpose.",
+      "What changes is not the standard but the centre of gravity. The room is built around your world, then held to the same level of care as every house room.",
+      "The result is not event planning. It is composition: a room designed to make the right people collide properly.",
+    ],
+  },
+  {
+    slug: "the-annual-house",
+    index: "VII",
+    title: "The Annual House",
+    strap: "One hundred people. One evening. The year made visible.",
+    kicker: "The largest room in the programme. The one people prepare for all year.",
+    accent: T.copper,
+    text: T.bg,
+    shell: `linear-gradient(160deg,${T.cream},#F0E8DD)`,
+    description:
+      "Once a year. End of season. The full Circle in one extraordinary room. The intimate tables of the year come together in a single, larger gathering. People who crossed paths at different dinners find each other again. Conversations resume mid-sentence. Someone introduces the person they brought from another city. The room is larger than anything else in the programme. The warmth has not changed. This is the evening that proves the system works.",
+    aside: "The year made visible.",
+    detail: [
+      "The Annual House is not scale for its own sake. It is evidence. The room is large because the relationships have compounded enough to hold one.",
+      "Faces from separate tables recognise one another. Threads from different seasons suddenly connect. The room reveals the structure that has been built beneath it.",
+      "It is the clearest demonstration that the programme is not a series of events. It is a living system.",
+    ],
+  },
+];
+
+export function getProgrammeRoom(slug) {
+  return PROGRAMME_ROOMS.find((room) => room.slug === slug);
+}
+
+
+
+export { IMG, CW, FOUNDERS, FAQ_DATA };
+
