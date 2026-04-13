@@ -1,8 +1,8 @@
-import { META } from "@/lib/brand";
+import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: META.founder.title,
-  description: META.founder.desc,
+  title: "Gigi Brown",
+  description: PAGE_META.founder.desc,
 };
 
 export default function Layout({ children }) {

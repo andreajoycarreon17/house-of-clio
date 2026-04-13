@@ -1,8 +1,8 @@
-import { META } from "@/lib/brand";
+import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: META.contact.title,
-  description: META.contact.desc,
+  title: "Contact",
+  description: PAGE_META.contact.desc,
 };
 
 export default function Layout({ children }) {

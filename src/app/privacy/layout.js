@@ -1,8 +1,8 @@
-import { META } from "@/lib/brand";
+import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: META.privacy.title,
-  description: META.privacy.desc,
+  title: "Privacy Policy",
+  description: PAGE_META.privacy.desc,
 };
 
 export default function Layout({ children }) {

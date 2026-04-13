@@ -1,8 +1,8 @@
-import { META } from "@/lib/brand";
+import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: META.circle.title,
-  description: META.circle.desc,
+  title: "The Circle",
+  description: PAGE_META.circle.desc,
 };
 
 export default function Layout({ children }) {

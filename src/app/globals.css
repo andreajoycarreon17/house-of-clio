@@ -1,26 +1,744 @@
-@import "tailwindcss";
+/*
+ * THE HOUSE OF CLIO - Global Styles
+ * =====================================================
+ * Production accessibility and visibility layer
+ * Version 2 - Updated with mobile screenshot fixes
+ *
+ * CHANGES IN V2:
+ * 1. Cursor visible everywhere (removes cursor:none bug)
+ * 2. Minimum font sizes enforced 20 percent larger
+ * 3. Footer contrast and size increased
+ * 4. Visible focus states for keyboard navigation
+ * 5. Mobile touch targets 44px minimum
+ * 6. Skip link visible on focus
+ * 7. Reduced motion respected
+ * 8. Legal pages readable (terms, privacy)
+ * 9. NEW: Scroll-to-top button repositioned out of content
+ * 10. NEW: Duplicate floating buttons hidden
+ * 11. NEW: Microtext helper lines brightened
+ * 12. NEW: Journal card minimum height enforced
+ * 13. NEW: Pagination dots enlarged for mobile
+ * ===================================================== */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --clio-bg: #1A0820;
+    --clio-bg-deep: #0E0113;
+    --clio-damson: #2D0B38;
+    --clio-cream: #FAF4EE;
+    --clio-off-white: #F4F0EB;
+    --clio-rose: #C9956C;
+    --clio-rose-light: #E8C4A0;
+    --clio-gold: #C9A84C;
+    --clio-copper: #A05025;
+
+    --clio-text-on-dark: rgba(250, 244, 238, 0.95);
+    --clio-text-on-dark-sub: rgba(250, 244, 238, 0.82);
+    --clio-text-on-dark-muted: rgba(250, 244, 238, 0.72);
+
+    --clio-text-on-light: #1F0A2D;
+    --clio-text-on-light-sub: #3A1A4D;
+    --clio-text-on-light-muted: #4A2A5C;
+
+    --clio-font-display: 'Cormorant Garamond', Georgia, serif;
+    --clio-font-body: 'Jost', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+    --clio-text-micro: 13px;
+    --clio-text-small: 15px;
+    --clio-text-body: 17px;
+    --clio-text-large: 19px;
+
+    --clio-touch-target: 44px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* RESET */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--clio-bg-deep);
+    font-family: var(--clio-font-body);
+    font-size: var(--clio-text-body);
+    line-height: 1.7;
+    color: var(--clio-text-on-dark);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+img,
+svg,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+::selection {
+    background: rgba(201, 149, 108, 0.25);
+    color: inherit;
+}
+
+/* CURSOR - restore custom cursor, hide only on touch devices */
+@media (hover: none) {
+
+    .cr,
+    .cd,
+    .custom-cursor-ring,
+    .custom-cursor-dot {
+        display: none !important;
+    }
+}
+
+a,
+button,
+[role="button"],
+summary,
+label[for],
+select {
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+textarea {
+    cursor: text;
+}
+
+input[disabled],
+button[disabled],
+[aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+/* FONT SIZE FLOOR - catches inline 9-12px and enlarges
+   Scoped to exclude booking/interactive components */
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size:9px"],
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size: 9px"] {
+    font-size: clamp(13px, 2.2vw, 14px) !important;
+}
+
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size:10px"],
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size: 10px"] {
+    font-size: clamp(13px, 2.4vw, 14px) !important;
+}
+
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size:11px"],
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size: 11px"] {
+    font-size: clamp(14px, 2.5vw, 15px) !important;
+}
+
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size:12px"],
+:not([data-card]):not([data-h]):not([data-img])>[style*="font-size: 12px"] {
+    font-size: clamp(15px, 2.8vw, 16px) !important;
+}
+
+/* Letter-spacing cap for readability */
+[style*="letter-spacing: .4em"],
+[style*="letter-spacing:.4em"],
+[style*="letter-spacing: .5em"],
+[style*="letter-spacing:.5em"] {
+    letter-spacing: 0.2em !important;
+}
+
+/* PROSE - max-width only for article/section prose, not all p tags */
+article p,
+section>p,
+.prose p,
+main>section p {
+    line-height: 1.8;
+    max-width: 68ch;
+}
+
+li {
+    line-height: 1.8;
+    max-width: 68ch;
+}
+
+h1,
+h2,
+h3 {
+    max-width: none;
+    line-height: 1.15;
+}
+
+/* LINKS */
+a {
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+/* FOCUS STATES - keyboard visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--clio-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* FORMS */
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+    font-size: var(--clio-text-body);
+    line-height: 1.5;
+}
+
+input,
+textarea {
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 14px 16px;
+    min-height: var(--clio-touch-target);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--clio-rose) !important;
+    box-shadow: 0 0 0 3px rgba(201, 149, 108, 0.2) !important;
+}
+
+label {
+    font-size: var(--clio-text-small) !important;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+}
+
+::placeholder {
+    color: rgba(90, 53, 117, 0.5);
+    opacity: 1;
+}
+
+/* BUTTONS - touch target (mobile only to avoid breaking desktop layouts) */
+@media (max-width: 768px) {
+    button {
+        min-height: var(--clio-touch-target);
+        min-width: var(--clio-touch-target);
+    }
+}
+
+button {
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+}
+
+/* FOOTER - high contrast, larger text */
+footer {
+    background: var(--clio-bg);
+    color: var(--clio-text-on-dark-sub);
+    padding: 48px clamp(20px, 5vw, 72px) 36px;
+}
+
+footer *,
+footer p,
+footer span,
+footer a,
+footer div {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: var(--clio-text-on-dark-sub) !important;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer [class*="heading"] {
+    font-size: 18px !important;
+    color: var(--clio-text-on-dark) !important;
+    margin-bottom: 12px;
+}
+
+footer a {
+    color: var(--clio-rose) !important;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 0;
+    min-height: var(--clio-touch-target);
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: var(--clio-rose-light) !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+footer p:last-of-type,
+footer [data-entity] {
+    font-size: 14px !important;
+    color: var(--clio-text-on-dark-muted) !important;
+    max-width: 70ch;
+    margin: 24px auto 0;
+}
+
+/* NAV - readable labels */
+nav[role="navigation"] a,
+nav[role="navigation"] button {
+    font-size: 13px !important;
+    letter-spacing: 0.15em !important;
+    padding: 10px 12px;
+    min-height: var(--clio-touch-target);
+    display: inline-flex;
+    align-items: center;
+}
+
+nav[role="navigation"] a:hover,
+nav[role="navigation"] a[aria-current="page"] {
+    color: var(--clio-rose) !important;
+}
+
+/* LEGAL PAGES - terms, privacy readability (light background sections only) */
+.legal-page article p,
+.legal-page article li,
+main article p,
+main article li {
+    font-size: 17px !important;
+    line-height: 1.85 !important;
+    max-width: 68ch;
+    margin-bottom: 1.2em;
+}
+
+main article h2,
+main article h3,
+[class*="legal"] h2,
+[class*="legal"] h3 {
+    font-size: 22px !important;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+}
+
+[data-clause],
+time,
+.last-updated {
+    font-size: 14px !important;
+}
+
+/* SKIP LINK */
+.skip-link,
+a[href="#main-content"]:first-of-type {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--clio-copper);
+    color: var(--clio-cream);
+    padding: 14px 20px;
+    z-index: 99999;
+    font-family: var(--clio-font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: top 0.25s ease;
+}
+
+.skip-link:focus,
+a[href="#main-content"]:first-of-type:focus {
+    top: 0;
+    outline: 2px solid var(--clio-gold);
+    outline-offset: -2px;
+}
+
+/* COOKIE BANNER */
+[class*="cookie"],
+[data-cookie-banner] {
+    background: var(--clio-bg) !important;
+    padding: 20px 24px !important;
+}
+
+[class*="cookie"] p,
+[class*="cookie"] span,
+[data-cookie-banner] p {
+    font-size: 15px !important;
+    color: var(--clio-text-on-dark-sub) !important;
+    line-height: 1.6 !important;
+}
+
+[class*="cookie"] button {
+    font-size: 14px !important;
+    padding: 10px 24px !important;
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: more) {
+    :root {
+        --clio-text-on-dark: rgba(255, 255, 255, 1);
+        --clio-text-on-dark-sub: rgba(255, 255, 255, 0.95);
+        --clio-text-on-light: #000000;
+        --clio-text-on-light-sub: #1A0A2E;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    :root {
+        --clio-text-body: 17px;
+    }
+
+    body {
+        font-size: 17px;
+    }
+
+    h1 {
+        font-size: clamp(32px, 8vw, 44px) !important;
+        line-height: 1.1;
+    }
+
+    h2 {
+        font-size: clamp(26px, 6vw, 36px) !important;
+    }
+
+    h3 {
+        font-size: clamp(20px, 5vw, 26px) !important;
+    }
+
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select {
+        min-height: 44px;
+    }
+
+    footer {
+        padding: 36px 20px 28px;
+        text-align: center;
+    }
+
+    footer *,
+    footer p,
+    footer a {
+        font-size: 15px !important;
+    }
+
+    nav[role="navigation"] .desktop-nav,
+    nav[role="navigation"] .desk-nav {
+        display: none !important;
+    }
+
+    nav[role="navigation"] .mobile-menu-btn,
+    nav[role="navigation"] .mob-menu-btn {
+        display: flex !important;
+    }
+
+    main article p,
+    main[id="main-content"] p {
+        font-size: 16px !important;
+        line-height: 1.8 !important;
+    }
+}
+
+@media (min-width: 769px) {
+
+    nav[role="navigation"] .mobile-menu-btn,
+    nav[role="navigation"] .mob-menu-btn {
+        display: none !important;
+    }
+
+    nav[role="navigation"] .desktop-nav,
+    nav[role="navigation"] .desk-nav {
+        display: flex !important;
+    }
+}
+
+/* PRINT */
+@media print {
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+    }
+
+    nav,
+    footer,
+    [class*="cookie"],
+    .skip-link {
+        display: none;
+    }
+
+    main p,
+    main li {
+        color: black !important;
+        font-size: 11pt !important;
+        line-height: 1.5;
+    }
+
+    a {
+        color: black !important;
+        text-decoration: underline;
+    }
+}
+
+/* ===================================================
+ * V2 MOBILE SCREENSHOT FIXES
+ * Based on 12 mobile screenshots showing:
+ * - Scroll-to-top buttons blocking content
+ * - Duplicate floating buttons
+ * - Microtext helper lines too faint
+ * - Journal cards rendering empty
+ * =================================================== */
+
+/* Fix 1: Hide duplicate scroll-to-top buttons
+   The site currently shows TWO scroll-to-top buttons
+   (a dark grey circular one centred at bottom, and a
+   rose-gold one at bottom-right). Hide the centred one. */
+
+button[aria-label*="scroll" i]:not(:last-of-type),
+button[aria-label*="top" i]:not(:last-of-type),
+[class*="scroll-top" i]:not(:last-of-type),
+[class*="scrolltop" i]:not(:last-of-type),
+[class*="back-to-top" i]:not(:last-of-type),
+.floating-scroll-btn+.floating-scroll-btn {
+    display: none !important;
+}
+
+/* Fix 2: Position the remaining scroll-to-top button in the
+   bottom-right corner, out of the content flow */
+
+button[aria-label*="scroll" i],
+button[aria-label*="top" i],
+[class*="scroll-top" i],
+[class*="scrolltop" i],
+[class*="back-to-top" i] {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    z-index: 9998 !important;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(201, 149, 108, 0.15) !important;
+    border: 1px solid rgba(201, 149, 108, 0.4) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+button[aria-label*="scroll" i]:hover,
+button[aria-label*="top" i]:hover,
+[class*="scroll-top" i]:hover,
+[class*="back-to-top" i]:hover {
+    opacity: 1;
+    transform: translateY(-2px) !important;
+    background: rgba(201, 149, 108, 0.25) !important;
+}
+
+/* Fix 3: Give scroll-to-top room away from footer on small screens */
+@media (max-width: 768px) {
+
+    button[aria-label*="scroll" i],
+    button[aria-label*="top" i],
+    [class*="scroll-top" i],
+    [class*="back-to-top" i] {
+        bottom: 16px !important;
+        right: 16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        opacity: 0.7;
+    }
+}
+
+/* Fix 4: Brighten all microtext helper lines that were too faint
+   Examples: "No membership fee. You pay only for the rooms you attend"
+   Examples: "A person reads every word"
+   Examples: Location and seasonal tags */
+
+[class*="helper" i],
+[class*="microtext" i],
+[class*="caption" i],
+[class*="meta" i],
+small,
+.helper-text,
+.micro-text {
+    color: var(--clio-text-on-dark-sub) !important;
+    font-size: 14px !important;
+    opacity: 1 !important;
+}
+
+/* Fix 5: Journal article cards - enforce minimum height and
+   ensure the Muse Mark or body content is visible */
+
+[class*="journal-card" i],
+[class*="article-card" i],
+article[class*="card" i] {
+    min-height: 280px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    background: rgba(45, 11, 56, 0.4) !important;
+    border: 1px solid rgba(201, 149, 108, 0.15) !important;
+    padding: 32px 24px !important;
+}
+
+[class*="journal-card" i] h2,
+[class*="journal-card" i] h3,
+[class*="article-card" i] h2,
+[class*="article-card" i] h3 {
+    color: var(--clio-cream) !important;
+    font-size: clamp(20px, 4.5vw, 26px) !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+}
+
+[class*="journal-card" i] p,
+[class*="article-card" i] p {
+    color: var(--clio-text-on-dark-sub) !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+}
+
+/* Fix 6: Carousel/slider pagination dots were tiny on mobile */
+
+[class*="pagination" i] button,
+[class*="slider-dot" i],
+[class*="carousel-dot" i],
+.slick-dots li button,
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
+    border-radius: 50% !important;
+    background: rgba(201, 149, 108, 0.35) !important;
+    border: none !important;
+    margin: 0 6px !important;
+    padding: 0 !important;
+}
+
+[class*="pagination" i] button[aria-current="true"],
+[class*="pagination" i] button.active,
+.slick-dots li.slick-active button,
+.swiper-pagination-bullet-active {
+    background: var(--clio-rose) !important;
+    width: 24px !important;
+    border-radius: 5px !important;
+}
+
+/* Fix 7: Ensure nothing overlaps the footer CTAs on mobile */
+@media (max-width: 768px) {
+    footer {
+        padding-bottom: 96px !important;
+        /* extra space so floating buttons do not cover links */
+    }
+}
+
+/* Fix 8: Section labels with extreme letter-spacing - already handled above
+   but this adds a minimum font-size safety net for uppercase eyebrow labels */
+
+[class*="eyebrow" i],
+[class*="label" i]:not(label),
+[class*="section-title" i] {
+    font-size: clamp(12px, 2.8vw, 14px) !important;
+    letter-spacing: 0.18em !important;
+}
+
+/* Fix 9: The italic helper text in hero sections like
+   "If the room is right, you will know."
+   Ensure it is not rendered too small */
+
+em,
+i,
+[class*="italic" i] {
+    font-size: inherit;
+    font-style: italic;
+}
+
+/* Fix 10: Quote blocks and long-form body passages should not
+   be rendered at the letter-spacing used for nav labels */
+
+blockquote,
+[class*="quote" i],
+[class*="body-text" i] {
+    letter-spacing: 0 !important;
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    color: var(--clio-text-on-dark) !important;
+}
+
+/* ===================================================
+ * END V2 MOBILE FIXES
+ * =================================================== */
+/*
+ =====================================================
+ * BOOKING PAGE - tab interaction fix
+ * Ensures the preloader never blocks clicks on /book
+ * and that tab divs are always interactive
+ * ===================================================== */
+
+/* Preloader must be fully non-interactive once done */
+.preloader.done {
+    pointer-events: none !important;
+    visibility: hidden !important;
+    display: none !important;
+}
+
+/* Booking tab rows — ensure pointer events always work on desktop */
+@media (min-width: 769px) {
+
+    /* Any div with inline cursor:pointer must be clickable */
+    [style*="cursor: pointer"],
+    [style*="cursor:pointer"] {
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 1;
+    }
 }

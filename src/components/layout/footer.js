@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
-
 import { CI, F, T } from "@/components/shared";
 import { getHref } from "@/lib/routes";
-
 import { useSiteChrome } from "./site-context";
+import {
+  BRAND_AKAN_UPPER,
+  BRAND_TAGLINE,
+  BRAND_ENTITY,
+  BRAND_COPYRIGHT,
+  BRAND_AKAN_NOTE,
+} from "@/lib/brand";
 
 export default function Footer() {
   const { setHov } = useSiteChrome();
@@ -36,21 +41,22 @@ export default function Footer() {
           alignItems: "center",
         }}
       >
+        {/* Brand block */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "clamp(32px,5vh,48px)" }}>
           <CI size={44} />
           <div
             style={{
-              fontFamily: F.display,
+              fontFamily: F.body,
               fontSize: "clamp(16px,3.5vw,21px)",
               fontWeight: 500,
-              letterSpacing: ".18em",
-              color: T.cream,
+              letterSpacing: ".3em",
+              color: T.rose,
               marginTop: 12,
               lineHeight: 1,
               textAlign: "center",
             }}
           >
-            The ƆUSE <em style={{ fontStyle: "normal", color: T.rose }}>ɔf</em> CLIO
+            {BRAND_AKAN_UPPER}
           </div>
           <div
             style={{
@@ -72,10 +78,11 @@ export default function Footer() {
               textAlign: "center",
             }}
           >
-            Every brilliant person you have not met yet.
+            {BRAND_TAGLINE}
           </div>
         </div>
 
+        {/* Primary nav links */}
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 clamp(16px,3vw,32px)", marginBottom: "clamp(14px,2vh,20px)" }}>
           {[
             ["The House", "house"],
@@ -96,32 +103,26 @@ export default function Footer() {
                 letterSpacing: ".1em",
                 color: T.cream,
                 opacity: 0.5,
-                transition: "color .3s,opacity .3s,border-color .3s",
+                transition: "color .3s,opacity .3s",
                 padding: "clamp(8px,1.5vh,12px) clamp(4px,1vw,8px)",
                 lineHeight: 1,
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => {
-                setHov(true);
-                e.target.style.opacity = "1";
-                e.target.style.color = T.rose;
-              }}
-              onMouseLeave={(e) => {
-                setHov(false);
-                e.target.style.opacity = ".5";
-                e.target.style.color = T.cream;
-              }}
+              onMouseEnter={(e) => { setHov(true); e.target.style.opacity = "1"; e.target.style.color = T.rose; }}
+              onMouseLeave={(e) => { setHov(false); e.target.style.opacity = ".5"; e.target.style.color = T.cream; }}
             >
               {label}
             </Link>
           ))}
         </div>
 
+        {/* Secondary nav links */}
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 clamp(14px,2.5vw,28px)", marginBottom: "clamp(20px,3vh,32px)" }}>
           {[
             ["How to Join", "questions"],
             ["Introduce Yourself", "apply"],
-            ["Contact Us", "contact"],
+            ["Reserve a Place", "book"],
+            ["Contact", "contact"],
             ["Press and Media", "press"],
           ].map(([label, key]) => (
             <Link
@@ -136,17 +137,13 @@ export default function Footer() {
                 textTransform: "uppercase",
                 color: T.rose,
                 opacity: 0.45,
-                transition: "color .3s,opacity .3s,border-color .3s",
+                transition: "color .3s,opacity .3s",
                 padding: "clamp(8px,1.5vh,12px) clamp(4px,1vw,8px)",
                 lineHeight: 1,
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.opacity = "1";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.opacity = ".75";
-              }}
+              onMouseEnter={(e) => { e.target.style.opacity = "1"; }}
+              onMouseLeave={(e) => { e.target.style.opacity = ".75"; }}
             >
               {label}
             </Link>
@@ -163,6 +160,7 @@ export default function Footer() {
           }}
         />
 
+        {/* Social links */}
         <div style={{ display: "flex", gap: 28, alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
           <a
             href="https://www.instagram.com/thehouseofclio.london/"
@@ -170,12 +168,8 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="Instagram"
             style={{ color: T.rose, opacity: 0.4, transition: "opacity .3s", display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40 }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = ".4";
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = ".4"; }}
           >
             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" /></svg>
           </a>
@@ -185,22 +179,16 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
             style={{ color: T.rose, opacity: 0.4, transition: "opacity .3s", display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40 }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = ".4";
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = ".4"; }}
           >
             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
           </a>
         </div>
 
+        {/* Legal links */}
         <div style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-          {[
-            ["Privacy", "privacy"],
-            ["Terms", "terms"],
-          ].map(([label, key]) => (
+          {[["Privacy", "privacy"], ["Terms", "terms"]].map(([label, key]) => (
             <Link
               key={key}
               href={getHref(key)}
@@ -216,19 +204,17 @@ export default function Footer() {
                 lineHeight: 1,
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => {
-                e.target.style.color = T.rose;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.color = "rgba(250,244,238,.3)";
-              }}
+              onMouseEnter={(e) => { e.target.style.color = T.rose; }}
+              onMouseLeave={(e) => { e.target.style.color = "rgba(250,244,238,.3)"; }}
             >
               {label}
             </Link>
           ))}
         </div>
 
+        {/* Entity paragraph — SEO + AIEO, no more mojibake */}
         <p
+          data-entity="true"
           data-speakable="true"
           style={{
             fontFamily: F.body,
@@ -242,17 +228,10 @@ export default function Footer() {
             margin: "0 auto 20px",
           }}
         >
-          The Æ†use É”f Clio is a private cultural house in London with a seasonal
-          programme of twelve formats including composed private dinners, supper
-          lectures, cycling journeys, city escapes, and Grand Journeys. No fixed
-          premises. No membership fee. Pay-per-gathering. Asset-light. Every guest is
-          selected. Every seat is composed. Growth is network-driven through member
-          nominations. Over forty touchpoints per year. The Returning Table meets
-          fortnightly. Composed by Gigi Brown. London is the first city. Dublin is the
-          second. The model is designed to operate in any city with the right density of
-          considered people.
+          {BRAND_ENTITY}
         </p>
 
+        {/* Copyright + Akan note */}
         <p
           style={{
             fontFamily: F.body,
@@ -266,11 +245,11 @@ export default function Footer() {
             margin: 0,
           }}
         >
-          © The Æ†use É”f Clio MMXXVI
+          {BRAND_COPYRIGHT}
           <br />
           London and the cities that follow
           <br />
-          The Æ† is drawn from the Akan alphabet of Ghana
+          <em>{BRAND_AKAN_NOTE}</em>
         </p>
       </div>
     </footer>

@@ -1,8 +1,8 @@
-import { META } from "@/lib/brand";
+import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: META.programme.title,
-  description: META.programme.desc,
+  title: "The Programme",
+  description: PAGE_META.programme.desc,
 };
 
 export default function Layout({ children }) {

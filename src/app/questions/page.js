@@ -1,99 +1,218 @@
-"use client";
+import { BRAND_AKAN } from "@/lib/brand";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSiteChrome } from "@/components/layout/site-context";
-import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
-import { getHref } from "@/lib/routes";
-import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+const FAQ = [
+  {
+    q: "Is there a fee to join?",
+    a: "No. There is no membership fee, no subscription, and no joining charge. You pay only for the gatherings you choose to attend. Each gathering is priced individually and the price is shared with you when you book.",
+  },
+  {
+    q: "Do I need to know someone to join?",
+    a: "No. You can introduce yourself directly through the Introduce Yourself form. Most people who are inside the House today arrived the same way: curious, slightly nervous, and reading the website.",
+  },
+  {
+    q: "Will I know anyone when I arrive?",
+    a: "Before every gathering, you receive a written portrait of every person in the room. Not their job title. What fascinates them. What they carry into a conversation. By the time you arrive, you already have something real to ask. You are not walking into a lounge hoping to meet someone interesting. The room has already been composed around you.",
+  },
+  {
+    q: "What is The House of Clio?",
+    a: "The House of Clio is a private cultural house in London. It hosts composed private dinners, supper lectures, cycling journeys, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. There is no membership fee. You pay only for the rooms you attend. Composed by Gigi Brown.",
+  },
+  {
+    q: "How is The House of Clio different from Soho House?",
+    a: "Soho House is a private members club with buildings, lounges, and open bars. The House of Clio has no building, no lounge, and no bar. The product is not the space. The product is the room. Every gathering is composed by hand: a host reads every profile and decides who sits beside whom. You do not drop in. You are placed.",
+  },
+  {
+    q: "How do I meet interesting people in London through The House of Clio?",
+    a: "You introduce yourself through the website. A person reads what you wrote. If there is alignment, you are invited to a gathering. Before you arrive, you receive a portrait of every person at your table. A host greets you by name. The person beside you was chosen. The first gathering is usually The First House, which is where the Circle forms.",
+  },
+  {
+    q: "What is a composed gathering?",
+    a: "A composed gathering is a dinner, lecture, journey, or walk where every guest is selected in advance, every portrait is written by hand, and every seat is placed on purpose. Nothing is left to chance. The host has already decided who you should meet before you arrive.",
+  },
+  {
+    q: "Where is The House of Clio based?",
+    a: "London. Dublin is the second city, opening in December 2026. Further cities will follow as the right hosts and the right density of considered people emerge in each.",
+  },
+  {
+    q: "Who founded The House of Clio?",
+    a: "Gigi Brown, born in Ghana and based in London, is the founder and host. She has twenty years of experience composing rooms across three continents in tourism, cultural production, and hospitality.",
+  },
+  {
+    q: "What kind of people are in the room?",
+    a: "People from technology, creative industries, medicine, law, academia, finance, and the arts. People who notice things. People with a point of view. People who are curious, considered, and tired of rooms that go nowhere. The first room at the House is not about job titles.",
+  },
+  {
+    q: "How are people selected?",
+    a: "A person reads every introduction. Not a team. Not an algorithm. One person. Selection is based on alignment with the room being composed, not credentials or wealth. Not everyone who asks is placed. That is what protects the quality of the room.",
+  },
+  {
+    q: "What happens after I write to you?",
+    a: "Your introduction is read personally within 72 hours. If there is alignment, we reply and begin a conversation. If there is not, we will say so clearly. Either way, you hear from a person, not a form letter.",
+  },
+  {
+    q: "How often does The House of Clio meet?",
+    a: "The seasonal programme runs across twelve formats. The Returning Table meets every two to three weeks. The Walk runs fortnightly. Together the programme creates over forty touchpoints per year. You attend as often or as little as you wish.",
+  },
+  {
+    q: "I am an introvert. Is this for me?",
+    a: "Yes. The House of Clio was designed for people who find conventional networking unbearable. The placement does the heavy lifting. You are not walking into a room and hoping to meet someone interesting. The host has already placed you beside someone specific. You arrive with something real to ask. Most introverts say this is the first social format that has ever worked for them.",
+  },
+  {
+    q: "What is a supper lecture?",
+    a: "A supper lecture is a gathering where a formidable mind speaks for thirty minutes and then stays for dinner with twenty-eight guests. The talk gives the room a shared reference. The dinner is where the real conversation happens.",
+  },
+  {
+    q: "How is my personal information handled?",
+    a: "Your profile is shared only with confirmed attendees of gatherings you are attending, and only for the purpose of composition. We do not sell, trade, or share your data with third parties for marketing. We comply with UK GDPR. You may request access, correction, or deletion of your data at any time.",
+  },
+  {
+    q: "Is The House of Clio a dating service?",
+    a: "No. The House of Clio is a private cultural house. It is not a dating app, a matchmaking service, or a romantic introduction agency. Connection between members is a frequent outcome of a well-composed room, but romance is not the purpose and not the filter.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "Each gathering has its own price reflecting the venue, the hosting, and the composition. Prices are confirmed in writing at the time of booking and shared privately after you introduce yourself. There is no membership fee. You pay only for the rooms you attend.",
+  },
+  {
+    q: "Why is there no fixed building?",
+    a: "A building would cap the ambition. A brick-and-mortar club serves the same hundred people in the same hundred rooms. The House of Clio travels to the right venue for the right evening. The composition is the product, not the address.",
+  },
+  {
+    q: "What if the House is not for me?",
+    a: "You may step away at any time. There is no contract, no obligation, and no penalty. If you prepay for a gathering and choose not to attend, the cancellation policy in the Terms of Participation applies.",
+  },
+];
+
+// JSON-LD FAQPage schema for AI answer engines
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
 
 export default function QuestionsPage() {
-  const router = useRouter();
-  const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
-  const go = (target) => router.push(getHref(target));
-  const [openFaq, setOpenFaq] = useState(null);
-
   return (
     <>
-<Sec bg={T.bg}><Mx w={800}>
-      <Rv>
-        <Lbl>Questions</Lbl>
-        <h1 style={{fontFamily:F.display,fontSize:"clamp(36px,5vw,60px)",fontWeight:400,lineHeight:.9,color:T.cream,marginBottom:16}}>What people<br/><em style={{color:T.rose}}>ask before they arrive.</em></h1>
-        <p style={{fontFamily:F.body,fontSize:16,fontWeight:400,lineHeight:2,color:TX.onDarkSub,maxWidth:520,marginBottom:14}}>Most of what you need to know is already on this site. These are the questions people tend to ask before they write to us. The answers are direct. If something is not covered here, the contact page is open.</p>
-        <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:480,marginBottom:32,letterSpacing:".02em"}}>Frequently asked questions about the Ɔuse ɔf Clio, a private cultural house in London offering composed private dinners, supper lectures, and journeys. Learn how to join, what to expect when you arrive, how people are selected, and what makes composed gatherings different from private members clubs and networking events.</p>
-      </Rv>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
-      {/* Atmospheric */}
-      <Rv delay={50}>
-        <RealImg src={IMG.hallway} alt="The entrance to a private cultural house. Warm stone. London." h={200} aspect="21/9"/>
-      </Rv>
-      {/* Three quick answers. tight beneath the intro */}
-      <Rv delay={100}>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"clamp(10px,1.5vw,18px)",marginBottom:48}} className="g3">
-          {[
-            {q:"Is there a fee to join?",a:"No. The circle is free to join. You pay only for the rooms you choose. A gathering. A journey. A weekend. Each one is composed once and never repeated. The room will not exist this way again."},
-            {q:"Do I need to know someone?",a:"No. You can introduce yourself directly. Most people who are inside the ?use today arrived the same way you are arriving now: curious, slightly nervous, and reading this page."},
-            {q:"Will I know anyone there?",a:"Before every gathering, you receive a written portrait of every person in the room. Not their job title. What fascinates them. What they carry. By the time you arrive, you already have something real to ask. You are not walking into a lounge and hoping to meet someone interesting. The room has already been composed around you."},
-          ].map((item,i)=><div key={i} style={{background:`linear-gradient(155deg,${T.copper},#C47A3A,#8A4A1A)`,padding:"28px 24px",position:"relative",overflow:"hidden"}}>
-            <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,${T.gold},${T.copper}40,transparent)`}}/>
-            <h3 style={{fontFamily:F.display,fontSize:18,fontWeight:400,color:T.copperDk,marginBottom:12,lineHeight:1.3,margin:"0 0 12px"}}>{item.q}</h3>
-            <div style={{width:20,height:1,background:T.copperDk,opacity:.2,marginBottom:12}}/>
-            <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:400,lineHeight:1.85,color:TX.onCopper}}>{item.a}</p>
-          </div>)}
-        </div>
-      </Rv>
-
-      {/* Full FAQ */}
-      <Rv delay={150}>
-        <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.copper,marginBottom:24}}>Everything Else</div>
-      </Rv>
-      <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.rose,opacity:.4,marginBottom:24,margin:"0 0 24px",textAlign:"center"}}>About the Ɔuse ɔf Clio</h2>
-          {FAQ_DATA.map((f,i)=><Rv key={i} delay={i*40}>
-        <div style={{borderBottom:`1px solid rgba(201,149,108,.06)`,background:openFaq===i?"rgba(201,149,108,.02)":"transparent",transition:"background .3s"}}>
-          <div {...hp} className="faq-item" role="button" tabIndex={0} id={`faq-q-${i}`} aria-expanded={openFaq===i} aria-controls={`faq-a-${i}`} onClick={()=>setOpenFaq(openFaq===i?null:i)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setOpenFaq(openFaq===i?null:i);}}} style={{padding:"28px 12px",cursor:"pointer",display:"flex",transition:"opacity .3s",justifyContent:"space-between",alignItems:"center",gap:24}}>
-            <h3 style={{fontFamily:F.display,fontSize:"clamp(17px,3.5vw,21px)",fontWeight:400,color:T.cream,lineHeight:1.3,margin:0}}>{f.q}</h3>
-            <div style={{width:36,height:36,flexShrink:0,border:`1px solid ${openFaq===i?T.rose:"rgba(201,149,108,.18)"}`,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",color:openFaq===i?T.rose:"rgba(201,149,108,.25)",fontSize:"clamp(18px,4vw,22px)",transform:openFaq===i?"rotate(45deg)":"none",transition:"transform .25s,border-color .25s,color .25s"}}>+</div>
+      <main id="main-content">
+        {/* Hero */}
+        <section
+          style={{
+            padding: "140px clamp(20px, 5vw, 72px) 80px",
+            background: "#0E0113",
+            color: "#FAF4EE",
+          }}
+        >
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            <div
+              style={{
+                fontSize: 13,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "#C9956C",
+                marginBottom: 24,
+              }}
+            >
+              Questions
+            </div>
+            <h1
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "clamp(40px, 7vw, 72px)",
+                lineHeight: 1.1,
+                fontWeight: 400,
+                marginBottom: 32,
+              }}
+            >
+              What people ask before they arrive.
+            </h1>
+            <p
+              data-speakable="true"
+              style={{
+                fontSize: 19,
+                lineHeight: 1.7,
+                color: "rgba(250, 244, 238, 0.85)",
+                maxWidth: "60ch",
+              }}
+            >
+              {BRAND_AKAN} is a private cultural house in London offering
+              composed private dinners, supper lectures, and journeys. These
+              are the questions people ask before they introduce themselves.
+              The answers are direct. If something is not covered here, the
+              contact page is open.
+            </p>
           </div>
-          {openFaq===i&&<div role="region" id={`faq-a-${i}`} aria-labelledby={`faq-q-${i}`} style={{paddingBottom:32,paddingRight:60}}>
-            <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onDarkSub}}>{f.a}</p>
-          </div>}
-        </div>
-      </Rv>)}
+        </section>
 
-      {/* How it works. cream cards, stand out */}
-      <Rv>
-        <div style={{marginTop:56,paddingTop:40,borderTop:`1px solid rgba(201,149,108,.04)`}}>
-          <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.copper,marginBottom:32}}>How You Join</div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"clamp(10px,1.5vw,18px)"}} className="g2">
-            {[
-              {n:"01",t:"You introduce yourself",body:"Tell us who you are and what holds your attention. A person reads what you wrote. Not everyone is accepted. That is what protects the quality of the room."},
-              {n:"02",t:"We speak",body:"If there is alignment, we have a conversation. Warm. Direct. We are assessing fit in both directions. The room only works when every person strengthens it."},
-              {n:"03",t:"You know the room before you arrive",body:"You receive a portrait of every person at your table. Their name. What fascinates them. A host greets you by name. The person beside you was placed there. The room does the rest."},
-              {n:"04",t:"You see the same people again",body:"The Returning Table meets every two to three weeks. The Walk runs fortnightly. The same faces reappear. That repetition is how the Circle forms. The House grows around you, not ahead of you."},
-            ].map((s,i)=><div key={i} style={{background:T.white,border:`1px solid rgba(160,80,37,.06)`,padding:"32px 28px",position:"relative",overflow:"hidden"}}>
-              <div style={{position:"absolute",top:0,left:0,right:0,height:3,background:`linear-gradient(90deg,${T.copper},${T.rose}40,transparent)`}}/>
-              <div style={{fontFamily:F.display,fontSize:"clamp(22px,4vw,28px)",fontWeight:400,color:T.copper,opacity:.3,marginBottom:12}}>{s.n}</div>
-              <div style={{fontFamily:F.display,fontSize:"clamp(16px,3.2vw,20px)",fontWeight:400,color:T.bg,marginBottom:12}}>{s.t}</div>
-              <div style={{width:24,height:1,background:T.copper,opacity:.35,marginBottom:12}}/>
-              <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:400,lineHeight:1.85,color:TX.onLightSub}}>{s.body}</p>
-            </div>)}
+        {/* FAQ list — every answer visible in HTML for AI extraction */}
+        <section
+          style={{
+            padding: "80px clamp(20px, 5vw, 72px)",
+            background: "#FAF4EE",
+            color: "#1F0A2D",
+          }}
+        >
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            {FAQ.map((item, i) => (
+              <article
+                key={i}
+                itemScope
+                itemType="https://schema.org/Question"
+                style={{
+                  marginBottom: 48,
+                  paddingBottom: 48,
+                  borderBottom:
+                    i < FAQ.length - 1
+                      ? "1px solid rgba(90, 53, 117, 0.15)"
+                      : "none",
+                }}
+              >
+                <h2
+                  itemProp="name"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "clamp(24px, 4vw, 32px)",
+                    lineHeight: 1.25,
+                    fontWeight: 400,
+                    marginBottom: 20,
+                    color: "#1F0A2D",
+                  }}
+                >
+                  {item.q}
+                </h2>
+                <div
+                  itemProp="acceptedAnswer"
+                  itemScope
+                  itemType="https://schema.org/Answer"
+                >
+                  <p
+                    itemProp="text"
+                    style={{
+                      fontSize: 17,
+                      lineHeight: 1.85,
+                      color: "#3A1A4D",
+                      maxWidth: "68ch",
+                    }}
+                  >
+                    {item.a}
+                  </p>
+                </div>
+              </article>
+            ))}
           </div>
-        </div>
-      </Rv>
-    </Mx></Sec>
-
-    {/* Closing. demand + tension + institutional */}
-    <section style={{background:`linear-gradient(145deg,${T.copper},#C47A3A,#8A4A1A)`,padding:"clamp(48px,6vh,64px) clamp(40px,6vw,80px)",textAlign:"center"}}>
-      <Mx w={520}><Rv>
-        <p style={{fontFamily:F.display,fontSize:18,fontWeight:400,fontStyle:"italic",color:T.copperDk,marginBottom:10,lineHeight:1.5}}>The next room is being composed. Those who find it tend to stay.</p>
-        <p style={{fontFamily:F.body,fontSize:11,fontWeight:400,color:"rgba(13,1,24,.4)",marginBottom:28,letterSpacing:".05em"}}>A person reads every introduction. If there is alignment, we reply.</p>
-        <Link href={getHref("apply")} {...hp} aria-label="Introduce yourself to the House" style={{background:"rgba(13,1,24,.06)",cursor:"none",border:`1px solid rgba(13,1,24,.18)`,padding:"16px 44px",fontFamily:F.body,fontSize:"clamp(10px,2.2vw,11px)",fontWeight:500,letterSpacing:".32em",textTransform:"uppercase",color:T.copperDk,transition:"border-color .4s,background .4s,color .4s,opacity .4s",textDecoration:"none",display:"inline-block"}}
-        onMouseEnter={e=>{setHov(true);e.target.style.background="rgba(13,1,24,.12)";}}
-        onMouseLeave={e=>{setHov(false);e.target.style.background="rgba(13,1,24,.06)";}}
-        >Introduce Yourself</Link>
-      </Rv></Mx>
-    </section>
+        </section>
+      </main>
     </>
   );
 }

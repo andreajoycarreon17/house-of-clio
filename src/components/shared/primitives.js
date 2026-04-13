@@ -14,7 +14,7 @@ function CI({ size = 80, variant = "dark" }) {
       width={size}
       height={size}
       viewBox="0 0 320 320"
-      fill="none"
+      fill="none" 
       preserveAspectRatio="xMidYMid meet"
       style={{ display: "block", flexShrink: 0 }}
     >
