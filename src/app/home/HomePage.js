@@ -194,12 +194,25 @@ export default function HomePage() {
 
           <div className="g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "clamp(12px,1.5vw,20px)" }}>
             {[
-              { title: "The First House", desc: "Where the circle forms. You arrive knowing no one. A host says your name. By the end of the evening, strangers are making plans that did not exist three hours ago.", foot: "London · Seasonal", bg: `linear-gradient(155deg, ${T.copper}, #1A0820)`, txt: T.cream, sub: "rgba(250,244,238,.75)", acc: T.goldL },
+              { title: "The First House", desc: "Where the circle forms. You arrive knowing no one. A host says your name. By the end of the evening, strangers are making plans that did not exist three hours ago.", foot: "London · Seasonal", bg: `linear-gradient(155deg,${T.copper},#8A4A1A)`, txt: T.cream, sub: "rgba(250,244,238,.75)", acc: T.goldL, },
               { title: "The Evening", desc: "The room people come back to. Considered company. Low light. A conversation that goes somewhere nobody expected. You leave with people you will actually call.", foot: "London · Seasonal", bg: `linear-gradient(155deg,${T.offW},#EDE5DA)`, txt: "#1A0820", sub: TX.onLightSub, acc: T.copper },
               { title: "The Journey", desc: "You come back different. Not because of the place. Because of who you were with. People arrive as strangers. They leave making plans that would not exist without this room.", foot: "Europe · By composition", bg: `linear-gradient(155deg,${T.bg},#0E0113)`, txt: T.cream, sub: TX.onDarkSub, acc: T.gold },
               { title: "The Gathering", desc: "End of year. The full circle in one room. People who crossed paths in different rooms find each other again. Conversations resume mid-sentence. The room is larger. The warmth has not changed.", foot: "London · Date to be announced", bg: `linear-gradient(155deg,${T.damson},${T.bg})`, txt: T.cream, sub: "rgba(250,244,238,.65)", acc: T.roseL },
             ].map((c, i) => <Rv key={i} delay={i * 80}>
-              <div className="card-glow" style={{ background: c.bg, height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
+              <div
+                className="card-glow"
+                style={{
+                  background: c.bg,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  overflow: "hidden",
+                  position: "relative",
+                  forcedColorAdjust: "none",
+                  WebkitForcedColorAdjust: "none",
+                  colorScheme: "light",
+                }}
+              >
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,${c.acc}80,transparent)` }} />
                 <div style={{ padding: "clamp(16px,2.5vh,36px) clamp(14px,3vw,32px)", flex: 1, display: "flex", flexDirection: "column" }}>
                   <div style={{ fontFamily: F.display, fontSize: "clamp(18px,4vw,28px)", fontWeight: 400, fontStyle: "italic", color: c.txt, lineHeight: 1.1, marginBottom: "clamp(8px,1.5vh,14px)" }}>{c.title}</div>
