@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import EditorialImage from "@/components/EditorialImage";
 
 export default function TheHousePage() {
   const router = useRouter();
@@ -29,7 +30,11 @@ export default function TheHousePage() {
       {/* Atmospheric. The room before anyone arrives */}
       <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv>
-          <RealImg src={IMG.dinner} alt="A composed room at the ?use ?f Clio. Long table set. Candles lit. The room is ready." h={300} aspect="21/9" />
+          <EditorialImage
+            src="/images/house/composed-room.jpg"
+            alt="A composed room at The House of Clio. Long table set. Candles lit."
+            ratio="21/9"
+          />
         </Rv></Mx>
       </section>
 
@@ -78,7 +83,11 @@ export default function TheHousePage() {
 
       {/* Atmospheric image */}
       <section style={{ padding: 0, background: T.bg2 }}>
-        <RealImg src={IMG.hands} alt="Guests at an intimate gathering at the ?use ?f Clio. Warm light." h={280} aspect="21/9" />
+        <EditorialImage
+          src="/images/house/guests-warm.jpg"
+          alt="Guests at an intimate gathering at The House of Clio. Warm light."
+          ratio="21/9"
+        />
       </section>
 
       {/* Answer blocks: query-capture layer. Each paragraph answers a real search query. */}
@@ -109,6 +118,17 @@ export default function TheHousePage() {
             </div>)}
           </div>
         </Rv></Mx>
+      </section>
+
+      {/* IMAGE SLOT — Before A Note on Scale */}
+      <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
+        <Mx w={900}>
+          <EditorialImage
+            src="/images/house/conversation.jpg"
+            alt="Conversation at a composed gathering. The House of Clio."
+            ratio="21/9"
+          />
+        </Mx>
       </section>
 
       {/* Philosophy of craft. Morgan principle */}

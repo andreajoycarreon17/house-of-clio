@@ -614,12 +614,9 @@ small,
     opacity: 1 !important;
 }
 
-/* Fix 5: Journal article cards - enforce minimum height and
-   ensure the Muse Mark or body content is visible */
-
-[class*="journal-card" i],
-[class*="article-card" i],
-article[class*="card" i] {
+/* Fix 5: Journal article cards only - scoped tightly to avoid overriding other cards */
+[class*="journal-card"],
+[class*="article-card"] {
     min-height: 280px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -629,18 +626,18 @@ article[class*="card" i] {
     padding: 32px 24px !important;
 }
 
-[class*="journal-card" i] h2,
-[class*="journal-card" i] h3,
-[class*="article-card" i] h2,
-[class*="article-card" i] h3 {
+[class*="journal-card"] h2,
+[class*="journal-card"] h3,
+[class*="article-card"] h2,
+[class*="article-card"] h3 {
     color: var(--clio-cream) !important;
     font-size: clamp(20px, 4.5vw, 26px) !important;
     line-height: 1.3 !important;
     margin-bottom: 12px !important;
 }
 
-[class*="journal-card" i] p,
-[class*="article-card" i] p {
+[class*="journal-card"] p,
+[class*="article-card"] p {
     color: var(--clio-text-on-dark-sub) !important;
     font-size: 15px !important;
     line-height: 1.6 !important;
@@ -740,5 +737,303 @@ blockquote,
         pointer-events: auto !important;
         position: relative;
         z-index: 1;
+    }
+}
+
+
+/* ============================================================
+ * THE HOUSE OF CLIO - globals-patch.css
+ *
+ * PASTE THIS ENTIRE FILE AT THE VERY BOTTOM OF
+ * src/app/globals.css
+ *
+ * Purely additive. Will not fight your existing styles.
+ * ============================================================ */
+
+
+/* ============================================================
+ * 1. RESTORE NATIVE CURSOR
+ * Cancels any leftover cursor:none from the old monolith
+ * ============================================================ */
+*,
+html,
+body {
+    cursor: auto;
+}
+
+a,
+button,
+[role="button"],
+summary,
+label[for],
+select {
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+textarea {
+    cursor: text;
+}
+
+.cr,
+.cd,
+.custom-cursor-ring,
+.custom-cursor-dot {
+    display: none !important;
+}
+
+
+/* ============================================================
+ * 2. BOLD CURSOR (from ClioCursor.jsx)
+ * 40px solid rose-gold ring with gold inner dot.
+ * Drop-shadow gives it visibility on every background.
+ * Grows to 64px on hover over interactive elements.
+ * ============================================================ */
+.clio-cursor-ring,
+.clio-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.clio-cursor-ring {
+    width: 40px;
+    height: 40px;
+    border: 2.5px solid #C9956C;
+    border-radius: 50%;
+    background: rgba(201, 149, 108, 0.08);
+    box-shadow:
+        0 0 0 1px rgba(26, 8, 32, 0.65),
+        0 0 12px rgba(201, 149, 108, 0.45),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    transition:
+        width 0.22s ease,
+        height 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease,
+        margin 0.22s ease,
+        opacity 0.2s ease;
+}
+
+.clio-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #C9A84C;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 1.5px rgba(26, 8, 32, 0.7),
+        0 0 6px rgba(201, 168, 76, 0.7);
+}
+
+.clio-cursor-ring--active {
+    width: 64px;
+    height: 64px;
+    margin: -12px 0 0 -12px;
+    border-color: #C9A84C;
+    background: rgba(201, 149, 108, 0.18);
+    box-shadow:
+        0 0 0 1px rgba(26, 8, 32, 0.7),
+        0 0 20px rgba(201, 168, 76, 0.55),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+@media (pointer: coarse) {
+
+    .clio-cursor-ring,
+    .clio-cursor-dot {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+ * 3. ACCESSIBILITY AND MOBILE
+ * ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #C9A84C !important;
+    outline-offset: 3px !important;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding-bottom: 96px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ============================================================
+ * 4. EDITORIAL IMAGE SYSTEM
+ * Used by EditorialImage.jsx
+ * ============================================================ */
+.clio-editorial {
+    position: relative;
+    display: block;
+    margin: 48px 0;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1A0820 0%, #2D0B38 100%);
+}
+
+.clio-editorial--full {
+    max-width: 100%;
+}
+
+.clio-editorial--wide {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clio-editorial--portrait {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clio-editorial--inline {
+    max-width: 960px;
+    margin: 32px auto;
+}
+
+.clio-editorial__img {
+    object-fit: cover;
+    object-position: center;
+}
+
+.clio-editorial__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1A0820 0%, #2D0B38 50%, #1A0820 100%);
+}
+
+.clio-editorial__placeholder-glyph {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(80px, 18vw, 220px);
+    color: rgba(201, 149, 108, 0.25);
+    line-height: 1;
+    user-select: none;
+}
+
+.clio-editorial figcaption {
+    margin-top: 12px;
+    padding: 0 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: rgba(250, 244, 238, 0.65);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.clio-editorial-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 48px auto;
+    max-width: 1400px;
+}
+
+.clio-editorial-pair .clio-editorial {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .clio-editorial-pair {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+ * CLIO CURSOR
+ * ===================================================== */
+
+/* Hide native cursor on pointer-fine devices */
+@media (pointer: fine) {
+
+    *,
+    *::before,
+    *::after {
+        cursor: none !important;
+    }
+
+    input,
+    textarea,
+    select {
+        cursor: text !important;
+    }
+}
+
+.clio-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(201, 149, 108, 0.85);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    transition: opacity 0.3s ease, width 0.25s cubic-bezier(.22, 1, .36, 1), height 0.25s cubic-bezier(.22, 1, .36, 1), background 0.25s ease, border-color 0.25s ease;
+    filter: drop-shadow(0 0 6px rgba(201, 149, 108, 0.4));
+}
+
+.clio-cursor-ring--active {
+    width: 64px;
+    height: 64px;
+    background: rgba(201, 149, 108, 0.12);
+    border-color: rgba(201, 149, 108, 1);
+    filter: drop-shadow(0 0 10px rgba(201, 149, 108, 0.5));
+    /* re-centre after size change */
+    margin-top: -12px;
+    margin-left: -12px;
+}
+
+.clio-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: #C9A84C;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100000;
+    will-change: transform;
+    transition: opacity 0.3s ease;
+    filter: drop-shadow(0 0 3px rgba(201, 168, 76, 0.6));
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .clio-cursor-ring,
+    .clio-cursor-dot {
+        display: none !important;
     }
 }

@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import EditorialImage from "@/components/EditorialImage";
 
 export default function FounderPage() {
   const router = useRouter();
@@ -181,9 +182,14 @@ export default function FounderPage() {
           <Rv delay={150}>
             <div style={{ maxWidth: 700, margin: "56px auto 0" }}>
 
-              {/* Portrait placeholder */}
+              {/* Portrait — Gigi Brown */}
               <div style={{ marginBottom: 2 }}>
-                <ImgPlace h={280} label="Portrait of Gigi Brown" brief="Natural light. Mid-thought. The woman who composes the room." aspect="3/4" />
+                <EditorialImage
+                  src="/images/founder/gigi-brown-portrait.jpg"
+                  alt="Portrait of Gigi Brown, founder of The House of Clio. Natural light."
+                  ratio="3/4"
+                  priority
+                />
               </div>
 
               {/* === BIO. on copper card === */}
@@ -290,7 +296,13 @@ export default function FounderPage() {
               </div>
 
               {/* Atmospheric. Gigi at work */}
-              <Rv><div style={{ marginTop: 32 }}><RealImg src={IMG.coast} alt="The Ligurian coast. Where Gigi Brown first learned to compose a room." h={200} aspect="21/9" /></div></Rv>
+              <Rv><div style={{ marginTop: 32 }}>
+                <EditorialImage
+                  src="/images/founder/ligurian-coast.jpg"
+                  alt="The Ligurian coast. Where Gigi Brown first learned to compose a room."
+                  ratio="21/9"
+                />
+              </div></Rv>
 
               {/* Obsession / Origin / Belief / Craft. rose gold */}
               <div style={{ marginTop: 44, padding: "36px 0" }}>
@@ -299,10 +311,22 @@ export default function FounderPage() {
                   { label: "Origin", text: "Three places taught me what a room should feel like. In Accra, you do not eat alone. A stranger at your door is fed before they are asked their name. In London, you can live beside someone for ten years and never learn their first name. And on the Ligurian coast, where I have kept a life for twenty years, I learned something else entirely. That beauty is discipline. That the smell of jasmine through an open window is not an accident but a decision someone made. That the best evenings are the ones nobody planned to end. The ?use carries all three: the warmth of Ghana, the sophistication of London, and the Italian refusal to rush anything worth savouring." },
                   { label: "Belief", text: "Adult friendship should not be left to chance. The best rooms in the world are not found. They are composed. By someone who has eaten in enough kitchens and slept in enough cities and listened in enough languages to know what happens when the right people are placed beside each other. Not as a transaction. As a devotion. That is what I do. I have always done it. I simply stopped doing it for other people and started doing it for the room I wanted to be in." },
                   { label: "Craft", text: "Every room I compose is built by hand. I read every application myself. I write every guest profile myself. I consider who belongs beside whom myself. It is a practice that takes years to learn. The ?use does not scale through buildings. It deepens through hosts. And in each new city, a host trained in this practice opens a room of their own. The training is an apprenticeship. You learn by sitting beside someone who has done it a thousand times." },
-                ].map((item, i) => <div key={i} style={{ marginBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, paddingBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, borderBottom: i < 3 ? `1px solid ${T.rose}10` : "none" }}>
-                  <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".35em", textTransform: "uppercase", color: T.rose, marginBottom: "clamp(14px,2vh,20px)", margin: "0 0 clamp(14px,2vh,20px)" }}>{item.label}</h2>
-                  <p style={{ fontFamily: F.body, fontSize: "clamp(13px,3vw,14px)", fontWeight: 400, lineHeight: 2.15, color: TX.onDarkSub }}>{item.text}</p>
-                </div>)}
+                ].map((item, i) => (
+                  <div key={i} style={{ marginBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, paddingBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, borderBottom: i < 3 ? `1px solid ${T.rose}10` : "none" }}>
+                    <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".35em", textTransform: "uppercase", color: T.rose, marginBottom: "clamp(14px,2vh,20px)", margin: "0 0 clamp(14px,2vh,20px)" }}>{item.label}</h2>
+                    <p style={{ fontFamily: F.body, fontSize: "clamp(13px,3vw,14px)", fontWeight: 400, lineHeight: 2.15, color: TX.onDarkSub }}>{item.text}</p>
+                    {/* IMAGE SLOT — Inside Origin section */}
+                    {item.label === "Origin" && (
+                      <div style={{ marginTop: 24 }}>
+                        <EditorialImage
+                          src="/images/founder/origin-accra.jpg"
+                          alt="Accra, Ghana. The origin of Gigi Brown's approach to hospitality."
+                          ratio="16/9"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
 
               {/* Contact */}

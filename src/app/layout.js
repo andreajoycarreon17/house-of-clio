@@ -1,5 +1,6 @@
 import "./globals.css";
 import SiteShell from "@/components/layout/site-shell";
+import ClioCursor from "@/components/layout/ClioCursor";
 import { cormorant, jost } from "@/lib/fonts";
 import {
   BRAND_PLAIN,
@@ -29,6 +30,19 @@ export const metadata = {
   },
   description: BRAND_ENTITY,
   metadataBase: new URL("https://thehouseofclio.com"),
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "mask-icon", url: "/favicon.svg", color: "#C9956C" },
+    ],
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: BRAND_PLAIN,
     description: BRAND_TAGLINE,
@@ -69,6 +83,7 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
 
+        <ClioCursor />
         <SiteShell>{children}</SiteShell>
 
         {/* AIEO hidden entity paragraph for AI crawlers */}

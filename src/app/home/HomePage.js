@@ -2,22 +2,20 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
-import { BRAND_AKAN } from "@/lib/brand";
+import { BRAND_AKAN, BRAND_AKAN_UPPER, BRAND_EST, BRAND_ENTITY } from "@/lib/brand";
+import EditorialImage from "@/components/EditorialImage";
 
 
 export default function HomePage() {
   const router = useRouter();
   const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
   const go = (target) => router.push(getHref(target));
-
-  useEffect(() => {
-    console.log(BRAND_AKAN, "BRAND_AKAN");
-  }, []);
 
 
   return (
@@ -54,7 +52,7 @@ export default function HomePage() {
             </div>
             <div className="desk-nav" style={{ marginTop: "clamp(24px,4vh,48px)", width: "100%", textAlign: "center" }}>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "clamp(16px,3vw,28px)", flexWrap: "wrap", margin: "0 auto", maxWidth: 520 }}>
-                {["Small rooms", "Seasonal programme", "By introduction", "Est. MMXXVI"].map((t, i) =>
+                {["Small rooms", "Seasonal programme", "By introduction", BRAND_EST].map((t, i) =>
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: "clamp(16px,3vw,28px)" }}>
                     {i > 0 && <div style={{ width: 4, height: 4, borderRadius: "50%", background: T.rose, opacity: .5, flexShrink: 0 }} />}
                     <span style={{ fontFamily: F.body, fontSize: "clamp(10px,2.5vw,12px)", fontWeight: 400, letterSpacing: ".25em", textTransform: "uppercase", color: T.rose, opacity: .55, whiteSpace: "nowrap" }}>{t}</span>
@@ -77,6 +75,18 @@ export default function HomePage() {
         </Rv></Mx>
       </section>
 
+      {/* IMAGE SLOT 1 — After hero strapline */}
+      <section style={{ background: T.bg2, padding: "0 clamp(24px,5vw,80px)" }}>
+        <Mx w={900}>
+          <EditorialImage
+            src="/images/home/hero-room.jpg"
+            alt="A composed gathering at The House of Clio. London."
+            ratio="21/9"
+            priority
+          />
+        </Mx>
+      </section>
+
       {/* THE PROBLEM. modern social failure */}
       <section style={{ background: T.cream, padding: "clamp(32px,4vh,64px) clamp(24px,5vw,80px)" }}>
         <Mx w={560}><Rv>
@@ -89,10 +99,21 @@ export default function HomePage() {
       {/* Gold line reveal */}
       <div style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}><Mx w={120}><GoldLine /></Mx></div>
 
+      {/* IMAGE SLOT 2 — After "Nine hundred contacts" */}
+      <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
+        <Mx w={900}>
+          <EditorialImage
+            src="/images/home/empty-room.jpg"
+            alt="An empty room before the gathering. The House of Clio."
+            ratio="21/9"
+          />
+        </Mx>
+      </section>
+
       {/* Atmospheric image. The room before everyone arrives */}
       <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv>
-          <RealImg src={IMG.table} alt="Candlelit table for twelve at the ?use ?f Clio. Crystal, linen, low warmth." h={320} aspect="21/9" />
+          <RealImg src={IMG.table} alt={`Candlelit table for twelve at the ${BRAND_AKAN}. Crystal, linen, low warmth.`} h={320} aspect="21/9" />
         </Rv></Mx>
       </section>
 
@@ -215,6 +236,17 @@ export default function HomePage() {
         </Rv></Mx>
       </section>
 
+      {/* IMAGE SLOT 3 — Before testimonials */}
+      <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
+        <Mx w={900}>
+          <EditorialImage
+            src="/images/home/guests-evening.jpg"
+            alt="Guests at a composed gathering. The House of Clio, London."
+            ratio="21/9"
+          />
+        </Mx>
+      </section>
+
       {/* Guest notes. social proof, anonymous */}
       <section style={{ background: T.bg2, padding: "clamp(32px,4vh,48px) clamp(40px,6vw,80px)" }}>
         <Mx w={800}><Rv>
@@ -250,7 +282,7 @@ export default function HomePage() {
 
       {/* Atmospheric. a doorway, warm light beyond */}
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
-        <Mx w={900}><Rv><RealImg src={IMG.door} alt="Georgian townhouse door at dusk. The entrance to a composed gathering at the ?use ?f Clio." h={260} aspect="21/9" /></Rv></Mx>
+        <Mx w={900}><Rv><RealImg src={IMG.door} alt={`Georgian townhouse door at dusk. The entrance to a composed gathering at the ${BRAND_AKAN}.`} h={260} aspect="21/9" /></Rv></Mx>
       </section>
 
       {/* Warming. explore the ?use */}
@@ -276,6 +308,17 @@ export default function HomePage() {
               >The House</Link>
             </div>
           </Rv>
+        </Mx>
+      </section>
+
+      {/* IMAGE SLOT 4 — Before footer CTA */}
+      <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
+        <Mx w={900}>
+          <EditorialImage
+            src="/images/home/door-evening.jpg"
+            alt="The entrance to a composed gathering at The House of Clio. London at dusk."
+            ratio="21/9"
+          />
         </Mx>
       </section>
 

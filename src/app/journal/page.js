@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { JOURNAL_ARTICLES } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { CM, F, IMG, Lbl, Mx, RealImg, Rv, Sec, T, TX } from "@/components/shared";
+import EditorialImage from "@/components/EditorialImage";
 
 export default function JournalPage() {
   const router = useRouter();
@@ -143,13 +144,11 @@ export default function JournalPage() {
               return (
                 <Rv key={article.slug} delay={Math.min(index, 8) * 60}>
                   <div className="card-glow" role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.click(); }} onClick={() => openArticle(article)} style={{ background: T.bg2, border: "1px solid rgba(201,149,108,.06)", cursor: "pointer", overflow: "hidden" }}>
-                    <div style={{ background: article.bg, aspectRatio: "4/3", position: "relative", overflow: "hidden" }}>
-                      <div style={{ position: "absolute", inset: 0, background: `repeating-linear-gradient(135deg,transparent,transparent 24px,${isDark ? "rgba(250,244,238,.015)" : "rgba(26,8,32,.015)"} 24px,${isDark ? "rgba(250,244,238,.015)" : "rgba(26,8,32,.015)"} 25px)`, pointerEvents: "none" }} />
-                      <div style={{ position: "absolute", top: 16, left: 16, fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".3em", textTransform: "uppercase", color: isDark ? "rgba(250,244,238,.4)" : "rgba(26,8,32,.3)" }}>{article.tag}</div>
-                      <div style={{ position: "absolute", bottom: 16, right: 16, opacity: 0.12, pointerEvents: "none" }}>
-                        <CM size={100} />
-                      </div>
-                    </div>
+                    <EditorialImage
+                      src={`/images/journal/${article.slug}.jpg`}
+                      alt={article.title}
+                      ratio="3/2"
+                    />
                     <div style={{ padding: "20px 20px 24px", textAlign: "center" }}>
                       <div style={{ fontFamily: F.display, fontSize: "clamp(16px,1.6vw,20px)", fontWeight: 400, color: T.cream, lineHeight: 1.3, marginBottom: 10 }}>{article.title}</div>
                       <div style={{ width: 24, height: 1, background: `linear-gradient(90deg,${T.gold}40,${T.rose}20)`, margin: "0 auto 10px" }} />

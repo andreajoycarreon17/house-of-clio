@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import EditorialImage from "@/components/EditorialImage";
 
 export default function ApplyPage() {
   const router = useRouter();
@@ -101,7 +102,13 @@ export default function ApplyPage() {
           </div>
         </div></Rv>
 
-        <Rv delay={50}><div style={{marginBottom:32}}><RealImg src={IMG.dinner} h={160} alt="A place held at the ?use ?f Clio. One chair. Candlelight." aspect="21/9" overlay={.3}/></div></Rv>
+        <Rv delay={50}><div style={{marginBottom:32}}>
+          <EditorialImage
+            src="/images/apply/a-place-at-the-table.jpg"
+            alt="A place held at The House of Clio. One chair. Candlelight."
+            ratio="21/9"
+          />
+        </div></Rv>
 
         {(()=>{
           const ls={display:"block",fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"uppercase",color:T.copper,marginBottom:8,opacity:.8};
