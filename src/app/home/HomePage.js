@@ -170,7 +170,7 @@ export default function HomePage() {
       <div style={{ background: T.bg, padding: "8px 0", display: "flex", justifyContent: "center" }}><div className="gold-shimmer" style={{ width: 80, height: 1 }} /></div>
 
       {/* Copper statement. The closing mechanism */}
-      <section style={{ background: `linear-gradient(135deg,${T.copper} 0%,#7A3A18 100%)`, padding: "clamp(48px,7vh,72px) clamp(40px,6vw,80px)", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: `linear-gradient(135deg,${T.copper} 0%,#7A3A18 100%) !important`, padding: "clamp(48px,7vh,72px) clamp(40px,6vw,80px)", position: "relative", overflow: "hidden" }}>
         <Orb color={T.copperDk} size="500px" top="15%" left="55%" delay={2} />
         <Mx w={700}><Rv>
           <div style={{ textAlign: "center" }}>
