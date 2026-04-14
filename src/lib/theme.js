@@ -92,7 +92,6 @@ img{max-width:100%;height:auto;}
 /* Dark mode is the default. Light mode users: brand stays dark, we soften transitions */
 @media(prefers-color-scheme:light){
   .preloader{background:#0E0113!important;}
-  body{color-scheme:dark;}
 }
 
 /* High contrast. boost text opacity, strengthen borders */
