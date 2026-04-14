@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function ContactPage() {
   const router = useRouter();
@@ -76,7 +77,7 @@ export default function ContactPage() {
 
         {/* Atmospheric */}
         <Rv delay={75}>
-          <RealImg src={IMG.pen} alt="A handwritten invitation to the ?use ?f Clio. Copper ink on heavy paper." h={180} aspect="21/9"/>
+          <RealImg src={IMG.pen} alt={`A handwritten invitation to the ${BRAND_AKAN}. Copper ink on heavy paper.`} h={180} aspect="21/9"/>
 
         </Rv>
 

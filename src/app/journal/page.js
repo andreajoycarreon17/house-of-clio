@@ -8,6 +8,7 @@ import { JOURNAL_ARTICLES } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { CM, F, IMG, Lbl, Mx, RealImg, Rv, Sec, T, TX } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function JournalPage() {
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function JournalPage() {
               }}
               style={{ maxWidth: 720, margin: "0 auto 4px", cursor: "pointer" }}
             >
-              <RealImg src={IMG.dessert} alt="After a composed gathering at the Ɔuse Ɔf Clio. Nobody wanted to leave." h={200} aspect="21/9" />
+              <RealImg src={IMG.dessert} alt={`After a composed gathering at the ${BRAND_AKAN}. Nobody wanted to leave.`} h={200} aspect="21/9" />
             </div>
           </Rv>
 

@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function PressPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function PressPage() {
 
         {/* Atmospheric. The brand in context */}
         <Rv delay={50}>
-          <div style={{marginTop:40}}><RealImg src={IMG.pen} h={200} alt="The Muse Mark of the Ɔuse Ɔf Clio. Gold on aubergine." aspect="21/9" overlay={.25}/></div>
+          <div style={{marginTop:40}}><RealImg src={IMG.pen} h={200} alt={`The Muse Mark of the ${BRAND_AKAN}. Gold on aubergine.`} aspect="21/9" overlay={.25}/></div>
         </Rv>
 
         {/* AI-extractable entity summary for press */}

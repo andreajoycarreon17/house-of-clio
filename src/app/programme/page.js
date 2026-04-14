@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function ProgrammePage() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric. a composed evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The ?use ?f Clio, London." h={240} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.wine} alt={`Wine being poured at a composed gathering. The ${BRAND_AKAN}, London.`} h={240} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* === THE SEVEN ROOMS === */}
@@ -96,7 +97,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric */}
     <section style={{background:T.bg2,padding:"2px clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.courtyard} alt="A courtyard setting for a composed gathering. The ?use ?f Clio." h={140} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.courtyard} alt={`A courtyard setting for a composed gathering. The ${BRAND_AKAN}.`} h={140} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* IV + V */}
@@ -138,7 +139,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric */}
     <section style={{background:T.bg2,padding:"2px clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.vineyard} alt="A Grand Journey destination. Vineyard at golden hour. The ?use ?f Clio." h={140} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.vineyard} alt={`A Grand Journey destination. Vineyard at golden hour. The ${BRAND_AKAN}.`} h={140} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* VI + VII */}

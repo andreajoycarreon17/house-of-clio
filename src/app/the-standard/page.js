@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function TheStandardPage() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function TheStandardPage() {
 
       {/* Atmospheric */}
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
-        <Mx w={680}><Rv><RealImg src={IMG.hallway} h={180} alt="The Standard at the ?use ?f Clio. Hands breaking bread." aspect="21/9" overlay={.2} /></Rv></Mx>
+        <Mx w={680}><Rv><RealImg src={IMG.hallway} h={180} alt={`The Standard at the ${BRAND_AKAN}. Hands breaking bread.`} aspect="21/9" overlay={.2} /></Rv></Mx>
       </section>
 
       {/* The Seven Standards. on cream paper */}

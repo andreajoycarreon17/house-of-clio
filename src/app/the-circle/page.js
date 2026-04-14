@@ -7,6 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function TheCirclePage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function TheCirclePage() {
 
     {/* Atmospheric. The room, mid-evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
-      <Mx w={960}><Rv><RealImg src={IMG.candles} alt="Candles reflected in dark glass. The Circle at the Ɔuse Ɔf Clio." h={220} aspect="21/9"/></Rv></Mx>
+      <Mx w={960}><Rv><RealImg src={IMG.candles} alt={`Candles reflected in dark glass. The Circle at the ${BRAND_AKAN}.`} h={220} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* === INTERLUDE. cream for zen break === */}
@@ -52,7 +53,7 @@ export default function TheCirclePage() {
     {/* Atmospheric. The room before the evening */}
     <section style={{background:T.bg2,padding:"2px clamp(40px,6vw,80px)"}}>
       <Mx w={960}><Rv>
-        <RealImg src={IMG.dinner} h={240} alt="A composed room at the ?use ?f Clio before the guests arrive." aspect="3/1"/>
+        <RealImg src={IMG.dinner} h={240} alt={`A composed room at the ${BRAND_AKAN} before the guests arrive.`} aspect="3/1"/>
       </Rv></Mx>
     </section>
 
