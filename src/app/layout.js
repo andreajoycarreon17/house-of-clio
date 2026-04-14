@@ -76,6 +76,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }}
         />
+        <meta name="google-site-verification" content="wzrmM0jaPyBKtzL2rnUYA8VDIo34eY16T_EsEFDh0yA" />
       </head>
       <body className="min-h-full">
         {/* Skip link for keyboard accessibility */}
