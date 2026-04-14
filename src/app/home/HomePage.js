@@ -336,7 +336,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA. copper for warmth */}
-      <section style={{ background: `linear-gradient(160deg,${T.copper},#C47A3A,#8A4A1A)`, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: `linear-gradient(160deg,${T.copper},#C47A3A,#8A4A1A) !important`, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,${T.gold},${T.copper},transparent)` }} />
         <Mx w={500}><Rv>
           <p style={{ fontFamily: F.display, fontSize: "clamp(22px,3vw,32px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.45, color: T.cream, marginBottom: 12 }}>There is a place in the House.<br />If it is yours, you will know.</p>
