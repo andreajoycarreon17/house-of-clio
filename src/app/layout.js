@@ -29,6 +29,7 @@ export const metadata = {
     default: BRAND_PLAIN + " | Private Cultural House in London",
   },
   description: BRAND_ENTITY,
+  colorScheme: "light",
   metadataBase: new URL("https://thehouseofclio.com"),
   icons: {
     icon: [
@@ -76,6 +77,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }}
         />
+        <meta name="color-scheme" content="light" />
       </head>
       <body className="min-h-full">
         {/* Skip link for keyboard accessibility */}
