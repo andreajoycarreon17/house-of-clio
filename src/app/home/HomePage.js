@@ -188,13 +188,13 @@ export default function HomePage() {
         <Mx w={880}><Rv>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <Lbl>The Exchange</Lbl>
-            <h2 style={{ fontFamily: F.display, fontSize: "clamp(26px,3.2vw,40px)", fontWeight: 400, lineHeight: 1.1, color: T.cream, marginBottom: 16 }}>Dinners. Lectures. Journeys.<br /><em style={{ color: T.rose, fontStyle: "italic" }}>A programme, not an event.</em></h2>
+            <h2 style={{ fontFamily: F.display, fontSize: "clamp(26px,3.2vw,40px)", fontWeight: 400, zlineHeight: 1.1, color: T.cream, marginBottom: 16 }}>Dinners. Lectures. Journeys.<br /><em style={{ color: T.rose, fontStyle: "italic" }}>A programme, not an event.</em></h2>
             <p style={{ fontFamily: F.body, fontSize: 13, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkSub, maxWidth: 440, margin: "0 auto" }}>Seven seasonal rooms. Three recurring formats. Two member-led Societies. The same people cross paths again across different tables. Friendship has time to form.</p>
           </div>
 
           <div className="g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "clamp(12px,1.5vw,20px)" }}>
             {[
-              { title: "The First House", desc: "Where the circle forms. You arrive knowing no one. A host says your name. By the end of the evening, strangers are making plans that did not exist three hours ago.", foot: "London · Seasonal", bg: `linear-gradient(155deg,${T.copper},#8A4A1A)`, txt: T.cream, sub: "rgba(250,244,238,.75)", acc: T.goldL },
+              { title: "The First House", desc: "Where the circle forms. You arrive knowing no one. A host says your name. By the end of the evening, strangers are making plans that did not exist three hours ago.", foot: "London · Seasonal", bg: `linear-gradient(155deg, ${T.copper}, #1A0820)`, txt: T.cream, sub: "rgba(250,244,238,.75)", acc: T.goldL },
               { title: "The Evening", desc: "The room people come back to. Considered company. Low light. A conversation that goes somewhere nobody expected. You leave with people you will actually call.", foot: "London · Seasonal", bg: `linear-gradient(155deg,${T.offW},#EDE5DA)`, txt: "#1A0820", sub: TX.onLightSub, acc: T.copper },
               { title: "The Journey", desc: "You come back different. Not because of the place. Because of who you were with. People arrive as strangers. They leave making plans that would not exist without this room.", foot: "Europe · By composition", bg: `linear-gradient(155deg,${T.bg},#0E0113)`, txt: T.cream, sub: TX.onDarkSub, acc: T.gold },
               { title: "The Gathering", desc: "End of year. The full circle in one room. People who crossed paths in different rooms find each other again. Conversations resume mid-sentence. The room is larger. The warmth has not changed.", foot: "London · Date to be announced", bg: `linear-gradient(155deg,${T.damson},${T.bg})`, txt: T.cream, sub: "rgba(250,244,238,.65)", acc: T.roseL },

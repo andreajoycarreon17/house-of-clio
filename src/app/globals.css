@@ -48,8 +48,6 @@
     --clio-text-large: 19px;
 
     --clio-touch-target: 44px;
-    color-scheme: light;
-
 }
 
 /* RESET */
@@ -59,10 +57,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-html {
-    color-scheme: light;
 }
 
 html {
