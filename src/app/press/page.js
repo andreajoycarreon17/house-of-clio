@@ -7,7 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
-import { BRAND_AKAN } from "@/lib/brand";
+import { BRAND_AKAN, BRAND_AKAN_UPPER, AKAN_O } from "@/lib/brand";
 
 export default function PressPage() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function PressPage() {
         <Rv>
           <Lbl color="rgba(46,18,64,.35)">Press and Media</Lbl>
           <h1 style={{fontFamily:F.display,fontSize:"clamp(32px,4.5vw,52px)",fontWeight:400,lineHeight:.92,color:T.bg,marginBottom:16}}>Tell<br/><em style={{color:T.rose}}>our story.</em></h1>
-          <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLightSub,maxWidth:520,marginBottom:16}}>Everything you need to tell the story of the ?use is below. If you need something that is not here, Gigi will pick up the phone.</p>
+          <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLightSub,maxWidth:520,marginBottom:16}}>Everything you need to tell the story of the {AKAN_O}use is below. If you need something that is not here, Gigi will pick up the phone.</p>
           <div style={{fontFamily:F.body,fontSize:13,fontWeight:500,color:T.rose}}>press@thehouseofclio.com</div>
         </Rv>
 
@@ -34,15 +34,15 @@ export default function PressPage() {
 
         {/* AI-extractable entity summary for press */}
         <Rv delay={75}>
-          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onLightMuted,maxWidth:600,margin:"28px auto 0",textAlign:"center",letterSpacing:".02em"}}>The Ɔuse Ɔf Clio is a private cultural house in London founded by Gigi Brown in 2026. It composes intimate gatherings where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. The programme includes composed dinners, supper lectures, cycling journeys, and city escapes. Entry is by introduction. London is the first city. Dublin is the second.</p>
+          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onLightMuted,maxWidth:600,margin:"28px auto 0",textAlign:"center",letterSpacing:".02em"}}>The {BRAND_AKAN} is a private cultural house in London founded by Gigi Brown in 2026. It composes intimate gatherings where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. The programme includes composed dinners, supper lectures, cycling journeys, and city escapes. Entry is by introduction. London is the first city. Dublin is the second.</p>
         </Rv>
 
         {/* Boilerplate */}
         <Rv delay={100}>
           <div style={{marginTop:56,padding:"36px 40px",background:T.white,border:`1px solid rgba(46,18,64,.08)`}}>
             <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.rose,marginBottom:16}}>Company Boilerplate</div>
-            <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLight,marginBottom:16}}>Ɔuse Ɔf Clio is a private cultural house founded in London in 2026 by Gigi Brown. It operates a seasonal programme of twelve formats: composed private dinners, supper lectures, cycling journeys, city escapes, and multi-day Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. The infrastructure is human: a host who reads every application, writes every guest portrait, and considers who belongs beside whom. There is no membership fee. The circle pays per gathering. Each room is composed once and never repeated. The circle grows through introduction, not application. Each person admitted strengthens the room for everyone who follows. The ? is drawn from the Akan alphabet of Ghana, carrying the sound of the English H: a European cultural form rooted in African linguistic identity. London is the first city. Dublin is the second. The model is designed to operate in any city with the right density of considered people. thehouseofclio.com</p>
-            <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLight}}>The ?use is based in London. Dublin is the second city. Edinburgh, Manchester, Birmingham, Bristol, Oxford, and international cities including Accra, Lisbon, and Dubai are under consideration. The name uses the Akan character ? from the alphabet of Ghana, carrying the sound of the English H.</p>
+            <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLight,marginBottom:16}}>{BRAND_AKAN} is a private cultural house founded in London in 2026 by Gigi Brown. It operates a seasonal programme of twelve formats: composed private dinners, supper lectures, cycling journeys, city escapes, and multi-day Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. The infrastructure is human: a host who reads every application, writes every guest portrait, and considers who belongs beside whom. There is no membership fee. The circle pays per gathering. Each room is composed once and never repeated. The circle grows through introduction, not application. Each person admitted strengthens the room for everyone who follows. The {AKAN_O} is drawn from the Akan alphabet of Ghana, carrying the sound of the English H: a European cultural form rooted in African linguistic identity. London is the first city. Dublin is the second. The model is designed to operate in any city with the right density of considered people. thehouseofclio.com</p>
+            <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:400,lineHeight:1.9,color:TX.onLight}}>The {AKAN_O}use is based in London. Dublin is the second city. Edinburgh, Manchester, Birmingham, Bristol, Oxford, and international cities including Accra, Lisbon, and Dubai are under consideration. The name uses the Akan character {AKAN_O} from the alphabet of Ghana, carrying the sound of the English H.</p>
           </div>
         </Rv>
 
@@ -70,8 +70,8 @@ export default function PressPage() {
             <div style={{flex:1}}>
               <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.copper,marginBottom:8}}>Host Bio</div>
               <div style={{fontFamily:F.display,fontSize:"clamp(20px,3.5vw,24px)",fontWeight:400,color:T.copper,marginBottom:12}}>Gigi Brown</div>
-              <p style={{fontFamily:F.body,fontSize:"clamp(13px,3vw,14px)",fontWeight:400,lineHeight:1.85,color:TX.onLightSub,marginBottom:12}}>Gigi Brown has spent twenty years in tourism, conference production, and incentive travel across Europe, the Middle East, and West Africa. She founded Inska Hub, a growth strategy consultancy, and co-founded Accra Konnect, a professional circle connecting the Ghanaian diaspora. She divides her time between London and the Italian Riviera, where she learned the discipline of composition that defines the ?use. She returned to London in 2026 and built the thing she had been rehearsing across three continents.</p>
-              <p style={{fontFamily:F.body,fontSize:"clamp(13px,3vw,14px)",fontWeight:400,lineHeight:1.85,color:TX.onLightSub}}>The hardest part of meeting strangers has already been done before anyone arrives. The ?use is based in London. Dublin follows.</p>
+              <p style={{fontFamily:F.body,fontSize:"clamp(13px,3vw,14px)",fontWeight:400,lineHeight:1.85,color:TX.onLightSub,marginBottom:12}}>Gigi Brown has spent twenty years in tourism, conference production, and incentive travel across Europe, the Middle East, and West Africa. She founded Inska Hub, a growth strategy consultancy, and co-founded Accra Konnect, a professional circle connecting the Ghanaian diaspora. She divides her time between London and the Italian Riviera, where she learned the discipline of composition that defines the {AKAN_O}use. She returned to London in 2026 and built the thing she had been rehearsing across three continents.</p>
+              <p style={{fontFamily:F.body,fontSize:"clamp(13px,3vw,14px)",fontWeight:400,lineHeight:1.85,color:TX.onLightSub}}>The hardest part of meeting strangers has already been done before anyone arrives. The {AKAN_O}use is based in London. Dublin follows.</p>
               <div style={{marginTop:16,fontFamily:F.body,fontSize:11,fontWeight:400,color:TX.onLightMuted,fontStyle:"italic"}}>Headshot and assets available on request. Contact press@thehouseofclio.com</div>
             </div>
           </div>
@@ -83,13 +83,13 @@ export default function PressPage() {
             <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.rose,marginBottom:24,margin:"0 0 24px"}}>Story Angles for Journalists</h2>
             <div className="g2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"clamp(10px,1.5vw,18px)"}}>
               {[
-                {angle:"The Friendship Economy",pitch:"One in three adults feels lonely weekly. A new wave of businesses is emerging to solve adult disconnection. Ɔuse Ɔf Clio is the considered end of that market: composed rooms where people are placed beside people worth knowing, with written portraits shared before anyone arrives."},
-                {angle:"Social Infrastructure",pitch:"The ?use composes human chemistry. There is no venue, no lounge, no amenity list. The infrastructure is a host, a room, and twenty years of pattern recognition. It scales through trained hosts, not property. A new category of social institution."},
-                {angle:"Small by Design",pitch:"In a world of scale, the ?use stays deliberately considered. A host at every gathering who knows every name. Written portraits. Intentional placement. Each new city begins with a person, not a building."},
-                {angle:"The Akan Letter",pitch:"The brand uses the character ? from the Akan alphabet of Ghana. A company choosing an African character as its identity is a design story, a cultural story, and a diaspora story."},
-                {angle:"The Company You Keep",pitch:"Adults over thirty report fewer close friendships than at any point since records began. A growing number want better company, not more of it. Ɔuse Ɔf Clio composes the room before anyone arrives. The result: friendships that begin in a room and continue long after."},
-                {angle:"Designed for Everyone",pitch:"28% of men under 30 report zero close friends. Most social platforms target women. Ɔuse Ɔf Clio is designed for all genders. The Circle includes people from London, Accra, and Kumasi."},
-                {angle:"From London to Dublin to the World",pitch:"A cultural institution expanding from London to Dublin in its first season. A private house with a considered international programme, beginning with the cities where the host already has roots."},
+                {angle:"The Friendship Economy",    pitch:<>{BRAND_AKAN} is the considered end of that market: composed rooms where people are placed beside people worth knowing, with written portraits shared before anyone arrives. One in three adults feels lonely weekly.</>},
+                {angle:"Social Infrastructure",     pitch:<>The {AKAN_O}use composes human chemistry. There is no venue, no lounge, no amenity list. The infrastructure is a host, a room, and twenty years of pattern recognition. It scales through trained hosts, not property. A new category of social institution.</>},
+                {angle:"Small by Design",           pitch:<>In a world of scale, the {AKAN_O}use stays deliberately considered. A host at every gathering who knows every name. Written portraits. Intentional placement. Each new city begins with a person, not a building.</>},
+                {angle:"The Akan Letter",           pitch:<>The brand uses the character {AKAN_O} from the Akan alphabet of Ghana. A company choosing an African character as its identity is a design story, a cultural story, and a diaspora story.</>},
+                {angle:"The Company You Keep",      pitch:<>Adults over thirty report fewer close friendships than at any point since records began. A growing number want better company, not more of it. {BRAND_AKAN} composes the room before anyone arrives. The result: friendships that begin in a room and continue long after.</>},
+                {angle:"Designed for Everyone",     pitch:<>28% of men under 30 report zero close friends. Most social platforms target women. {BRAND_AKAN} is designed for all genders. The Circle includes people from London, Accra, and Kumasi.</>},
+                {angle:"From London to Dublin to the World", pitch:"A cultural institution expanding from London to Dublin in its first season. A private house with a considered international programme, beginning with the cities where the host already has roots."},
               ].map((s,i)=><div key={i} style={{background:T.white,border:`1px solid rgba(46,18,64,.08)`,padding:"28px 24px"}}>
                 <div style={{fontFamily:F.display,fontSize:19,fontWeight:400,color:T.bg,marginBottom:10}}>{s.angle}</div>
                 <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:400,lineHeight:1.8,color:TX.onLightSub,marginBottom:12}}>{s.pitch}</p>
@@ -169,7 +169,7 @@ export default function PressPage() {
               </div>
               <div>
                 <div style={{display:"flex",alignItems:"center",gap:10}}>
-                  <div style={{fontFamily:F.display,fontSize:"clamp(17px,3.5vw,20px)",fontWeight:500,letterSpacing:".2em",color:T.bg}}>The ƆUSE <span style={{color:T.rose}}>ɔf</span> CLIO</div>
+                  <div style={{fontFamily:F.display,fontSize:"clamp(17px,3.5vw,20px)",fontWeight:500,letterSpacing:".2em",color:T.bg}}>{BRAND_AKAN_UPPER}</div>
                   <div style={{width:1,height:14,background:"rgba(46,18,64,.12)",flexShrink:0}}/>
                   <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:400,letterSpacing:".18em",textTransform:"uppercase",color:T.rose,opacity:.65}}>The House of Clio</div>
                 </div>
@@ -185,11 +185,11 @@ export default function PressPage() {
             <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.rose,marginBottom:12}}>Brand Usage Notes</div>
             <div className="g2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px 28px"}}>
               {[
-                "The Ɔ character is from the Akan alphabet of Ghana. It carries the sound of the English H.",
-                "Pronunciation: House of Clio. The Ɔ is never silent.",
-                "The brand is Ɔuse ɔf Clio. Display form: ƆUSE ɔf CLIO. Website: thehouseofclio.com",
+                <>{AKAN_O} character is from the Akan alphabet of Ghana. It carries the sound of the English H.</>,
+                <>Pronunciation: House of Clio. The {AKAN_O} is never silent.</>,
+                <>The brand is {BRAND_AKAN}. Display form: {BRAND_AKAN_UPPER}. Website: thehouseofclio.com</>,
                 "The Muse Mark should never be stretched, recoloured, or placed on busy backgrounds.",
-                "Please do not refer to the Ɔuse as a club, a network, or an events company.",
+                <>Please do not refer to the {AKAN_O}use as a club, a network, or an events company.</>,
                 "The preferred description is: a private cultural house.",
               ].map((note,i)=><div key={i} style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:i<5?4:0}}>
                 <div style={{width:4,height:4,borderRadius:"50%",background:T.rose,opacity:.3,flexShrink:0,marginTop:7}}/>

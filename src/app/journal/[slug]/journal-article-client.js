@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useSiteChrome } from "@/components/layout/site-context";
 import { BTN, F, Mx, Rv, Sec, T, TX } from "@/components/shared";
+import { BRAND_AKAN } from "@/lib/brand";
 
 export default function JournalArticleClient({ article, activeArticle, totalArticles, previous, next, continueReading }) {
   const { hp } = useSiteChrome();
@@ -76,7 +77,7 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
                     })}
                     <div style={{ marginTop: 44, paddingTop: 20, borderTop: `1px solid ${T.copper}30`, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                       <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, letterSpacing: ".12em" }}>The Clio Journal · {article.date}</div>
-                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".1em" }}>Ɔuse ɔf Clio</div>
+                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".1em" }}>{BRAND_AKAN}</div>
                     </div>
                     <div style={{ marginTop: 36, paddingTop: 24, borderTop: `1px solid rgba(201,149,108,.06)`, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 20 }}>
                       {previous ? (

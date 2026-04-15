@@ -7,7 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
-import { BRAND_AKAN } from "@/lib/brand";
+import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
 
 export default function ProgrammePage() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function ProgrammePage() {
           <Dv w="48px" m="0 auto 28px"/>
           <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"42ch",margin:"0 auto"}}>Most rooms are designed for volume. These are designed for depth. Seven seasonal rooms composed by hand and never repeated. Three recurring formats that bring people back. Two Societies led by the Circle. A system designed so the longer you stay, the richer it becomes.</p>
           <p style={{fontFamily:F.body,fontSize:12,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"44ch",margin:"16px auto 0",fontStyle:"italic"}}>You begin with a single evening. You return for The Returning Table. You recognise faces. You travel together. The value compounds with every room you enter. That is the architecture.</p>
-          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"48ch",margin:"14px auto 0",letterSpacing:".02em"}}>The Exchange is the seasonal programme of the Ɔuse Ɔf Clio in London. Twelve formats including composed private dinners for eighteen, supper lectures for twenty-eight, cycling journeys, city escapes to Paris and Dublin, Grand Journeys through Puglia and Marrakech, and The Returning Table which meets every two to three weeks so the same people see each other again.</p>
+          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"48ch",margin:"14px auto 0",letterSpacing:".02em"}}>The Exchange is the seasonal programme of the {BRAND_AKAN} in London. Twelve formats including composed private dinners for eighteen, supper lectures for twenty-eight, cycling journeys, city escapes to Paris and Dublin, Grand Journeys through Puglia and Marrakech, and The Returning Table which meets every two to three weeks so the same people see each other again.</p>
         </div>
       </Rv></Mx>
     </Sec>
@@ -114,7 +114,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Two to three nights. Eighteen people. A city you know, seen through people you did not.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.rose}30,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:"rgba(250,244,238,.6)"}}>Paris. Dublin. Milan. Manchester. The ?use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:"rgba(250,244,238,.6)"}}>Paris. Dublin. Milan. Manchester. The {AKAN_O}use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onDarkMuted,fontStyle:"italic",marginTop:14}}>Each city once per season. Never repeated.</p>
           </div>
           </Rv>
@@ -129,7 +129,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Four to five days. Ten people. Destinations that change how you see the world.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.roseL}35,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the ?use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the {AKAN_O}use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:T.roseL,fontStyle:"italic",opacity:.65,marginTop:14}}>Limited places. Once composed, never repeated.</p>
           </div>
           </Rv>
@@ -156,7 +156,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Twelve to forty guests. A room composed entirely around your world.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.rose}25,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The ?use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The {AKAN_O}use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:T.rose,fontStyle:"italic",opacity:.6,marginTop:14}}>By arrangement only. Begin with a conversation.</p>
           </div>
           </Rv>
@@ -215,7 +215,7 @@ export default function ProgrammePage() {
         <div style={{textAlign:"center",marginBottom:"clamp(32px,4vh,44px)"}}>
           <Lbl>The Societies</Lbl>
           <h2 style={{fontFamily:F.display,fontSize:"clamp(22px,3vw,32px)",fontWeight:400,fontStyle:"italic",lineHeight:1.15,color:T.cream,marginBottom:14}}>Member-held. Self-governing.<br/><em style={{color:T.rose}}>Open to the Circle.</em></h2>
-          <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"44ch",margin:"0 auto"}}>Standing groups that meet on their own rhythm. Kept by a member. Held to The Standard. The ?use provides the framework. The people provide the reason.</p>
+          <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"44ch",margin:"0 auto"}}>Standing groups that meet on their own rhythm. Kept by a member. Held to The Standard. The {AKAN_O}use provides the framework. The people provide the reason.</p>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"clamp(10px,1.5vw,18px)",maxWidth:720,margin:"0 auto"}} className="g2">
           {[

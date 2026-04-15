@@ -68,7 +68,7 @@ export default function ContactPage() {
         {/* Contact options */}
         <Rv delay={50}>
           <div style={{marginBottom:44,textAlign:"center"}}>
-            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"uppercase",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact the ?use ?f Clio</h2>
+            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"uppercase",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact the {BRAND_AKAN}</h2>
             <div style={{fontFamily:F.body,fontSize:14,fontWeight:400,color:TX.onLight,marginBottom:6}}>hello@thehouseofclio.com</div>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onLightSub,marginBottom:16}}>A real person reads every message. If you prefer a call, say so and we will arrange a time that suits you.</div>
             <div style={{fontFamily:F.body,fontSize:10,fontWeight:400,color:T.rose,opacity:.7}}>thehouseofclio.com</div>
@@ -94,7 +94,7 @@ export default function ContactPage() {
                 return(<>
                   <div className="g2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 24px"}}>
                     <div style={{marginBottom:24}}><label style={ls}>Name</label><input placeholder="As you would introduce yourself" autoComplete="name" aria-label="Your name" aria-required="true" id="contact-name" style={is} onFocus={fc} onBlur={bl}/></div>
-                    <div style={{marginBottom:24}}><label style={ls}>Email</label><input type="email" placeholder="For our reply" aria-label="Email address" autoComplete="email" autoComplete="email" style={is} onFocus={fc} onBlur={bl}/></div>
+                    <div style={{marginBottom:24}}><label style={ls}>Email</label><input type="email" placeholder="For our reply" aria-label="Email address" autoComplete="email" style={is} onFocus={fc} onBlur={bl}/></div>
                   </div>
                   <div style={{marginBottom:24}}><label style={ls}>Message</label><textarea placeholder="Whatever brought you here" aria-label="Your message" rows={4} style={{...is,resize:"none"}} onFocus={fc} onBlur={bl}/></div>
                   <div style={{display:"flex",justifyContent:"flex-end"}}>

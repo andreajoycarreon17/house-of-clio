@@ -8,6 +8,7 @@ import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
+import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
 
 export default function TheHousePage() {
   const router = useRouter();
@@ -21,9 +22,9 @@ export default function TheHousePage() {
         <Lbl>The House</Lbl>
         <h1 style={{ fontFamily: F.display, fontSize: "clamp(36px,5vw,64px)", fontWeight: 400, lineHeight: .9, color: T.cream, marginBottom: 28 }}>The feeling of being<br /><em style={{ color: T.rose }}>in exactly the right room.</em></h1>
         <Dv w="56px" m="0 0 36px" />
-        <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 2, color: TX.onDarkMuted, maxWidth: "52ch", marginBottom: 32, letterSpacing: ".02em" }}>The Ɔuse ɔf Clio is a private cultural house in London with a seasonal programme of twelve formats: composed private dinners, supper lectures, cycling journeys, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. No membership fee. You pay only for the rooms you attend. Each person admitted strengthens the room for everyone who follows. Composed by Gigi Brown.</p>
+        <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 2, color: TX.onDarkMuted, maxWidth: "52ch", marginBottom: 32, letterSpacing: ".02em" }}>The {BRAND_AKAN} is a private cultural house in London with a seasonal programme of twelve formats: composed private dinners, supper lectures, cycling journeys, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. No membership fee. You pay only for the rooms you attend. Each person admitted strengthens the room for everyone who follows. Composed by Gigi Brown.</p>
         <p style={{ fontFamily: F.body, fontSize: 17, fontWeight: 400, lineHeight: 2.2, color: TX.onDark, marginBottom: 24, maxWidth: "62ch" }}>You know the feeling. You are at a dinner and within twenty minutes you are leaning forward. Within an hour, you have forgotten your phone exists. Within three, you are walking home with an idea you did not have when you arrived. The food was secondary. The venue was forgettable. What you remember is what was said and who said it.</p>
-        <p style={{ fontFamily: F.body, fontSize: 17, fontWeight: 400, lineHeight: 2.2, color: TX.onDark, marginBottom: 24, maxWidth: "62ch" }}>Most people assume that evening was an accident. It was not. It was composition. Someone chose who was in the room. Someone considered who should be placed beside whom. The Ɔuse exists to produce that feeling reliably, through a seasonal programme of composed gatherings, supper lectures, and journeys. There is no building. The rooms change. The standard does not. The format travels to extraordinary spaces across the city and, in time, beyond it. You arrive curious. You leave changed. That is the mechanism.</p>
+        <p style={{ fontFamily: F.body, fontSize: 17, fontWeight: 400, lineHeight: 2.2, color: TX.onDark, marginBottom: 24, maxWidth: "62ch" }}>Most people assume that evening was an accident. It was not. It was composition. Someone chose who was in the room. Someone considered who should be placed beside whom. The {AKAN_O}use exists to produce that feeling reliably, through a seasonal programme of composed gatherings, supper lectures, and journeys. There is no building. The rooms change. The standard does not. The format travels to extraordinary spaces across the city and, in time, beyond it. You arrive curious. You leave changed. That is the mechanism.</p>
         <p style={{ fontFamily: F.display, fontSize: "clamp(18px,3.5vw,22px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.5, color: T.cream }}>London is the first city. Dublin is the second. Each new city opens only when the host, the room, and the circle are right. The programme is underway.</p>
       </Rv></Mx></Sec>
 
@@ -54,7 +55,7 @@ export default function TheHousePage() {
             <Lbl color={T.rose}>The Culture</Lbl>
             <h2 style={{ fontFamily: F.display, fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 400, lineHeight: 1, color: T.cream, marginBottom: 24 }}>You feel it the moment you walk in.</h2>
             <p style={{ fontFamily: F.body, fontSize: 16, fontWeight: 400, lineHeight: 2, color: TX.onDark, maxWidth: 520, margin: "0 auto 20px" }}>Nobody asks what anyone does for a living. The person beside you might run a country or run a hair salon. In the room, it does not matter. What matters is whether they are curious, whether they listen, and whether they make the person next to them feel like the most interesting person in the room. People arrive with one set of assumptions. They leave with different ones. That is not an accident. It is the design.</p>
-            <p style={{ fontFamily: F.display, fontSize: 18, fontWeight: 400, fontStyle: "italic", lineHeight: 1.5, color: T.roseL, maxWidth: 480, margin: "0 auto" }}>The ?use belongs to everyone in the room equally. Not as a rule. As a feeling you notice the moment you arrive.</p>
+            <p style={{ fontFamily: F.display, fontSize: 18, fontWeight: 400, fontStyle: "italic", lineHeight: 1.5, color: T.roseL, maxWidth: 480, margin: "0 auto" }}>The {AKAN_O}use belongs to everyone in the room equally. Not as a rule. As a feeling you notice the moment you arrive.</p>
           </div>
         </Rv></Mx>
       </section>
@@ -95,9 +96,9 @@ export default function TheHousePage() {
         <Mx w={560}><Rv>
           <div style={{ textAlign: "center" }}>
             <div data-speakable="true" style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 2.1, color: TX.onDarkMuted, maxWidth: "50ch", margin: "0 auto" }}>
-              <p style={{ marginBottom: 20 }}>Many people find it difficult to meet interesting people in London because most social events rely on chance. The Ɔuse Ɔf Clio solves this by composing every room in advance. A host selects who enters, writes a portrait of every guest, and decides who sits beside whom. The result is that meaningful conversation happens from the first word, not after thirty minutes of small talk.</p>
-              <p style={{ marginBottom: 20 }}>Adult friendship is harder than it should be. Research from the University of Kansas shows it takes roughly 50 hours of shared time to form a genuine friendship. Most social events offer two hours with strangers you never see again. The Ɔuse Ɔf Clio is designed differently. The Returning Table meets every two to three weeks. The same faces reappear. That repetition is the mechanism.</p>
-              <p>Unlike a traditional private members club, the Ɔuse has no building, no lounge, and no open bar. Every room is composed once and never repeated. There is no membership fee. You pay only for the rooms you attend. The composition is what makes it work. That is what cannot be replicated.</p>
+              <p style={{ marginBottom: 20 }}>Many people find it difficult to meet interesting people in London because most social events rely on chance. The {BRAND_AKAN} solves this by composing every room in advance. A host selects who enters, writes a portrait of every guest, and decides who sits beside whom. The result is that meaningful conversation happens from the first word, not after thirty minutes of small talk.</p>
+              <p style={{ marginBottom: 20 }}>Adult friendship is harder than it should be. Research from the University of Kansas shows it takes roughly 50 hours of shared time to form a genuine friendship. Most social events offer two hours with strangers you never see again. The {BRAND_AKAN} is designed differently. The Returning Table meets every two to three weeks. The same faces reappear. That repetition is the mechanism.</p>
+              <p>Unlike a traditional private members club, the {AKAN_O}use has no building, no lounge, and no open bar. Every room is composed once and never repeated. There is no membership fee. You pay only for the rooms you attend. The composition is what makes it work. That is what cannot be replicated.</p>
             </div>
           </div>
         </Rv></Mx>
@@ -135,7 +136,7 @@ export default function TheHousePage() {
       <section style={{ background: T.bg, padding: "clamp(32px,4vh,44px) clamp(40px,6vw,80px)", textAlign: "center" }}>
         <Mx w={500}><Rv>
           <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: .4, marginBottom: 16 }}>A Note on Scale</div>
-          <p style={{ fontFamily: F.display, fontSize: "clamp(16px,2vw,20px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.6, color: TX.onDarkSub }}>Every room is sized for its purpose. Some hold a handful. Some hold over a hundred. The number is never random. The price of each experience reflects the craft behind it. Each new city begins with a host, not a building. A person trained in the practice of composition who opens a room of their own. The ?use scales through people, not property.</p>
+          <p style={{ fontFamily: F.display, fontSize: "clamp(16px,2vw,20px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.6, color: TX.onDarkSub }}>Every room is sized for its purpose. Some hold a handful. Some hold over a hundred. The number is never random. The price of each experience reflects the craft behind it. Each new city begins with a host, not a building. A person trained in the practice of composition who opens a room of their own. The {AKAN_O}use scales through people, not property.</p>
         </Rv></Mx>
       </section>
 
@@ -167,7 +168,7 @@ export default function TheHousePage() {
           <Link href={getHref("apply")} {...hp} aria-label="Introduce yourself to the House" style={{ background: "rgba(13,1,24,.06)", cursor: "none", border: `1px solid rgba(13,1,24,.18)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: T.copperDk, transition: "border-color .4s,background .4s,color .4s,opacity .4s", textDecoration: "none", display: "inline-block" }}
             onMouseEnter={e => { setHov(true); e.target.style.background = "rgba(13,1,24,.12)"; }}
             onMouseLeave={e => { setHov(false); e.target.style.background = "rgba(13,1,24,.06)"; }}
-            aria-label="Introduce yourself to the House">Introduce Yourself</Link>
+            >Introduce Yourself</Link>
         </Rv></Mx>
       </section>
     </>

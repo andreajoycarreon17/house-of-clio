@@ -8,7 +8,7 @@ import { JOURNAL_ARTICLES } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { CM, F, IMG, Lbl, Mx, RealImg, Rv, Sec, T, TX } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
-import { BRAND_AKAN } from "@/lib/brand";
+import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
 
 export default function JournalPage() {
   const router = useRouter();
@@ -47,7 +47,7 @@ export default function JournalPage() {
               Essays on adult friendship, the rooms that change people, and the art of meeting well. Written for people who take the quality of a room as seriously as the quality of what is served in it.
             </p>
             <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, marginBottom: 56, letterSpacing: ".02em" }}>
-              The Clio Journal is published by the Ɔuse Ɔf Clio, a private cultural house in London. Written by founder Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
+              The Clio Journal is published by the {BRAND_AKAN}, a private cultural house in London. Written by founder Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
             </p>
           </Rv>
 
@@ -121,11 +121,11 @@ export default function JournalPage() {
                     <p style={{ fontFamily: F.display, fontSize: "clamp(18px,2.5vw,23px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.45, color: T.bg }}>The hand on the door is the price of entry. Everything good happens afterwards.</p>
                   </div>
 
-                  <p style={{ fontFamily: F.body, fontSize: 15, fontWeight: 400, lineHeight: 2.3, color: TX.onLight }}>The Ɔuse is designed around that moment. Not the venue. Not the food. Not the conversation that comes later. The seven minutes before. The walk from the station. The hand on the door. Because every person at the Ɔuse arrived alone the first time. Every single one of them knows what it cost.</p>
+                  <p style={{ fontFamily: F.body, fontSize: 15, fontWeight: 400, lineHeight: 2.3, color: TX.onLight }}>The {AKAN_O}use is designed around that moment. Not the venue. Not the food. Not the conversation that comes later. The seven minutes before. The walk from the station. The hand on the door. Because every person at the {AKAN_O}use arrived alone the first time. Every single one of them knows what it cost.</p>
 
                   <div style={{ marginTop: 40, paddingTop: 14, borderTop: `1px solid ${T.copper}12`, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                     <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, letterSpacing: ".08em" }}>The Clio Journal · July MMXXVI</div>
-                    <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".08em" }}>The Ɔuse Ɔf Clio</div>
+                    <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".08em" }}>The {BRAND_AKAN}</div>
                   </div>
                 </div>
               </div>
@@ -179,7 +179,7 @@ export default function JournalPage() {
         <Mx w={560}>
           <Rv>
             <div style={{ display: "flex", justifyContent: "center", gap: "clamp(16px,3vw,32px)", flexWrap: "wrap" }}>
-              {[["How the ?use works", "house"], ["The seasonal programme", "programme"], ["The Circle", "circle"], ["Introduce yourself", "apply"], ["Meet the host", "founder"]].map(([text, page]) => (
+              {[["How the House works", "house"], ["The seasonal programme", "programme"], ["The Circle", "circle"], ["Introduce yourself", "apply"], ["Meet the host", "founder"]].map(([text, page]) => (
                 <Link
                   key={page}
                   href={getHref(page)}

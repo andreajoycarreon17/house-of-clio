@@ -1,109 +1,110 @@
 ﻿import { T } from "@/lib/theme";
+import { AKAN_O } from "@/lib/brand";
 
-const IMG={
+const IMG = {
   /* HOME. Hero atmospheric: Long candlelit table, crystal, warm amber glow.
      Aspect: 21/9 | Mood: Anticipation. The room before everyone arrives.
      File: hero-dinner-table.webp | PLACEHOLDER. replace with commissioned photo */
-  table:"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&q=85&fit=crop",
+  table: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&q=85&fit=crop",
 
   /* HOME. How it works: Intimate table set, dark moody, candles and wine glasses.
      Aspect: 21/9 | Mood: Warmth. Proof the room is real.
      File: composed-room-candles.webp | PLACEHOLDER */
-  dinner:"https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85&fit=crop",
+  dinner: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85&fit=crop",
 
   /* CIRCLE. Atmosphere: Taper candles in dark room, amber bokeh.
      Aspect: 21/9 | Mood: Intimacy. The light people gather around.
      File: taper-candles-dark.webp | PLACEHOLDER */
-  candles:"https://images.unsplash.com/photo-1602920838667-3c5c1b83a835?w=1400&q=85&fit=crop",
+  candles: "https://images.unsplash.com/photo-1602920838667-3c5c1b83a835?w=1400&q=85&fit=crop",
 
   /* HOME. Guest section: Close crop of hands, wine, warm tones. No faces.
      Aspect: 21/9 | Mood: Togetherness without identity.
      File: guests-warm-light.webp | PLACEHOLDER */
-  hands:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1400&q=85&fit=crop",
+  hands: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1400&q=85&fit=crop",
 
   /* EXCHANGE. Grand Journeys: Tuscan/Provencal vineyard at golden hour.
      Aspect: 21/9 | Mood: Cinematic possibility. The destination as character.
      File: journey-vineyard-golden.webp | PLACEHOLDER */
-  vineyard:"https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=85&fit=crop",
+  vineyard: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=85&fit=crop",
 
   /* EXCHANGE. Threshold: Grand entrance with warm light spilling outward.
      Aspect: 21/9 | Mood: The moment before you walk in.
      File: entrance-warm-light.webp | PLACEHOLDER */
-  door:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=85&fit=crop",
+  door: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=85&fit=crop",
 
   /* EXCHANGE. Atmospheric: Wine being poured, dark background, luxury.
      Aspect: 21/9 | Mood: Ceremony. The pour as ritual.
      File: wine-pour-close.webp | PLACEHOLDER */
-  wine:"https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1400&q=85&fit=crop",
+  wine: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1400&q=85&fit=crop",
 
   /* EXCHANGE. City Escapes: European courtyard, stone, dappled light.
      Aspect: 21/9 | Mood: Discovery. A table in a place you did not know existed.
      File: courtyard-stone-table.webp | PLACEHOLDER */
-  courtyard:"https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=1400&q=85&fit=crop",
+  courtyard: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=1400&q=85&fit=crop",
 
   /* APPLY. Writing: Notebook, heavy paper, close crop, editorial.
      Aspect: 21/9 | Mood: Considered words. The introduction as craft.
      File: handwritten-invitation.webp | PLACEHOLDER */
-  pen:"https://images.unsplash.com/photo-1517842645767-c639042777db?w=1400&q=85&fit=crop",
+  pen: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=1400&q=85&fit=crop",
 
   /* FOUNDER. Coast: Italian/Ligurian coast at golden hour.
      Aspect: 21/9 | Mood: Origin. Where the practice began.
      File: ligurian-coast-golden.webp | PLACEHOLDER */
-  coast:"https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1400&q=85&fit=crop",
+  coast: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1400&q=85&fit=crop",
 
   /* JOURNAL. End of evening: Empty glasses, candle stubs, warmth, nobody left.
      Aspect: 21/9 | Mood: The room ran late. Nobody wanted to leave.
      File: evening-end-warmth.webp | PLACEHOLDER */
-  dessert:"https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1400&q=85&fit=crop",
+  dessert: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1400&q=85&fit=crop",
 
   /* HOUSE. Architecture: Grand interior, warm stone corridor.
      Aspect: 21/9 | Mood: Institutional permanence. The building remembers.
      File: grand-interior-corridor.webp | PLACEHOLDER */
-  hallway:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=85&fit=crop",
+  hallway: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=85&fit=crop",
 };
 /* === DATA === */
-const CW=[
-  {lBg:T.copper,rBg:"rgba(160,80,37,.85)",txt:T.cream,sub:"rgba(250,244,238,.7)",acc:T.goldL,roleC:T.goldL,qm:"rgba(250,244,238,.15)",lbl:T.goldL,div:`linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`,border:"rgba(250,244,238,.12)"},
-  {lBg:T.bg,rBg:"rgba(201,149,108,.015)",txt:T.cream,sub:"rgba(250,244,238,.72)",acc:T.gold,roleC:T.gold,qm:"rgba(201,168,76,.2)",lbl:T.gold,div:`linear-gradient(90deg,${T.gold},${T.rose})`,border:"rgba(201,168,76,.08)"},
-  {lBg:T.damson,rBg:"rgba(45,11,56,.8)",txt:T.cream,sub:"rgba(250,244,238,.72)",acc:T.goldL,roleC:T.goldL,qm:"rgba(226,201,126,.18)",lbl:T.goldL,div:`linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`,border:"rgba(226,201,126,.08)"},
-  {lBg:T.offW,rBg:T.white,txt:"#2E1240",sub:"#4A2660",acc:T.gold,roleC:T.gold,qm:"rgba(201,168,76,.12)",lbl:T.gold,div:`linear-gradient(90deg,${T.gold},${T.rose})`,border:"rgba(201,168,76,.06)"},
+const CW = [
+  { lBg: T.copper, rBg: "rgba(160,80,37,.85)", txt: T.cream, sub: "rgba(250,244,238,.7)", acc: T.goldL, roleC: T.goldL, qm: "rgba(250,244,238,.15)", lbl: T.goldL, div: `linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`, border: "rgba(250,244,238,.12)" },
+  { lBg: T.bg, rBg: "rgba(201,149,108,.015)", txt: T.cream, sub: "rgba(250,244,238,.72)", acc: T.gold, roleC: T.gold, qm: "rgba(201,168,76,.2)", lbl: T.gold, div: `linear-gradient(90deg,${T.gold},${T.rose})`, border: "rgba(201,168,76,.08)" },
+  { lBg: T.damson, rBg: "rgba(45,11,56,.8)", txt: T.cream, sub: "rgba(250,244,238,.72)", acc: T.goldL, roleC: T.goldL, qm: "rgba(226,201,126,.18)", lbl: T.goldL, div: `linear-gradient(90deg,${T.goldL},rgba(226,201,126,.2))`, border: "rgba(226,201,126,.08)" },
+  { lBg: T.offW, rBg: T.white, txt: "#2E1240", sub: "#4A2660", acc: T.gold, roleC: T.gold, qm: "rgba(201,168,76,.12)", lbl: T.gold, div: `linear-gradient(90deg,${T.gold},${T.rose})`, border: "rgba(201,168,76,.06)" },
 ];
-const FOUNDERS=[
-  {name:"Gigi Brown",city:"London · Accra · Liguria",quote:"I know what a good room smells like. Sounds like. Tastes like. I learned it in three kitchens: one in Accra where strangers were fed before they were asked their name, one in Ealing where the door was never locked, and one on the Ligurian coast where lunch began at one and nobody noticed the stars were out until someone reached for a candle. I spent twenty years composing that feeling for other people. Then I came home and realised I could not find it for myself. So I composed the first room.",interests:"Why the best conversations happen after midnight, la bella figura as a philosophy of attention, West African hospitality as a way of life, the Ligurian coastline from a racing bike at dawn",cw:0},
-  {name:"Lesley Sackey",city:"Hertfordshire · Accra",quote:"I built a business from my kitchen while my children were asleep upstairs. Nobody tells you the loneliest part of running a company is having nobody to talk to who is not on your payroll. I do not need another advisor. I need someone to have dinner with who understands what it costs.",interests:"What it takes to build something alone, the gap between ambition and support, how women carry businesses and families in the same hands",cw:1},
-  {name:"Samuel Appiah",city:"London · Accra · Cape Town",quote:"Most people hate being photographed. They stiffen. They perform. Around the fourth minute something shifts. The face they arrived with falls away and the real one appears. That is the photograph. Everything before it is noise. I spend my life waiting for that fourth minute. The Ɔuse is the only place I have found where it happens in conversation too.",interests:"The four minutes before a person stops performing, why the best portraits are taken mid-sentence, how light and trust arrive at the same moment",cw:2},
-  {name:"Michael Pearce",city:"London · Dubai · Kabul",quote:"I have sat in rooms where the stakes were life and death and rooms where the stakes were a quarterly report. After Kabul I came back with no tolerance left for small talk. I would rather sit in silence with someone honest than make conversation with someone polished. If you have ever felt that, you already know why I am here.",interests:"What people reveal when they stop performing, the distance between a polished life and an honest one, why the most interesting people in any room rarely speak first",cw:3},
-  {name:"Emma Wainwright",city:"London · Aberdeen · Edinburgh",quote:"I have spent twenty years studying what makes people feel they belong somewhere. The research says it is not the building or the programme or the price of entry. It is whether someone noticed you arrived. Whether the room was designed so you did not have to perform. Whether you left feeling more yourself than when you walked in. I read about these things for a living. The Ɔuse is the first place I have experienced them.",interests:"Why belonging is spatial before it is emotional, what a room does to the people inside it, the geography of who gets to feel at home and who does not",cw:0},
-  {name:"Ilaria Ferretti",city:"Florence · London",quote:"My grandfather opened his restaurant in 1962 with eleven places and a handshake with the landlord. I am the third generation. I have watched food become content. Photographs of plates nobody tasted. Reviews from people who ate alone. I miss the room where nobody took a photograph because they were too busy talking.",interests:"The Italian kitchen as a philosophy of life, why the best meals are the ones nobody photographs, hospitality as a form of love that does not ask for anything back",cw:1},
-  {name:"Priya Sharma",city:"Jaipur · London",quote:"I built my first company from a bedroom in Jaipur and sold it to a firm in San Francisco without ever meeting them in person. The money was good. The silence afterwards was not. I built the second company because I missed having people in the room. Turns out the room was the thing I was building all along.",interests:"Why the loneliest people in any city are often the ones building the most, Mughal garden design as a way of thinking about what belongs beside what, the difference between connection and proximity",cw:3},
-  {name:"Laïla Lamey",city:"London",quote:"I have cooked for eight Champions League and Premier League finals. Forty thousand people in the stadium and I am underneath it making sure the timing is right. Nobody sees you. Nobody knows your name. You just make sure the room is fed and the room is good. I write the same way. Quietly. Late at night. Books nobody has read yet because I have not shown them to anyone. Arsenal is the only place I am loud.",interests:"What feeding people at scale teaches you about attention to detail, why the best writing happens when nobody is watching, the discipline of working where no one sees you",cw:0},
+const FOUNDERS = [
+  { name: "Gigi Brown", city: "London · Accra · Liguria", quote: "I know what a good room smells like. Sounds like. Tastes like. I learned it in three kitchens: one in Accra where strangers were fed before they were asked their name, one in Ealing where the door was never locked, and one on the Ligurian coast where lunch began at one and nobody noticed the stars were out until someone reached for a candle. I spent twenty years composing that feeling for other people. Then I came home and realised I could not find it for myself. So I composed the first room.", interests: "Why the best conversations happen after midnight, la bella figura as a philosophy of attention, West African hospitality as a way of life, the Ligurian coastline from a racing bike at dawn", cw: 0 },
+  { name: "Lesley Sackey", city: "Hertfordshire · Accra", quote: "I built a business from my kitchen while my children were asleep upstairs. Nobody tells you the loneliest part of running a company is having nobody to talk to who is not on your payroll. I do not need another advisor. I need someone to have dinner with who understands what it costs.", interests: "What it takes to build something alone, the gap between ambition and support, how women carry businesses and families in the same hands", cw: 1 },
+  { name: "Samuel Appiah", city: "London · Accra · Cape Town", quote: "Most people hate being photographed. They stiffen. They perform. Around the fourth minute something shifts. The face they arrived with falls away and the real one appears. That is the photograph. Everything before it is noise. I spend my life waiting for that fourth minute. The Ɔuse is the only place I have found where it happens in conversation too.", interests: "The four minutes before a person stops performing, why the best portraits are taken mid-sentence, how light and trust arrive at the same moment", cw: 2 },
+  { name: "Michael Pearce", city: "London · Dubai · Kabul", quote: "I have sat in rooms where the stakes were life and death and rooms where the stakes were a quarterly report. After Kabul I came back with no tolerance left for small talk. I would rather sit in silence with someone honest than make conversation with someone polished. If you have ever felt that, you already know why I am here.", interests: "What people reveal when they stop performing, the distance between a polished life and an honest one, why the most interesting people in any room rarely speak first", cw: 3 },
+  { name: "Emma Wainwright", city: "London · Aberdeen · Edinburgh", quote: "I have spent twenty years studying what makes people feel they belong somewhere. The research says it is not the building or the programme or the price of entry. It is whether someone noticed you arrived. Whether the room was designed so you did not have to perform. Whether you left feeling more yourself than when you walked in. I read about these things for a living. The Ɔuse is the first place I have experienced them.", interests: "Why belonging is spatial before it is emotional, what a room does to the people inside it, the geography of who gets to feel at home and who does not", cw: 0 },
+  { name: "Ilaria Ferretti", city: "Florence · London", quote: "My grandfather opened his restaurant in 1962 with eleven places and a handshake with the landlord. I am the third generation. I have watched food become content. Photographs of plates nobody tasted. Reviews from people who ate alone. I miss the room where nobody took a photograph because they were too busy talking.", interests: "The Italian kitchen as a philosophy of life, why the best meals are the ones nobody photographs, hospitality as a form of love that does not ask for anything back", cw: 1 },
+  { name: "Priya Sharma", city: "Jaipur · London", quote: "I built my first company from a bedroom in Jaipur and sold it to a firm in San Francisco without ever meeting them in person. The money was good. The silence afterwards was not. I built the second company because I missed having people in the room. Turns out the room was the thing I was building all along.", interests: "Why the loneliest people in any city are often the ones building the most, Mughal garden design as a way of thinking about what belongs beside what, the difference between connection and proximity", cw: 3 },
+  { name: "Laïla Lamey", city: "London", quote: "I have cooked for eight Champions League and Premier League finals. Forty thousand people in the stadium and I am underneath it making sure the timing is right. Nobody sees you. Nobody knows your name. You just make sure the room is fed and the room is good. I write the same way. Quietly. Late at night. Books nobody has read yet because I have not shown them to anyone. Arsenal is the only place I am loud.", interests: "What feeding people at scale teaches you about attention to detail, why the best writing happens when nobody is watching, the discipline of working where no one sees you", cw: 0 },
 ];
 
-const FAQ_DATA=[
-  {q:"What is the Ɔuse ɔf Clio?",a:"A private house in London that composes rooms. Before each gathering, a host reads every profile and decides who sits beside whom. You arrive knowing who is in the room. The person beside you was placed there for a reason. You pay only for the rooms you attend. There is no membership fee."},
-  {q:"How is the Ɔuse ɔf Clio different from Soho House?",a:"Soho House is a place you go. The Ɔuse ɔf Clio is a room composed for you. There is no building, no lounge, no open bar. Before each gathering you receive a written portrait of every person at your table. A host decides who sits beside whom. Every room is composed once and never repeated. The rooms are capped at twenty-two. Soho House has 250,000 members. The Ɔuse caps each city at 600."},
-  {q:"What are the best private dining experiences in London?",a:"The Ɔuse ɔf Clio offers composed private dinners where every guest is selected and every seat is placed by hand. Before you arrive, you receive a portrait of every person at your table. A host greets you by name. The format is designed so the same people meet again across different tables. Gatherings run seasonally in private rooms across London."},
-  {q:"How do I meet interesting people in London?",a:"The Ɔuse ɔf Clio solves this by composing rooms where every person is selected and placed beside someone specific. You receive portraits before arrival. A host introduces you. The Returning Table meets every two to three weeks so the same people cross paths again. Entry is by introduction or expression of interest."},
-  {q:"I am nervous about walking in alone.",a:"You will not walk into an open room and hope for the best. A host meets you at the door. Says your name. Introduces you to the first person you should meet. Within ten minutes, you are in conversation, not because you forced it, but because the room was designed for it. Every person at the table received a portrait of you before they arrived. They already know what fascinates you."},
-  {q:"What makes the Ɔuse different from a private members club?",a:"You will not stand in a room hoping someone talks to you. Before each gathering, you receive a written portrait of every person at your table. A host has decided who sits beside whom. The conversation does not start from zero. There is no building, no lounge, no open bar. Every room is composed once and never repeated."},
-  {q:"Where is the Ɔuse ɔf Clio based?",a:"London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people."},
-  {q:"Who founded the Ɔuse ɔf Clio?",a:"Gigi Brown. Born in Ghana, based in London. Twenty years composing rooms across three continents in tourism, conference production, and incentive travel. Co-founder of Inska Hub and Accra Konnect."},
-  {q:"What kind of people are in the room?",a:"People whose lives have taken them somewhere interesting. Founders, architects, surgeons, writers, venture capitalists, cultural thinkers. There is no single type. The House is shaped by range, not by any one profile. People who are curious about others and have a point of view."},
-  {q:"How are people selected?",a:"Every person is introduced by someone already in the room, or selected from the register of interest. We look for curiosity, range, and warmth. Not everyone who applies is accepted. That is what protects the quality of the room."},
-  {q:"What is a composed gathering?",a:"A gathering where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. A host greets each person by name. The conversation does not start from zero. Pioneered by the Ɔuse ɔf Clio in London."},
-  {q:"What happens after I write to you?",a:"A person reads your words. If there is alignment, we reply with a conversation. If there is not, we say so directly."},
-  {q:"How often does the House meet?",a:"The Returning Table runs every two to three weeks. The Walk runs fortnightly. A Distance Day happens quarterly. Two Societies, culture evenings and a riding group, keep the Circle alive between those. There is always a reason to return. There is never pressure to attend everything."},
-  {q:"I am an introvert. Is this for me?",a:"Yes. The House is designed for people who prefer real conversation to small talk. Profiles mean you never introduce yourself cold. The format is built for depth, not volume."},
-  {q:"What if I do not connect with anyone?",a:"Connection does not happen in a single evening. It happens through repetition. The Returning Table meets every two to three weeks. Some of the people at your next table were at your last one. Research shows it takes roughly 50 hours of shared time to form a genuine friendship. The programme is designed to deliver those hours."},
-  {q:"What is a supper lecture?",a:"A speaker talks for thirty minutes on a subject that changes how the room thinks. Then the speaker stays for dinner. The talk gives the table a shared reference. The dinner is where the real conversation happens. Supper lectures at the Ɔuse ɔf Clio seat thirty to sixty people."},
-  {q:"Does the Ɔuse ɔf Clio organise cycling journeys?",a:"Yes. Grand Journeys include cycling routes through Tuscany led by a professional cyclist, with composed company and composed tables every evening. The Ride, a fortnightly cycling Society, meets in London at conversational pace and ends at a table."},
-  {q:"How is my information handled?",a:"With complete discretion. Profiles are visible only to confirmed members before each sitting. Nothing is shared externally, sold, or used for any purpose beyond composing the room."},
-  {q:"What if the House is not for me?",a:"You may step away at any time. No contract. No obligation. You are part of the House for as long as it adds something to your life."},
-  {q:"Is the Ɔuse ɔf Clio a dating service?",a:"No. The Ɔuse is a cultural house designed for friendship, conversation, and belonging. Gatherings are mixed-gender, composed for range and curiosity, and the Standard explicitly protects the room from romantic pursuit. People come to meet people worth knowing, not to date."},
-  {q:"How much does the Ɔuse ɔf Clio cost?",a:"There is no membership fee. You pay only for the gatherings you attend. Prices reflect the venue, the food, and the craft of composition. They are shared after your introduction is accepted. There is no contract and no obligation."},
-  {q:"How does the Circle grow?",a:"Through the people inside it. Each member of the Circle holds a limited number of nominations per season. The people recruit the people. There is no advertising, no open application, and no public waitlist. Growth is governed by the quality of each introduction. The circle compounds because every new person is chosen by someone who already understands the standard."},
-  {q:"Will the Ɔuse expand to other cities?",a:"London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people. Each city opens only when the host, the format, and the circle are ready. The model is designed to travel. The standard is not negotiable."},
-  {q:"Why is there no building?",a:"The Ɔuse has no fixed premises. That is by design. The rooms change with each gathering. A Georgian townhouse for one evening. A private gallery for another. A vineyard for a journey. The format, the host, and the standard travel. The venue serves the room, not the other way around. This means every gathering can be held in the best possible space for that specific composition of people."},
+const FAQ_DATA = [
+  { q: "What is the Ɔuse ɔf Clio?", a: "A private house in London that composes rooms. Before each gathering, a host reads every profile and decides who sits beside whom. You arrive knowing who is in the room. The person beside you was placed there for a reason. You pay only for the rooms you attend. There is no membership fee." },
+  { q: "How is the Ɔuse ɔf Clio different from Soho House?", a: "Soho House is a place you go. The Ɔuse ɔf Clio is a room composed for you. There is no building, no lounge, no open bar. Before each gathering you receive a written portrait of every person at your table. A host decides who sits beside whom. Every room is composed once and never repeated. The rooms are capped at twenty-two. Soho House has 250,000 members. The Ɔuse caps each city at 600." },
+  { q: "What are the best private dining experiences in London?", a: "The Ɔuse ɔf Clio offers composed private dinners where every guest is selected and every seat is placed by hand. Before you arrive, you receive a portrait of every person at your table. A host greets you by name. The format is designed so the same people meet again across different tables. Gatherings run seasonally in private rooms across London." },
+  { q: "How do I meet interesting people in London?", a: "The Ɔuse ɔf Clio solves this by composing rooms where every person is selected and placed beside someone specific. You receive portraits before arrival. A host introduces you. The Returning Table meets every two to three weeks so the same people cross paths again. Entry is by introduction or expression of interest." },
+  { q: "I am nervous about walking in alone.", a: "You will not walk into an open room and hope for the best. A host meets you at the door. Says your name. Introduces you to the first person you should meet. Within ten minutes, you are in conversation, not because you forced it, but because the room was designed for it. Every person at the table received a portrait of you before they arrived. They already know what fascinates you." },
+  { q: "What makes the Ɔuse different from a private members club?", a: "You will not stand in a room hoping someone talks to you. Before each gathering, you receive a written portrait of every person at your table. A host has decided who sits beside whom. The conversation does not start from zero. There is no building, no lounge, no open bar. Every room is composed once and never repeated." },
+  { q: "Where is the Ɔuse ɔf Clio based?", a: "London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people." },
+  { q: "Who founded the Ɔuse ɔf Clio?", a: "Gigi Brown. Born in Ghana, based in London. Twenty years composing rooms across three continents in tourism, conference production, and incentive travel. Co-founder of Inska Hub and Accra Konnect." },
+  { q: "What kind of people are in the room?", a: "People whose lives have taken them somewhere interesting. Founders, architects, surgeons, writers, venture capitalists, cultural thinkers. There is no single type. The House is shaped by range, not by any one profile. People who are curious about others and have a point of view." },
+  { q: "How are people selected?", a: "Every person is introduced by someone already in the room, or selected from the register of interest. We look for curiosity, range, and warmth. Not everyone who applies is accepted. That is what protects the quality of the room." },
+  { q: "What is a composed gathering?", a: "A gathering where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. A host greets each person by name. The conversation does not start from zero. Pioneered by the Ɔuse ɔf Clio in London." },
+  { q: "What happens after I write to you?", a: "A person reads your words. If there is alignment, we reply with a conversation. If there is not, we say so directly." },
+  { q: "How often does the House meet?", a: "The Returning Table runs every two to three weeks. The Walk runs fortnightly. A Distance Day happens quarterly. Two Societies, culture evenings and a riding group, keep the Circle alive between those. There is always a reason to return. There is never pressure to attend everything." },
+  { q: "I am an introvert. Is this for me?", a: "Yes. The House is designed for people who prefer real conversation to small talk. Profiles mean you never introduce yourself cold. The format is built for depth, not volume." },
+  { q: "What if I do not connect with anyone?", a: "Connection does not happen in a single evening. It happens through repetition. The Returning Table meets every two to three weeks. Some of the people at your next table were at your last one. Research shows it takes roughly 50 hours of shared time to form a genuine friendship. The programme is designed to deliver those hours." },
+  { q: "What is a supper lecture?", a: "A speaker talks for thirty minutes on a subject that changes how the room thinks. Then the speaker stays for dinner. The talk gives the table a shared reference. The dinner is where the real conversation happens. Supper lectures at the Ɔuse ɔf Clio seat thirty to sixty people." },
+  { q: "Does the Ɔuse ɔf Clio organise cycling journeys?", a: "Yes. Grand Journeys include cycling routes through Tuscany led by a professional cyclist, with composed company and composed tables every evening. The Ride, a fortnightly cycling Society, meets in London at conversational pace and ends at a table." },
+  { q: "How is my information handled?", a: "With complete discretion. Profiles are visible only to confirmed members before each sitting. Nothing is shared externally, sold, or used for any purpose beyond composing the room." },
+  { q: "What if the House is not for me?", a: "You may step away at any time. No contract. No obligation. You are part of the House for as long as it adds something to your life." },
+  { q: "Is the Ɔuse ɔf Clio a dating service?", a: "No. The Ɔuse is a cultural house designed for friendship, conversation, and belonging. Gatherings are mixed-gender, composed for range and curiosity, and the Standard explicitly protects the room from romantic pursuit. People come to meet people worth knowing, not to date." },
+  { q: "How much does the Ɔuse ɔf Clio cost?", a: "There is no membership fee. You pay only for the gatherings you attend. Prices reflect the venue, the food, and the craft of composition. They are shared after your introduction is accepted. There is no contract and no obligation." },
+  { q: "How does the Circle grow?", a: "Through the people inside it. Each member of the Circle holds a limited number of nominations per season. The people recruit the people. There is no advertising, no open application, and no public waitlist. Growth is governed by the quality of each introduction. The circle compounds because every new person is chosen by someone who already understands the standard." },
+  { q: "Will the Ɔuse expand to other cities?", a: "London is the first city. Dublin is confirmed as the second city in December 2026. The programme will expand to cities with the right density of considered people. Each city opens only when the host, the format, and the circle are ready. The model is designed to travel. The standard is not negotiable." },
+  { q: "Why is there no building?", a: "The Ɔuse has no fixed premises. That is by design. The rooms change with each gathering. A Georgian townhouse for one evening. A private gallery for another. A vineyard for a journey. The format, the host, and the standard travel. The venue serves the room, not the other way around. This means every gathering can be held in the best possible space for that specific composition of people." },
 ];
 
 
@@ -210,7 +211,7 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "These questions do not sort. They open. They take the conversation from the surface to the floor beneath it. They give the other person permission to be more than their job title.", s: "b" },
       { t: null },
-      { t: "The profile system at the ?use was designed around this principle. Before each occasion, you receive a short portrait of every person who will be in the room. Not their job. What fascinates them. Where they have lived. What holds their attention when nobody is watching.", s: "b" },
+      { t: `The profile system at the ${AKAN_O}use was designed around this principle. Before each occasion, you receive a short portrait of every person who will be in the room. Not their job. What fascinates them. Where they have lived. What holds their attention when nobody is watching.`, s: "b" },
       { t: null },
       { t: "By the time you arrive, you already know that the person beside you spent three years restoring a farmhouse in Puglia. That the person across from you has a private obsession with the mathematics of sound. That the person at the far end changed careers at forty five and has never looked back.", s: "b" },
       { t: null },
@@ -249,7 +250,7 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "The hand on the door is the price of entry. Everything good happens afterwards.", s: "e" },
       { t: null },
-      { t: "The ?use is designed around that moment. Not the venue. Not the food. Not the conversation that comes later. The seven minutes before. The walk from the station. The hand on the door. Because every person at the ?use arrived alone the first time. Every single one of them knows what it cost.", s: "b" },
+      { t: `The ${AKAN_O}use is designed around that moment. Not the venue. Not the food. Not the conversation that comes later. The seven minutes before. The walk from the station. The hand on the door. Because every person at the ${AKAN_O}use arrived alone the first time. Every single one of them knows what it cost.`, s: "b" },
       { t: null },
       { t: "The next evening is being composed now. A host is writing profiles. Choosing who belongs beside whom. Preparing the room so that when you arrive, the seven minutes are already behind you.", s: "b" }
     ]
@@ -319,7 +320,7 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "Never leave the first hello to chance.", s: "e" },
       { t: null },
-      { t: "At the ?use, nobody introduces themselves cold. Before every gathering, you receive a profile of every person in the room. What fascinates them. What they carry. By the time you arrive, the conversation has already begun.", s: "b" },
+      { t: `At the ${AKAN_O}use, nobody introduces themselves cold. Before every gathering, you receive a profile of every person in the room. What fascinates them. What they carry. By the time you arrive, the conversation has already begun.`, s: "b" },
       { t: null },
       { t: "I have been in rooms where the host did this for every single person in the room. By the time the first course arrived, nobody needed rescuing. Nobody was stranded. Nobody was performing the desperate small talk of two people who have been abandoned beside each other with nothing but a name.", s: "b" },
       { t: null },
@@ -358,12 +359,12 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "Being known requires the thing the modern world is structured to prevent: repeated encounters with the same people over time. Not a single evening. Not a one-off gathering. A rhythm. A cadence. The kind of regularity that turns a stranger into someone you recognise, and someone you recognise into someone you trust, and someone you trust into someone you call when things go wrong.", s: "b" },
       { t: null },
-      { t: "The ?use is designed around this rhythm. Four principal sittings a year. Smaller rooms between them. The same faces appearing and reappearing across seasons. Until the person who was once a profile you read before dinner becomes someone whose opinion you value, whose company you seek, whose absence you notice.", s: "b" },
+      { t: `The ${AKAN_O}use is designed around this rhythm. Four principal sittings a year. Smaller rooms between them. The same faces appearing and reappearing across seasons. Until the person who was once a profile you read before dinner becomes someone whose opinion you value, whose company you seek, whose absence you notice.`, s: "b" },
       { t: null },
       { t: "That is the difference.", s: "b" },
       { t: null },
       { t: "", s: "l" },
-      { t: "Everything else offers to be seen. The ?use offers to be known.", s: "e" },
+      { t: `Everything else offers to be seen. The ${AKAN_O}use offers to be known.`, s: "e" },
       { t: null },
       { t: "The programme is built around return. Four principal gatherings a year. Smaller rooms between them. The same people reappearing across seasons until belonging is not a word but a feeling you notice when you walk in.", s: "b" }
     ]
@@ -388,7 +389,7 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "The instinct in most rooms is to gravitate toward the familiar. Toward the person you already know. Toward the group that is already laughing. This is human. It is also the reason most gatherings fail. Because the person who arrived alone is often the most interesting person in the room. They came because something mattered to them more than comfort.", s: "b" },
       { t: null },
-      { t: "At the ?use, there is a principle that sits above every other. It is not about what you say or how you dress or what you have accomplished. It is this: look after the person who arrived alone.", s: "b" },
+      { t: `At the ${AKAN_O}use, there is a principle that sits above every other. It is not about what you say or how you dress or what you have accomplished. It is this: look after the person who arrived alone.`, s: "b" },
       { t: null },
       { t: "Walk toward them. Introduce yourself. Ask them what brought them here tonight. Ask them what they are curious about. Do not ask what they do for a living. That question is a wall disguised as a door.", s: "b" },
       { t: null },
@@ -400,7 +401,7 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "That is devotion to the room.", s: "e" },
       { t: null },
-      { t: "Every person at the ?use arrived alone the first time. Someone walked toward them. The room opened. That is not a memory. It is a system designed to happen every single time.", s: "b" }
+      { t: `Every person at the ${AKAN_O}use arrived alone the first time. Someone walked toward them. The room opened. That is not a memory. It is a system designed to happen every single time.`, s: "b" }
     ]
   },
   {
@@ -433,11 +434,11 @@ export const JOURNAL_ARTICLES = [
       { t: null },
       { t: "Rooms built on honesty do not need to be rebuilt.", s: "e" },
       { t: null },
-      { t: "At the ?use, the fifth principle is Courage. Not the courage of grand gestures. The courage of choosing the true thing over the impressive thing, in a room where it would be easier to perform.", s: "b" },
+      { t: `At the ${AKAN_O}use, the fifth principle is Courage. Not the courage of grand gestures. The courage of choosing the true thing over the impressive thing, in a room where it would be easier to perform.`, s: "b" },
       { t: null },
       { t: "The clever thing gets a nod. The true thing gets remembered.", s: "e" },
       { t: null },
-      { t: "The ?use is composed for that kind of room. The right number of people. A question that matters. A host who chose every person for a reason. The evening runs late because nobody wants to leave a room where something real is happening.", s: "b" }
+      { t: `The ${AKAN_O}use is composed for that kind of room. The right number of people. A question that matters. A host who chose every person for a reason. The evening runs late because nobody wants to leave a room where something real is happening.`, s: "b" }
     ]
   }
 ];
@@ -515,7 +516,7 @@ export const PROGRAMME_ROOMS = [
     text: T.cream,
     shell: `linear-gradient(160deg,${T.damson},#1E0628,${T.bg})`,
     description:
-      "Paris. Dublin. Milan. Manchester. The ?use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.",
+      `Paris. Dublin. Milan. Manchester. The ${AKAN_O}use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.`,
     aside: "Doors that do not open for a booking engine.",
     detail: [
       "These are not city breaks assembled from recommendations. They are lived itineraries built from places that have already been tested in person.",
@@ -533,7 +534,7 @@ export const PROGRAMME_ROOMS = [
     text: T.cream,
     shell: `linear-gradient(160deg,${T.damson},#1E0628,#140420)`,
     description:
-      "Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the ?use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.",
+      `Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the ${AKAN_O}use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.`,
     aside: "Not capital cities. Not the obvious route.",
     detail: [
       "The destination matters, but not in the usual way. It is chosen for atmosphere, rhythm, and how well it can hold a composed group.",
@@ -551,7 +552,7 @@ export const PROGRAMME_ROOMS = [
     text: T.cream,
     shell: `linear-gradient(160deg,#0E0113,${T.bg2})`,
     description:
-      "You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The ?use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.",
+      `You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The ${AKAN_O}use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.`,
     aside: "You arrive as a guest in your own room.",
     detail: [
       "This is the most intimate expression of the method: social architecture applied to a room that begins with your people and your purpose.",

@@ -8,6 +8,7 @@ import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
+import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
 
 export default function FounderPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function FounderPage() {
               <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.cream, marginBottom: 10 }}>An Open Letter</div>
               <h1 style={{ fontFamily: F.display, fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 400, color: T.rose, lineHeight: 1 }}>Gigi Brown</h1>
               <div style={{ width: 40, height: 1, background: `linear-gradient(90deg,transparent,${T.copper},transparent)`, margin: "16px auto 0" }} />
-              <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, margin: "14px auto 0", textAlign: "center", letterSpacing: ".02em" }}>Gigi Brown is the founder of the Ɔuse ɔf Clio, a private cultural house in London. Born in Ghana, she has twenty years of experience composing rooms across three continents in tourism, conference production, and cultural hospitality. She built the ?use because she lived the problem: a full diary, a wide network, and no room worth her evening. She reads every application, writes every guest portrait, and decides who sits beside whom. The model is designed to operate in any city with the right density of considered people.</p>
+              <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, margin: "14px auto 0", textAlign: "center", letterSpacing: ".02em" }}>Gigi Brown is the founder of the {BRAND_AKAN}, a private cultural house in London. Born in Ghana, she has twenty years of experience composing rooms across three continents in tourism, conference production, and cultural hospitality. She built the {AKAN_O}use because she lived the problem: a full diary, a wide network, and no room worth her evening. She reads every application, writes every guest portrait, and decides who sits beside whom. The model is designed to operate in any city with the right density of considered people.</p>
             </div>
 
             {/* THE OPEN JOURNAL */}
@@ -64,7 +65,7 @@ export default function FounderPage() {
                     {/* Gigi header */}
                     <div style={{ marginBottom: 32 }}>
                       <div style={{ fontFamily: F.display, fontSize: "clamp(28px,5vw,36px)", fontWeight: 400, color: T.rose, lineHeight: 1, marginBottom: 6 }}>Gigi Brown</div>
-                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".25em", color: T.copper }}>Host · Ɔuse ɔf Clio</div>
+                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".25em", color: T.copper }}>Host · {BRAND_AKAN}</div>
                     </div>
 
                     {/* Left page entries */}
@@ -90,7 +91,7 @@ export default function FounderPage() {
                       { t: null },
                       { t: "I have spent twenty years reading rooms in Dubai, Accra, Marrakech, and London. I speak three languages. I cook from two continents. I carry Ga warmth and Akan precision and the Italian conviction that nothing worth composing should ever feel rushed. I know how to place a retired general beside a twenty-three year old poet and watch three hours disappear. That is not a skill you learn in a course. It is a life spent paying attention to what happens when the right people are in the same room.", s: "b" },
                       { t: null },
-                      { t: "The Ɔuse is not my first room. It is the room I have been composing my entire life.", s: "e" },
+                      { t: <>The {AKAN_O}use is not my first room. It is the room I have been composing my entire life.</>, s: "e" },
                     ].map((ln, i) => {
                       if (!ln || !ln.t) return <div key={i} style={{ height: 24 }} />;
                       return <p key={i} style={{
@@ -122,7 +123,7 @@ export default function FounderPage() {
                     {/* Page header */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36, paddingBottom: 12, borderBottom: `1px solid rgba(201,149,108,.08)` }}>
                       <div style={{ fontFamily: F.display, fontSize: 11, fontWeight: 400, fontStyle: "italic", color: TX.onLightMuted, opacity: .4 }}>ii</div>
-                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: TX.onLightMuted, opacity: .5 }}>Ɔuse ɔf Clio</div>
+                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: TX.onLightMuted, opacity: .5 }}>{BRAND_AKAN}</div>
                     </div>
 
                     {/* Right page entries */}
@@ -139,7 +140,7 @@ export default function FounderPage() {
                       { t: null },
                       { t: "I am tired of rooms that cost a fortune and feel like nothing.", s: "e" },
                       { t: null },
-                      { t: "The ?use is what followed. A private cultural house where the guests are composed with the same deliberation as the destination. Private dining in London. Supper lectures where someone says the thing the room was thinking. Journeys to places you would not find alone with people who make you braver than you are at home.", s: "b" },
+                      { t: <>The {AKAN_O}use is what followed. A private cultural house where the guests are composed with the same deliberation as the destination. Private dining in London. Supper lectures where someone says the thing the room was thinking. Journeys to places you would not find alone with people who make you braver than you are at home.</>, s: "b" },
                       { t: null },
                       { t: "The name comes from my heritage. The Ɔ is Akan. Ghanaian. It carries the sound of the English H. I liked that a European cultural form could be rooted in an African letter. That felt exactly right.", s: "b" },
                       { t: null },
@@ -205,7 +206,7 @@ export default function FounderPage() {
                       </div>
                       <div>
                         <div style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, color: T.copperDk, lineHeight: 1 }}>Gigi Brown</div>
-                        <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".2em", color: "rgba(13,1,24,.45)", marginTop: 6 }}>Host · The Ɔuse ɔf Clio · London</div>
+                        <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".2em", color: "rgba(13,1,24,.45)", marginTop: 6 }}>Host · The {BRAND_AKAN} · London</div>
                       </div>
                     </div>
                     <div style={{ width: 40, height: 1.5, background: `linear-gradient(90deg,rgba(13,1,24,.2),transparent)`, marginBottom: 24 }} />
@@ -214,7 +215,7 @@ export default function FounderPage() {
                     {[
                       "Born in Ghana. Made in West London. Ealing, to be specific. The kind of neighbourhood where your next door neighbour is from Killarney, the family across the road is from Kraków, and the woman at the corner shop remembers your name and your order. I grew up curious about everyone. I still am.",
                       "Twenty years in tourism, conference production, and incentive travel across three continents. I founded Inska Hub. Co-founded Accra Konnect. Moved to Ghana during Covid and spent three years composing rooms from nothing. Every summer I spend six weeks on the Ligurian coast, where someone once taught me that the length of a meal is a measure of how much you value the people in it. Every city taught me the same thing: the value of any room is decided by who is in it.",
-                      "In 2026, I came home to London and opened the Ɔuse. It carries the warmth of Accra, the precision of Turin, and the conviction that nothing worth composing should ever be rushed.",
+                      <>In 2026, I came home to London and opened the {AKAN_O}use. It carries the warmth of Accra, the precision of Turin, and the conviction that nothing worth composing should ever be rushed.</>,
                     ].map((p, i) => <p key={i} style={{ fontFamily: F.body, fontSize: "clamp(13px,3vw,14px)", fontWeight: 400, lineHeight: 2.1, color: "rgba(13,1,24,.7)", marginBottom: i < 2 ? 14 : 0 }}>{p}</p>)}
                   </div>
                 </div>
@@ -244,7 +245,7 @@ export default function FounderPage() {
 
                   {/* Liguria. one breath */}
                   <div style={{ marginTop: 28, paddingTop: 24, borderTop: `1px solid rgba(160,80,37,.08)` }}>
-                    <p style={{ fontFamily: F.display, fontSize: "clamp(14px,3.2vw,16px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.75, color: T.bg, maxWidth: 540 }}>Every summer for twenty years. Six weeks on the Italian Riviera. A fuchsia pink racing bike on the cliff roads above the sea. Jasmine and salt and warm stone. Espresso in a village where nobody is in a hurry. Late suppers on the terrace while the sky turns copper. Everything I compose at the ?use begins on that coastline.</p>
+                    <p style={{ fontFamily: F.display, fontSize: "clamp(14px,3.2vw,16px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.75, color: T.bg, maxWidth: 540 }}>Every summer for twenty years. Six weeks on the Italian Riviera. A fuchsia pink racing bike on the cliff roads above the sea. Jasmine and salt and warm stone. Espresso in a village where nobody is in a hurry. Late suppers on the terrace while the sky turns copper. Everything I compose at the {AKAN_O}use begins on that coastline.</p>
                   </div>
 
                   {/* Why Her. The qualification */}
@@ -286,7 +287,7 @@ export default function FounderPage() {
                     {/* Cities */}
                     <div style={{ marginTop: 36, paddingTop: 24, borderTop: `1px solid rgba(201,149,108,.12)` }}>
                       <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".35em", textTransform: "uppercase", color: T.roseL, opacity: .6, marginBottom: 12 }}>Cities Composed</div>
-                      <p style={{ fontFamily: F.display, fontSize: 16, fontWeight: 300, fontStyle: "italic", color: "rgba(250,244,238,.6)", lineHeight: 1.7 }}>Gigi Brown · Founder, Ɔuse ɔf Clio · Accra · Dublin · Marrakech · Edinburgh · Turin · Liguria · Piedmont · Lisbon · Puglia · Dubai...</p>
+                      <p style={{ fontFamily: F.display, fontSize: 16, fontWeight: 300, fontStyle: "italic", color: "rgba(250,244,238,.6)", lineHeight: 1.7 }}>Gigi Brown · Founder, {BRAND_AKAN} · Accra · Dublin · Marrakech · Edinburgh · Turin · Liguria · Piedmont · Lisbon · Puglia · Dubai...</p>
                     </div>
                   </div>
                 </div>
@@ -308,9 +309,9 @@ export default function FounderPage() {
               <div style={{ marginTop: 44, padding: "36px 0" }}>
                 {[
                   { label: "Obsession", text: "The composition of a room. Not the food, not the venue, not the view. The people. I have served a two hundred pound dinner in London to the wrong twelve people and watched the evening die by the main course. And I have sat on a plastic chair in Accra with a bowl of rice and the right six people and talked until the power cut and nobody moved. Who belongs beside whom is everything. Most people leave that to chance. I have spent my entire life refusing to." },
-                  { label: "Origin", text: "Three places taught me what a room should feel like. In Accra, you do not eat alone. A stranger at your door is fed before they are asked their name. In London, you can live beside someone for ten years and never learn their first name. And on the Ligurian coast, where I have kept a life for twenty years, I learned something else entirely. That beauty is discipline. That the smell of jasmine through an open window is not an accident but a decision someone made. That the best evenings are the ones nobody planned to end. The ?use carries all three: the warmth of Ghana, the sophistication of London, and the Italian refusal to rush anything worth savouring." },
+                  { label: "Origin", text: <>Three places taught me what a room should feel like. In Accra, you do not eat alone. A stranger at your door is fed before they are asked their name. In London, you can live beside someone for ten years and never learn their first name. And on the Ligurian coast, where I have kept a life for twenty years, I learned something else entirely. That beauty is discipline. That the smell of jasmine through an open window is not an accident but a decision someone made. That the best evenings are the ones nobody planned to end. The {AKAN_O}use carries all three: the warmth of Ghana, the sophistication of London, and the Italian refusal to rush anything worth savouring.</> },
                   { label: "Belief", text: "Adult friendship should not be left to chance. The best rooms in the world are not found. They are composed. By someone who has eaten in enough kitchens and slept in enough cities and listened in enough languages to know what happens when the right people are placed beside each other. Not as a transaction. As a devotion. That is what I do. I have always done it. I simply stopped doing it for other people and started doing it for the room I wanted to be in." },
-                  { label: "Craft", text: "Every room I compose is built by hand. I read every application myself. I write every guest profile myself. I consider who belongs beside whom myself. It is a practice that takes years to learn. The ?use does not scale through buildings. It deepens through hosts. And in each new city, a host trained in this practice opens a room of their own. The training is an apprenticeship. You learn by sitting beside someone who has done it a thousand times." },
+                  { label: "Craft", text: <>Every room I compose is built by hand. I read every application myself. I write every guest profile myself. I consider who belongs beside whom myself. It is a practice that takes years to learn. The {AKAN_O}use does not scale through buildings. It deepens through hosts. And in each new city, a host trained in this practice opens a room of their own. The training is an apprenticeship. You learn by sitting beside someone who has done it a thousand times.</> },
                 ].map((item, i) => (
                   <div key={i} style={{ marginBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, paddingBottom: i < 3 ? "clamp(32px,4vh,44px)" : 0, borderBottom: i < 3 ? `1px solid ${T.rose}10` : "none" }}>
                     <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".35em", textTransform: "uppercase", color: T.rose, marginBottom: "clamp(14px,2vh,20px)", margin: "0 0 clamp(14px,2vh,20px)" }}>{item.label}</h2>
@@ -358,7 +359,7 @@ export default function FounderPage() {
               <Link href={getHref("apply")} {...hp} className="btn-shine" aria-label="Introduce yourself to the House" style={{ background: "rgba(201,149,108,.06)", cursor: "none", border: `1px solid rgba(201,149,108,.25)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: T.rose, transition: "border-color .4s,background .4s,color .4s,opacity .4s", textDecoration: "none", display: "inline-block" }}
                 onMouseEnter={e => { setHov(true); e.target.style.borderColor = T.rose; e.target.style.background = "rgba(201,149,108,.12)"; }}
                 onMouseLeave={e => { setHov(false); e.target.style.borderColor = "rgba(201,149,108,.25)"; e.target.style.background = "rgba(201,149,108,.06)"; }}
-                aria-label="Introduce yourself to the House">Introduce Yourself</Link>
+                >Introduce Yourself</Link>
             </div>
           </Rv>
         </Mx>
