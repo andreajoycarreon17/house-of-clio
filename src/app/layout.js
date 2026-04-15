@@ -41,7 +41,7 @@ export const metadata = {
     other: [
       { rel: "mask-icon", url: "/favicon.ico", color: "#C9956C" },
     ],
-  },
+  }, 
   manifest: "/manifest.webmanifest",
   openGraph: {
     title: BRAND_PLAIN,
