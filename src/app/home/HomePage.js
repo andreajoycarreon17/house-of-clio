@@ -34,6 +34,14 @@ export default function HomePage() {
           </div>
           {/* Tagline. perfectly centred, full width */}
           <div style={{ opacity: ld ? 1 : 0, transform: ld ? "none" : "translateY(24px)", transition: "opacity 1.2s cubic-bezier(.16,1,.3,1) .9s,transform 1.2s cubic-bezier(.16,1,.3,1) .9s", width: "100%" }}>
+            <div className="hero-strapline">
+              <span className="hero-strapline__brand">
+                {BRAND_AKAN_UPPER}
+              </span>
+              <span className="hero-strapline__est">
+                {BRAND_EST}
+              </span>
+            </div>
             <h1 style={{ fontFamily: F.display, fontSize: "clamp(44px,7.5vw,92px)", fontWeight: 300, lineHeight: .85, letterSpacing: "-.03em", marginBottom: "clamp(16px,3vh,28px)", textAlign: "center", width: "100%", margin: "0 auto clamp(16px,3vh,28px)" }}><span style={{ color: T.cream }}>Every brilliant person</span><br /><span style={{ color: T.rose, fontStyle: "italic" }}>you have not met yet.</span></h1>
           </div>
           <div style={{ opacity: ld ? 1 : 0, transition: "opacity 1s ease 1.4s", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
