@@ -7,7 +7,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
-import { BRAND_AKAN } from "@/lib/brand";
+import { BRAND_AKAN , BRAND_AKAN_UPPER} from "@/lib/brand";
 
 export default function ContactPage() {
   const router = useRouter();
@@ -68,7 +68,7 @@ export default function ContactPage() {
         {/* Contact options */}
         <Rv delay={50}>
           <div style={{marginBottom:44,textAlign:"center"}}>
-            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"uppercase",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact the {BRAND_AKAN}</h2>
+            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact {BRAND_AKAN_UPPER}</h2>
             <div style={{fontFamily:F.body,fontSize:14,fontWeight:400,color:TX.onLight,marginBottom:6}}>hello@thehouseofclio.com</div>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onLightSub,marginBottom:16}}>A real person reads every message. If you prefer a call, say so and we will arrange a time that suits you.</div>
             <div style={{fontFamily:F.body,fontSize:10,fontWeight:400,color:T.rose,opacity:.7}}>thehouseofclio.com</div>

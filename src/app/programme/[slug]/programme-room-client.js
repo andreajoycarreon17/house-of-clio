@@ -12,7 +12,7 @@ function RoomCard({ room }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${T.gold},${T.copper},transparent)` }} />
         <div style={{ position: "relative", zIndex: 2, padding: "clamp(44px,6vh,64px) clamp(36px,5vw,52px)" }}>
           <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".6em", textTransform: "uppercase", color: "rgba(13,1,24,.2)", marginBottom: 16 }}>{room.index}</div>
-          <h1 style={{ fontFamily: F.display, fontSize: "clamp(28px,3.5vw,40px)", fontWeight: 400, fontStyle: "italic", color: T.copperDk, lineHeight: 1.05, marginBottom: 6 }}>{room.title}</h1>
+          <h2 style={{ fontFamily: F.display, fontSize: "clamp(28px,3.5vw,40px)", fontWeight: 400, fontStyle: "italic", color: T.copperDk, lineHeight: 1.05, marginBottom: 6 }}>{room.title}</h2>
           <div style={{ width: 40, height: 2, background: `linear-gradient(90deg,${T.copperDk}40,transparent)`, marginBottom: 20 }} />
           <p style={{ fontFamily: F.body, fontSize: "clamp(13px,3vw,14px)", fontWeight: 400, lineHeight: 2, color: "rgba(13,1,24,.5)", maxWidth: "42ch" }}>{room.description}</p>
           <p style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, color: "rgba(13,1,24,.3)", marginTop: 14, fontStyle: "italic" }}>{room.aside}</p>
@@ -29,7 +29,7 @@ function RoomCard({ room }) {
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${T.copper},${T.gold}40,transparent)` }} />
         <MarkLayer layer={7} size={140} color="rgba(201,168,76,.3)" style={{ top: "8%", right: "6%" }} />
         <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.copper, opacity: 0.55, marginBottom: 18, position: "relative", zIndex: 1 }}>{room.index}</div>
-        <h1 style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, fontStyle: "italic", color: T.bg, lineHeight: 1.1, marginBottom: 8, position: "relative", zIndex: 1 }}>{room.title}</h1>
+        <h2 style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, fontStyle: "italic", color: T.bg, lineHeight: 1.1, marginBottom: 8, position: "relative", zIndex: 1 }}>{room.title}</h2>
         <div style={{ fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 400, color: T.copper, fontStyle: "italic", opacity: 0.75, marginBottom: 18 }}>{room.strap}</div>
         <div style={{ width: 36, height: 1.5, background: `linear-gradient(90deg,${T.copper}40,${T.gold}15,transparent)`, marginBottom: 18 }} />
         <p style={{ fontFamily: F.body, fontSize: 14, fontWeight: 400, lineHeight: 2.1, color: TX.onLight, marginBottom: 8 }}>{room.description}</p>
@@ -51,7 +51,7 @@ function RoomCard({ room }) {
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: variants.top }} />
       <MarkLayer layer={variants.layer} size={variants.layerSize} color={variants.layerColor} style={variants.layerStyle} />
       <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: variants.idxColor, opacity: 0.55, marginBottom: 18, position: "relative", zIndex: 1 }}>{room.index}</div>
-      <h1 style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, fontStyle: "italic", color: variants.titleColor, lineHeight: 1.1, marginBottom: 8, position: "relative", zIndex: 1 }}>{room.title}</h1>
+      <h2 style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, fontStyle: "italic", color: variants.titleColor, lineHeight: 1.1, marginBottom: 8, position: "relative", zIndex: 1 }}>{room.title}</h2>
       <div style={{ fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 400, color: variants.strapColor, fontStyle: "italic", opacity: variants.strapOpacity, marginBottom: 18 }}>{room.strap}</div>
       <div style={{ width: 36, height: 1.5, background: variants.rule, marginBottom: 18 }} />
       <p style={{ fontFamily: F.body, fontSize: 14, fontWeight: 400, lineHeight: 2.1, color: variants.bodyColor }}>{room.description}</p>
@@ -69,11 +69,24 @@ export default function ProgrammeRoomClient({ room }) {
         <Mx w={560}>
           <Rv>
             <div style={{ textAlign: "center" }}>
-              <Lbl>The Exchange</Lbl>
-              <h1 style={{ fontFamily: F.display, fontSize: "clamp(36px,5vw,58px)", fontWeight: 400, lineHeight: 0.92, color: T.cream, marginBottom: 28 }}>{room.title}</h1>
+              <Lbl>Programme</Lbl>
+              <h1 style={{ fontFamily: F.display, fontSize: "clamp(36px,5vw,58px)", fontWeight: 400, lineHeight: 0.92, color: T.cream, marginBottom: 16 }}>{room.title}</h1>
+              {room.when && (
+                <p style={{ fontFamily: F.body, fontSize: 13, fontWeight: 400, letterSpacing: ".08em", color: TX.onDarkMuted, marginBottom: 20 }}>
+                  {room.when} · London
+                </p>
+              )}
               <div style={{ width: 48, height: 1, background: `linear-gradient(90deg,transparent,${T.gold}40,transparent)`, margin: "0 auto 28px" }} />
               <p style={{ fontFamily: F.body, fontSize: "clamp(14px,3.2vw,15px)", fontWeight: 300, lineHeight: 2, color: TX.onDarkSub, maxWidth: "42ch", margin: "0 auto" }}>{room.strap}</p>
               <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: "44ch", margin: "16px auto 0", fontStyle: "italic" }}>{room.aside}</p>
+              <div style={{ marginTop: 32 }}>
+                <Link
+                  href={`/apply?event=${room.slug}`}
+                  style={{ background: "rgba(201,149,108,.06)", border: "1px solid rgba(201,149,108,.25)", padding: "14px 36px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".28em", textTransform: "uppercase", color: T.rose, textDecoration: "none", display: "inline-block", transition: "border-color .4s,background .4s" }}
+                >
+                  Reserve a place on {room.title}
+                </Link>
+              </div>
             </div>
           </Rv>
         </Mx>

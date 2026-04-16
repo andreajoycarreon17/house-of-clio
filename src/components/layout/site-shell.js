@@ -33,11 +33,11 @@ export default function SiteShell({ children }) {
   const rr = useRef({ x: -100, y: -100 });
   const af = useRef(null);
   const lastSy = useRef(0);
-                                   
+
   useEffect(() => {
     try {
       setCookieOk(localStorage.getItem("clio-cookies") === "1");
-    } catch {}
+    } catch { }
   }, []);
 
   useEffect(() => {
@@ -126,12 +126,12 @@ export default function SiteShell({ children }) {
   const scrollPct =
     typeof window !== "undefined"
       ? Math.min(
-          100,
-          Math.max(
-            0,
-            (sy / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100,
-          ),
-        )
+        100,
+        Math.max(
+          0,
+          (sy / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100,
+        ),
+      )
       : 0;
 
   const hp = {
@@ -139,37 +139,11 @@ export default function SiteShell({ children }) {
     onMouseLeave: () => setHov(false),
   };
 
-  const trackInteraction = () => {};
+  const trackInteraction = () => { };
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <a
-        href="#main-content"
-        style={{
-          position: "absolute",
-          top: -100,
-          left: 16,
-          padding: "12px 24px",
-          background: T.copper,
-          color: T.cream,
-          fontFamily: F.body,
-          fontSize: 13,
-          fontWeight: 500,
-          zIndex: 10002,
-          borderRadius: 2,
-          transition: "top .2s",
-        }}
-        onFocus={(e) => {
-          e.target.style.top = "16px";
-        }}
-        onBlur={(e) => {
-          e.target.style.top = "-100px";
-        }}
-      >
-        Skip to main content
-      </a>
-
       <SiteChromeContext.Provider
         value={{
           page,

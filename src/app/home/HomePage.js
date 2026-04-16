@@ -8,7 +8,7 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
-import { BRAND_AKAN, BRAND_AKAN_UPPER, BRAND_EST, BRAND_ENTITY } from "@/lib/brand";
+import { BRAND_AKAN, BRAND_AKAN_UPPER, BRAND_EST } from "@/lib/brand";
 import EditorialImage from "@/components/EditorialImage";
 
 
@@ -46,7 +46,7 @@ export default function HomePage() {
           </div>
           <div style={{ opacity: ld ? 1 : 0, transition: "opacity 1s ease 1.4s", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <p style={{ fontFamily: F.body, fontSize: "clamp(13px,3.5vw,15px)", fontWeight: 300, lineHeight: 1.85, color: TX.onDarkSub, maxWidth: 480, textAlign: "center", margin: "0 auto clamp(8px,1.5vh,14px)" }}>A private house in London where the people, the placement, and the conversation are composed before you arrive. You know who is in the room. The room already knows you.</p>
-            <p style={{ fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 300, lineHeight: 1.7, color: TX.onDarkMuted, maxWidth: 420, textAlign: "center", margin: "0 auto clamp(12px,2vh,20px)", opacity: .7 }}>Intimate dinners, supper lectures, and journeys for people who are tired of rooms that go nowhere. Not a club. Not networking. Not dating. A place where every seat is placed and every person is considered.</p>
+            <p style={{ fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 300, lineHeight: 1.7, color: TX.onDarkMuted, maxWidth: 420, textAlign: "center", margin: "0 auto clamp(12px,2vh,20px)", opacity: .7 }}>Intimate dinners, supper lectures, and journeys for people who are tired of rooms that go nowhere. Not a club. Not a transaction. Not dating. A place where every seat is placed and every person is considered.</p>
             <div style={{ display: "flex", gap: "clamp(12px,3vw,24px)", justifyContent: "center", flexWrap: "wrap", width: "100%", marginTop: 8 }}>
               <Link href={getHref("house")} {...hp} aria-label="Enter the House" style={{ background: "none", cursor: "none", border: `1px solid rgba(201,149,108,.2)`, padding: "clamp(12px,2.5vh,16px) clamp(24px,6vw,40px)", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 300, letterSpacing: ".25em", textTransform: "uppercase", color: T.rose, transition: "border-color .5s,background .5s,color .5s,opacity .5s", textDecoration: "none", display: "inline-block" }}
                 onMouseEnter={e => { setHov(true); e.target.style.borderColor = "rgba(201,149,108,.5)"; e.target.style.background = "rgba(201,149,108,.04)"; }}
@@ -178,7 +178,7 @@ export default function HomePage() {
       <div style={{ background: T.bg, padding: "8px 0", display: "flex", justifyContent: "center" }}><div className="gold-shimmer" style={{ width: 80, height: 1 }} /></div>
 
       {/* Copper statement. The closing mechanism */}
-      <section style={{ background: `linear-gradient(135deg,${T.copper} 0%,#7A3A18 100%) !important`, padding: "clamp(48px,7vh,72px) clamp(40px,6vw,80px)", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: `linear-gradient(135deg,${T.copper} 0%,#7A3A18 100%)`, padding: "clamp(48px,7vh,72px) clamp(40px,6vw,80px)", position: "relative", overflow: "hidden" }}>
         <Orb color={T.copperDk} size="500px" top="15%" left="55%" delay={2} />
         <Mx w={700}><Rv>
           <div style={{ textAlign: "center" }}>
@@ -195,8 +195,8 @@ export default function HomePage() {
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,${T.copper},${T.rose}40,transparent)` }} />
         <Mx w={880}><Rv>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <Lbl>The Exchange</Lbl>
-            <h2 style={{ fontFamily: F.display, fontSize: "clamp(26px,3.2vw,40px)", fontWeight: 400, zlineHeight: 1.1, color: T.cream, marginBottom: 16 }}>Dinners. Lectures. Journeys.<br /><em style={{ color: T.rose, fontStyle: "italic" }}>A programme, not an event.</em></h2>
+            <Lbl>The Programme</Lbl>
+            <h2 style={{ fontFamily: F.display, fontSize: "clamp(26px,3.2vw,40px)", fontWeight: 400, lineHeight: 1.1, color: T.cream, marginBottom: 16 }}>Dinners. Lectures. Journeys.<br /><em style={{ color: T.rose, fontStyle: "italic" }}>A programme, not an event.</em></h2>
             <p style={{ fontFamily: F.body, fontSize: 13, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkSub, maxWidth: 440, margin: "0 auto" }}>Seven seasonal rooms. Three recurring formats. Two member-led Societies. The same people cross paths again across different tables. Friendship has time to form.</p>
           </div>
 
@@ -253,7 +253,7 @@ export default function HomePage() {
             <input type="email" placeholder="Your email" autoComplete="email" aria-label="Email for occasional letters" style={{ flex: 1, background: "rgba(250,244,238,.04)", border: `1px solid ${T.rose}20`, padding: "12px 16px", fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 300, color: T.cream, outline: "none", transition: "border-color .3s" }} onFocus={e => e.target.style.borderColor = `${T.rose}50`} onBlur={e => e.target.style.borderColor = `${T.rose}20`} />
             <button type="button" style={{ background: T.copper, border: "none", padding: "12px 20px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: T.cream, cursor: "pointer", transition: "background .3s", flexShrink: 0 }} onMouseEnter={e => e.target.style.background = "rgba(160,80,37,.85)"} onMouseLeave={e => e.target.style.background = T.copper}>Receive</button>
           </div>
-          <p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, marginTop: 10, opacity: .5 }}>No spam. Unsubscribe anytime. Your privacy is part of the product.</p>
+          <p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, marginTop: 10, opacity: .5 }}>Letters only. Unsubscribe at any time. Your privacy is part of the standard.</p>
         </Rv></Mx>
       </section>
 
@@ -274,9 +274,9 @@ export default function HomePage() {
           <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: .4, textAlign: "center", marginBottom: 24, margin: "0 auto 24px" }}>From the Room</h2>
           <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,28px)" }}>
             {[
-              { quote: "I have walked into a hundred rooms in this city. This was the first one where someone remembered my name the second time.", role: "Founder · London" },
-              { quote: "I came alone. I left with three people I now see monthly. That has never happened to me at any event in twenty years.", role: "Architect · London" },
-              { quote: "My wife said: you came home different. I think she meant more alive.", role: "Partner · London" },
+              { quote: "I have walked into a hundred rooms in this city. This was the first one where someone remembered my name the second time.", role: "A guest at the first table · London" },
+              { quote: "I came alone. I left with three people I now see monthly. That has never happened to me at any event in twenty years.", role: "A guest from the autumn season · London" },
+              { quote: "My wife said: you came home different. I think she meant more alive.", role: "Husband of a member · London" },
             ].map((g, i) => <div key={i} style={{ borderLeft: `1px solid ${T.gold}20`, paddingLeft: 16 }}>
               <p style={{ fontFamily: F.display, fontSize: "clamp(12px,3vw,14px)", fontWeight: 400, fontStyle: "italic", color: TX.onDarkSub, lineHeight: 1.55, marginBottom: 10 }}>"{g.quote}"</p>
               <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.gold, opacity: .5, letterSpacing: ".1em" }}>{g.role}</div>
@@ -344,7 +344,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA. copper for warmth */}
-      <section style={{ background: `linear-gradient(160deg,${T.copper},#C47A3A,#8A4A1A) !important`, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: `linear-gradient(160deg,${T.copper},#C47A3A,#8A4A1A)`, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,${T.gold},${T.copper},transparent)` }} />
         <Mx w={500}><Rv>
           <p style={{ fontFamily: F.display, fontSize: "clamp(22px,3vw,32px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.45, color: T.cream, marginBottom: 12 }}>There is a place in the House.<br />If it is yours, you will know.</p>
@@ -354,10 +354,10 @@ export default function HomePage() {
               onMouseEnter={e => { setHov(true); e.target.style.background = "rgba(13,1,24,.12)"; }}
               onMouseLeave={e => { setHov(false); e.target.style.background = "rgba(13,1,24,.06)"; }}
             >Introduce Yourself</Link>
-            <button type="button" {...hp} onClick={() => { window.open('mailto:gigi@thehouseofclio.com?subject=I%20know%20someone%20the%20%C6%86use%20should%20meet&body=Gigi%2C%0A%0AI%20know%20someone%20you%20should%20have%20in%20the%20room.%0A%0A%0ATheir%20name%3A%20%0A%0ACity%3A%20%0A%0AThe%20reason%20I%20thought%20of%20them%3A%20%0A%0A%0AThe%20thing%20that%20makes%20them%20unforgettable%20in%20a%20room%3A%20%0A%0A%0ASomething%20they%20would%20never%20say%20about%20themselves%3A%20%0A%0A%0AMy%20name%3A%20%0A%0A%0A---%0ASent%20from%20thehouseofclio.com%0AThe%20best%20rooms%20are%20composed%20by%20the%20people%20already%20in%20them.'); }} aria-label="Introduce someone" style={{ background: "none", cursor: "none", border: `1px solid rgba(13,1,24,.12)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: "rgba(13,1,24,.45)", transition: "border-color .4s,background .4s,color .4s,opacity .4s" }}
+            <Link href="/apply?referral=true" {...hp} aria-label="Introduce someone to the House" style={{ background: "none", cursor: "none", border: `1px solid rgba(13,1,24,.12)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: "rgba(13,1,24,.45)", transition: "border-color .4s,background .4s,color .4s,opacity .4s", textDecoration: "none", display: "inline-block" }}
               onMouseEnter={e => { setHov(true); e.target.style.borderColor = "rgba(13,1,24,.25)"; }}
               onMouseLeave={e => { setHov(false); e.target.style.borderColor = "rgba(13,1,24,.12)"; }}
-            >Introduce Someone</button>
+            >Introduce Someone</Link>
           </div>
         </Rv></Mx>
       </section>

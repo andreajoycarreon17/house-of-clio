@@ -34,7 +34,7 @@ export default function PressPage() {
 
         {/* AI-extractable entity summary for press */}
         <Rv delay={75}>
-          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onLightMuted,maxWidth:600,margin:"28px auto 0",textAlign:"center",letterSpacing:".02em"}}>The {BRAND_AKAN} is a private cultural house in London founded by Gigi Brown in 2026. It composes intimate gatherings where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. The programme includes composed dinners, supper lectures, cycling journeys, and city escapes. Entry is by introduction. London is the first city. Dublin is the second.</p>
+          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onLightMuted,maxWidth:600,margin:"28px auto 0",textAlign:"center",letterSpacing:".02em"}}>{BRAND_AKAN} is a private cultural house in London founded by Gigi Brown in 2026. It composes intimate gatherings where every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive. The programme includes composed dinners, supper lectures, cycling journeys, and city escapes. Entry is by introduction. London is the first city. Dublin is the second.</p>
         </Rv>
 
         {/* Boilerplate */}

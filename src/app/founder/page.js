@@ -8,7 +8,7 @@ import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
-import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
+import { BRAND_AKAN, AKAN_O ,BRAND_AKAN_UPPER} from "@/lib/brand";
 
 export default function FounderPage() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function FounderPage() {
               <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.cream, marginBottom: 10 }}>An Open Letter</div>
               <h1 style={{ fontFamily: F.display, fontSize: "clamp(28px,3.5vw,44px)", fontWeight: 400, color: T.rose, lineHeight: 1 }}>Gigi Brown</h1>
               <div style={{ width: 40, height: 1, background: `linear-gradient(90deg,transparent,${T.copper},transparent)`, margin: "16px auto 0" }} />
-              <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, margin: "14px auto 0", textAlign: "center", letterSpacing: ".02em" }}>Gigi Brown is the founder of the {BRAND_AKAN}, a private cultural house in London. Born in Ghana, she has twenty years of experience composing rooms across three continents in tourism, conference production, and cultural hospitality. She built the {AKAN_O}use because she lived the problem: a full diary, a wide network, and no room worth her evening. She reads every application, writes every guest portrait, and decides who sits beside whom. The model is designed to operate in any city with the right density of considered people.</p>
+              <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, margin: "14px auto 0", textAlign: "center", letterSpacing: ".02em" }}>Gigi Brown is the founder of {BRAND_AKAN}, a private cultural house in London. Born in Ghana, she has twenty years of experience composing rooms across three continents in tourism, conference production, and cultural hospitality. She built the {AKAN_O}use because she lived the problem: a full diary, a wide network, and no room worth her evening. She reads every application, writes every guest portrait, and decides who sits beside whom. The model is designed to operate in any city with the right density of considered people.</p>
             </div>
 
             {/* THE OPEN JOURNAL */}
@@ -123,7 +123,7 @@ export default function FounderPage() {
                     {/* Page header */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 36, paddingBottom: 12, borderBottom: `1px solid rgba(201,149,108,.08)` }}>
                       <div style={{ fontFamily: F.display, fontSize: 11, fontWeight: 400, fontStyle: "italic", color: TX.onLightMuted, opacity: .4 }}>ii</div>
-                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: TX.onLightMuted, opacity: .5 }}>{BRAND_AKAN}</div>
+                      <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", color: TX.onLightMuted, opacity: .5 }}>{BRAND_AKAN_UPPER}</div>
                     </div>
 
                     {/* Right page entries */}
@@ -206,7 +206,7 @@ export default function FounderPage() {
                       </div>
                       <div>
                         <div style={{ fontFamily: F.display, fontSize: "clamp(24px,3vw,32px)", fontWeight: 400, color: T.copperDk, lineHeight: 1 }}>Gigi Brown</div>
-                        <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".2em", color: "rgba(13,1,24,.45)", marginTop: 6 }}>Host · The {BRAND_AKAN} · London</div>
+                        <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 400, letterSpacing: ".2em", color: "rgba(13,1,24,.45)", marginTop: 6 }}>Host · {BRAND_AKAN} · London</div>
                       </div>
                     </div>
                     <div style={{ width: 40, height: 1.5, background: `linear-gradient(90deg,rgba(13,1,24,.2),transparent)`, marginBottom: 24 }} />

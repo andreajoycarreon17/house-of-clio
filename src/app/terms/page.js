@@ -74,7 +74,7 @@ const CLAUSES = [
   {
     num: "15",
     heading: "Intellectual property",
-    body: "The __BRAND__ name, the Muse Mark, and all original content on this website are the intellectual property of House of Clio Ltd. You may not reproduce, distribute, or create derivative works from our brand assets without written permission.",
+    body: "__BRAND__ name, the Muse Mark, and all original content on this website are the intellectual property of House of Clio Ltd. You may not reproduce, distribute, or create derivative works from our brand assets without written permission.",
   },
   {
     num: "16",

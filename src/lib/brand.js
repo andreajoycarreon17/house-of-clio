@@ -64,7 +64,7 @@ export const PAGE_META = {
   // home uses absolute title (no template) to avoid doubling
   home: { title: BRAND_PLAIN + " | Private Cultural House in London", desc: "A private cultural house in London. Composed private dinners, supper lectures, city escapes, and Grand Journeys. By introduction only." },
   house: { title: "The House | Composed Private Gatherings | " + BRAND_PLAIN, desc: "Before each gathering, a host reads every portrait and decides who sits beside whom. You receive a portrait of every person at your table. London." },
-  programme: { title: "The Exchange | Seasonal Programme of 12 Formats | " + BRAND_PLAIN, desc: "Seven seasonal rooms, three recurring formats, two member-led Societies. Private dinners, supper lectures, cycling journeys, and composed tables. London." },
+  programme: { title: "The Programme | Seasonal Formats | " + BRAND_PLAIN, desc: "Seven seasonal rooms, three recurring formats, two member-led Societies. Private dinners, supper lectures, cycling journeys, and composed tables. London." },
   circle: { title: "The Circle | " + BRAND_PLAIN, desc: "The first people who said yes. Portraits composed around fascination, not profession. A circle of people who raise the standard of every room they enter." },
   founder: { title: "Gigi Brown | The Host | " + BRAND_PLAIN, desc: "Born in Ghana, based in London. Twenty years composing rooms across three continents. The host of " + BRAND_PLAIN + ". Hospitality and social architecture." },
   journal: { title: "The Clio Journal | Essays on Adult Friendship | " + BRAND_PLAIN, desc: "Why most gatherings fail. How composed rooms create real friendship. Essays on loneliness, social architecture, and belonging. By Gigi Brown." },

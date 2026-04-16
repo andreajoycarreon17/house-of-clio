@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   if (!room) return {};
 
-  const title = `${room.title} | The Exchange | The House of Clio`;
+  const title = `${room.title} | Programme | The House of Clio`;
   const description = room.description;
   const url = `https://thehouseofclio.com/programme/${room.slug}`;
 

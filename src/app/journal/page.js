@@ -47,7 +47,7 @@ export default function JournalPage() {
               Essays on adult friendship, the rooms that change people, and the art of meeting well. Written for people who take the quality of a room as seriously as the quality of what is served in it.
             </p>
             <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, marginBottom: 56, letterSpacing: ".02em" }}>
-              The Clio Journal is published by the {BRAND_AKAN}, a private cultural house in London. Written by founder Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
+              The Clio Journal is published by {BRAND_AKAN}, a private cultural house in London. Written by founder Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
             </p>
           </Rv>
 
@@ -125,7 +125,7 @@ export default function JournalPage() {
 
                   <div style={{ marginTop: 40, paddingTop: 14, borderTop: `1px solid ${T.copper}12`, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                     <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, letterSpacing: ".08em" }}>The Clio Journal · July MMXXVI</div>
-                    <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".08em" }}>The {BRAND_AKAN}</div>
+                    <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.copper, letterSpacing: ".08em" }}>{BRAND_AKAN}</div>
                   </div>
                 </div>
               </div>

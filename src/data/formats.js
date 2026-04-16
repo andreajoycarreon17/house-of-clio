@@ -2,65 +2,18 @@
 import { AKAN_O } from "@/lib/brand";
 
 const IMG = {
-  /* HOME. Hero atmospheric: Long candlelit table, crystal, warm amber glow.
-     Aspect: 21/9 | Mood: Anticipation. The room before everyone arrives.
-     File: hero-dinner-table.webp | PLACEHOLDER. replace with commissioned photo */
-  table: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=1400&q=85&fit=crop",
-
-  /* HOME. How it works: Intimate table set, dark moody, candles and wine glasses.
-     Aspect: 21/9 | Mood: Warmth. Proof the room is real.
-     File: composed-room-candles.webp | PLACEHOLDER */
-  dinner: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85&fit=crop",
-
-  /* CIRCLE. Atmosphere: Taper candles in dark room, amber bokeh.
-     Aspect: 21/9 | Mood: Intimacy. The light people gather around.
-     File: taper-candles-dark.webp | PLACEHOLDER */
-  candles: "https://images.unsplash.com/photo-1602920838667-3c5c1b83a835?w=1400&q=85&fit=crop",
-
-  /* HOME. Guest section: Close crop of hands, wine, warm tones. No faces.
-     Aspect: 21/9 | Mood: Togetherness without identity.
-     File: guests-warm-light.webp | PLACEHOLDER */
-  hands: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1400&q=85&fit=crop",
-
-  /* EXCHANGE. Grand Journeys: Tuscan/Provencal vineyard at golden hour.
-     Aspect: 21/9 | Mood: Cinematic possibility. The destination as character.
-     File: journey-vineyard-golden.webp | PLACEHOLDER */
-  vineyard: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1400&q=85&fit=crop",
-
-  /* EXCHANGE. Threshold: Grand entrance with warm light spilling outward.
-     Aspect: 21/9 | Mood: The moment before you walk in.
-     File: entrance-warm-light.webp | PLACEHOLDER */
-  door: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=85&fit=crop",
-
-  /* EXCHANGE. Atmospheric: Wine being poured, dark background, luxury.
-     Aspect: 21/9 | Mood: Ceremony. The pour as ritual.
-     File: wine-pour-close.webp | PLACEHOLDER */
-  wine: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1400&q=85&fit=crop",
-
-  /* EXCHANGE. City Escapes: European courtyard, stone, dappled light.
-     Aspect: 21/9 | Mood: Discovery. A table in a place you did not know existed.
-     File: courtyard-stone-table.webp | PLACEHOLDER */
-  courtyard: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=1400&q=85&fit=crop",
-
-  /* APPLY. Writing: Notebook, heavy paper, close crop, editorial.
-     Aspect: 21/9 | Mood: Considered words. The introduction as craft.
-     File: handwritten-invitation.webp | PLACEHOLDER */
-  pen: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=1400&q=85&fit=crop",
-
-  /* FOUNDER. Coast: Italian/Ligurian coast at golden hour.
-     Aspect: 21/9 | Mood: Origin. Where the practice began.
-     File: ligurian-coast-golden.webp | PLACEHOLDER */
-  coast: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1400&q=85&fit=crop",
-
-  /* JOURNAL. End of evening: Empty glasses, candle stubs, warmth, nobody left.
-     Aspect: 21/9 | Mood: The room ran late. Nobody wanted to leave.
-     File: evening-end-warmth.webp | PLACEHOLDER */
-  dessert: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1400&q=85&fit=crop",
-
-  /* HOUSE. Architecture: Grand interior, warm stone corridor.
-     Aspect: 21/9 | Mood: Institutional permanence. The building remembers.
-     File: grand-interior-corridor.webp | PLACEHOLDER */
-  hallway: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=85&fit=crop",
+  table:    "/images/table.png",
+  dinner:   "/images/dinner.png",
+  candles:  "/images/candles.png",
+  hands:    "/images/hands.png",
+  vineyard: "/images/vineyard.png",
+  door:     "/images/door.png",
+  wine:     "/images/wine.png",
+  courtyard:"/images/courtyard.png",
+  pen:      "/images/pen.png",
+  coast:    "/images/coast.png",
+  dessert:  "/images/dessert.png",
+  hallway:  "/images/hallway.png",
 };
 /* === DATA === */
 const CW = [
@@ -455,6 +408,7 @@ export const PROGRAMME_ROOMS = [
     slug: "the-first-house",
     index: "I",
     title: "The First House",
+    when: "June MMXXVI",
     strap: "Twenty-four people. The opening of each season.",
     kicker: "24 places · London · Seasonal",
     accent: T.copper,
@@ -474,6 +428,7 @@ export const PROGRAMME_ROOMS = [
     slug: "the-evening",
     index: "II",
     title: "The Evening",
+    when: "June MMXXVI",
     strap: "Eighteen strangers. One room. One evening. Never this configuration again.",
     kicker: "The flagship room",
     accent: T.rose,
@@ -492,6 +447,7 @@ export const PROGRAMME_ROOMS = [
     slug: "the-supper-lecture",
     index: "III",
     title: "The Supper Lecture",
+    when: "July MMXXVI",
     strap: "A formidable mind speaks for thirty minutes. Then stays for dinner with twenty-eight guests.",
     kicker: "The speaker is announced. The guest list is not.",
     accent: T.gold,
@@ -510,6 +466,7 @@ export const PROGRAMME_ROOMS = [
     slug: "city-escapes",
     index: "IV",
     title: "City Escapes",
+    when: "September MMXXVI",
     strap: "Two to three nights. Eighteen people. A city you know, seen through people you did not.",
     kicker: "Each city once per season. Never repeated.",
     accent: T.roseL,
@@ -528,6 +485,7 @@ export const PROGRAMME_ROOMS = [
     slug: "grand-journeys",
     index: "V",
     title: "Grand Journeys",
+    when: "October MMXXVI",
     strap: "Four to five days. Ten people. Destinations that change how you see the world.",
     kicker: "Limited places. Once composed, never repeated.",
     accent: T.roseL,
@@ -546,6 +504,7 @@ export const PROGRAMME_ROOMS = [
     slug: "the-private-house",
     index: "VI",
     title: "The Private House",
+    when: "October MMXXVI",
     strap: "Twelve to forty guests. A room composed entirely around your world.",
     kicker: "By arrangement only. Begin with a conversation.",
     accent: T.rose,
@@ -564,7 +523,8 @@ export const PROGRAMME_ROOMS = [
     slug: "the-annual-house",
     index: "VII",
     title: "The Annual House",
-    strap: "One hundred people. One evening. The year made visible.",
+    when: "December MMXXVI",
+    strap: " One hundred and twenty people. One evening. The year made visible.",
     kicker: "The largest room in the programme. The one people prepare for all year.",
     accent: T.copper,
     text: T.bg,
