@@ -121,7 +121,7 @@ export default function HomePage() {
       {/* Atmospheric image. The room before everyone arrives */}
       <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv>
-          <RealImg src={IMG.table} alt={`Candlelit table for twelve at the ${BRAND_AKAN}. Crystal, linen, low warmth.`} h={320} aspect="21/9" />
+          <RealImg src={IMG.table} alt={`Candlelit table for twelve at ${BRAND_AKAN}. Crystal, linen, low warmth.`} h={320} aspect="21/9" />
         </Rv></Mx>
       </section>
 
@@ -303,7 +303,7 @@ export default function HomePage() {
 
       {/* Atmospheric. a doorway, warm light beyond */}
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
-        <Mx w={900}><Rv><RealImg src={IMG.door} alt={`Georgian townhouse door at dusk. The entrance to a composed gathering at the ${BRAND_AKAN}.`} h={260} aspect="21/9" /></Rv></Mx>
+        <Mx w={900}><Rv><RealImg src={IMG.door} alt={`Georgian townhouse door at dusk. The entrance to a composed gathering at ${BRAND_AKAN}.`} h={260} aspect="21/9" /></Rv></Mx>
       </section>
 
       {/* Warming. explore the ?use */}

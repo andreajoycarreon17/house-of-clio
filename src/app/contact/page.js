@@ -77,7 +77,7 @@ export default function ContactPage() {
 
         {/* Atmospheric */}
         <Rv delay={75}>
-          <RealImg src={IMG.pen} alt={`A handwritten invitation to the ${BRAND_AKAN}. Copper ink on heavy paper.`} h={180} aspect="21/9"/>
+          <RealImg src={IMG.pen} alt={`A handwritten invitation to ${BRAND_AKAN}. Copper ink on heavy paper.`} h={180} aspect="21/9"/>
 
         </Rv>
 

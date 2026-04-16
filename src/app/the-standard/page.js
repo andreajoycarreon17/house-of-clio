@@ -28,7 +28,7 @@ export default function TheStandardPage() {
 
       {/* Atmospheric */}
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
-        <Mx w={680}><Rv><RealImg src={IMG.hallway} h={180} alt={`The Standard at the ${BRAND_AKAN}. Hands breaking bread.`} aspect="21/9" overlay={.2} /></Rv></Mx>
+        <Mx w={680}><Rv><RealImg src={IMG.hallway} h={180} alt={`The Standard at ${BRAND_AKAN}. Hands breaking bread.`} aspect="21/9" overlay={.2} /></Rv></Mx>
       </section>
 
       {/* The Seven Standards. on cream paper */}

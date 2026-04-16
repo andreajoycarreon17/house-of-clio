@@ -53,7 +53,7 @@ export default function TheCirclePage() {
       {/* Atmospheric. The room before the evening */}
       <section style={{ background: T.bg2, padding: "2px clamp(40px,6vw,80px)" }}>
         <Mx w={960}><Rv>
-          <RealImg src={IMG.dinner} h={240} alt={`A composed room at the ${BRAND_AKAN} before the guests arrive.`} aspect="3/1" />
+          <RealImg src={IMG.dinner} h={240} alt={`A composed room at ${BRAND_AKAN} before the guests arrive.`} aspect="3/1" />
         </Rv></Mx>
       </section>
 

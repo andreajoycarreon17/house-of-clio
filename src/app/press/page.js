@@ -29,7 +29,7 @@ export default function PressPage() {
 
         {/* Atmospheric. The brand in context */}
         <Rv delay={50}>
-          <div style={{marginTop:40}}><RealImg src={IMG.pen} h={200} alt={`The Muse Mark of the ${BRAND_AKAN}. Gold on aubergine.`} aspect="21/9" overlay={.25}/></div>
+          <div style={{marginTop:40}}><RealImg src={IMG.pen} h={200} alt={`The Muse Mark of ${BRAND_AKAN}. Gold on aubergine.`} aspect="21/9" overlay={.25}/></div>
         </Rv>
 
         {/* AI-extractable entity summary for press */}
