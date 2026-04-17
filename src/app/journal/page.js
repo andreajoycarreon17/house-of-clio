@@ -47,7 +47,7 @@ export default function JournalPage() {
               Essays on adult friendship, the rooms that change people, and the art of meeting well. Written for people who take the quality of a room as seriously as the quality of what is served in it.
             </p>
             <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 11, fontWeight: 300, lineHeight: 1.9, color: TX.onDarkMuted, maxWidth: 480, marginBottom: 56, letterSpacing: ".02em" }}>
-              The Clio Journal is published by {BRAND_AKAN}, a private cultural house in London. Written by founder Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
+              The Clio Journal is published by {BRAND_AKAN}, a private cultural house in London. Written by Gigi Brown, these essays explore why adult friendship is harder than it should be, how loneliness persists among accomplished people, why most social events fail, and how composed gatherings produce meaningful human connection.
             </p>
           </Rv>
 

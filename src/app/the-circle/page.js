@@ -166,10 +166,10 @@ export default function TheCirclePage() {
               >About the founder</Link>
             </div>
             <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", marginTop: 20 }}>
-              <button type="button" {...hp} onClick={() => { window.open('mailto:gigi@thehouseofclio.com?subject=I%20know%20someone%20the%20%C6%86use%20should%20meet&body=Gigi%2C%0A%0AI%20know%20someone%20you%20should%20have%20in%20the%20room.%0A%0A%0ATheir%20name%3A%20%0A%0ACity%3A%20%0A%0AThe%20reason%20I%20thought%20of%20them%3A%20%0A%0A%0AThe%20thing%20that%20makes%20them%20unforgettable%20in%20a%20room%3A%20%0A%0A%0ASomething%20they%20would%20never%20say%20about%20themselves%3A%20%0A%0A%0AMy%20name%3A%20%0A%0A%0A---%0ASent%20from%20thehouseofclio.com%0AThe%20best%20rooms%20are%20composed%20by%20the%20people%20already%20in%20them.'); }} aria-label="Introduce someone" style={{ background: "none", cursor: "none", border: `1px solid rgba(13,1,24,.12)`, padding: "14px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: "rgba(13,1,24,.5)", transition: "border-color .4s,background .4s,color .4s,opacity .4s" }}
+              <Link href="/apply?referral=true" {...hp} aria-label="Introduce someone to the House" style={{ background: "none", cursor: "none", border: `1px solid rgba(13,1,24,.12)`, padding: "14px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: "rgba(13,1,24,.5)", transition: "border-color .4s,background .4s,color .4s,opacity .4s", textDecoration: "none", display: "inline-block" }}
                 onMouseEnter={e => { setHov(true); e.target.style.borderColor = "rgba(13,1,24,.25)"; }}
                 onMouseLeave={e => { setHov(false); e.target.style.borderColor = "rgba(13,1,24,.12)"; }}
-              >Introduce Someone</button>
+              >Introduce Someone</Link>
             </div>
           </div>
         </Rv></Mx>

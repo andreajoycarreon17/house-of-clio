@@ -15,7 +15,33 @@ import EditorialImage from "@/components/EditorialImage";
 export default function HomePage() {
   const router = useRouter();
   const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
-  const go = (target) => router.push(getHref(target));
+  const [nlEmail, setNlEmail] = useState("");
+  const [nlLoading, setNlLoading] = useState(false);
+  const [nlMessage, setNlMessage] = useState(null); // { text, ok }
+
+  const handleNewsletter = async () => {
+    if (!nlEmail.trim()) return;
+    setNlLoading(true);
+    setNlMessage(null);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: nlEmail }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setNlMessage({ text: "You are on the list.", ok: true });
+        setNlEmail("");
+      } else {
+        setNlMessage({ text: data.message || "Something went wrong.", ok: false });
+      }
+    } catch {
+      setNlMessage({ text: "Something went wrong. Please try again.", ok: false });
+    } finally {
+      setNlLoading(false);
+    }
+  };
 
 
   return (
@@ -250,10 +276,34 @@ export default function HomePage() {
           <h2 style={{ fontFamily: F.display, fontSize: "clamp(20px,2.5vw,28px)", fontWeight: 400, fontStyle: "italic", color: T.cream, marginBottom: 12 }}>Notes from private rooms.</h2>
           <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 1.8, color: TX.onDarkMuted, maxWidth: 400, margin: "0 auto 20px" }}>Occasional letters on gathering, friendship, and the rooms that stay with people. Dispatches from the room.</p>
           <div style={{ display: "flex", gap: 8, maxWidth: 360, margin: "0 auto" }}>
-            <input type="email" placeholder="Your email" autoComplete="email" aria-label="Email for occasional letters" style={{ flex: 1, background: "rgba(250,244,238,.04)", border: `1px solid ${T.rose}20`, padding: "12px 16px", fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 300, color: T.cream, outline: "none", transition: "border-color .3s" }} onFocus={e => e.target.style.borderColor = `${T.rose}50`} onBlur={e => e.target.style.borderColor = `${T.rose}20`} />
-            <button type="button" style={{ background: T.copper, border: "none", padding: "12px 20px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: T.cream, cursor: "pointer", transition: "background .3s", flexShrink: 0 }} onMouseEnter={e => e.target.style.background = "rgba(160,80,37,.85)"} onMouseLeave={e => e.target.style.background = T.copper}>Receive</button>
+            <input
+              type="email"
+              placeholder="Your email"
+              autoComplete="email"
+              aria-label="Email for occasional letters"
+              value={nlEmail}
+              onChange={e => setNlEmail(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && handleNewsletter()}
+              disabled={nlLoading}
+              style={{ flex: 1, background: "rgba(250,244,238,.04)", border: `1px solid ${T.rose}20`, padding: "12px 16px", fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 300, color: T.cream, outline: "none", transition: "border-color .3s" }}
+              onFocus={e => e.target.style.borderColor = `${T.rose}50`}
+              onBlur={e => e.target.style.borderColor = `${T.rose}20`}
+            />
+            <button
+              type="button"
+              onClick={handleNewsletter}
+              disabled={nlLoading}
+              style={{ background: T.copper, border: "none", padding: "12px 20px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: T.cream, cursor: nlLoading ? "default" : "pointer", transition: "background .3s", flexShrink: 0, opacity: nlLoading ? .6 : 1 }}
+              onMouseEnter={e => { if (!nlLoading) e.target.style.background = "rgba(160,80,37,.85)"; }}
+              onMouseLeave={e => e.target.style.background = T.copper}
+            >{nlLoading ? "..." : "Receive"}</button>
           </div>
-          <p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, marginTop: 10, opacity: .5 }}>Letters only. Unsubscribe at any time. Your privacy is part of the standard.</p>
+          {nlMessage && (
+            <p style={{ fontFamily: F.body, fontSize: 11, fontWeight: 400, color: nlMessage.ok ? T.gold : T.rose, marginTop: 10, textAlign: "center" }}>
+              {nlMessage.text}
+            </p>
+          )}
+          <p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, marginTop: 10, opacity: .5 }}>Letters only. Unsubscribe at any time.</p>
         </Rv></Mx>
       </section>
 

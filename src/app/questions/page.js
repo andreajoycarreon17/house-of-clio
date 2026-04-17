@@ -18,8 +18,8 @@ const FAQ = [
     a: "The House of Clio is a private cultural house in London. It hosts composed private dinners, supper lectures, cycling journeys, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. There is no membership fee. You pay only for the rooms you attend. Composed by Gigi Brown.",
   },
   {
-    q: "How is The House of Clio different from Soho House?",
-    a: "Soho House is a private members club with buildings, lounges, and open bars. The House of Clio has no building, no lounge, and no bar. The product is not the space. The product is the room. Every gathering is composed by hand: a host reads every profile and decides who sits beside whom. You do not drop in. You are placed.",
+    q: "How is The House of Clio different from a private members club?",
+    a: "A private members club is a building. The House of Clio is a room. A building serves the same hundred people in the same hundred spaces. A composed room places eighteen specific people beside one another for one evening that will never be repeated. You are not a member. You are placed.",
   },
   {
     q: "How do I meet interesting people in London through The House of Clio?",
@@ -47,7 +47,7 @@ const FAQ = [
   },
   {
     q: "What happens after I write to you?",
-    a: "Your introduction is read personally within 72 hours. If there is alignment, we reply and begin a conversation. If there is not, we will say so clearly. Either way, you hear from a person, not a form letter.",
+    a: "Your introduction is read personally within seventy two hours. If there is alignment, we reply and begin a conversation. If there is not, we will say so clearly. Either way, you hear from a person, not a form letter.",
   },
   {
     q: "How often does The House of Clio meet?",
@@ -55,7 +55,7 @@ const FAQ = [
   },
   {
     q: "I am an introvert. Is this for me?",
-    a: "Yes. The House of Clio was designed for people who find conventional networking unbearable. The placement does the heavy lifting. You are not walking into a room and hoping to meet someone interesting. The host has already placed you beside someone specific. You arrive with something real to ask. Most introverts say this is the first social format that has ever worked for them.",
+    a: "Yes. The House of Clio was designed for people who find conventional social events unbearable. The placement does the heavy lifting. You are not walking into a room and hoping to meet someone interesting. The host has already placed you beside someone specific. You arrive with something real to ask. Most introverts say this is the first social format that has ever worked for them.",
   },
   {
     q: "What is a supper lecture?",
@@ -66,16 +66,12 @@ const FAQ = [
     a: "Your profile is shared only with confirmed attendees of gatherings you are attending, and only for the purpose of composition. We do not sell, trade, or share your data with third parties for marketing. We comply with UK GDPR. You may request access, correction, or deletion of your data at any time.",
   },
   {
-    q: "Is The House of Clio a dating service?",
-    a: "No. The House of Clio is a private cultural house. It is not a dating app, a matchmaking service, or a romantic introduction agency. Connection between members is a frequent outcome of a well-composed room, but romance is not the purpose and not the filter.",
-  },
-  {
     q: "How much does it cost?",
     a: "Each gathering has its own price reflecting the venue, the hosting, and the composition. Prices are confirmed in writing at the time of booking and shared privately after you introduce yourself. There is no membership fee. You pay only for the rooms you attend.",
   },
   {
     q: "Why is there no fixed building?",
-    a: "A building would cap the ambition. A brick-and-mortar club serves the same hundred people in the same hundred rooms. The House of Clio travels to the right venue for the right evening. The composition is the product, not the address.",
+    a: "A building would cap the ambition. A club with a building serves the same hundred people in the same hundred rooms. The House of Clio travels to the right venue for the right evening. The composition is the product, not the address.",
   },
   {
     q: "What if the House is not for me?",
