@@ -4,7 +4,7 @@ const CLAUSES = [
   {
     num: "01",
     heading: "These terms",
-    body: "By participating in any __BRAND__ gathering, journey, or programme, you accept these terms. They form a binding agreement between you and House of Clio Ltd, a company registered in England and Wales (company number pending registration). Registered address: London, United Kingdom. If anything here is unclear, write to hello@thehouseofclio.com. We will explain it in conversation.",
+    body: "By participating in any __BRAND__ gathering, journey, or programme, you accept these terms. They form a binding agreement between you and House of Clio Ltd. House of Clio Ltd is being incorporated in England and Wales. Company number will appear on incorporation. Registered office address will be updated upon incorporation. If anything here is unclear, write to hello@thehouseofclio.com. We will explain it in conversation.",
   },
   {
     num: "02",
@@ -19,7 +19,7 @@ const CLAUSES = [
   {
     num: "04",
     heading: "Eligibility",
-    body: "Participation is open to individuals aged 18 and over. By participating, you confirm that you are at least 18 years of age. The House is a space of inclusion. We welcome people of all backgrounds, gender identities, ethnicities, nationalities, and orientations. Discrimination, harassment, or hostility of any kind is grounds for immediate removal from the circle.",
+    body: "Participation is open to individuals aged 18 and over. By participating, you confirm that you are at least 18 years of age. The House is open to participants from all backgrounds and nationalities. Discrimination, harassment, or hostility of any kind is grounds for immediate removal from the circle.",
   },
   {
     num: "05",
@@ -34,12 +34,12 @@ const CLAUSES = [
   {
     num: "07",
     heading: "Cancellation of gatherings and lectures",
-    body: "You may cancel any gathering, supper lecture, or recurring table up to 14 days before the date for a full refund. Between 14 and 7 days before, a credit is issued toward a future occasion. Within 7 days, refunds are at our discretion depending on costs already committed. Non-attendance of a confirmed seat without notice incurs the full charge.",
+    body: "Cancellation of any booking incurs a £100 charge against the original payment. The remainder is refunded to your original payment method within 7 working days. Non-attendance of a confirmed seat without notice incurs the full charge of the booking.",
   },
   {
     num: "08",
     heading: "Cancellation of journeys and travel",
-    body: "Journeys, city escapes, and any experience involving accommodation, flights, or group transport require a minimum of 30 days notice for cancellation. Between 30 and 14 days, a 50 percent credit toward a future journey is offered. Within 14 days, refunds are not available unless we can fill your place or recover costs from the provider. This policy reflects the commitments we make to hotels, venues, and transport providers on your behalf, many of which are non-refundable to us once confirmed.",
+    body: "For journeys and city escapes, the same £100 cancellation charge applies. Where the House has committed non-refundable costs to hotels, venues, or transport providers on your behalf, those costs are additionally charged to you and itemised in writing. We always attempt to fill your place first and will pass any recovery back to you.",
   },
   {
     num: "09",
@@ -136,7 +136,7 @@ export default function TermsPage() {
             {BRAND_AKAN}. Written in plain English because clarity is a form of respect.
           </p>
           <p style={{ fontSize: 14, color: "rgba(250, 244, 238, 0.6)", marginTop: 20 }}>
-            Last updated: April 2026
+            Last updated: 17 April 2026
           </p>
         </div>
       </section>
@@ -204,7 +204,7 @@ export default function TermsPage() {
               These terms exist to protect you, not to protect us from you. I wrote them the way
               I would explain them if you were sitting across from me. If anything here feels
               unclear, or if you ever feel the House has not held up its end of this agreement,
-              write to me directly. I would rather hear it from you than from a lawyer.
+              write to me directly through the <a href="/contact" style={{ color: "#C9956C", textDecoration: "none", borderBottom: "1px solid rgba(201,149,108,0.3)" }}>contact form</a>. I would rather hear it from you than from a lawyer.
             </p>
             <p
               style={{
@@ -217,7 +217,6 @@ export default function TermsPage() {
             >
               Gigi
             </p>
-            <p style={{ fontSize: 15, color: "#3A1A4D" }}>gigi@thehouseofclio.com</p>
           </section>
         </div>
       </article>

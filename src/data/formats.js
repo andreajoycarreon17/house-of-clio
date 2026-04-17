@@ -409,7 +409,7 @@ export const PROGRAMME_ROOMS = [
     index: "I",
     title: "The First House",
     when: "June MMXXVI",
-    strap: "Twenty-four people. The opening of each season.",
+    strap: "Twenty four people. The opening of each season.",
     kicker: "24 places · London · Seasonal",
     accent: T.copper,
     text: T.copperDk,

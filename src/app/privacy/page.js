@@ -4,7 +4,7 @@ const SECTIONS = [
   {
     num: "01",
     heading: "Who we are",
-    body: "This privacy policy describes how House of Clio Ltd collects, uses, and protects your personal data. House of Clio Ltd is a company registered in England and Wales (company number pending registration), trading as The House of Clio. Our registered address is in London, United Kingdom. We are the data controller for the personal data we hold about you. Contact us at privacy@thehouseofclio.com for any privacy-related question.",
+    body: "This privacy policy describes how House of Clio Ltd collects, uses, and protects your personal data. House of Clio Ltd is being incorporated in England and Wales. Company number will appear on incorporation. Registered office address will be updated upon incorporation. We are the data controller for the personal data we hold about you. Contact us at privacy@thehouseofclio.com for any privacy-related question.",
   },
   {
     num: "02",
@@ -39,7 +39,7 @@ const SECTIONS = [
   {
     num: "08",
     heading: "Your rights under UK GDPR",
-    body: "You have the right to access your personal data, to request correction of inaccurate data, to request deletion of your data, to object to processing, to restrict processing, to data portability, and to withdraw consent at any time. To exercise any of these rights, write to privacy@thehouseofclio.com. We will respond within one calendar month.",
+    body: "You have the right to access your personal data, to request correction of inaccurate data, to request deletion of your data, to object to processing, to restrict processing, to data portability, and to withdraw consent at any time. To exercise any of these rights, write to privacy@thehouseofclio.com. We will respond within 1 calendar month.",
   },
   {
     num: "09",
@@ -54,7 +54,7 @@ const SECTIONS = [
   {
     num: "11",
     heading: "Complaints",
-    body: "If you have a complaint about how we handle your personal data, please write to privacy@thehouseofclio.com and we will respond within 14 days. You also have the right to lodge a complaint with the UK Information Commissioner Office at ico.org.uk.",
+    body: "If you have a complaint about how we handle your personal data, please write to privacy@thehouseofclio.com and we will respond within 14 days. You also have the right to lodge a complaint with the Office of the Information Commissioner at ico.org.uk.",
   },
   {
     num: "12",
@@ -102,7 +102,7 @@ export default function PrivacyPage() {
             Protection Act 2018.
           </p>
           <p style={{ fontSize: 14, color: "rgba(250, 244, 238, 0.6)", marginTop: 20 }}>
-            Last updated: April 2026
+            Last updated: 17 April 2026
           </p>
         </div>
       </section>

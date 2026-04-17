@@ -68,9 +68,9 @@ export default function ContactPage() {
         {/* Contact options */}
         <Rv delay={50}>
           <div style={{marginBottom:44,textAlign:"center"}}>
-            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact {BRAND_AKAN_UPPER}</h2>
-            <div style={{fontFamily:F.body,fontSize:14,fontWeight:400,color:TX.onLight,marginBottom:6}}>hello@thehouseofclio.com</div>
-            <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onLightSub,marginBottom:16}}>A real person reads every message. If you prefer a call, say so and we will arrange a time that suits you.</div>
+            <h2 style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".35em",textTransform:"",color:T.rose,opacity:.5,marginBottom:14,margin:"0 0 14px"}}>Contact {BRAND_AKAN}</h2>
+            {/* <div style={{fontFamily:F.body,fontSize:14,fontWeight:400,color:TX.onLight,marginBottom:6}}>hello@thehouseofclio.com</div> */}
+            <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onLightSub,marginBottom:16}}>Send a note through the form below. A real person reads every message. We reply within seventy two hours.</div>
             <div style={{fontFamily:F.body,fontSize:10,fontWeight:400,color:T.rose,opacity:.7}}>thehouseofclio.com</div>
           </div>
         </Rv>
@@ -109,7 +109,7 @@ export default function ContactPage() {
         {/* Hours. one line */}
         <Rv delay={150}>
           <div style={{marginTop:28,textAlign:"center"}}>
-            <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onLight}}>Monday to Friday, 9am to 6pm GMT.</p>
+            <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onLight}}>Monday to Friday, nine to six.</p>
           </div>
         </Rv>
         <Rv delay={200}>

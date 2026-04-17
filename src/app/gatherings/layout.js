@@ -1,8 +1,8 @@
 import { PAGE_META } from "@/lib/brand";
 
 export const metadata = {
-  title: "Gigi Brown, Host",
-  description: PAGE_META.founder.desc,
+  title: "The Programme",
+  description: PAGE_META.programme.desc,
 };
 
 export default function Layout({ children }) {

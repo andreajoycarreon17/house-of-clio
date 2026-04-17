@@ -8,23 +8,23 @@ import { BRAND_AKAN_UPPER, BRAND_TAGLINE } from "@/lib/brand";
 import { useSiteChrome } from "./site-context";
 
 const DESKTOP_LINKS = [
-  { label: "The House",   href: "/the-house" },
-  { label: "Programme",   href: "/programme" },
+  { label: "The House",   href: "/about" },
+  { label: "Programme",   href: "/gatherings" },
   { label: "Book",        href: "/book" },
-  { label: "The Circle",  href: "/the-circle" },
+  { label: "The Circle",  href: "/circle" },
   { label: "Journal",     href: "/journal" },
   { label: "The Standard",href: "/the-standard" },
 ];
 
 const MOBILE_LINKS = [
-  { label: "The House",   href: "/the-house" },
-  { label: "Programme",   href: "/programme" },
+  { label: "The House",   href: "/about" },
+  { label: "Programme",   href: "/gatherings" },
   { label: "Book",        href: "/book" },
-  { label: "The Circle",  href: "/the-circle" },
+  { label: "The Circle",  href: "/circle" },
   { label: "Journal",     href: "/journal" },
   { label: "The Standard",href: "/the-standard" },
   { label: "Gigi Brown",  href: "/founder" },
-  { label: "Questions",   href: "/questions" },
+  { label: "Questions",   href: "/faq" },
 ];
 
 export default function Nav() {
