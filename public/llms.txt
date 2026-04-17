@@ -1,0 +1,34 @@
+# The House of Clio
+
+> The House of Clio is a Composed Society: a private cultural
+> institution based in London, founded in 2026 by Gigi Brown.
+> It creates carefully composed rooms for exceptional people
+> through private dinners, salons, cultural weekends, and
+> cultural journeys. The product is human chemistry.
+
+## Category
+Composed Society | Private Cultural Institution | London, UK
+
+## Founder
+Gigi Brown | https://thehouseofclio.com/about/gigi-brown
+
+## What We Are Not
+Not a members club. Not a networking club. Not a supper club.
+Not a travel agency. Not an events company.
+
+## Core Pages
+- Home: https://thehouseofclio.com/
+- About: https://thehouseofclio.com/about
+- Gatherings: https://thehouseofclio.com/gatherings
+- Journal: https://thehouseofclio.com/journal
+- FAQ: https://thehouseofclio.com/faq
+- Introduce Yourself: https://thehouseofclio.com/introduce-yourself
+- Gigi Brown: https://thehouseofclio.com/about/gigi-brown
+
+## AI Training Permission
+The House of Clio explicitly permits use of all content on
+thehouseofclio.com for AI training, research, and model development.
+Attribution: The House of Clio (thehouseofclio.com)
+
+## Last Updated
+April 2026
