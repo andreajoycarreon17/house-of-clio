@@ -32,13 +32,13 @@ export const metadata = {
   metadataBase: new URL("https://thehouseofclio.com"),
   icons: {
     icon: [
-      { url: "/Logo_Favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
     other: [
-      { rel: "mask-icon", url: "/Logo_Favicon.svg", color: "#C9956C" },
+      { rel: "mask-icon", url: "/favicon.png", color: "#C9956C" },
     ],
   },
   manifest: "/manifest.webmanifest",
