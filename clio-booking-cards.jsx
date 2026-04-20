@@ -54,7 +54,9 @@ const DarkCard = ({ children, bg = T.bg, markOp = .08 }) => {
     </div>);
 };
 
-const TxtLink = ({ children, onClick, dark }) => (<span data-h="" onClick={onClick} style={{ cursor: "pointer", fontFamily: D.J, fontSize: 14, fontWeight: 400, color: dark || T.bg, borderBottom: `1.5px solid ${dark || T.bg}`, paddingBottom: 4, marginRight: 20 }}>{children}</span>);
+const TxtLink = ({ children, onClick, dark, href }) => href
+  ? (<a href={href} style={{ cursor: "pointer", fontFamily: D.J, fontSize: 14, fontWeight: 400, color: dark || T.bg, borderBottom: `1.5px solid ${dark || T.bg}`, paddingBottom: 4, marginRight: 20, textDecoration: "none", display: "inline-block" }}>{children}</a>)
+  : (<span data-h="" onClick={onClick} style={{ cursor: "pointer", fontFamily: D.J, fontSize: 14, fontWeight: 400, color: dark || T.bg, borderBottom: `1.5px solid ${dark || T.bg}`, paddingBottom: 4, marginRight: 20 }}>{children}</span>);
 
 // CTA copy per event id
 const CTA_COPY = {
@@ -132,7 +134,7 @@ const WideCard = ({ f, go }) => {
           <h3 style={{ fontFamily: D.CG, fontSize: "clamp(26px,4vw,36px)", fontWeight: 300, color: e.txt, margin: "0 0 12px" }}>{f.l1} <em style={{ color: e.acc || T.rose }}>{f.l2}</em></h3>
           <p style={{ fontFamily: D.CG, fontSize: 17, fontWeight: 400, fontStyle: "italic", lineHeight: 1.65, color: e.sub, marginBottom: 14, maxWidth: "32ch" }}>{f.it}</p>
           <div style={{ fontFamily: D.J, fontSize: 12, color: e.meta, marginBottom: 14 }}>{f.when} · {f.cap} · {f.dur}</div>
-          <TxtLink onClick={() => window.location.href = `/apply?event=${APPLY_SLUG[f.id] || f.id}`} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
+             <TxtLink onClick={() => go("detail", f)} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
         </div>
       </div>
     </div>);
@@ -148,7 +150,7 @@ const StdCard = ({ f, go }) => {
         <h3 style={{ fontFamily: D.CG, fontSize: "clamp(24px,4vw,32px)", fontWeight: 300, color: e.txt, margin: "0 0 10px" }}>{f.l1} <em style={{ color: e.acc || T.rose }}>{f.l2}</em></h3>
         <p style={{ fontFamily: D.CG, fontSize: 17, fontWeight: 400, fontStyle: "italic", lineHeight: 1.65, color: e.sub, marginBottom: 12, maxWidth: "32ch" }}>{f.it}</p>
         <div style={{ fontFamily: D.J, fontSize: 12, color: e.meta, marginBottom: 12 }}>{f.when} · {f.cap} · {f.dur}</div>
-        <TxtLink onClick={() => window.location.href = `/apply?event=${APPLY_SLUG[f.id] || f.id}`} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
+         <TxtLink onClick={() => go("detail", f)} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
       </div>
     </div>);
 };
@@ -260,7 +262,7 @@ export default function ClioReservation() {
           <div style={{ position: "relative", zIndex: 1 }}>
             <div style={{ width: 40, height: 1, background: T.rose, opacity: .2, margin: "0 auto 16px" }} />
             <p style={{ fontFamily: D.J, fontSize: 15, fontWeight: 400, color: "rgba(26,8,32,.85)", marginBottom: 16 }}>The Circle is open by introduction.</p>
-            <TxtLink onClick={() => window.open && window.open("/apply", "_self")}>Introduce yourself</TxtLink>
+            <TxtLink href="/apply">Introduce yourself</TxtLink>
           </div>
         </div>
 
@@ -308,7 +310,7 @@ export default function ClioReservation() {
 
             {sel.fx && <div style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, color: wc, marginTop: 8, fontStyle: "italic" }}>Once placed, your name is on the table.</div>}
             <CTA ac={ac} dk={dk} onClick={() => go("form")}>{sel.fx ? "Reserve your place" : "Continue to arrangement"}</CTA>
-            <div style={{ marginTop: 12, fontFamily: D.J, fontSize: 12, color: nc }}><span data-h="" onClick={() => window.open && window.open("/apply", "_self")} style={{ color: ac, cursor: "pointer", borderBottom: `1.5px solid ${ac}`, opacity: .8 }}>Introduce yourself</span></div>
+            <div style={{ marginTop: 12, fontFamily: D.J, fontSize: 12, color: nc }}><a href={`/apply?event=${APPLY_SLUG[sel.id] || sel.id}`} style={{ color: ac, cursor: "pointer", borderBottom: `1.5px solid ${ac}`, opacity: .8, textDecoration: "none" }}>Introduce yourself</a></div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 24, paddingTop: 16, borderTop: `1px solid ${rc}` }}>
               {prev ? <div data-h="" onClick={() => go("detail", prev)} style={{ flex: 1, cursor: "pointer" }}><div style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".12em", textTransform: "uppercase", color: ac, marginBottom: 4 }}>{"←"} Previous</div><div style={{ fontFamily: D.CG, fontSize: 16, fontStyle: "italic", color: sc2 }}>{prev.l1} {prev.l2}</div></div> : <div style={{ flex: 1 }} />}
               <div data-h="" onClick={() => go("browse")} style={{ padding: "0 16px", textAlign: "center", cursor: "pointer" }}><div style={{ width: 8, height: 8, borderRadius: "50%", border: `1.5px solid ${ac}`, opacity: .4, margin: "0 auto" }} /><div style={{ fontFamily: D.J, fontSize: 11, color: nc, marginTop: 4 }}>All</div></div>
