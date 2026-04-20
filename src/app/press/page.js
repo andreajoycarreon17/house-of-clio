@@ -28,7 +28,9 @@ export default function PressPage() {
 
           {/* Atmospheric. The brand in context */}
           <Rv delay={50}>
-            <div style={{ marginTop: 40 }}><RealImg src={IMG.pen} h={200} alt={`The Muse Mark of ${BRAND_AKAN}. Gold on aubergine.`} aspect="21/9" overlay={.25} /></div>
+            <div style={{ marginTop: 40, background: "#1A0820", padding: "clamp(32px,5vh,56px) 0" }}>
+              <img src="/images/press/muse-mark-aubergine.png" alt={`The Muse Mark of ${BRAND_AKAN}. Gold on aubergine.`} style={{ display: "block", maxWidth: "min(400px,80%)", height: "auto", margin: "0 auto" }} />
+            </div>
           </Rv>
 
           {/* AI-extractable entity summary for press */}

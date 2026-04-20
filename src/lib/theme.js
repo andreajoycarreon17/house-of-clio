@@ -18,7 +18,7 @@ body{background:${T.bg2};font-family:'Jost',sans-serif;color:${T.cream};overflow
 ::placeholder{transition:opacity .4s;}
 :focus::placeholder{opacity:.2;}
 button,a{cursor:none!important;}
-input,textarea,select{cursor:text!important;}
+input,textarea,select{cursor:text!important;pointer-events:auto!important;user-select:text!important;-webkit-user-select:text!important;}
 .faq-item{transition:background .4s;margin:0 -12px;padding-left:12px!important;padding-right:12px!important;}.faq-item:hover{background:rgba(201,149,108,.015);}
 .skip-link{position:absolute;top:-40px;left:0;background:${T.copper};color:${T.copperDk};padding:8px 16px;z-index:99999;font-family:'Jost',sans-serif;font-size:13px;transition:top .2s;}.skip-link:focus{top:0;}
 .cr{position:fixed;width:40px;height:40px;border:0.5px solid rgba(201,149,108,.15);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .6s cubic-bezier(.16,1,.3,1),height .6s cubic-bezier(.16,1,.3,1),border-color .6s,background .6s;}

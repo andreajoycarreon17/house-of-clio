@@ -717,7 +717,20 @@ blockquote {
  * and that tab divs are always interactive
  * ===================================================== */
 
-/* Preloader must be fully non-interactive once done */
+/* Ensure Rv (reveal) elements never block pointer events even before animation */
+.rv {
+    pointer-events: auto;
+}
+
+/* Inputs must always be interactive — override any cursor/pointer rules */
+input,
+textarea,
+select {
+    pointer-events: auto !important;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}
+
 .preloader.done {
     pointer-events: none !important;
     visibility: hidden !important;

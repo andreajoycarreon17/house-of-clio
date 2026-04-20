@@ -72,6 +72,23 @@ const CTA_COPY = {
   ri: "Enquire about The Ride",
   ph: "Begin a conversation about The Private House",
 };
+
+// Maps event id → /apply?event= slug (matches EVENT_LABELS in apply page)
+const APPLY_SLUG = {
+  fh: "the-first-house-2-june",
+  ev: "the-evening-14-june",
+  sl: "the-supper-lecture-12-july",
+  pa: "city-escape-paris-september",
+  du: "city-escape-dublin-october",
+  pu: "grand-journey-puglia-october",
+  ah: "the-annual-house-6-december",
+  rt: "the-returning-table",
+  wk: "the-walk",
+  dd: "the-distance-day",
+  ce: "the-culture-evening",
+  ri: "the-ride",
+  ph: "the-private-house",
+};
 const CTA = ({ children, onClick, disabled, full, ac, dk = true }) => { const c = ac || T.rose; const rb = dk ? "rgba(201,149,108,.35)" : "rgba(26,8,32,.12)"; const rh = dk ? "rgba(201,149,108,.5)" : "rgba(26,8,32,.2)"; const hb = dk ? "rgba(201,149,108,.06)" : "rgba(26,8,32,.03)"; return (<div style={{ marginTop: 20 }}><button data-h="" type="button" aria-label={typeof children === "string" ? children : undefined} onClick={onClick} disabled={disabled} style={{ background: "none", border: `1.5px solid ${rb}`, padding: `14px ${full ? "0" : "36px"}`, width: full ? "100%" : "auto", fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".16em", textTransform: "uppercase", color: c, opacity: disabled ? .5 : 1, transition: "all .4s" }} onMouseEnter={e => { if (!disabled) { e.target.style.background = hb; e.target.style.borderColor = rh; } }} onMouseLeave={e => { e.target.style.background = "none"; e.target.style.borderColor = rb; }}>{children}</button></div>); };
 const Field = ({ label, type = "text", placeholder, value, onChange, half, options, dk = true }) => { const tc = dk ? T.cream : T.bg; const bg = dk ? "rgba(250,244,238,.06)" : "rgba(26,8,32,.04)"; const bd = dk ? "1px solid rgba(201,149,108,.3)" : "1px solid rgba(26,8,32,.15)"; const lc = dk ? T.rose : T.copper; return (<div style={{ marginBottom: 14, display: "inline-block", width: half ? "48%" : "100%", marginRight: half ? "4%" : "0", verticalAlign: "top" }}><label style={{ fontFamily: D.J, fontSize: 11, fontWeight: 500, letterSpacing: ".16em", textTransform: "uppercase", color: lc, display: "block", marginBottom: 5 }}>{label}</label>{options ? <select value={value} onChange={onChange} style={{ width: "100%", padding: "12px 16px", background: bg, border: bd, fontFamily: D.J, fontSize: 15, fontWeight: 400, color: tc, WebkitAppearance: "none" }}>{options.map((o, i) => <option key={i} value={o} style={{ background: dk ? T.bg : T.cream, color: tc }}>{o}</option>)}</select> : <input type={type} value={value} onChange={onChange} placeholder={placeholder} style={{ width: "100%", padding: "12px 16px", background: bg, border: bd, fontFamily: D.J, fontSize: 15, fontWeight: 400, color: tc, borderRadius: 0, WebkitAppearance: "none" }} />}</div>); };
 const Wh = ({ children, dk = true }) => (<div style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, fontStyle: "italic", color: dk ? "rgba(250,244,238,.95)" : "rgba(26,8,32,.85)", marginBottom: 6, lineHeight: 1.65 }}>{children}</div>);
@@ -115,7 +132,7 @@ const WideCard = ({ f, go }) => {
           <h3 style={{ fontFamily: D.CG, fontSize: "clamp(26px,4vw,36px)", fontWeight: 300, color: e.txt, margin: "0 0 12px" }}>{f.l1} <em style={{ color: e.acc || T.rose }}>{f.l2}</em></h3>
           <p style={{ fontFamily: D.CG, fontSize: 17, fontWeight: 400, fontStyle: "italic", lineHeight: 1.65, color: e.sub, marginBottom: 14, maxWidth: "32ch" }}>{f.it}</p>
           <div style={{ fontFamily: D.J, fontSize: 12, color: e.meta, marginBottom: 14 }}>{f.when} · {f.cap} · {f.dur}</div>
-          <TxtLink onClick={() => go("detail", f)} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
+          <TxtLink onClick={() => window.location.href = `/apply?event=${APPLY_SLUG[f.id] || f.id}`} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
         </div>
       </div>
     </div>);
@@ -131,7 +148,7 @@ const StdCard = ({ f, go }) => {
         <h3 style={{ fontFamily: D.CG, fontSize: "clamp(24px,4vw,32px)", fontWeight: 300, color: e.txt, margin: "0 0 10px" }}>{f.l1} <em style={{ color: e.acc || T.rose }}>{f.l2}</em></h3>
         <p style={{ fontFamily: D.CG, fontSize: 17, fontWeight: 400, fontStyle: "italic", lineHeight: 1.65, color: e.sub, marginBottom: 12, maxWidth: "32ch" }}>{f.it}</p>
         <div style={{ fontFamily: D.J, fontSize: 12, color: e.meta, marginBottom: 12 }}>{f.when} · {f.cap} · {f.dur}</div>
-        <TxtLink onClick={() => go("detail", f)} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
+        <TxtLink onClick={() => window.location.href = `/apply?event=${APPLY_SLUG[f.id] || f.id}`} dark={e.dk ? e.acc : e.link}>{CTA_COPY[f.id] || "Enquire"}</TxtLink>
       </div>
     </div>);
 };
