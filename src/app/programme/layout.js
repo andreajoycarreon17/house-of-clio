@@ -1,10 +1,43 @@
 import { PAGE_META } from "@/lib/brand";
 
+const PILLAR_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: "Cultural Salons in London — The Return of the Salon",
+  dateline: "London, United Kingdom",
+  articleSection: "Cultural Salons",
+  keywords: "cultural salon London, private members club alternative, composed gathering London, supper lecture London",
+  author: {
+    "@type": "Person",
+    "@id": "https://thehouseofclio.com/about/gigi-brown#person",
+    name: "Gigi Brown",
+  },
+  publisher: {
+    "@id": "https://thehouseofclio.com/#organization",
+    "@type": "Organization",
+    name: "The House of Clio",
+    logo: { "@type": "ImageObject", url: "https://thehouseofclio.com/images/hoc-mark-v8.png" },
+  },
+  datePublished: "2026-04-01",
+  dateModified: "2026-04-01",
+  mainEntityOfPage: "https://thehouseofclio.com/programme",
+  image: { "@type": "ImageObject", url: "https://thehouseofclio.com/og/hoc-og-journal.jpg" },
+};
+
 export const metadata = {
   title: "The Programme",
   description: PAGE_META.programme.desc,
+  alternates: { canonical: "https://thehouseofclio.com/programme" },
 };
 
 export default function Layout({ children }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(PILLAR_SCHEMA) }}
+      />
+      {children}
+    </>
+  );
 }

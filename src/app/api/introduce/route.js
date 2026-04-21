@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(request) {
   try {
@@ -9,11 +10,18 @@ export async function POST(request) {
       return NextResponse.json({ message: "Name, email, and city are required." }, { status: 400 });
     }
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    if (!RESEND_API_KEY) {
-      console.error("[introduce] Missing RESEND_API_KEY");
+    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
+    if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
+      console.error("[introduce] Missing SMTP config");
       return NextResponse.json({ message: "Email service not configured." }, { status: 500 });
     }
+
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: Number(SMTP_PORT) || 587,
+      secure: Number(SMTP_PORT) === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    });
 
     // Build subject line
     const subject = event
@@ -23,7 +31,7 @@ export async function POST(request) {
         : `Introduction — ${name}`;
 
     // Build email body
-    const lines = [
+    const text = [
       `Name: ${name}`,
       `Email: ${email}`,
       `City: ${city}`,
@@ -34,26 +42,31 @@ export async function POST(request) {
       `\n---\nSent from thehouseofclio.com`,
     ].filter(Boolean).join("\n");
 
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "The House of Clio <noreply@thehouseofclio.com>",
-        to: ["hello@thehouseofclio.com"],
-        reply_to: email,
-        subject,
-        text: lines,
-      }),
+    // Host notification
+    await transporter.sendMail({
+      from: `"System" <system@thehouseofclio.com>`,
+      to: "gigi@thehouseofclio.com",
+      replyTo: `"${name}" <${email}>`,
+      subject,
+      text,
     });
 
-    if (!res.ok) {
-      const err = await res.json();
-      console.error("[introduce] Resend error:", err);
-      return NextResponse.json({ message: "Failed to send. Please try again." }, { status: 500 });
-    }
+    // Submitter confirmation
+    await transporter.sendMail({
+      from: `"The House of Clio" <gigi@thehouseofclio.com>`,
+      to: email,
+      subject: `We have received your introduction`,
+      text: [
+        `${name},`,
+        ``,
+        `Thank you for introducing yourself to The House of Clio.`,
+        ``,
+        `We read every introduction carefully. If your curiosity aligns with the room, we will be in touch.`,
+        ``,
+        `The House of Clio`,
+        `London`,
+      ].join("\n"),
+    });
 
     return NextResponse.json({ message: "Received." }, { status: 200 });
 

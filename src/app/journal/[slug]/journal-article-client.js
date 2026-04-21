@@ -6,6 +6,17 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { BTN, F, Mx, Rv, Sec, T, TX } from "@/components/shared";
 import { BRAND_AKAN } from "@/lib/brand";
 
+// Reading time calculation: 200 words per minute
+function readingTime(bodyArray) {
+  if (!bodyArray || !Array.isArray(bodyArray)) return "5 min read";
+  const words = bodyArray
+    .filter(line => line && line.t)
+    .map(line => line.t.trim().split(/\s+/).length)
+    .reduce((sum, count) => sum + count, 0);
+  const minutes = Math.ceil(words / 200);
+  return `${minutes} min read`;
+}
+
 export default function JournalArticleClient({ article, activeArticle, totalArticles, previous, next, continueReading }) {
   const { hp } = useSiteChrome();
 
@@ -63,7 +74,11 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
                         <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 400, color: TX.onLightMuted, opacity: 0.5 }}>{article.date}</div>
                       </div>
                       <h2 style={{ fontFamily: F.display, fontSize: "clamp(28px,4vw,40px)", fontWeight: 400, lineHeight: 1.15, color: T.bg, marginBottom: 10 }}>{article.title}</h2>
-                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, opacity: 0.5, letterSpacing: ".08em", marginBottom: 14 }}>By Gigi Brown · <time>{article.date}</time></div>
+                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, opacity: 0.5, letterSpacing: ".08em", marginBottom: 14 }}>
+                        By <a href="/about/gigi-brown" style={{ color: TX.onLightMuted, textDecoration: "none" }}>Gigi Brown</a>
+                        {" · "}<time dateTime={article.publishedAt || "2026-06-01"}>{article.date}</time>
+                        {" · "}{readingTime(article.body)}
+                      </div>
                       <div style={{ width: 48, height: 2, background: T.copper }} />
                     </div>
                     {article.body.map((line, index) => {

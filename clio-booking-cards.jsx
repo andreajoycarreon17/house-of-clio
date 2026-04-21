@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
+
 const T = { bg: "#1A0820", cream: "#FAF4EE", rose: "#C9956C", gold: "#C9A84C", copper: "#A05025" };
 const D = { CG: "'Cormorant Garamond',Georgia,serif", J: "'Jost',sans-serif" };
 
@@ -123,7 +124,22 @@ const F = [
 
 const SECS = [{ key: "seasonal", label: "Seasonal" }, { key: "recurring", label: "Recurring" }, { key: "society", label: "Societies" }];
 
-const WideCard = ({ f, go }) => {
+// Convert price string to pence for Stripe
+const priceToPence = (priceStr) => {
+  if (!priceStr) return 0;
+  
+  // Handle "From £X,XXX" format
+  if (priceStr.startsWith("From ")) {
+    const cleanPrice = priceStr.replace("From ", "").replace("£", "").replace(",", "").replace(" per person", "");
+    return parseInt(parseFloat(cleanPrice) * 100);
+  }
+  
+  // Handle "£XXX" format
+  const cleanPrice = priceStr.replace("£", "").replace(",", "").replace(" per person", "");
+  return parseInt(parseFloat(cleanPrice) * 100);
+};
+
+const WideCard=({f,go})=>{
   const e = ENV[f.env] || ENV.deep;
   return (
     <div data-card="" style={{ background: e.bg, gridColumn: "1 / -1" }}>
@@ -155,12 +171,12 @@ const StdCard = ({ f, go }) => {
     </div>);
 };
 
-export default function ClioReservation() {
+export default function ClioReservation({ confirmed = false, formatId = null }){
   /* Cursor: circle + dot — pure DOM, zero React re-renders */
-  const dotRef = useRef(null); const ringRef = useRef(null);
-  const pos = useRef({ x: -100, y: -100 }); const rpos = useRef({ x: -100, y: -100 }); const raf = useRef(null);
-  useEffect(() => {
-    const onMove = e => { pos.current = { x: e.clientX, y: e.clientY }; if (dotRef.current) { dotRef.current.style.left = e.clientX + "px"; dotRef.current.style.top = e.clientY + "px"; } };
+  const dotRef=useRef(null);const ringRef=useRef(null);
+  const pos=useRef({x:-100,y:-100});const rpos=useRef({x:-100,y:-100});const raf=useRef(null);
+  useEffect(()=>{
+     const onMove = e => { pos.current = { x: e.clientX, y: e.clientY }; if (dotRef.current) { dotRef.current.style.left = e.clientX + "px"; dotRef.current.style.top = e.clientY + "px"; } };
     const animate = () => { rpos.current.x += (pos.current.x - rpos.current.x) * .12; rpos.current.y += (pos.current.y - rpos.current.y) * .12; if (ringRef.current) { ringRef.current.style.left = rpos.current.x + "px"; ringRef.current.style.top = rpos.current.y + "px"; } raf.current = requestAnimationFrame(animate); };
     const onOver = e => { if (e.target.closest("button,[data-h]")) ringRef.current?.classList.add("h"); };
     const onOut = e => { if (e.target.closest("button,[data-h]")) ringRef.current?.classList.remove("h"); };
@@ -168,220 +184,291 @@ export default function ClioReservation() {
     raf.current = requestAnimationFrame(animate);
     setTimeout(() => { if (dotRef.current) dotRef.current.style.opacity = "1"; if (ringRef.current) ringRef.current.style.opacity = "1"; }, 400);
     return () => { window.removeEventListener("keydown", onKey); window.removeEventListener("mousemove", onMove); document.removeEventListener("mouseover", onOver); document.removeEventListener("mouseout", onOut); cancelAnimationFrame(raf.current); };
-  }, []);
+  },[]);
 
-  const [view, setView] = useState("browse");
-  const [sel, setSel] = useState(null);
-  const [tab, setTab] = useState("seasonal");
-  const [sending, setSending] = useState(false);
-  const [formStep, setFormStep] = useState(1);
-  const scrollPos = useRef(0);
-  const step2Ref = useRef(null);
-  useEffect(() => { if (formStep === 2 && step2Ref.current) { const first = step2Ref.current.querySelector('input:not([value]),select'); if (first) setTimeout(() => first.focus(), 200); } }, [formStep]);
-  const ref = useRef(null);
-  const [fm, setFm] = useState({ name: "", email: "", phone: "", dietary: [], dietaryOther: "", attending: "Alone", guestName: "", guestEmail: "", guestPhone: "", guestDietary: [], guestDietaryOther: "", city: "", roomPref: "", guests: "1", occasion: "", timing: "", guestCount: "", locationPref: "" });
-  const up = (k, v) => setFm(p => ({ ...p, [k]: v }));
-  const toggleDiet = (d) => setFm(p => { if (d === "None") return { ...p, dietary: [], dietaryOther: "" }; const cur = p.dietary.filter(x => x !== "None"); return { ...p, dietary: cur.includes(d) ? cur.filter(x => x !== d) : [...cur, d] }; });
-  const toggleGuestDiet = (d) => setFm(p => { if (d === "None") return { ...p, guestDietary: [], guestDietaryOther: "" }; const cur = p.guestDietary.filter(x => x !== "None"); return { ...p, guestDietary: cur.includes(d) ? cur.filter(x => x !== d) : [...cur, d] }; });
-  const reset = () => setFm({ name: "", email: "", phone: "", dietary: [], dietaryOther: "", attending: "Alone", guestName: "", guestEmail: "", guestPhone: "", guestDietary: [], guestDietaryOther: "", city: "", roomPref: "", guests: "1", occasion: "", timing: "", guestCount: "", locationPref: "" });
-  const scroll = () => setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 60);
-  const go = (v, f) => { if (v !== "browse") scrollPos.current = window.scrollY; if (f) setSel(f); setView(v); setFormStep(1); if (v === "browse") setTimeout(() => window.scrollTo({ top: scrollPos.current, behavior: "smooth" }), 100); else scroll(); };
-  const canSubmit = fm.name && fm.email && fm.email.includes("@") && fm.phone;
-  const idx = sel ? F.findIndex(f => f.id === sel.id) : -1;
-  const prev = idx > 0 ? F[idx - 1] : null;
-  const next = idx < F.length - 1 && idx >= 0 ? F[idx + 1] : null;
-  const submit = () => { if (!canSubmit) return; setSending(true); setTimeout(() => { setSending(false); go("confirmed"); }, 1200); };
-  const filtered = F.filter(f => f.sec === tab);
+  const [view,setView]=useState("browse");
+  const [sel,setSel]=useState(null);
+  const [tab,setTab]=useState("seasonal");
 
-  return (
-    <div ref={ref} style={{ minHeight: "100vh" }}>
-      <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');*{margin:0;padding:0;box-sizing:border-box}[data-card]:focus-visible{outline:2px solid rgba(201,149,108,.4);outline-offset:4px}html{scroll-behavior:smooth;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media(pointer:fine){body,*{cursor:none!important}}@media(pointer:fine){input,textarea,select{cursor:text!important}}.cr{position:fixed;width:44px;height:44px;border:1px solid rgba(201,149,108,.25);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s cubic-bezier(.22,1,.36,1),border-color .35s,background .35s,opacity .4s}.cr.h{width:60px;height:60px;border-color:rgba(201,149,108,.45);background:rgba(201,149,108,.04)}.cd{position:fixed;width:5px;height:5px;background:rgba(201,149,108,.7);border-radius:50%;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:opacity .3s}::selection{background:rgba(201,149,108,.2);color:#1A0820}input:focus,textarea:focus,select:focus{border-color:rgba(201,149,108,.5)!important;outline:none;box-shadow:0 0 0 2px rgba(201,149,108,.15)}input,textarea,select{border-radius:0;-webkit-appearance:none}[data-card]{transition:transform .5s cubic-bezier(.25,.1,.25,1)}[data-card]:hover{transform:none}[data-card]{opacity:0;animation:cardIn .6s ease forwards}@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes checkIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}` }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: '{"@context":"https://schema.org","@type":"Organization","name":"The House of Clio","alternateName":"The \u0186use \u0254f Clio","url":"https://thehouseofclio.com","description":"A private cultural house in London offering composed private dinners, supper lectures, city escapes, and Grand Journeys. Founded 2026. By introduction only.","foundingDate":"2026","address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},"sameAs":["https://instagram.com/houseof_clio","https://x.com/TheHouseofClio"]}' }} />
-      <div ref={ringRef} className="cr" style={{ opacity: 0 }} />
-      <div ref={dotRef} className="cd" style={{ opacity: 0 }} />
+  // Check for confirmed=true and format URL parameters
+  useEffect(() => {
+    if (confirmed) {
+      const format = formatId ? F.find(f => f.id === formatId) : null;
+      setSel(format || null);
+      setView('confirmed');
+    }
+  }, [confirmed, formatId]);
+  const [sending,setSending]=useState(false);
+  const [formStep,setFormStep]=useState(1);
+  const [error,setError]=useState("");
+  const scrollPos=useRef(0);
+  const step2Ref=useRef(null);
+  useEffect(()=>{if(formStep===2&&step2Ref.current){const first=step2Ref.current.querySelector('input:not([value]),select');if(first)setTimeout(()=>first.focus(),200);}},[formStep]);
+  const ref=useRef(null);
+  const [fm,setFm]=useState({name:"",email:"",phone:"",dietary:[],dietaryOther:"",attending:"Alone",guestName:"",guestEmail:"",guestPhone:"",guestDietary:[],guestDietaryOther:"",city:"",roomPref:"",guests:"1",occasion:"",timing:"",guestCount:"",locationPref:""});
+  const up=(k,v)=>setFm(p=>({...p,[k]:v}));
+  const toggleDiet=(d)=>{setFm(p=>{if(d==="None")return{...p,dietary:[],dietaryOther:""};const cur=p.dietary.filter(x=>x!=="None");return{...p,dietary:cur.includes(d)?cur.filter(x=>x!==d):[...cur,d]};});setError("");};
+  const toggleGuestDiet=(d)=>{setFm(p=>{if(d==="None")return{...p,guestDietary:[],guestDietaryOther:""};const cur=p.guestDietary.filter(x=>x!=="None");return{...p,guestDietary:cur.includes(d)?cur.filter(x=>x!==d):[...cur,d]};});setError("");};
+  const reset=()=>setFm({name:"",email:"",phone:"",dietary:[],dietaryOther:"",attending:"Alone",guestName:"",guestEmail:"",guestPhone:"",guestDietary:[],guestDietaryOther:"",city:"",roomPref:"",guests:"1",occasion:"",timing:"",guestCount:"",locationPref:""});
+  const scroll=()=>setTimeout(()=>window.scrollTo({top:0,behavior:"smooth"}),60);
+  const go=(v,f)=>{if(v!=="browse")scrollPos.current=window.scrollY;if(f)setSel(f);setView(v);setFormStep(1);if(v==="browse")setTimeout(()=>window.scrollTo({top:scrollPos.current,behavior:"smooth"}),100);else scroll();};
+  const canSubmit=fm.name&&fm.email&&fm.email.includes("@")&&fm.phone;
+  const idx=sel?F.findIndex(f=>f.id===sel.id):-1;
+  const prev=idx>0?F[idx-1]:null;
+  const next=idx<F.length-1&&idx>=0?F[idx+1]:null;
+  const submit=async()=>{
+    if(!canSubmit)return;
+    setSending(true);
+    setError("");
+    
+    try {
+      if(sel.fx){
+        // Fixed price formats - use Stripe Checkout
+        const res=await fetch("/api/checkout",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({
+            formatId:sel.id,
+            formatName:`${sel.l1} ${sel.l2}`,
+            formatSlug:sel.id,
+            priceInPence:priceToPence(sel.price),
+            name:fm.name,
+            email:fm.email,
+            phone:fm.phone,
+            dietary:fm.dietary,
+            dietaryNotes:fm.dietaryOther,
+            attending:fm.attending,
+            guestName:fm.guestName,
+            guestEmail:fm.guestEmail,
+            guestPhone:fm.guestPhone,
+            guestDietary:fm.guestDietary,
+            guestDietaryNotes:fm.guestDietaryOther,
+          }),
+        });
+        const data=await res.json();
+        if(data.url){
+          window.location.href=data.url;
+        }else{
+          setError("Something went wrong. Please try again.");
+          setSending(false);
+        }
+      }else{
+        // Variable/bespoke formats - create CRM record
+        const res=await fetch("/api/enquiry",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({
+            type:"enquiry",
+            name:fm.name,
+            email:fm.email,
+            phone:fm.phone,
+            dietary:fm.dietary,
+            dietaryNotes:fm.dietaryOther,
+            formatName:`${sel.l1} ${sel.l2}`,
+            formatId:sel.id,
+            attending:fm.attending,
+          }),
+        });
+        const data=await res.json();
+        if(data.success){
+          go("confirmed");
+        }else{
+          setError("Something went wrong. Please try again.");
+        }
+        setSending(false);
+      }
+    }catch(err){
+      setError("Connection error. Please check your internet and try again.");
+      setSending(false);
+    }
+  };
+  const filtered=F.filter(f=>f.sec===tab);
 
-      {view === "browse" && <div style={{ background: T.cream, animation: "fadeIn .4s ease" }}>
-        <div style={{ textAlign: "center", padding: "clamp(48px,8vh,80px) 24px clamp(24px,4vh,36px)", position: "relative" }}>
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}><ClioIcon size={380} color={T.rose} opacity={.06} style={{ position: "relative" }} /></div>
-          <p style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}>The House of Clio is a private cultural house in London offering composed private dinners, supper lectures, city escapes, and Grand Journeys. Twelve formats across the season. Every seat placed by the host. Founded 2026. By introduction only.</p>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <div style={{ fontFamily: D.J, fontSize: 11, fontWeight: 500, letterSpacing: ".3em", textTransform: "uppercase", color: T.rose, marginBottom: 16 }}>THE {"\u0186"}USE {"\u0254"}F CLIO</div>
-            <h1 style={{ fontFamily: D.CG, fontSize: "clamp(30px,5vw,44px)", fontWeight: 300, lineHeight: 1.15, color: T.bg, marginBottom: 8 }}>The Season</h1>
-            <p style={{ fontFamily: D.CG, fontSize: "clamp(14px,2.5vw,18px)", fontWeight: 300, fontStyle: "italic", color: "rgba(26,8,32,.6)", marginBottom: 16 }}>Seven rooms. Two cities. One year.</p>
-            <p style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, lineHeight: 1.85, color: "rgba(26,8,32,.8)", maxWidth: "56ch", margin: "0 auto" }}>The {"\u0186"}use {"\u0254"}f Clio is a private cultural house in London for people whose social lives have not caught up with the rest of their lives.</p>
+  return(
+    <div ref={ref} style={{minHeight:"100vh"}}>
+      <style dangerouslySetInnerHTML={{__html:`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');*{margin:0;padding:0;box-sizing:border-box}[data-card]:focus-visible{outline:2px solid rgba(201,149,108,.4);outline-offset:4px}html{scroll-behavior:smooth;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media(pointer:fine){body,*{cursor:none!important}}@media(pointer:fine){input,textarea,select{cursor:text!important}}.cr{position:fixed;width:44px;height:44px;border:1px solid rgba(201,149,108,.25);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.22,1,.36,1),height .35s cubic-bezier(.22,1,.36,1),border-color .35s,background .35s,opacity .4s}.cr.h{width:60px;height:60px;border-color:rgba(201,149,108,.45);background:rgba(201,149,108,.04)}.cd{position:fixed;width:5px;height:5px;background:rgba(201,149,108,.7);border-radius:50%;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:opacity .3s}::selection{background:rgba(201,149,108,.2);color:#1A0820}input:focus,textarea:focus,select:focus{border-color:rgba(201,149,108,.5)!important;outline:none;box-shadow:0 0 0 2px rgba(201,149,108,.15)}input,textarea,select{border-radius:0;-webkit-appearance:none}[data-card]{transition:transform .5s cubic-bezier(.25,.1,.25,1)}[data-card]:hover{transform:none}[data-card]{opacity:0;animation:cardIn .6s ease forwards}@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes checkIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}`}}/>
+<script type="application/ld+json" dangerouslySetInnerHTML={{__html:'{"@context":"https://schema.org","@type":"Organization","name":"The House of Clio","alternateName":"The \u0186use \u0254f Clio","url":"https://thehouseofclio.com","description":"A private cultural house in London offering composed private dinners, supper lectures, city escapes, and Grand Journeys. Founded 2026. By introduction only.","foundingDate":"2026","address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},"sameAs":["https://instagram.com/houseof_clio","https://x.com/TheHouseofClio"]}'}}/>
+      <div ref={ringRef} className="cr" style={{opacity:0}}/>
+      <div ref={dotRef} className="cd" style={{opacity:0}}/>
+
+      {view==="browse"&&<div style={{background:T.cream,animation:"fadeIn .4s ease"}}>
+        <div style={{textAlign:"center",padding:"clamp(48px,8vh,80px) 24px clamp(24px,4vh,36px)",position:"relative"}}>
+          <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}><ClioIcon size={380} color={T.rose} opacity={.06} style={{position:"relative"}}/></div>
+          <p style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0,0,0,0)",whiteSpace:"nowrap"}}>The House of Clio is a private cultural house in London offering composed private dinners, supper lectures, city escapes, and Grand Journeys. Twelve formats across the season. Every seat placed by the host. Founded 2026. By introduction only.</p>
+          <div style={{position:"relative",zIndex:1}}>
+            <div style={{fontFamily:D.J,fontSize:11,fontWeight:500,letterSpacing:".3em",textTransform:"uppercase",color:T.rose,marginBottom:16}}>THE {"\u0186"}USE {"\u0254"}F CLIO</div>
+            <h1 style={{fontFamily:D.CG,fontSize:"clamp(30px,5vw,44px)",fontWeight:300,lineHeight:1.15,color:T.bg,marginBottom:16}}>The Programme</h1>
+            <p style={{fontFamily:D.J,fontSize:14,fontWeight:400,lineHeight:1.85,color:"rgba(26,8,32,.8)",maxWidth:"56ch",margin:"0 auto"}}>The {"\u0186"}use {"\u0254"}f Clio is a private cultural house in London for people whose social lives have not caught up with the rest of their lives.</p>
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: "clamp(20px,4vw,40px)", borderBottom: "1px solid rgba(26,8,32,.12)", padding: "0 24px", marginBottom: "clamp(28px,4vh,44px)" }}>
-          {SECS.map(s => (<div key={s.key} onClick={() => setTab(s.key)} style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, color: tab === s.key ? T.bg : "rgba(26,8,32,.65)", paddingBottom: 14, borderBottom: tab === s.key ? `2px solid ${T.bg}` : "2px solid transparent", transition: "all .3s", cursor: "pointer", "data-h": "", }}>{s.label}</div>))}
-          <div onClick={() => setTab("private")} style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, color: tab === "private" ? T.bg : "rgba(26,8,32,.65)", paddingBottom: 14, borderBottom: tab === "private" ? `2px solid ${T.bg}` : "2px solid transparent", transition: "all .3s", cursor: "pointer", "data-h": "", }}>Private House</div>
+        <div style={{display:"flex",justifyContent:"center",gap:"clamp(20px,4vw,40px)",borderBottom:"1px solid rgba(26,8,32,.12)",padding:"0 24px",marginBottom:"clamp(28px,4vh,44px)"}}>
+          {SECS.map(s=>(<div key={s.key} onClick={()=>setTab(s.key)} style={{fontFamily:D.J,fontSize:13,fontWeight:400,color:tab===s.key?T.bg:"rgba(26,8,32,.65)",paddingBottom:14,borderBottom:tab===s.key?`2px solid ${T.bg}`:"2px solid transparent",transition:"all .3s",cursor:"pointer","data-h":"",}}>{s.label}</div>))}
+          <div onClick={()=>setTab("private")} style={{fontFamily:D.J,fontSize:13,fontWeight:400,color:tab==="private"?T.bg:"rgba(26,8,32,.65)",paddingBottom:14,borderBottom:tab==="private"?`2px solid ${T.bg}`:"2px solid transparent",transition:"all .3s",cursor:"pointer","data-h":"",}}>Private House</div>
         </div>
 
-        {(tab === "seasonal" || tab === "private") && <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 clamp(24px,4vw,48px)" }}>
-          <Img aspect="21/9" v={tab === "seasonal" ? 0 : 2} markSize={320} />
-          <div style={{ width: "48px", height: "1px", background: T.rose, opacity: .3, margin: "16px auto 0" }} />
+        {(tab==="seasonal"||tab==="private")&&<div style={{maxWidth:960,margin:"0 auto",padding:"0 clamp(24px,4vw,48px)"}}>
+          <Img aspect="21/9" v={tab==="seasonal"?0:2} markSize={320}/>
+          <div style={{width:"48px",height:"1px",background:T.rose,opacity:.3,margin:"16px auto 0"}}/>
         </div>}
 
-        <div style={{ textAlign: "center", padding: (tab === "seasonal" || tab === "private") ? "clamp(36px,5vh,56px) 24px clamp(24px,3vh,36px)" : "clamp(24px,3vh,36px) 24px clamp(16px,2vh,24px)", maxWidth: 640, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: D.CG, fontSize: "clamp(26px,4vw,36px)", fontWeight: 300, color: T.bg, marginBottom: (tab === "seasonal" || tab === "private") ? 12 : 8 }}>
-            {tab === "seasonal" && "The Season"}
-            {tab === "recurring" && "Recurring"}
-            {tab === "society" && "Societies"}
-            {tab === "private" && "The Private House"}
+        <div style={{textAlign:"center",padding:(tab==="seasonal"||tab==="private")?"clamp(36px,5vh,56px) 24px clamp(24px,3vh,36px)":"clamp(24px,3vh,36px) 24px clamp(16px,2vh,24px)",maxWidth:640,margin:"0 auto"}}>
+          <h2 style={{fontFamily:D.CG,fontSize:"clamp(26px,4vw,36px)",fontWeight:300,color:T.bg,marginBottom:(tab==="seasonal"||tab==="private")?12:8}}>
+            {tab==="seasonal"&&"The Season"}
+            {tab==="recurring"&&"Recurring"}
+            {tab==="society"&&"Societies"}
+            {tab==="private"&&"The Private House"}
           </h2>
-          {(tab === "seasonal" || tab === "private") && <p style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, lineHeight: 1.85, color: "rgba(26,8,32,.8)", maxWidth: "52ch", margin: "0 auto" }}>
-            {tab === "seasonal" && "Dinners for eighteen. Lectures for twenty-eight. Two city escapes. One Grand Journey. The first season opens 2 June 2026."}
-            {tab === "private" && "Your people in one room. Twelve to forty. The host handles the rest."}
+          {(tab==="seasonal"||tab==="private")&&<p style={{fontFamily:D.J,fontSize:14,fontWeight:400,lineHeight:1.85,color:"rgba(26,8,32,.8)",maxWidth:"52ch",margin:"0 auto"}}>
+            {tab==="seasonal"&&"Dinners for eighteen. Lectures for twenty-eight. Two city escapes. One Grand Journey. The first season opens 2 June 2026."}
+            {tab==="private"&&"Your people in one room. Twelve to forty. The host handles the rest."}
           </p>}
-          {(tab === "seasonal" || tab === "private") && <div style={{ width: 40, height: 1, background: T.rose, opacity: .35, margin: "20px auto 0" }} />}
+          {(tab==="seasonal"||tab==="private")&&<div style={{width:40,height:1,background:T.rose,opacity:.35,margin:"20px auto 0"}}/>}
         </div>
 
-        {tab !== "private" && <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 clamp(24px,4vw,48px)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,380px),1fr))", gap: "clamp(24px,3vw,36px)" }}>
-            {filtered.map((f, i) => {
-              if (f.wide) return <div key={i} data-card="" tabIndex={0} onKeyDown={e => { if (e.key === "Enter") go("detail", f) }} style={{ animationDelay: `${i * 120}ms` }}><WideCard f={f} go={go} /></div>;
-              return <div key={i} data-card="" tabIndex={0} onKeyDown={e => { if (e.key === "Enter") go("detail", f) }} style={{ animationDelay: `${i * 120}ms` }}><StdCard f={f} go={go} /></div>;
+        {tab!=="private"&&<div style={{maxWidth:960,margin:"0 auto",padding:"0 clamp(24px,4vw,48px)"}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,380px),1fr))",gap:"clamp(24px,3vw,36px)"}}>
+            {filtered.map((f,i)=>{
+              if(f.wide) return <div key={i} data-card="" tabIndex={0} onKeyDown={e=>{if(e.key==="Enter")go("detail",f)}} style={{animationDelay:`${i*120}ms`}}><WideCard f={f} go={go}/></div>;
+              return <div key={i} data-card="" tabIndex={0} onKeyDown={e=>{if(e.key==="Enter")go("detail",f)}} style={{animationDelay:`${i*120}ms`}}><StdCard f={f} go={go}/></div>;
             })}
           </div>
         </div>}
 
-        {tab === "private" && <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 clamp(24px,4vw,48px)" }}>
-          <div style={{ background: T.copper, overflow: "hidden" }}>
-            <Img aspect="21/9" v={2} markSize={280} />
-            <div style={{ padding: "clamp(28px,4vw,48px)" }}>
-              <div style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: "rgba(255,255,255,.95)", marginBottom: 10 }}>By arrangement</div>
-              <h3 style={{ fontFamily: D.CG, fontSize: "clamp(28px,4.5vw,40px)", fontWeight: 300, color: T.cream, margin: "0 0 16px" }}>The Private House</h3>
-              <p style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, lineHeight: 1.85, color: "rgba(255,255,255,.95)", marginBottom: 20, maxWidth: "40ch" }}>You name the people. The host composes the room. Venue, seating, portraits, catering.</p>
-              <TxtLink onClick={() => { setSel({ id: "ph", env: "copper", l1: "The Private", l2: "House", tag: "By arrangement", it: "You name the people. The host does the rest.", wh: "Conversation first. Pricing follows.", bespoke: true }); setView("form"); scroll(); }} dark={T.rose}>Begin a conversation</TxtLink>
+        {tab==="private"&&<div style={{maxWidth:960,margin:"0 auto",padding:"0 clamp(24px,4vw,48px)"}}>
+          <div style={{background:T.copper,overflow:"hidden"}}>
+            <Img aspect="21/9" v={2} markSize={280}/>
+            <div style={{padding:"clamp(28px,4vw,48px)"}}>
+              <div style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".2em",textTransform:"uppercase",color:"rgba(255,255,255,.95)",marginBottom:10}}>By arrangement</div>
+              <h3 style={{fontFamily:D.CG,fontSize:"clamp(28px,4.5vw,40px)",fontWeight:300,color:T.cream,margin:"0 0 16px"}}>The Private House</h3>
+              <p style={{fontFamily:D.J,fontSize:14,fontWeight:400,lineHeight:1.85,color:"rgba(255,255,255,.95)",marginBottom:20,maxWidth:"40ch"}}>You name the people. The host composes the room. Venue, seating, portraits, catering.</p>
+              <TxtLink onClick={()=>{setSel({id:"ph",env:"copper",l1:"The Private",l2:"House",tag:"By arrangement",it:"You name the people. The host does the rest.",wh:"Conversation first. Pricing follows.",bespoke:true});setView("form");scroll();}} dark={T.rose}>Begin a conversation</TxtLink>
             </div>
           </div>
         </div>}
 
-        <div style={{ textAlign: "center", padding: "clamp(36px,5vh,56px) 24px", maxWidth: 540, margin: "0 auto", position: "relative" }}>
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}><ClioIcon size={280} color={T.rose} opacity={.06} style={{ position: "relative" }} /></div>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <div style={{ width: 40, height: 1, background: T.rose, opacity: .2, margin: "0 auto 16px" }} />
-            <p style={{ fontFamily: D.J, fontSize: 15, fontWeight: 400, color: "rgba(26,8,32,.85)", marginBottom: 16 }}>The Circle is open by introduction.</p>
-            <TxtLink href="/apply">Introduce yourself</TxtLink>
+        <div style={{textAlign:"center",padding:"clamp(36px,5vh,56px) 24px",maxWidth:540,margin:"0 auto",position:"relative"}}>
+          <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}><ClioIcon size={280} color={T.rose} opacity={.06} style={{position:"relative"}}/></div>
+          <div style={{position:"relative",zIndex:1}}>
+          <div style={{width:40,height:1,background:T.rose,opacity:.2,margin:"0 auto 16px"}}/>
+          <p style={{fontFamily:D.J,fontSize:15,fontWeight:400,color:"rgba(26,8,32,.85)",marginBottom:16}}>The Circle is open by introduction.</p>
+          <TxtLink href="/apply">Introduce yourself</TxtLink>
           </div>
         </div>
 
-        <div style={{ background: T.bg, padding: "clamp(24px,3vh,36px) 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}><ClioIcon size={200} color={T.rose} opacity={.06} style={{ position: "relative" }} /></div>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <div style={{ fontFamily: D.J, fontSize: 11, letterSpacing: ".14em", color: "rgba(255,255,255,.85)", marginBottom: 8 }}>THE {"\u0186"}USE {"\u0254"}F CLIO</div>
-            <div style={{ fontFamily: D.CG, fontSize: 14, fontWeight: 400, fontStyle: "italic", color: "rgba(255,255,255,.85)" }}>The room is being composed. The next seat is yours.</div>
+        <div style={{background:T.bg,padding:"clamp(24px,3vh,36px) 24px",textAlign:"center",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}><ClioIcon size={200} color={T.rose} opacity={.06} style={{position:"relative"}}/></div>
+          <div style={{position:"relative",zIndex:1}}>
+            <div style={{fontFamily:D.J,fontSize:11,letterSpacing:".14em",color:"rgba(255,255,255,.85)",marginBottom:8}}>THE {"\u0186"}USE {"\u0254"}F CLIO</div>
+            <div style={{fontFamily:D.CG,fontSize:14,fontWeight:400,fontStyle:"italic",color:"rgba(255,255,255,.85)"}}>London. Est. MMXXVI.</div>
           </div>
         </div>
       </div>}
 
-      {view === "detail" && sel && (() => {
-        const e = ENV[sel.env] || ENV.deep;
-        const dk = e.dk;
-        const tc = e.txt; const sc = e.sub;
-        const mc = e.meta;
-        const ic = dk ? "rgba(250,244,238,.9)" : "rgba(26,8,32,.8)";
-        const sc2 = dk ? "rgba(250,244,238,.92)" : "rgba(26,8,32,.85)";
-        const wc = dk ? "rgba(250,244,238,.8)" : "rgba(26,8,32,.7)";
-        const rc = e.rule;
-        const nc = dk ? "rgba(250,244,238,.85)" : "rgba(26,8,32,.75)";
-        const pc = dk ? "rgba(250,244,238,.8)" : "rgba(26,8,32,.75)";
-        const ac = e.acc || T.rose;
-        const obg = e.bg === "#A05025" ? "#5A2A10" : e.bg === "#2D0B38" ? "#1A0520" : dk ? "#080312" : "#E8E2DB";
-        return <div style={{ background: obg, padding: "24px 0 48px", animation: "fadeIn .4s ease" }}>
-          <DarkCard bg={e.bg} markOp={dk ? .12 : .07}>
-            <div data-h="" onClick={() => go("browse")} style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase", color: ac, cursor: "pointer", marginBottom: 22 }}>{"←"} Programme</div>
-            <div style={{ fontFamily: D.J, fontSize: 11, color: mc, marginBottom: 14 }}>{idx + 1} of {F.length}</div>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 20 }}>
-              <span style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".16em", textTransform: "uppercase", color: ac }}>{sel.when}</span>
-              <span style={{ fontFamily: D.J, fontSize: 12, color: mc }}>{sel.cap}{/\d+$/.test(sel.cap) ? " seats" : ""}</span>
-              <span style={{ fontFamily: D.J, fontSize: 12, color: mc }}>{sel.dur}</span>
+      {view==="detail"&&sel&&(()=>{
+        const e=ENV[sel.env]||ENV.deep;
+        const dk=e.dk;
+        const tc=e.txt;const sc=e.sub;
+        const mc=e.meta;
+        const ic=dk?"rgba(250,244,238,.9)":"rgba(26,8,32,.8)";
+        const sc2=dk?"rgba(250,244,238,.92)":"rgba(26,8,32,.85)";
+        const wc=dk?"rgba(250,244,238,.8)":"rgba(26,8,32,.7)";
+        const rc=e.rule;
+        const nc=dk?"rgba(250,244,238,.85)":"rgba(26,8,32,.75)";
+        const pc=dk?"rgba(250,244,238,.8)":"rgba(26,8,32,.75)";
+        const ac=e.acc||T.rose;
+        const obg=e.bg==="#A05025"?"#5A2A10":e.bg==="#2D0B38"?"#1A0520":dk?"#080312":"#E8E2DB";
+        return <div style={{background:obg,padding:"24px 0 48px",animation:"fadeIn .4s ease"}}>
+        <DarkCard bg={e.bg} markOp={dk?.12:.07}>
+          <div data-h="" onClick={()=>go("browse")} style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".14em",textTransform:"uppercase",color:ac,cursor:"pointer",marginBottom:22}}>{"←"} Programme</div>
+          <div style={{fontFamily:D.J,fontSize:11,color:mc,marginBottom:14}}>{idx+1} of {F.length}</div>
+          <div style={{display:"flex",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:20}}>
+            <span style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".16em",textTransform:"uppercase",color:ac}}>{sel.when}</span>
+            <span style={{fontFamily:D.J,fontSize:12,color:mc}}>{sel.cap}{/\d+$/.test(sel.cap)?" seats":""}</span>
+            <span style={{fontFamily:D.J,fontSize:12,color:mc}}>{sel.dur}</span>
+          </div>
+          <p style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0,0,0,0)",whiteSpace:"nowrap"}}>{(sel.l1||"")} {(sel.l2||"")} at The House of Clio. {sel.bd||""}. {sel.price||""}. Private cultural house, London. By introduction only.</p>
+          <h2 style={{fontFamily:D.CG,fontSize:"clamp(32px,6vw,48px)",fontWeight:300,lineHeight:1.15,color:tc,margin:"0 0 20px"}}>{sel.l1} <em style={{color:ac}}>{sel.l2}</em></h2>
+          <div style={{width:"40px",height:"1px",background:ac,opacity:.35,marginBottom:20}}/>
+          <div style={{fontFamily:D.CG,fontSize:20,fontWeight:500,fontStyle:"italic",lineHeight:1.65,color:dk?"rgba(250,244,238,.95)":"rgba(26,8,32,.8)",maxWidth:"30ch",marginBottom:16}}>{sel.it}</div>
+          <div style={{fontFamily:D.J,fontSize:15,fontWeight:400,lineHeight:1.85,color:sc,maxWidth:"36ch",marginBottom:16}}>{sel.bd}</div>
+          <div style={{marginTop:12,marginBottom:8}}>{sel.inc.map((s,i)=><div key={i} style={{fontFamily:D.J,fontSize:14,fontWeight:400,lineHeight:1.8,color:ic,display:"flex",gap:8,alignItems:"flex-start",marginBottom:3}}><span style={{color:ac,fontSize:12,marginTop:2,flexShrink:0}}>—</span>{s}</div>)}</div>
+          {sel.exp&&<div style={{marginTop:20}}>{sel.exp.map((step,i)=>(<div key={i} style={{display:"flex",gap:10,marginBottom:11,alignItems:"flex-start"}}><span style={{fontFamily:D.CG,fontSize:15,fontStyle:"italic",color:ac,opacity:.7,flexShrink:0,minWidth:16,textAlign:"right",lineHeight:1.3}}>{i+1}</span><span style={{fontFamily:D.J,fontSize:14,lineHeight:1.7,color:sc2}}>{step}</span></div>))}</div>}
+          {sel.wh&&<div style={{fontFamily:D.J,fontSize:13,fontWeight:400,fontStyle:"italic",color:wc,marginTop:8,marginBottom:8,lineHeight:1.65}}>{sel.wh}</div>}
+          <div style={{width:"32px",height:"1px",background:ac,opacity:.25,marginTop:24}}/>
+          <div style={{fontFamily:D.CG,fontSize:34,marginTop:12,fontWeight:300,letterSpacing:".04em",color:tc,marginBottom:6}}>{sel.price.startsWith("From")?<><span style={{fontSize:18,fontWeight:400,opacity:.7}}>From </span>{sel.price.replace("From ","")}</>:sel.price}</div>
+
+          {sel.fx&&<div style={{fontFamily:D.J,fontSize:13,fontWeight:400,color:wc,marginTop:8,fontStyle:"italic"}}>Once placed, your name is on the table.</div>}
+          <CTA ac={ac} dk={dk} onClick={()=>go("form")}>{sel.fx?"Reserve your place":"Continue to arrangement"}</CTA>
+          <div style={{ marginTop: 12, fontFamily: D.J, fontSize: 12, color: nc }}><a href={`/apply?event=${APPLY_SLUG[sel.id] || sel.id}`} style={{ color: ac, cursor: "pointer", borderBottom: `1.5px solid ${ac}`, opacity: .8, textDecoration: "none" }}>Introduce yourself</a></div>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:24,paddingTop:16,borderTop:`1px solid ${rc}`}}>
+            {prev?<div data-h="" onClick={()=>go("detail",prev)} style={{flex:1,cursor:"pointer"}}><div style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".12em",textTransform:"uppercase",color:ac,marginBottom:4}}>{"←"} Previous</div><div style={{fontFamily:D.CG,fontSize:16,fontStyle:"italic",color:sc2}}>{prev.l1} {prev.l2}</div></div>:<div style={{flex:1}}/>}
+            <div data-h="" onClick={()=>go("browse")} style={{padding:"0 16px",textAlign:"center",cursor:"pointer"}}><div style={{width:8,height:8,borderRadius:"50%",border:`1.5px solid ${ac}`,opacity:.4,margin:"0 auto"}}/><div style={{fontFamily:D.J,fontSize:11,color:nc,marginTop:4}}>All</div></div>
+            {next?<div data-h="" onClick={()=>go("detail",next)} style={{flex:1,textAlign:"right",cursor:"pointer"}}><div style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".12em",textTransform:"uppercase",color:ac,marginBottom:4}}>Next {"→"}</div><div style={{fontFamily:D.CG,fontSize:16,fontStyle:"italic",color:sc2}}>{next.l1} {next.l2}</div></div>:<div style={{flex:1}}/>}
+          </div>
+        </DarkCard>
+      </div>})()}
+
+      {view==="form"&&sel&&(()=>{
+        const fe=ENV[sel.env]||ENV.deep;
+        const fdk=fe.dk;
+        const fac=fe.acc||T.rose;
+        const ftc=fe.txt;
+        const fmc=fdk?"rgba(250,244,238,.9)":"rgba(26,8,32,.8)";
+        const fpc=fdk?"rgba(250,244,238,.85)":"rgba(26,8,32,.75)";
+        const flc=fdk?"rgba(250,244,238,.85)":"rgba(26,8,32,.75)";
+        const fobg=fe.bg==="#A05025"?"#5A2A10":fe.bg==="#2D0B38"?"#1A0520":fdk?"#080312":"#E8E2DB";
+        return <div style={{background:fobg,padding:"24px 0 48px",animation:"fadeIn .4s ease"}}>
+        <DarkCard bg={fe.bg} markOp={fdk?.08:.05}>
+          <div data-h="" onClick={()=>sel.bespoke?go("browse"):go("detail")} style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".14em",textTransform:"uppercase",color:fac,cursor:"pointer",marginBottom:22}}>{"\u2190"} {sel.l1} {sel.l2}</div>
+
+          <h2 style={{fontFamily:D.CG,fontSize:"clamp(32px,6vw,48px)",fontWeight:300,lineHeight:1.15,color:ftc,margin:"0 0 12px"}}>{sel.l1} <em style={{color:fac}}>{sel.l2}</em></h2>
+          {!sel.bespoke&&<div style={{fontFamily:D.J,fontSize:13,color:fmc,marginBottom:16}}>{sel.when} · {sel.cap}{/\d+$/.test(sel.cap)?" seats":""} · {sel.dur}{sel.fx?" · "+sel.price:""}</div>}
+          <div style={{display:"flex",gap:8,marginBottom:16,alignItems:"center"}}><div style={{width:8,height:8,borderRadius:"50%",background:fac,opacity:formStep>=1?1:.3,transition:"opacity .3s"}}/><div style={{width:20,height:"1px",background:fac,opacity:.2}}/><div style={{width:8,height:8,borderRadius:"50%",background:fac,opacity:formStep>=2?1:.2,transition:"opacity .3s"}}/></div>
+          <div style={{fontFamily:D.CG,fontSize:16,fontWeight:400,fontStyle:"italic",color:fpc,marginBottom:14,lineHeight:1.6}}>{sel.bespoke?"Tell us about the occasion.":"The host places every seat."}</div>
+          <Field dk={fdk} label="Name" placeholder="" value={fm.name} onChange={e=>{up("name",e.target.value);setError("");}}/>
+          <Field dk={fdk} label="Email" type="email" placeholder="" value={fm.email} onChange={e=>{up("email",e.target.value);setError("");}}/>
+          {formStep===1&&fm.name&&fm.email&&<div style={{marginTop:16}}>{sel.wh&&<div style={{fontFamily:D.J,fontSize:13,fontWeight:400,fontStyle:"italic",color:fpc,marginBottom:10,lineHeight:1.65}}>{sel.wh}</div>}<span data-h="" onClick={()=>setFormStep(2)} style={{cursor:"pointer",fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".12em",textTransform:"uppercase",color:fac,borderBottom:`1.5px solid ${fac}`,paddingBottom:4}}>Continue</span></div>}
+          {formStep>=2&&<Field dk={fdk} label="Phone" type="tel" placeholder="" value={fm.phone} onChange={e=>{up("phone",e.target.value);setError("");}}/>}{formStep>=2&&sel.fx&&<div ref={step2Ref}><Field dk={fdk} label="Attending" value={fm.attending} onChange={e=>up("attending",e.target.value)} options={["Alone","With a guest"]} half/><DietaryPills dk={fdk} value={fm.dietary} other={fm.dietaryOther} onToggle={toggleDiet} onOther={e=>up("dietaryOther",e.target.value)}/>{fm.attending==="With a guest"&&<div style={{marginTop:8,paddingTop:16,borderTop:`1px solid ${fdk?"rgba(201,149,108,.12)":"rgba(26,8,32,.06)"}`}}><div style={{fontFamily:D.CG,fontSize:16,fontWeight:400,fontStyle:"italic",color:fpc,marginBottom:14,lineHeight:1.6}}>Your guest is also our guest.</div><Field dk={fdk} label="Guest name" placeholder="" value={fm.guestName} onChange={e=>up("guestName",e.target.value)}/><Field dk={fdk} label="Guest email" type="email" placeholder="" value={fm.guestEmail} onChange={e=>up("guestEmail",e.target.value)} half/><Field dk={fdk} label="Guest phone" type="tel" placeholder="" value={fm.guestPhone} onChange={e=>up("guestPhone",e.target.value)} half/><DietaryPills dk={fdk} value={fm.guestDietary} other={fm.guestDietaryOther} onToggle={toggleGuestDiet} onOther={e=>up("guestDietaryOther",e.target.value)}/></div>}</div>}
+          {formStep>=2&&!sel.fx&&!sel.bespoke&&<><Field dk={fdk} label="Departing from" placeholder="" value={fm.city} onChange={e=>up("city",e.target.value)}/><Field dk={fdk} label="Travelling" value={fm.guests} onChange={e=>up("guests",e.target.value)} options={["1","2"]} half/><Field dk={fdk} label="Room" placeholder="Single or double" value={fm.roomPref} onChange={e=>up("roomPref",e.target.value)} half/><DietaryPills dk={fdk} value={fm.dietary} other={fm.dietaryOther} onToggle={toggleDiet} onOther={e=>up("dietaryOther",e.target.value)}/>{fm.guests==="2"&&<div style={{marginTop:8,paddingTop:16,borderTop:`1px solid ${fdk?"rgba(201,149,108,.12)":"rgba(26,8,32,.06)"}`}}><div style={{fontFamily:D.CG,fontSize:16,fontWeight:400,fontStyle:"italic",color:fpc,marginBottom:14,lineHeight:1.6}}>Your guest is also our guest.</div><Field dk={fdk} label="Guest name" placeholder="" value={fm.guestName} onChange={e=>up("guestName",e.target.value)}/><Field dk={fdk} label="Guest email" type="email" placeholder="" value={fm.guestEmail} onChange={e=>up("guestEmail",e.target.value)} half/><Field dk={fdk} label="Guest phone" type="tel" placeholder="" value={fm.guestPhone} onChange={e=>up("guestPhone",e.target.value)} half/><DietaryPills dk={fdk} value={fm.guestDietary} other={fm.guestDietaryOther} onToggle={toggleGuestDiet} onOther={e=>up("guestDietaryOther",e.target.value)}/></div>}<Wh dk={fdk}> Pricing follows.</Wh></>}
+          {formStep>=2&&sel.bespoke&&<><Field dk={fdk} label="Timing" placeholder="" value={fm.timing} onChange={e=>up("timing",e.target.value)}/><Field dk={fdk} label="Guest count" placeholder="" value={fm.guestCount} onChange={e=>up("guestCount",e.target.value)} half/><Field dk={fdk} label="Occasion" placeholder="" value={fm.occasion} onChange={e=>up("occasion",e.target.value)} half/><Field dk={fdk} label="Location" placeholder="" value={fm.locationPref} onChange={e=>up("locationPref",e.target.value)}/><Wh dk={fdk}>The host replies within 48 hours.</Wh></>}
+          {formStep>=2&&<><div style={{marginTop:20}}/>{sel.fx&&<div style={{fontFamily:D.CG,fontSize:26,fontWeight:300,color:ftc,marginBottom:4}}>{sel.price}{fm.attending==="With a guest"?<span style={{fontSize:16,fontWeight:400,opacity:.7}}> each</span>:""}</div>}{sel.fx&&fm.attending==="With a guest"&&<div style={{fontFamily:D.J,fontSize:14,fontWeight:400,color:fmc,marginBottom:4}}>Two places · {sel.price} × 2</div>}{sel.fx&&<div style={{fontFamily:D.J,fontSize:13,color:fpc,marginBottom:14}}>{fm.attending==="With a guest"?"Both places confirmed immediately.":"Your place is confirmed immediately."}</div>}{!sel.fx&&!sel.bespoke&&<div style={{fontFamily:D.J,fontSize:13,color:fpc,marginBottom:14}}>The host confirms your place within 48 hours.</div>}{sel.bespoke&&<div style={{fontFamily:D.J,fontSize:13,color:fpc,marginBottom:14}}>The host replies within 48 hours.</div>}{error&&<div style={{fontFamily:D.J,fontSize:13,color:T.copper,marginBottom:14,padding:8,border:`1px solid rgba(160,80,37,.2)`,background:fdk?"rgba(160,80,37,.1)":"rgba(160,80,37,.05)"}}>{error}</div>}<CTA ac={fac} dk={fdk} onClick={submit} disabled={!canSubmit||sending} full>{sending?<span style={{animation:"pulse 1.2s infinite"}}>Confirming</span>:(sel.bespoke?"Proceed privately":sel.fx?"Confirm and pay":"Confirm your place")}</CTA></>}
+          {formStep>=2&&<div style={{marginTop:12}}><div style={{display:"flex",alignItems:"center",gap:6}}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={fdk?"rgba(250,244,238,.8)":"rgba(26,8,32,.5)"} strokeWidth="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span style={{fontFamily:D.J,fontSize:12,color:flc}}>{sel.fx?"Secure payment via Stripe. 14-day cancellation.":sel.bespoke?"No payment now.":"No payment now. 30-day cancellation."}</span>
+          </div></div>}
+        </DarkCard>
+      </div>})()}
+
+      {view==="confirmed"&&sel&&(()=>{
+        const ce=ENV[sel.env]||ENV.deep;
+        const cdk=ce.dk;
+        const cac=ce.acc||T.rose;
+        const ctc=ce.txt;
+        const cmc=cdk?"rgba(250,244,238,.9)":"rgba(26,8,32,.8)";
+        const csc=cdk?"rgba(250,244,238,.92)":"rgba(26,8,32,.85)";
+        const cobg=ce.bg==="#A05025"?"#5A2A10":ce.bg==="#2D0B38"?"#1A0520":cdk?"#080312":"#E8E2DB";
+        return <div style={{background:cobg,padding:"24px 0 48px",animation:"fadeIn .4s ease"}}>
+        <DarkCard bg={ce.bg} markOp={cdk?.08:.05}>
+          <div style={{textAlign:"center"}}>
+            <div style={{width:40,height:40,borderRadius:"50%",border:`2px solid ${cdk?"rgba(201,149,108,.5)":"rgba(26,8,32,.15)"}`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px"}}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={cac} strokeWidth="1.5" style={{animation:"checkIn .5s cubic-bezier(.34,1.56,.64,1) .2s both"}}><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style={{fontFamily:D.J,fontSize:12,fontWeight:500,letterSpacing:".16em",textTransform:"uppercase",color:cac,marginBottom:8}}>{sel.bespoke?"Received":sel.fx?"Place confirmed":"Submitted"}</div>
+            <h2 style={{fontFamily:D.CG,fontSize:"clamp(32px,6vw,48px)",fontWeight:300,lineHeight:1.15,color:ctc,margin:"0 0 12px"}}>{sel.l1} <em style={{color:cac}}>{sel.l2}</em></h2>
+            {!sel.bespoke&&<div style={{fontFamily:D.J,fontSize:12,color:cmc,marginBottom:24}}>{sel.when} · {sel.cap}{/\d+$/.test(sel.cap)?" seats":""}</div>}
+            <div style={{width:"40px",height:"1px",background:cac,opacity:.35,margin:"16px auto"}}/>
+            <div style={{textAlign:"left",marginTop:14}}>
+                {(sel.bespoke?["The host replies within 48 hours.","Pricing and structure follow.","Nothing moves until you say."]:sel.fx?["Greeted by name at the door.","A portrait of the room before you arrive.","Confirmation within the hour.","Everything else at the right moment."]:["Availability and pricing within 48 hours.","A payment link by return.","Portraits of everyone in the room.","The host handles everything from there."]).map((s,i)=><div key={i} style={{display:"flex",gap:9,marginBottom:8,alignItems:"flex-start"}}><span style={{fontFamily:D.CG,fontSize:15,fontStyle:"italic",color:cac,opacity:.7,flexShrink:0,minWidth:14,textAlign:"right"}}>{i+1}</span><span style={{fontFamily:D.J,fontSize:14,fontWeight:400,lineHeight:1.75,color:csc}}>{s}</span></div>)}
             </div>
-            <p style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}>{(sel.l1 || "")} {(sel.l2 || "")} at The House of Clio. {sel.bd || ""}. {sel.price || ""}. Private cultural house, London. By introduction only.</p>
-            <h2 style={{ fontFamily: D.CG, fontSize: "clamp(32px,6vw,48px)", fontWeight: 300, lineHeight: 1.15, color: tc, margin: "0 0 20px" }}>{sel.l1} <em style={{ color: ac }}>{sel.l2}</em></h2>
-            <div style={{ width: "40px", height: "1px", background: ac, opacity: .35, marginBottom: 20 }} />
-            <div style={{ fontFamily: D.CG, fontSize: 20, fontWeight: 500, fontStyle: "italic", lineHeight: 1.65, color: dk ? "rgba(250,244,238,.95)" : "rgba(26,8,32,.8)", maxWidth: "30ch", marginBottom: 16 }}>{sel.it}</div>
-            <div style={{ fontFamily: D.J, fontSize: 15, fontWeight: 400, lineHeight: 1.85, color: sc, maxWidth: "36ch", marginBottom: 16 }}>{sel.bd}</div>
-            <div style={{ marginTop: 12, marginBottom: 8 }}>{sel.inc.map((s, i) => <div key={i} style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, lineHeight: 1.8, color: ic, display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 3 }}><span style={{ color: ac, fontSize: 12, marginTop: 2, flexShrink: 0 }}>—</span>{s}</div>)}</div>
-            {sel.exp && <div style={{ marginTop: 20 }}>{sel.exp.map((step, i) => (<div key={i} style={{ display: "flex", gap: 10, marginBottom: 11, alignItems: "flex-start" }}><span style={{ fontFamily: D.CG, fontSize: 15, fontStyle: "italic", color: ac, opacity: .7, flexShrink: 0, minWidth: 16, textAlign: "right", lineHeight: 1.3 }}>{i + 1}</span><span style={{ fontFamily: D.J, fontSize: 14, lineHeight: 1.7, color: sc2 }}>{step}</span></div>))}</div>}
-            {sel.wh && <div style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, fontStyle: "italic", color: wc, marginTop: 8, marginBottom: 8, lineHeight: 1.65 }}>{sel.wh}</div>}
-            <div style={{ width: "32px", height: "1px", background: ac, opacity: .25, marginTop: 24 }} />
-            <div style={{ fontFamily: D.CG, fontSize: 34, marginTop: 12, fontWeight: 300, letterSpacing: ".04em", color: tc, marginBottom: 6 }}>{sel.price.startsWith("From") ? <><span style={{ fontSize: 18, fontWeight: 400, opacity: .7 }}>From </span>{sel.price.replace("From ", "")}</> : sel.price}</div>
+            <div style={{fontFamily:D.CG,fontSize:16,fontWeight:300,fontStyle:"italic",color:cdk?"rgba(250,244,238,.85)":"rgba(26,8,32,.7)",maxWidth:"24ch",margin:"48px auto 16px",lineHeight:1.6}}>You are part of the room now</div>
+            <div style={{fontFamily:D.J,fontSize:12,color:cdk?"rgba(250,244,238,.65)":"rgba(26,8,32,.5)",marginTop:8,marginBottom:28,lineHeight:1.65}}>Tell someone who should be in this room.</div>
+            <div style={{marginTop:12}}><CTA ac={cac} dk={cdk} onClick={()=>{setSel(null);reset();go("browse");}}>The Programme</CTA></div>
 
-            {sel.fx && <div style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, color: wc, marginTop: 8, fontStyle: "italic" }}>Once placed, your name is on the table.</div>}
-            <CTA ac={ac} dk={dk} onClick={() => go("form")}>{sel.fx ? "Reserve your place" : "Continue to arrangement"}</CTA>
-            <div style={{ marginTop: 12, fontFamily: D.J, fontSize: 12, color: nc }}><a href={`/apply?event=${APPLY_SLUG[sel.id] || sel.id}`} style={{ color: ac, cursor: "pointer", borderBottom: `1.5px solid ${ac}`, opacity: .8, textDecoration: "none" }}>Introduce yourself</a></div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 24, paddingTop: 16, borderTop: `1px solid ${rc}` }}>
-              {prev ? <div data-h="" onClick={() => go("detail", prev)} style={{ flex: 1, cursor: "pointer" }}><div style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".12em", textTransform: "uppercase", color: ac, marginBottom: 4 }}>{"←"} Previous</div><div style={{ fontFamily: D.CG, fontSize: 16, fontStyle: "italic", color: sc2 }}>{prev.l1} {prev.l2}</div></div> : <div style={{ flex: 1 }} />}
-              <div data-h="" onClick={() => go("browse")} style={{ padding: "0 16px", textAlign: "center", cursor: "pointer" }}><div style={{ width: 8, height: 8, borderRadius: "50%", border: `1.5px solid ${ac}`, opacity: .4, margin: "0 auto" }} /><div style={{ fontFamily: D.J, fontSize: 11, color: nc, marginTop: 4 }}>All</div></div>
-              {next ? <div data-h="" onClick={() => go("detail", next)} style={{ flex: 1, textAlign: "right", cursor: "pointer" }}><div style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".12em", textTransform: "uppercase", color: ac, marginBottom: 4 }}>Next {"→"}</div><div style={{ fontFamily: D.CG, fontSize: 16, fontStyle: "italic", color: sc2 }}>{next.l1} {next.l2}</div></div> : <div style={{ flex: 1 }} />}
-            </div>
-          </DarkCard>
-        </div>
-      })()}
-
-      {view === "form" && sel && (() => {
-        const fe = ENV[sel.env] || ENV.deep;
-        const fdk = fe.dk;
-        const fac = fe.acc || T.rose;
-        const ftc = fe.txt;
-        const fmc = fdk ? "rgba(250,244,238,.9)" : "rgba(26,8,32,.8)";
-        const fpc = fdk ? "rgba(250,244,238,.85)" : "rgba(26,8,32,.75)";
-        const flc = fdk ? "rgba(250,244,238,.85)" : "rgba(26,8,32,.75)";
-        const fobg = fe.bg === "#A05025" ? "#5A2A10" : fe.bg === "#2D0B38" ? "#1A0520" : fdk ? "#080312" : "#E8E2DB";
-        return <div style={{ background: fobg, padding: "24px 0 48px", animation: "fadeIn .4s ease" }}>
-          <DarkCard bg={fe.bg} markOp={fdk ? .08 : .05}>
-            <div data-h="" onClick={() => sel.bespoke ? go("browse") : go("detail")} style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase", color: fac, cursor: "pointer", marginBottom: 22 }}>{"\u2190"} {sel.l1} {sel.l2}</div>
-
-            <h2 style={{ fontFamily: D.CG, fontSize: "clamp(32px,6vw,48px)", fontWeight: 300, lineHeight: 1.15, color: ftc, margin: "0 0 12px" }}>{sel.l1} <em style={{ color: fac }}>{sel.l2}</em></h2>
-            {!sel.bespoke && <div style={{ fontFamily: D.J, fontSize: 13, color: fmc, marginBottom: 16 }}>{sel.when} · {sel.cap}{/\d+$/.test(sel.cap) ? " seats" : ""} · {sel.dur}{sel.fx ? " · " + sel.price : ""}</div>}
-            <div style={{ display: "flex", gap: 8, marginBottom: 16, alignItems: "center" }}><div style={{ width: 8, height: 8, borderRadius: "50%", background: fac, opacity: formStep >= 1 ? 1 : .3, transition: "opacity .3s" }} /><div style={{ width: 20, height: "1px", background: fac, opacity: .2 }} /><div style={{ width: 8, height: 8, borderRadius: "50%", background: fac, opacity: formStep >= 2 ? 1 : .2, transition: "opacity .3s" }} /></div>
-            <div style={{ fontFamily: D.CG, fontSize: 16, fontWeight: 400, fontStyle: "italic", color: fpc, marginBottom: 14, lineHeight: 1.6 }}>{sel.bespoke ? "Tell us about the occasion." : "The host places every seat."}</div>
-            <Field dk={fdk} label="Name" placeholder="" value={fm.name} onChange={e => up("name", e.target.value)} />
-            <Field dk={fdk} label="Email" type="email" placeholder="" value={fm.email} onChange={e => up("email", e.target.value)} />
-            {formStep === 1 && fm.name && fm.email && <div style={{ marginTop: 16 }}>{sel.wh && <div style={{ fontFamily: D.J, fontSize: 13, fontWeight: 400, fontStyle: "italic", color: fpc, marginBottom: 10, lineHeight: 1.65 }}>{sel.wh}</div>}<span data-h="" onClick={() => setFormStep(2)} style={{ cursor: "pointer", fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".12em", textTransform: "uppercase", color: fac, borderBottom: `1.5px solid ${fac}`, paddingBottom: 4 }}>Continue</span></div>}
-            {formStep >= 2 && <Field dk={fdk} label="Phone" type="tel" placeholder="" value={fm.phone} onChange={e => up("phone", e.target.value)} />}{formStep >= 2 && sel.fx && <div ref={step2Ref}><Field dk={fdk} label="Attending" value={fm.attending} onChange={e => up("attending", e.target.value)} options={["Alone", "With a guest"]} half /><DietaryPills dk={fdk} value={fm.dietary} other={fm.dietaryOther} onToggle={toggleDiet} onOther={e => up("dietaryOther", e.target.value)} />{fm.attending === "With a guest" && <div style={{ marginTop: 8, paddingTop: 16, borderTop: `1px solid ${fdk ? "rgba(201,149,108,.12)" : "rgba(26,8,32,.06)"}` }}><div style={{ fontFamily: D.CG, fontSize: 16, fontWeight: 400, fontStyle: "italic", color: fpc, marginBottom: 14, lineHeight: 1.6 }}>Your guest is also our guest.</div><Field dk={fdk} label="Guest name" placeholder="" value={fm.guestName} onChange={e => up("guestName", e.target.value)} /><Field dk={fdk} label="Guest email" type="email" placeholder="" value={fm.guestEmail} onChange={e => up("guestEmail", e.target.value)} half /><Field dk={fdk} label="Guest phone" type="tel" placeholder="" value={fm.guestPhone} onChange={e => up("guestPhone", e.target.value)} half /><DietaryPills dk={fdk} value={fm.guestDietary} other={fm.guestDietaryOther} onToggle={toggleGuestDiet} onOther={e => up("guestDietaryOther", e.target.value)} /></div>}</div>}
-            {formStep >= 2 && !sel.fx && !sel.bespoke && <><Field dk={fdk} label="Departing from" placeholder="" value={fm.city} onChange={e => up("city", e.target.value)} /><Field dk={fdk} label="Travelling" value={fm.guests} onChange={e => up("guests", e.target.value)} options={["1", "2"]} half /><Field dk={fdk} label="Room" placeholder="Single or double" value={fm.roomPref} onChange={e => up("roomPref", e.target.value)} half /><DietaryPills dk={fdk} value={fm.dietary} other={fm.dietaryOther} onToggle={toggleDiet} onOther={e => up("dietaryOther", e.target.value)} />{fm.guests === "2" && <div style={{ marginTop: 8, paddingTop: 16, borderTop: `1px solid ${fdk ? "rgba(201,149,108,.12)" : "rgba(26,8,32,.06)"}` }}><div style={{ fontFamily: D.CG, fontSize: 16, fontWeight: 400, fontStyle: "italic", color: fpc, marginBottom: 14, lineHeight: 1.6 }}>Your guest is also our guest.</div><Field dk={fdk} label="Guest name" placeholder="" value={fm.guestName} onChange={e => up("guestName", e.target.value)} /><Field dk={fdk} label="Guest email" type="email" placeholder="" value={fm.guestEmail} onChange={e => up("guestEmail", e.target.value)} half /><Field dk={fdk} label="Guest phone" type="tel" placeholder="" value={fm.guestPhone} onChange={e => up("guestPhone", e.target.value)} half /><DietaryPills dk={fdk} value={fm.guestDietary} other={fm.guestDietaryOther} onToggle={toggleGuestDiet} onOther={e => up("guestDietaryOther", e.target.value)} /></div>}<Wh dk={fdk}> Pricing follows.</Wh></>}
-            {formStep >= 2 && sel.bespoke && <><Field dk={fdk} label="Timing" placeholder="" value={fm.timing} onChange={e => up("timing", e.target.value)} /><Field dk={fdk} label="Guest count" placeholder="" value={fm.guestCount} onChange={e => up("guestCount", e.target.value)} half /><Field dk={fdk} label="Occasion" placeholder="" value={fm.occasion} onChange={e => up("occasion", e.target.value)} half /><Field dk={fdk} label="Location" placeholder="" value={fm.locationPref} onChange={e => up("locationPref", e.target.value)} /><Wh dk={fdk}>The host replies within 48 hours.</Wh></>}
-            {formStep >= 2 && <><div style={{ marginTop: 20 }} />{sel.fx && <div style={{ fontFamily: D.CG, fontSize: 26, fontWeight: 300, color: ftc, marginBottom: 4 }}>{sel.price}{fm.attending === "With a guest" ? <span style={{ fontSize: 16, fontWeight: 400, opacity: .7 }}> each</span> : ""}</div>}{sel.fx && fm.attending === "With a guest" && <div style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, color: fmc, marginBottom: 4 }}>Two places · {sel.price} × 2</div>}{sel.fx && <div style={{ fontFamily: D.J, fontSize: 13, color: fpc, marginBottom: 14 }}>{fm.attending === "With a guest" ? "Both places confirmed immediately." : "Your place is confirmed immediately."}</div>}{!sel.fx && !sel.bespoke && <div style={{ fontFamily: D.J, fontSize: 13, color: fpc, marginBottom: 14 }}>The host confirms your place within 48 hours.</div>}{sel.bespoke && <div style={{ fontFamily: D.J, fontSize: 13, color: fpc, marginBottom: 14 }}>The host replies within 48 hours.</div>}<CTA ac={fac} dk={fdk} onClick={submit} disabled={!canSubmit || sending} full>{sending ? <span style={{ animation: "pulse 1.2s infinite" }}>Confirming</span> : (sel.bespoke ? "Proceed privately" : sel.fx ? "Confirm and pay" : "Confirm your place")}</CTA></>}
-            {formStep >= 2 && <div style={{ marginTop: 12 }}><div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={fdk ? "rgba(250,244,238,.8)" : "rgba(26,8,32,.5)"} strokeWidth="1.5"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
-              <span style={{ fontFamily: D.J, fontSize: 12, color: flc }}>{sel.fx ? "Secure payment via Stripe. 14-day cancellation." : sel.bespoke ? "No payment now." : "No payment now. 30-day cancellation."}</span>
-            </div></div>}
-          </DarkCard>
-        </div>
-      })()}
-
-      {view === "confirmed" && sel && (() => {
-        const ce = ENV[sel.env] || ENV.deep;
-        const cdk = ce.dk;
-        const cac = ce.acc || T.rose;
-        const ctc = ce.txt;
-        const cmc = cdk ? "rgba(250,244,238,.9)" : "rgba(26,8,32,.8)";
-        const csc = cdk ? "rgba(250,244,238,.92)" : "rgba(26,8,32,.85)";
-        const cobg = ce.bg === "#A05025" ? "#5A2A10" : ce.bg === "#2D0B38" ? "#1A0520" : cdk ? "#080312" : "#E8E2DB";
-        return <div style={{ background: cobg, padding: "24px 0 48px", animation: "fadeIn .4s ease" }}>
-          <DarkCard bg={ce.bg} markOp={cdk ? .08 : .05}>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ width: 40, height: 40, borderRadius: "50%", border: `2px solid ${cdk ? "rgba(201,149,108,.5)" : "rgba(26,8,32,.15)"}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={cac} strokeWidth="1.5" style={{ animation: "checkIn .5s cubic-bezier(.34,1.56,.64,1) .2s both" }}><polyline points="20 6 9 17 4 12" /></svg></div>
-              <div style={{ fontFamily: D.J, fontSize: 12, fontWeight: 500, letterSpacing: ".16em", textTransform: "uppercase", color: cac, marginBottom: 8 }}>{sel.bespoke ? "Received" : sel.fx ? "Place confirmed" : "Submitted"}</div>
-              <h2 style={{ fontFamily: D.CG, fontSize: "clamp(32px,6vw,48px)", fontWeight: 300, lineHeight: 1.15, color: ctc, margin: "0 0 12px" }}>{sel.l1} <em style={{ color: cac }}>{sel.l2}</em></h2>
-              {!sel.bespoke && <div style={{ fontFamily: D.J, fontSize: 12, color: cmc, marginBottom: 24 }}>{sel.when} · {sel.cap}{/\d+$/.test(sel.cap) ? " seats" : ""}</div>}
-              <div style={{ width: "40px", height: "1px", background: cac, opacity: .35, margin: "16px auto" }} />
-              <div style={{ textAlign: "left", marginTop: 14 }}>
-                {(sel.bespoke ? ["The host replies within 48 hours.", "Pricing and structure follow.", "Nothing moves until you say."] : sel.fx ? ["Greeted by name at the door.", "A portrait of the room before you arrive.", "Confirmation within the hour.", "Everything else at the right moment."] : ["Availability and pricing within 48 hours.", "A payment link by return.", "Portraits of everyone in the room.", "The host handles everything from there."]).map((s, i) => <div key={i} style={{ display: "flex", gap: 9, marginBottom: 8, alignItems: "flex-start" }}><span style={{ fontFamily: D.CG, fontSize: 15, fontStyle: "italic", color: cac, opacity: .7, flexShrink: 0, minWidth: 14, textAlign: "right" }}>{i + 1}</span><span style={{ fontFamily: D.J, fontSize: 14, fontWeight: 400, lineHeight: 1.75, color: csc }}>{s}</span></div>)}
-              </div>
-              <div style={{ fontFamily: D.CG, fontSize: 16, fontWeight: 300, fontStyle: "italic", color: cdk ? "rgba(250,244,238,.85)" : "rgba(26,8,32,.7)", maxWidth: "24ch", margin: "48px auto 16px", lineHeight: 1.6 }}>You are part of the room now</div>
-              <div style={{ fontFamily: D.J, fontSize: 12, color: cdk ? "rgba(250,244,238,.65)" : "rgba(26,8,32,.5)", marginTop: 8, marginBottom: 28, lineHeight: 1.65 }}>Tell someone who should be in this room.</div>
-              <div style={{ marginTop: 12 }}><CTA ac={cac} dk={cdk} onClick={() => { setSel(null); reset(); go("browse"); }}>The Programme</CTA></div>
-
-              {idx >= 0 && <div style={{ marginTop: 24, paddingTop: 18, borderTop: `1px solid ${cdk ? "rgba(201,149,108,.15)" : "rgba(26,8,32,.08)"}`, textAlign: "left" }}>
-                {F.filter(x => x.id !== sel.id && x.sec !== sel.sec).concat(F.filter(x => x.id !== sel.id && x.sec === sel.sec)).slice(0, 3).map((f, i) => (<div key={i} onClick={() => { reset(); go("detail", f); }} data-h="" style={{ cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderTop: i ? `0.5px solid ${cdk ? "rgba(201,149,108,.06)" : "rgba(26,8,32,.04)"}` : "none" }}><div><div style={{ fontFamily: D.CG, fontSize: 17, fontWeight: 400, color: ctc }}>{f.l1} <em style={{ color: cac }}>{f.l2}</em></div><div style={{ fontFamily: D.J, fontSize: 11, color: cdk ? "rgba(250,244,238,.85)" : "rgba(26,8,32,.7)", marginTop: 4 }}>{f.when} · {f.cap} · {f.price}</div></div><span style={{ fontFamily: D.J, fontSize: 14, color: cac }}>{"\u2192"}</span></div>))}
-              </div>}
-            </div>
-          </DarkCard>
-        </div>
-      })()}
+            {idx>=0&&<div style={{marginTop:24,paddingTop:18,borderTop:`1px solid ${cdk?"rgba(201,149,108,.15)":"rgba(26,8,32,.08)"}`,textAlign:"left"}}>
+                {F.filter(x=>x.id!==sel.id&&x.sec!==sel.sec).concat(F.filter(x=>x.id!==sel.id&&x.sec===sel.sec)).slice(0,3).map((f,i)=>(<div key={i} onClick={()=>{reset();go("detail",f);}} data-h="" style={{cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0",borderTop:i?`0.5px solid ${cdk?"rgba(201,149,108,.06)":"rgba(26,8,32,.04)"}`:"none"}}><div><div style={{fontFamily:D.CG,fontSize:17,fontWeight:400,color:ctc}}>{f.l1} <em style={{color:cac}}>{f.l2}</em></div><div style={{fontFamily:D.J,fontSize:11,color:cdk?"rgba(250,244,238,.85)":"rgba(26,8,32,.7)",marginTop:4}}>{f.when} · {f.cap} · {f.price}</div></div><span style={{fontFamily:D.J,fontSize:14,color:cac}}>{"\u2192"}</span></div>))}
+            </div>}
+          </div>
+        </DarkCard>
+      </div>})()}
     </div>
   );
 }

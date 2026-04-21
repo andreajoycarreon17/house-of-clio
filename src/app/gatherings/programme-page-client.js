@@ -26,14 +26,14 @@ export default function ProgrammePage() {
           <Dv w="48px" m="0 auto 28px"/>
           <p style={{fontFamily:F.body,fontSize:"clamp(14px,3.2vw,15px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"42ch",margin:"0 auto"}}>Most rooms are designed for volume. These are designed for depth. Seven seasonal rooms composed by hand and never repeated. Three recurring formats that bring people back. Two Societies led by the Circle. A system designed so the longer you stay, the richer it becomes.</p>
           <p style={{fontFamily:F.body,fontSize:12,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"44ch",margin:"16px auto 0",fontStyle:"italic"}}>You begin with a single evening. You return for The Returning Table. You recognise faces. You travel together. The value compounds with every room you enter. That is the architecture.</p>
-          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"48ch",margin:"14px auto 0",letterSpacing:".02em"}}>The Exchange is the seasonal programme of the Ɔuse Ɔf Clio in London. Twelve formats including composed private dinners for eighteen, supper lectures for twenty-eight, cycling journeys, city escapes to Paris and Dublin, Grand Journeys through Puglia and Marrakech, and The Returning Table which meets every two to three weeks so the same people see each other again.</p>
+          <p data-speakable="true" style={{fontFamily:F.body,fontSize:11,fontWeight:300,lineHeight:1.9,color:TX.onDarkMuted,maxWidth:"48ch",margin:"14px auto 0",letterSpacing:".02em"}}>The seasonal programme of the Ɔuse ɔf Clio in London. Twelve formats including composed private dinners for eighteen, supper lectures for twenty-eight, cycling journeys, city escapes to Paris and Dublin, Grand Journeys through Puglia and Marrakech, and The Returning Table which meets every two to three weeks so the same people see each other again.</p>
         </div>
       </Rv></Mx>
     </Sec>
 
     {/* Atmospheric. a composed evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The ?use ?f Clio, London." h={240} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* === THE SEVEN ROOMS === */}
@@ -98,7 +98,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric */}
     <section style={{background:T.bg2,padding:"2px clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.courtyard} alt="A courtyard setting for a composed gathering. The ?use ?f Clio." h={140} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.courtyard} alt="A courtyard setting for a composed gathering. The Ɔuse ɔf Clio." h={140} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* IV + V */}
@@ -115,7 +115,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Two to three nights. Eighteen people. A city you know, seen through people you did not.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.rose}30,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:"rgba(250,244,238,.6)"}}>Paris. Dublin. Milan. Manchester. The ?use handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:"rgba(250,244,238,.6)"}}>Paris. Dublin. Milan. Manchester. The Ɔuse handles everything: the hotel, the restaurant reservations, the transfers, the access. A private gallery opening before the public arrives. A table at a restaurant held because the host knows the chef. A morning walking a neighbourhood with someone who grew up there. Doors that do not open for a booking engine. Every detail arranged by someone who has been before, so you arrive and simply live. Flights are arranged independently. Everything else is handled.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:TX.onDarkMuted,fontStyle:"italic",marginTop:14}}>Each city once per season. Never repeated.</p>
           </div>
           </Rv>
@@ -130,7 +130,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Four to five days. Ten people. Destinations that change how you see the world.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.roseL}35,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the ?use. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>Puglia. The Peloponnese. Marrakech. The coast of Accra. Tuscany by road with a professional cyclist who knows every climb and every village kitchen. Not capital cities. Not the obvious route. Every itinerary is designed by the host from routes walked, driven, and tested in person. The local connections are real. The restaurants are held because someone has eaten there before and knows the owner. Accommodation, local transport, cultural access, private dining, and local guides are arranged by the Ɔuse. Flights are arranged independently. The company is composed with the same precision as the destination. Some journeys are walked. Some are driven. Some are ridden. All end at a table.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:T.roseL,fontStyle:"italic",opacity:.65,marginTop:14}}>Limited places. Once composed, never repeated.</p>
           </div>
           </Rv>
@@ -140,7 +140,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric */}
     <section style={{background:T.bg2,padding:"2px clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.vineyard} alt="A Grand Journey destination. Vineyard at golden hour. The ?use ?f Clio." h={140} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.vineyard} alt="A Grand Journey destination. Vineyard at golden hour. The Ɔuse ɔf Clio." h={140} aspect="21/9"/></Rv></Mx>
     </section>
 
     {/* VI + VII */}
@@ -157,7 +157,7 @@ export default function ProgrammePage() {
             </h2>
             <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:TX.onDarkSub,fontStyle:"italic",marginBottom:18}}>Twelve to forty guests. A room composed entirely around your world.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.rose}25,transparent)`,marginBottom:18}}/>
-            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The ?use composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.</p>
+            <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onDarkSub}}>You have people who should be in the same room but never have been. Collaborators from different cities. Friends from different decades. People from separate corners of your life who would change something in each other if they ever sat down together. The Ɔuse composes that room for you. The venue. The guest portraits. The seating. The sequence of the evening. Every detail handled so you arrive as a guest in your own room. For celebrations, milestones, or gatherings with no occasion at all except that the people deserve to meet.</p>
             <p style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:300,color:T.rose,fontStyle:"italic",opacity:.6,marginTop:14}}>By arrangement only. Begin with a conversation.</p>
           </div>
           </Rv>
@@ -170,7 +170,7 @@ export default function ProgrammePage() {
             <h2 style={{fontFamily:F.display,fontSize:"clamp(24px,3vw,32px)",fontWeight:400,fontStyle:"italic",color:T.bg,lineHeight:1.1,marginBottom:8,position:"relative",zIndex:1}}>
               <Link href="/gatherings/the-annual-house" style={{color:"inherit",textDecoration:"none"}}>The Annual House</Link>
             </h2>
-            <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:T.copper,fontStyle:"italic",opacity:.75,marginBottom:18}}>One hundred people. One evening. The year made visible.</div>
+            <div style={{fontFamily:F.body,fontSize:"clamp(11px,2.5vw,12px)",fontWeight:400,color:T.copper,fontStyle:"italic",opacity:.75,marginBottom:18}}>One hundred and twenty people. One evening. The year made visible.</div>
             <div style={{width:36,height:1.5,background:`linear-gradient(90deg,${T.copper}40,${T.gold}15,transparent)`,marginBottom:18}}/>
             <p style={{fontFamily:F.body,fontSize:14,fontWeight:400,lineHeight:2.1,color:TX.onLight,marginBottom:8}}>Once a year. End of season. The full Circle in one extraordinary room. The intimate tables of the year come together in a single, larger gathering. People who crossed paths at different dinners find each other again. Conversations resume mid-sentence. Someone introduces the person they brought from another city. The room is larger than anything else in the programme. The warmth has not changed. This is the evening that proves the system works.</p>
             <p style={{fontFamily:F.display,fontSize:13,fontWeight:400,fontStyle:"italic",lineHeight:1.5,color:T.copper,opacity:.5,marginTop:14}}>The largest room in the programme. The one people prepare for all year.</p>
@@ -192,7 +192,7 @@ export default function ProgrammePage() {
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"clamp(10px,1.5vw,18px)"}} className="g3">
           {[
             {name:"The Returning Table",freq:"Every two to three weeks · Ten seats",desc:"The Evening is strangers. The Returning Table is not. Ten people, and some of them you sat beside last time. The host deliberately invites people back so each table builds on the one before. The same name appears across three, four, five tables, and somewhere around the fourth, you stop introducing yourself. That is when friendship begins. The Evening gives you electricity. The Returning Table gives you people.",acc:T.rose},
-            {name:"The Walk",freq:"Fortnightly · Twelve people",desc:"No preparation. No performance. Just arrive. A walk at conversational pace through Hampstead Heath, along the Regent's Canal, or across the South Downs to a village pub. Paired rotations mean you speak to everyone. Walking beside someone unlocks something that sitting opposite them does not. The walk ends at a table. Always a table someone has chosen for the warmth of the room and the quality of what is served.",acc:T.gold},
+            {name:"The Walk",freq:"Fortnightly · Twelve people",desc:"No preparation. No performance. Just arrive. A walk at conversational pace through Hampstead Heath, along the canal at Regents Park, or across the South Downs to a village pub. Paired rotations mean you speak to most of the room before lunch. Walking beside someone unlocks something that sitting opposite them does not. The walk ends at a table. Always a table someone has chosen for the warmth of the room and the quality of what is served.",acc:T.gold},
             {name:"The Distance Day",freq:"Quarterly · Eight people, two cars",desc:"No flights. No passports. Two cars of four heading to the Cotswolds, the Kent coast, or a harbour town nobody suggested before. Ninety minutes in a car with one other person is a conversation format nothing else replicates. You arrive at a harbour restaurant or a farmhouse kitchen as people who already know each other. The destination is chosen for the quality of the table at the end.",acc:T.copper},
           ].map((f,i)=><Rv key={i} delay={i*120}>
             <div className="hl" style={{background:T.bg,border:`1px solid ${f.acc}12`,padding:"clamp(32px,4vh,40px) clamp(24px,3vw,32px)",height:"100%",display:"flex",flexDirection:"column"}}>
@@ -220,7 +220,7 @@ export default function ProgrammePage() {
         <div style={{textAlign:"center",marginBottom:"clamp(32px,4vh,44px)"}}>
           <Lbl>The Societies</Lbl>
           <h2 style={{fontFamily:F.display,fontSize:"clamp(22px,3vw,32px)",fontWeight:400,fontStyle:"italic",lineHeight:1.15,color:T.cream,marginBottom:14}}>Member-held. Self-governing.<br/><em style={{color:T.rose}}>Open to the Circle.</em></h2>
-          <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"44ch",margin:"0 auto"}}>Standing groups that meet on their own rhythm. Kept by a member. Held to The Standard. The ?use provides the framework. The people provide the reason.</p>
+          <p style={{fontFamily:F.body,fontSize:"clamp(12px,2.8vw,13px)",fontWeight:300,lineHeight:2,color:TX.onDarkSub,maxWidth:"44ch",margin:"0 auto"}}>Standing groups that meet on their own rhythm. Kept by a member. Held to The Standard. The Ɔuse provides the framework. The people provide the reason.</p>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:"clamp(10px,1.5vw,18px)",maxWidth:720,margin:"0 auto"}} className="g2">
           {[
@@ -258,12 +258,12 @@ export default function ProgrammePage() {
           >Composed by Gigi Brown</Link>
         </div>
         <p style={{fontFamily:F.display,fontSize:"clamp(18px,2.5vw,24px)",fontWeight:400,fontStyle:"italic",lineHeight:1.45,color:T.copperDk,marginBottom:12}}>Twelve formats. One city for now.<br/>The next room is being composed.</p>
-        <p style={{fontFamily:F.body,fontSize:11,fontWeight:300,color:"rgba(13,1,24,.25)",fontStyle:"italic",marginBottom:28,maxWidth:"38ch",margin:"0 auto 28px"}}>Social architecture for people who have outgrown networking. Every room you enter makes the next one richer.</p>
+        <p style={{fontFamily:F.body,fontSize:11,fontWeight:300,color:"rgba(13,1,24,.25)",fontStyle:"italic",marginBottom:28,maxWidth:"38ch",margin:"0 auto 28px"}}>Social architecture for people who have outgrown the rooms that go nowhere. Every room you enter makes the next one richer.</p>
         <Link href={getHref("apply")} {...hp} className="btn-shine" aria-label="Introduce yourself" style={{background:"rgba(13,1,24,.05)",cursor:"none",border:`1px solid rgba(13,1,24,.12)`,padding:"14px 40px",fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".3em",textTransform:"uppercase",color:T.copperDk,transition:"border-color .4s,background .4s,color .4s,opacity .4s",textDecoration:"none",display:"inline-block"}}
         onMouseEnter={e=>{setHov(true);e.target.style.background="rgba(13,1,24,.1)";}}
         onMouseLeave={e=>{setHov(false);e.target.style.background="rgba(13,1,24,.05)";}}
         >Introduce Yourself</Link>
-        <p style={{fontFamily:F.body,fontSize:10,fontWeight:300,color:TX.onCopperSub,marginTop:16,opacity:.5}}>No membership fee. You pay only for the rooms you attend. <Link href={getHref("book")} style={{cursor:"pointer",borderBottom:"1px solid rgba(13,1,24,.08)",textDecoration:"none",color:"inherit"}}>View the programme and prices</Link>.</p>
+        <p style={{fontFamily:F.body,fontSize:10,fontWeight:300,color:TX.onCopperSub,marginTop:16,opacity:.5}}>No membership fee. The full season is open. <Link href={getHref("book")} style={{cursor:"pointer",borderBottom:"1px solid rgba(13,1,24,.08)",textDecoration:"none",color:"inherit"}}>See the season</Link>.</p>
       </Rv></Mx>
     </section>
     </>

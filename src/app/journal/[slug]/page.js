@@ -54,14 +54,50 @@ export default async function JournalArticlePage({ params }) {
     JOURNAL_ARTICLES[(activeArticle + 2) % JOURNAL_ARTICLES.length],
   ];
 
+  const newsSchema = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    dateline: "London, United Kingdom",
+    articleSection: "Culture",
+    keywords: "private dining London, cultural salon, composed gathering, adult friendship, The House of Clio",
+    author: {
+      "@type": "Person",
+      "@id": "https://thehouseofclio.com/about/gigi-brown#person",
+      name: "Gigi Brown",
+    },
+    publisher: {
+      "@id": "https://thehouseofclio.com/#organization",
+      "@type": "Organization",
+      name: "The House of Clio",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://thehouseofclio.com/images/hoc-mark-v8.png",
+      },
+    },
+    datePublished: article.publishedAt || "2026-06-01",
+    dateModified: article.updatedAt || article.publishedAt || "2026-06-01",
+    mainEntityOfPage: `https://thehouseofclio.com/journal/${article.slug}`,
+    image: {
+      "@type": "ImageObject",
+      url: "https://thehouseofclio.com/og/hoc-og-journal.jpg",
+    },
+  };
+
   return (
-    <JournalArticleClient
-      article={article}
-      activeArticle={activeArticle}
-      totalArticles={JOURNAL_ARTICLES.length}
-      previous={previous}
-      next={next}
-      continueReading={continueReading}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }}
+      />
+      <JournalArticleClient
+        article={article}
+        activeArticle={activeArticle}
+        totalArticles={JOURNAL_ARTICLES.length}
+        previous={previous}
+        next={next}
+        continueReading={continueReading}
+      />
+    </>
   );
 }

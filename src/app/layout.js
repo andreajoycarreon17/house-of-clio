@@ -70,6 +70,11 @@ export default function RootLayout({ children }) {
       className={`${cormorant.variable} ${jost.variable} h-full antialiased`}
     >
       <head>
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         {/* JSON-LD Organisation schema for SEO and AIEO */}
         <script
           type="application/ld+json"
