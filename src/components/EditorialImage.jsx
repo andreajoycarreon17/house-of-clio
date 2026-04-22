@@ -12,6 +12,25 @@ import { useEffect, useState } from "react";
 
 const AKAN_O = String.fromCharCode(0x0186);
 
+// Registry of local image paths that are known to exist.
+// Add a path here once the file is placed in /public.
+// While absent, the component renders the placeholder without
+// attempting a network request (avoids SSR 404 noise in the terminal).
+const KNOWN_IMAGES = new Set([
+  // "/images/home/hero-room.jpg",
+  // "/images/home/empty-room.jpg",
+  // "/images/home/guests-evening.jpg",
+  // "/images/home/door-evening.jpg",
+]);
+
+function isAvailable(src) {
+  if (typeof src !== "string" || src.length === 0) return false;
+  // External URLs (http/https) are always attempted.
+  if (src.startsWith("http://") || src.startsWith("https://")) return true;
+  // Local paths: only attempt if registered above.
+  return KNOWN_IMAGES.has(src);
+}
+
 export default function EditorialImage({
   src,
   alt,
@@ -27,8 +46,7 @@ export default function EditorialImage({
   }, [src]);
 
   const wrapperClass = "clio-editorial clio-editorial--" + variant;
-  const hasValidSrc = typeof src === "string" && src.length > 0;
-  const showImage = hasValidSrc && !failed;
+  const showImage = isAvailable(src) && !failed;
 
   return (
     <figure className={wrapperClass} style={{ aspectRatio: ratio }}>

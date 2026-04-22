@@ -160,6 +160,10 @@ export default function TheHousePage() {
                 onMouseEnter={e => { setHov(true); e.target.style.borderBottomColor = T.rose; }}
                 onMouseLeave={e => { setHov(false); e.target.style.borderBottomColor = `${T.rose}40`; }}
               >Meet the host</Link>
+              <Link href="/glossary" {...hp} style={{ fontFamily: F.display, fontSize: "clamp(14px,3.2vw,16px)", fontWeight: 400, fontStyle: "italic", color: T.rose, cursor: "none", borderBottom: `1px solid ${T.rose}40`, paddingBottom: 3, transition: "border-color .3s", textDecoration: "none" }}
+                onMouseEnter={e => { setHov(true); e.target.style.borderBottomColor = T.rose; }}
+                onMouseLeave={e => { setHov(false); e.target.style.borderBottomColor = `${T.rose}40`; }}
+              >Glossary of terms</Link>
             </div>
           </Rv>
 

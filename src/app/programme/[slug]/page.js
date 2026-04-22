@@ -38,6 +38,20 @@ export async function generateMetadata({ params }) {
   };
 }
 
+function buildEventSchema(room) {
+  if (!room.eventSchema) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: `${room.title} — The House of Clio`,
+    description: room.description,
+    ...room.eventSchema,
+    organizer: {
+      "@id": "https://thehouseofclio.com/#organization",
+    },
+  };
+}
+
 export default async function ProgrammeRoomPage({ params }) {
   const { slug } = await params;
   const room = getProgrammeRoom(slug);
@@ -46,5 +60,17 @@ export default async function ProgrammeRoomPage({ params }) {
     notFound();
   }
 
-  return <ProgrammeRoomClient room={room} />;
+  const eventSchema = buildEventSchema(room);
+
+  return (
+    <>
+      {eventSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+        />
+      )}
+      <ProgrammeRoomClient room={room} />
+    </>
+  );
 }

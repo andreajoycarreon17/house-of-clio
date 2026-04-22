@@ -24,6 +24,15 @@ const PILLAR_SCHEMA = {
   image: { "@type": "ImageObject", url: "https://thehouseofclio.com/og/hoc-og-journal.jpg" },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://thehouseofclio.com" },
+    { "@type": "ListItem", position: 2, name: "Journal", item: "https://thehouseofclio.com/journal" },
+  ],
+};
+
 export const metadata = {
   title: "Journal",
   description: PAGE_META.journal.desc,
@@ -36,6 +45,10 @@ export default function Layout({ children }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(PILLAR_SCHEMA) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {children}
     </>

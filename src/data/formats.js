@@ -422,6 +422,26 @@ export const PROGRAMME_ROOMS = [
       "That is why lunch lands differently here. By the time everyone sits down, the room is already warm. The first friction has gone. People are speaking mid-thought rather than from zero.",
       "The First House is where the social architecture becomes visible. It proves that timing, sequence, and composition matter more than volume ever will.",
     ],
+    eventSchema: {
+      startDate: "2026-06-07T10:00:00+01:00",
+      endDate: "2026-06-07T15:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Private Venue, London",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/the-first-house",
+      },
+    },
   },
   {
     slug: "the-evening",
@@ -441,6 +461,26 @@ export const PROGRAMME_ROOMS = [
       "Profiles are read beforehand. The sequence of the table is deliberate. The pairings are chosen for surprise, not similarity.",
       "Because the room is never repeated, it carries the charge of a thing that can only happen once. That is what gives it its voltage.",
     ],
+    eventSchema: {
+      startDate: "2026-06-20T19:00:00+01:00",
+      endDate: "2026-06-20T23:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Private Dining Room, London",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/the-evening",
+      },
+    },
   },
   {
     slug: "the-supper-lecture",
@@ -460,6 +500,26 @@ export const PROGRAMME_ROOMS = [
       "That shared reference changes the first question, which changes the second hour, which changes the room.",
       "The best moments happen after the formal edge has disappeared and the speaker has become another person at the table.",
     ],
+    eventSchema: {
+      startDate: "2026-07-10T19:00:00+01:00",
+      endDate: "2026-07-10T23:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Private Venue, London",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/the-supper-lecture",
+      },
+    },
   },
   {
     slug: "city-escapes",
@@ -479,6 +539,26 @@ export const PROGRAMME_ROOMS = [
       "The city changes because the company changes it. Streets feel different when the people beside you were selected for the same room.",
       "The practical burden is removed so that attention can stay on the company, the access, and the feeling of being carried through a place well.",
     ],
+    eventSchema: {
+      startDate: "2026-09-18T18:00:00+01:00",
+      endDate: "2026-09-20T20:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Various Venues, Europe",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/city-escapes",
+      },
+    },
   },
   {
     slug: "grand-journeys",
@@ -498,6 +578,26 @@ export const PROGRAMME_ROOMS = [
       "Routes are field-tested. Access is personal. The table at the end of the day is as deliberate as the road that led there.",
       "Grand Journeys are where the architecture of the house leaves London and proves it can still hold in motion.",
     ],
+    eventSchema: {
+      startDate: "2026-10-08T09:00:00+01:00",
+      endDate: "2026-10-12T20:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Various Destinations",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/grand-journeys",
+      },
+    },
   },
   {
     slug: "the-private-house",
@@ -517,6 +617,26 @@ export const PROGRAMME_ROOMS = [
       "What changes is not the standard but the centre of gravity. The room is built around your world, then held to the same level of care as every house room.",
       "The result is not event planning. It is composition: a room designed to make the right people collide properly.",
     ],
+    eventSchema: {
+      startDate: "2026-10-22T19:00:00+01:00",
+      endDate: "2026-10-22T23:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Private Venue, London",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/the-private-house",
+      },
+    },
   },
   {
     slug: "the-annual-house",
@@ -536,6 +656,26 @@ export const PROGRAMME_ROOMS = [
       "Faces from separate tables recognise one another. Threads from different seasons suddenly connect. The room reveals the structure that has been built beneath it.",
       "It is the clearest demonstration that the programme is not a series of events. It is a living system.",
     ],
+    eventSchema: {
+      startDate: "2026-12-10T19:00:00+00:00",
+      endDate: "2026-12-10T23:30:00+00:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Private Venue, London",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/the-annual-house",
+      },
+    },
   },
 ];
 

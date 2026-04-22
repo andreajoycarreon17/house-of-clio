@@ -36,6 +36,7 @@ const nextConfig = {
   },
   images: {
     minimumCacheTTL: 60 * 60 * 24,
+    qualities: [75, 88],
     deviceSizes: [640, 750, 900, 1080, 1400],
     remotePatterns: [
       {

@@ -113,6 +113,22 @@ export const ORG_SCHEMA = {
   sameAs: ["https://instagram.com/thehouseofclio"],
 };
 
+export const WEBSITE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://thehouseofclio.com/#website",
+  name: BRAND_PLAIN,
+  url: "https://thehouseofclio.com",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://thehouseofclio.com/search?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 /* ===== BACKWARDS COMPATIBILITY ===== */
 // Keeps existing layout.js and page.js imports working
 export const META = {

@@ -9,6 +9,7 @@ import {
   BRAND_COPYRIGHT,
   BRAND_AKAN_NOTE,
   ORG_SCHEMA,
+  WEBSITE_SCHEMA,
 } from "@/lib/brand";
 
 /**
@@ -79,6 +80,11 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }}
+        />
+        {/* JSON-LD WebSite schema with SiteLinksSearchBox */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
         />
         <meta name="google-site-verification" content="wzrmM0jaPyBKtzL2rnUYA8VDIo34eY16T_EsEFDh0yA" />
       </head>

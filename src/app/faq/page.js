@@ -206,6 +206,44 @@ export default function QuestionsPage() {
                 </div>
               </article>
             ))}
+
+            {/* Glossary link */}
+            <div
+              style={{
+                paddingTop: 40,
+                borderTop: "1px solid rgba(90,53,117,.12)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "clamp(16px,3vw,20px)",
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  lineHeight: 1.6,
+                  color: "#3A1A4D",
+                  marginBottom: 16,
+                }}
+              >
+                Unfamiliar with a term?
+              </p>
+              <a
+                href="/glossary"
+                style={{
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: ".25em",
+                  textTransform: "uppercase",
+                  color: "#C9956C",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(201,149,108,.4)",
+                  paddingBottom: 3,
+                }}
+              >
+                Read the glossary of terms
+              </a>
+            </div>
           </div>
         </section>
       </main>

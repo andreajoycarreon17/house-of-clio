@@ -45,4 +45,8 @@
   <url>
     <loc>https://thehouseofclio.com/the-standard</loc>
   </url>
+  <url>
+    <loc>https://thehouseofclio.com/glossary</loc>
+    <priority>0.6</priority>
+  </url>
 </urlset>
