@@ -404,6 +404,46 @@ export function getJournalArticle(slug) {
 
 export const PROGRAMME_ROOMS = [
   {
+    slug: "inaugural-table",
+    index: "0",
+    title: "The Inaugural Table",
+    when: "2 June MMXXVI",
+    strap: "Twenty-five composed seats. The opening gathering of The House of Clio.",
+    kicker: "25 places · Nobu Portman Square · 2 June 2026",
+    accent: T.gold,
+    text: T.cream,
+    shell: `linear-gradient(145deg,${T.bg} 0%,${T.damson} 60%,#1E0628 100%)`,
+    description:
+      "The opening gathering of The House of Clio. A Mini Cooper urban rally through London followed by private dinner at Nobu Portman Square. Twenty-five composed seats. Every person selected. Every seat placed by hand. Every guest receives a written portrait of the room before they arrive. This evening will not be repeated. By introduction only.",
+    aside: "The room that started everything.",
+    detail: [
+      "A rally through the city first. Not a transfer. A shared experience that dissolves the formality before anyone sits down.",
+      "Then Nobu Portman Square. Twenty-five people who were chosen for the human chemistry they bring to a room. The seating composed with the same precision as the guest list.",
+      "This is the evening The House of Clio opens. The people in this room will be the first Circle. Everything that follows begins here.",
+    ],
+    eventSchema: {
+      startDate: "2026-06-02T19:00:00+01:00",
+      endDate: "2026-06-02T23:30:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Nobu Portman Square",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "22 Portman Square",
+          addressLocality: "London",
+          addressCountry: "GB",
+        },
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/LimitedAvailability",
+        url: "https://thehouseofclio.com/gatherings/inaugural-table",
+      },
+    },
+  },
+  {
     slug: "the-first-house",
     index: "I",
     title: "The First House",

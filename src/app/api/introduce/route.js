@@ -1,6 +1,43 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+async function saveToAirtable(fields) {
+  const token  = process.env.AIRTABLE_TOKEN;
+  const baseId = process.env.AIRTABLE_BASE_ID;
+
+  console.log("[introduce] saveToAirtable called");
+  console.log("[introduce] Env check: token exists?", !!token, "baseId exists?", !!baseId);
+
+  if (!token || !baseId) {
+    console.warn("[introduce] Airtable not configured — skipping CRM write");
+    return;
+  }
+
+  const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent("The Circle")}`;
+  console.log("[introduce] POST", url);
+  console.log("[introduce] fields:", JSON.stringify(fields));
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fields }),
+    });
+    const data = await res.json();
+    console.log("[introduce] Airtable response HTTP", res.status, JSON.stringify(data));
+    if (!res.ok) {
+      console.error("[introduce] Airtable error:", JSON.stringify(data));
+    } else {
+      console.log("[introduce] Airtable record created:", data.id);
+    }
+  } catch (err) {
+    console.error("[introduce] Airtable write failed:", err.message);
+  }
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -41,6 +78,16 @@ export async function POST(request) {
       formMode === "full" ? `\nForm: Full portrait` : `\nForm: Short introduction`,
       `\n---\nSent from thehouseofclio.com`,
     ].filter(Boolean).join("\n");
+
+    // Save to Airtable (non-blocking — email still sends even if this fails)
+    await saveToAirtable({
+      Name:     name,
+      Email:    email,
+      City:     city      || "",
+      Curiosity: curiosity || "",
+      Source:   "Website",
+      Status:   "Introduced",
+    });
 
     // Host notification
     await transporter.sendMail({
