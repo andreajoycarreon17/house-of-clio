@@ -9,7 +9,8 @@ function getStripe() {
   });
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://thehouseofclio.com";
+// For local testing, use localhost. For production, set NEXT_PUBLIC_SITE_URL env var
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 async function writeToAirtable({ formatId, formatName, name, email, phone, dietary, dietaryNotes, attending }) {
   const token  = process.env.AIRTABLE_TOKEN;
@@ -165,11 +166,8 @@ export async function POST(req) {
 
     const quantity = attending === "With a guest" ? 2 : 1;
 
-    // Write to Airtable and send email BEFORE returning the Stripe URL.
-    // If we do it after, the serverless function can be killed the moment
-    // the browser receives the URL and navigates away to Stripe.
-    await writeToAirtable({ formatId, formatName, name, email, phone, dietary, dietaryNotes, attending });
-    await sendConfirmationEmail({ name, email, formatName, attending, phone, dietary });
+    // NOTE: Airtable records and emails are now handled by the webhook
+    // after successful payment. This prevents creating records for unpaid bookings.
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

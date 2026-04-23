@@ -86,10 +86,65 @@ async function sendEmails({ name, email, formatName, attending, phone, dietary, 
   });
 }
 
+async function findExistingGathering(stripeSessionId) {
+  const token  = process.env.AIRTABLE_TOKEN;
+  const baseId = process.env.AIRTABLE_BASE_ID;
+
+  if (!token || !baseId) return null;
+
+  try {
+    const formula = encodeURIComponent(`{Stripe Session} = "${stripeSessionId}"`);
+    const res = await fetch(
+      `https://api.airtable.com/v0/${baseId}/${encodeURIComponent("Gatherings")}?filterByFormula=${formula}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await res.json();
+    if (res.ok && data.records && data.records.length > 0) {
+      return data.records[0];
+    }
+  } catch (err) {
+    console.error("[webhook] Error finding existing gathering:", err.message);
+  }
+  return null;
+}
+
+async function updateAirtableRecord(recordId, table, fields) {
+  const token  = process.env.AIRTABLE_TOKEN;
+  const baseId = process.env.AIRTABLE_BASE_ID;
+
+  if (!token || !baseId) throw new Error("Airtable not configured");
+
+  const res = await fetch(
+    `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}/${recordId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fields }),
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) {
+    console.error(`[webhook] Airtable update error (${table}):`, JSON.stringify(data));
+    throw new Error(data?.error?.message || "Airtable update error");
+  }
+  console.log(`[webhook] Airtable record updated in ${table}:`, data.id);
+  return data;
+}
+
 export async function POST(req) {
+  console.log("[webhook] ===== WEBHOOK RECEIVED =====");
+  
   const stripe = getStripe();
   const body = await req.text();
   const sig  = req.headers.get("stripe-signature");
+
+  console.log("[webhook] Signature present:", !!sig);
+  console.log("[webhook] Webhook secret configured:", !!process.env.STRIPE_WEBHOOK_SECRET);
 
   let event;
   try {
@@ -98,56 +153,108 @@ export async function POST(req) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
+    console.log("[webhook] ✅ Signature verified successfully");
   } catch (err) {
-    console.error("[webhook] Signature verification failed:", err.message);
+    console.error("[webhook] ❌ Signature verification failed:", err.message);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
+  console.log("[webhook] Event type:", event.type);
+  console.log("[webhook] Event ID:", event.id);
+
+  // Handle payment state events
+  const handledEvents = [
+    "checkout.session.completed",
+    "checkout.session.async_payment_failed",
+    "checkout.session.expired",
+    "payment_intent.payment_failed"
+  ];
+
+  if (handledEvents.includes(event.type)) {
     const session = event.data.object;
     const meta    = session.metadata || {};
 
+    console.log("[webhook] 📦 Session ID:", session.id);
+    console.log("[webhook] 📦 Metadata:", JSON.stringify(meta, null, 2));
+    console.log("[webhook] 💰 Amount:", session.amount_total);
+
+    // Determine payment status based on event type
+    let paymentStatus = "";
+    if (event.type === "checkout.session.completed") {
+      paymentStatus = "Paid";
+    } else if (event.type === "checkout.session.async_payment_failed" || 
+               event.type === "payment_intent.payment_failed") {
+      paymentStatus = "Failed";
+    } else if (event.type === "checkout.session.expired") {
+      paymentStatus = "Expired";
+    }
+
+    console.log(`[webhook] Processing ${event.type} → ${paymentStatus} for session ${session.id}`);
+
     try {
-      // 1. Create person record in The Circle (identity only — no booking details)
-      const person = await airtablePost("The Circle", {
-        Name:   meta.name,
-        Email:  meta.email,
-        Source: "Website",
-        Status: "Active",
-      });
+      // Check if gathering already exists (upsert logic)
+      const existingGathering = await findExistingGathering(session.id);
 
-      // 2. Create gathering record (booking details including dietary/phone)
-      await airtablePost("Gatherings", {
-        Format:           meta.formatName,
-        "Format ID":      meta.formatId,
-        Person:           [person.id],
-        Attending:        meta.attending       || "Alone",
-        "Payment Status": "Paid",
-        Amount:           (session.amount_total || 0) / 100,
-        "Stripe Session": session.id,
-        ...(meta.phone ? { Phone: String(meta.phone) } : {}),
-        ...(meta.dietary && JSON.parse(meta.dietary).length > 0 ? { Dietary: JSON.parse(meta.dietary) } : {}),
-        ...(meta.dietaryNotes ? { "Dietary Notes": meta.dietaryNotes } : {}),
-      });
+      if (existingGathering) {
+        // Update existing record with new payment status
+        console.log(`[webhook] Updating existing gathering ${existingGathering.id}`);
+        await updateAirtableRecord(existingGathering.id, "Gatherings", {
+          "Payment Status": paymentStatus,
+          Amount:           (session.amount_total || 0) / 100,
+        });
+      } else {
+        // Create new records (person + gathering)
+        console.log(`[webhook] Creating new records for ${meta.name}`);
 
-      // 3. Send confirmation emails
-      await sendEmails({
-        name:       meta.name,
-        email:      meta.email,
-        formatName: meta.formatName,
-        attending:  meta.attending,
-        phone:      meta.phone,
-        dietary:    meta.dietary ? JSON.parse(meta.dietary) : [],
-        amount:     session.amount_total || 0,
-      });
+        // 1. Create person record in The Circle (identity only — no booking details)
+        const person = await airtablePost("The Circle", {
+          Name:   meta.name,
+          Email:  meta.email,
+          Source: "Website",
+          Status: "Active",
+        });
 
-      console.log(`[webhook] Processed: ${meta.formatName} for ${meta.name}`);
+        // 2. Create gathering record (booking details including dietary/phone)
+        const gatheringFields = {
+          Format:           meta.formatName,
+          "Format ID":      meta.formatId,
+          Person:           [person.id],
+          Attending:        meta.attending       || "Alone",
+          "Payment Status": paymentStatus,
+          Amount:           (session.amount_total || 0) / 100,
+          "Stripe Session": session.id,
+          ...(meta.phone ? { Phone: String(meta.phone) } : {}),
+          ...(meta.dietary && JSON.parse(meta.dietary).length > 0 ? { Dietary: JSON.parse(meta.dietary) } : {}),
+          ...(meta.dietaryNotes ? { "Dietary Notes": meta.dietaryNotes } : {}),
+        };
+
+        await airtablePost("Gatherings", gatheringFields);
+      }
+
+      // 3. Send confirmation emails ONLY for successful payments
+      if (paymentStatus === "Paid") {
+        await sendEmails({
+          name:       meta.name,
+          email:      meta.email,
+          formatName: meta.formatName,
+          attending:  meta.attending,
+          phone:      meta.phone,
+          dietary:    meta.dietary ? JSON.parse(meta.dietary) : [],
+          amount:     session.amount_total || 0,
+        });
+      }
+
+      console.log(`[webhook] Successfully processed: ${meta.formatName} for ${meta.name} (${paymentStatus})`);
     } catch (err) {
-      console.error("[webhook] Processing error:", err.message);
+      console.error("[webhook] ❌ Processing error:", err.message);
+      console.error("[webhook] Error stack:", err.stack);
       // Return 200 so Stripe does not retry — log the error for manual review
       return NextResponse.json({ received: true, warning: err.message });
     }
+  } else {
+    console.log("[webhook] ℹ️ Unhandled event type:", event.type);
   }
 
+  console.log("[webhook] ===== WEBHOOK COMPLETE =====");
   return NextResponse.json({ received: true });
 }
