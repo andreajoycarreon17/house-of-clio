@@ -4,13 +4,19 @@ const nextConfig = {
   reactCompiler: true,
   async redirects() {
     return [
+      // Page renames
       { source: "/the-house", destination: "/about", statusCode: 301 },
+      { source: "/house", destination: "/about", statusCode: 301 },
       { source: "/programme", destination: "/gatherings", statusCode: 301 },
       { source: "/programme/:path*", destination: "/gatherings/:path*", statusCode: 301 },
+      { source: "/exchange", destination: "/gatherings", statusCode: 301 },
       { source: "/questions", destination: "/faq", statusCode: 301 },
       { source: "/apply", destination: "/introduce-yourself", statusCode: 301 },
       { source: "/founder", destination: "/about/gigi-brown", statusCode: 301 },
       { source: "/the-circle", destination: "/circle", statusCode: 301 },
+      // Blog → Journal
+      { source: "/blog", destination: "/journal", statusCode: 301 },
+      { source: "/blog/:slug", destination: "/journal/:slug", statusCode: 301 },
     ];
   },
   async headers() {

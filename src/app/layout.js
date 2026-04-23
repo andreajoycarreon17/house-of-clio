@@ -1,6 +1,7 @@
 import "./globals.css";
 import SiteShell from "@/components/layout/site-shell";
 import ClioCursor from "@/components/layout/ClioCursor";
+import { WebVitals } from "@/components/web-vitals";
 import { cormorant, jost } from "@/lib/fonts";
 import {
   BRAND_PLAIN,
@@ -71,6 +72,10 @@ export default function RootLayout({ children }) {
       className={`${cormorant.variable} ${jost.variable} h-full antialiased`}
     >
       <head>
+        {/* hreflang — London (en-GB) + Dublin expansion (en-IE) + x-default */}
+        <link rel="alternate" hrefLang="en-GB" href="https://thehouseofclio.com" />
+        <link rel="alternate" hrefLang="en-IE" href="https://thehouseofclio.com/dublin" />
+        <link rel="alternate" hrefLang="x-default" href="https://thehouseofclio.com" />
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -96,6 +101,7 @@ export default function RootLayout({ children }) {
 
         <ClioCursor />
         <SiteShell>{children}</SiteShell>
+        <WebVitals />
 
         {/* AIEO hidden entity paragraph for AI crawlers */}
         <div
