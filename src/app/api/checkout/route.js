@@ -10,7 +10,7 @@ function getStripe() {
 }
 
 // For local testing, use localhost. For production, set NEXT_PUBLIC_SITE_URL env var
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://thehouseofclio.com"
 
 async function writeToAirtable({ formatId, formatName, name, email, phone, dietary, dietaryNotes, attending }) {
   const token  = process.env.AIRTABLE_TOKEN;
