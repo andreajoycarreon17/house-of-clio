@@ -12,6 +12,7 @@ export const routeMap = {
   "members": "/members",
   "privacy": "/privacy",
   "terms": "/terms",
+  "corrections": "/corrections",
   "book": "/book",
   "conduct": "/the-standard"
 };

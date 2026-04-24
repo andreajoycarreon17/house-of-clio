@@ -188,7 +188,7 @@ export default function Footer() {
 
         {/* Legal links */}
         <div style={{ display: "flex", gap: 24, alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-          {[["Privacy", "privacy"], ["Terms", "terms"]].map(([label, key]) => (
+          {[["Privacy", "privacy"], ["Terms", "terms"], ["Corrections", "corrections"]].map(([label, key]) => (
             <Link
               key={key}
               href={getHref(key)}
