@@ -14,6 +14,8 @@ import Footer from "./footer";
 import Nav from "./nav";
 import PageShell from "./page-shell";
 import { SiteChromeContext } from "./site-context";
+import { ExitIntent } from "@/components/ExitIntent";
+import { ScrollCTA } from "@/components/ScrollCTA";
 
 export default function SiteShell({ children }) {
   const pathname = usePathname();
@@ -200,6 +202,8 @@ export default function SiteShell({ children }) {
             </svg>
           </button>
           <CookieBanner cookieOk={cookieOk} setCookieOk={setCookieOk} />
+          <ExitIntent />
+          <ScrollCTA />
         </div>
       </SiteChromeContext.Provider>
     </>

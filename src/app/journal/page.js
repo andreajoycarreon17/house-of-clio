@@ -9,6 +9,7 @@ import { getHref } from "@/lib/routes";
 import { CM, F, IMG, Lbl, Mx, RealImg, Rv, Sec, T, TX } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
 import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export default function JournalPage() {
   const router = useRouter();
@@ -167,9 +168,8 @@ export default function JournalPage() {
         <Mx w={440}>
           <Rv>
             <div style={{ fontFamily: F.display, fontSize: 18, fontWeight: 400, fontStyle: "italic", color: T.cream, marginBottom: 12 }}>The Journal is written for the House. If this is how you see the world, stay close.</div>
-            <div style={{ display: "flex", gap: 8, maxWidth: 340, margin: "0 auto" }}>
-              <input type="email" placeholder="Your email" autoComplete="email" aria-label="Email for occasional letters" style={{ flex: 1, background: "rgba(250,244,238,.04)", border: `1px solid ${T.rose}20`, padding: "11px 14px", fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 300, color: T.cream, outline: "none" }} onFocus={(e) => { e.target.style.borderColor = `${T.rose}50`; }} onBlur={(e) => { e.target.style.borderColor = `${T.rose}20`; }} />
-              <button type="button" style={{ background: T.copper, border: "none", padding: "11px 18px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: T.cream, cursor: "pointer", flexShrink: 0 }}>Receive</button>
+            <div style={{ maxWidth: 340, margin: "0 auto" }}>
+              <NewsletterSignup variant="dark" />
             </div>
           </Rv>
         </Mx>

@@ -48,6 +48,7 @@ function ApplyForm() {
   const [formData, setFormData] = useState({ name: "", email: "", city: "", curiosity: "", referral: "" });
   const [formErrors, setFormErrors] = useState({});
   const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formMode, setFormMode] = useState("short");
   const [checks, setChecks] = useState([false, false, false, false, false]);
   const toggleCheck = (i) => setChecks((prev) => { const next = [...prev]; next[i] = !next[i]; return next; });
@@ -71,8 +72,17 @@ function ApplyForm() {
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
+
+    // Honeypot — if filled, silently discard (bot)
+    if (formData._hp) {
+      router.push("/apply/received");
+      return;
+    }
+
     trackInteraction("form_submit", formMode);
     setSending(true);
+    setSubmitError("");
+
     try {
       const res = await fetch("/api/introduce", {
         method: "POST",
@@ -84,14 +94,22 @@ function ApplyForm() {
           formMode,
         }),
       });
+
       if (res.ok) {
-        setSubmitted(true);
-      } else {
-        const data = await res.json();
-        alert(data.message || "Something went wrong. Please email hello@thehouseofclio.com directly.");
+        router.push("/apply/received");
+        return;
       }
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.status === 429) {
+        setSubmitError("Please wait a moment before trying again.");
+        return;
+      }
+
+      setSubmitError(data.message || "Something went wrong. Write to gigi@thehouseofclio.com directly.");
     } catch {
-      alert("Something went wrong. Please email hello@thehouseofclio.com directly.");
+      setSubmitError("Something went wrong. Write to gigi@thehouseofclio.com directly.");
     } finally {
       setSending(false);
     }
@@ -186,6 +204,17 @@ function ApplyForm() {
 
                 {formMode === "short" && <>
                   <div style={{backgroundColor:"#fff",border: `1px solid rgba(160,80,37,.06)`, padding: "clamp(36px,4vw,48px)", marginBottom: 2,}}>
+                    {/* Honeypot — hidden from real users, catches bots */}
+                    <input
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      value={formData._hp || ""}
+                      onChange={e => updateField("_hp", e.target.value)}
+                      style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                    />
                     <div className="g2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 36px" }}>
                       <div style={{ marginBottom: 32 }}><label style={ls}>Name</label><input aria-label="Your name" value={formData.name} onChange={e => updateField("name", e.target.value)} placeholder="As you would introduce yourself" autoComplete="name" aria-required="true" id="clio-name" style={{ ...is, borderBottomColor: formErrors.name ? T.err : "rgba(160,80,37,.12)" }} className="input-glow" onFocus={fc} onBlur={bl} />{formErrors.name && <div style={errS}>{formErrors.name}</div>}</div>
                       <div style={{ marginBottom: 32 }}><label style={ls}>Email</label><input aria-label="Email address" type="email" autoComplete="email" value={formData.email} onChange={e => updateField("email", e.target.value)} placeholder="For our reply only" style={{ ...is, borderBottomColor: formErrors.email ? T.err : "rgba(160,80,37,.12)" }} className="input-glow" onFocus={fc} onBlur={bl} />{formErrors.email && <div style={errS}>{formErrors.email}</div>}</div>
@@ -196,7 +225,10 @@ function ApplyForm() {
                   </div>
 
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: T.bg, border: `1px solid rgba(201,149,108,.06)`, padding: "28px clamp(36px,4vw,48px)" }}>
-                    <p style={{ fontFamily: F.display, fontSize: 15, fontWeight: 400, fontStyle: "italic", color: "rgba(250,244,238,.6)", maxWidth: 340 }}>{sending ? "Composing your introduction..." : "Your words will be read by a person."}</p>
+                    <div>
+                      <p style={{ fontFamily: F.display, fontSize: 15, fontWeight: 400, fontStyle: "italic", color: "rgba(250,244,238,.6)", maxWidth: 340 }}>{sending ? "Composing your introduction..." : "Your words will be read by a person."}</p>
+                      {submitError && <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 400, color: T.err, marginTop: 8, maxWidth: 340 }}>{submitError}</p>}
+                    </div>
                     <button type="button" aria-label="Submit" {...hp} className="hl" style={{ background: "none", cursor: "none", border: `1px solid rgba(201,149,108,.25)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: T.rose, transition: "border-color .4s,background .4s,color .4s,opacity .4s", flexShrink: 0, opacity: sending ? .5 : 1 }} onClick={() => { if (window.clioData) window.clioData.interactions.push({ type: 'form_submit', page: 'apply', ts: Date.now() }); handleSubmit(); }} disabled={sending} onMouseEnter={e => { if (!sending) { setHov(true); e.target.style.background = "rgba(201,149,108,.06)"; } }} onMouseLeave={e => { setHov(false); e.target.style.background = "none"; }}>{sending ? "Composing..." : "Send"}</button>
                   </div>
 
@@ -284,6 +316,7 @@ function ApplyForm() {
                     <div style={{ maxWidth: 400 }}>
                       <p style={{ fontFamily: F.display, fontSize: 17, fontWeight: 400, fontStyle: "italic", color: "rgba(250,244,238,.6)", lineHeight: 1.5, marginBottom: 6 }}>{sending ? "Composing your portrait..." : "Your words will be read by a person."}</p>
                       <p style={{ fontFamily: F.body, fontSize: 11, fontWeight: 400, color: "rgba(250,244,238,.35)" }}>Your words will be read by a person, not a system.</p>
+                      {submitError && <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 400, color: T.err, marginTop: 10 }}>{submitError}</p>}
                     </div>
                     <button type="button" aria-label="Submit full portrait" {...hp} className="hl" style={{ background: "none", cursor: "none", border: `1px solid rgba(201,149,108,.25)`, padding: "18px 48px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: T.rose, transition: "border-color .4s,background .4s,color .4s,opacity .4s", flexShrink: 0, opacity: sending ? .5 : 1 }} onClick={handleSubmit} disabled={sending} onMouseEnter={e => { if (!sending) { setHov(true); e.target.style.background = "rgba(201,149,108,.06)"; } }} onMouseLeave={e => { setHov(false); e.target.style.background = "none"; }}>{sending ? "Composing..." : "Submit Portrait"}</button>
                   </div>

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useSiteChrome } from "@/components/layout/site-context";
 import { BTN, F, Mx, Rv, Sec, T, TX } from "@/components/shared";
 import { BRAND_AKAN } from "@/lib/brand";
+import { JOURNAL_ARTICLES } from "@/data/formats";
+import { JournalRecommendations } from "@/components/JournalRecommendations";
 
 // Reading time calculation: 200 words per minute
 function readingTime(bodyArray) {
@@ -115,6 +117,17 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
           </Rv>
 
           <Rv delay={100}>
+            <div style={{ marginTop: 56 }}>
+              {/* Behavioural recommendations — same-category articles first */}
+              <JournalRecommendations
+                currentSlug={article.slug}
+                allArticles={JOURNAL_ARTICLES}
+                category={article.tag}
+              />
+            </div>
+          </Rv>
+
+          <Rv delay={120}>
             <div style={{ marginTop: 56 }}>
               <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: 0.45, marginBottom: 20, textAlign: "center" }}>The Conversation Continues</div>
               <div className="g2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "clamp(12px,2vw,20px)" }}>

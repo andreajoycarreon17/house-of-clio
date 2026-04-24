@@ -10,38 +10,14 @@ import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import { BRAND_AKAN, BRAND_AKAN_UPPER, BRAND_EST } from "@/lib/brand";
 import EditorialImage from "@/components/EditorialImage";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { getTestimonialsForPage } from "@/data/testimonials";
+import { Testimonials } from "@/components/Testimonials";
 
 
 export default function HomePage() {
   const router = useRouter();
   const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
-  const [nlEmail, setNlEmail] = useState("");
-  const [nlLoading, setNlLoading] = useState(false);
-  const [nlMessage, setNlMessage] = useState(null); // { text, ok }
-
-  const handleNewsletter = async () => {
-    if (!nlEmail.trim()) return;
-    setNlLoading(true);
-    setNlMessage(null);
-    try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: nlEmail }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setNlMessage({ text: "You are on the list.", ok: true });
-        setNlEmail("");
-      } else {
-        setNlMessage({ text: data.message || "Something went wrong.", ok: false });
-      }
-    } catch {
-      setNlMessage({ text: "Something went wrong. Please try again.", ok: false });
-    } finally {
-      setNlLoading(false);
-    }
-  };
 
 
   return (
@@ -118,6 +94,13 @@ export default function HomePage() {
             ratio="21/9"
             priority
           />
+        </Mx>
+      </section>
+
+      {/* Founding member testimonials */}
+      <section style={{ background: T.bg2 }}>
+        <Mx w={900}>
+          <Testimonials category="founding_member" limit={3} />
         </Mx>
       </section>
 
@@ -275,34 +258,9 @@ export default function HomePage() {
           <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: .45, marginBottom: 14 }}>Stay Close</div>
           <h2 style={{ fontFamily: F.display, fontSize: "clamp(20px,2.5vw,28px)", fontWeight: 400, fontStyle: "italic", color: T.cream, marginBottom: 12 }}>Notes from private rooms.</h2>
           <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 1.8, color: TX.onDarkMuted, maxWidth: 400, margin: "0 auto 20px" }}>Occasional letters on gathering, friendship, and the rooms that stay with people. Dispatches from the room.</p>
-          <div style={{ display: "flex", gap: 8, maxWidth: 360, margin: "0 auto" }}>
-            <input
-              type="email"
-              placeholder="Your email"
-              autoComplete="email"
-              aria-label="Email for occasional letters"
-              value={nlEmail}
-              onChange={e => setNlEmail(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && handleNewsletter()}
-              disabled={nlLoading}
-              style={{ flex: 1, background: "rgba(250,244,238,.04)", border: `1px solid ${T.rose}20`, padding: "12px 16px", fontFamily: F.body, fontSize: "clamp(11px,2.5vw,12px)", fontWeight: 300, color: T.cream, outline: "none", transition: "border-color .3s" }}
-              onFocus={e => e.target.style.borderColor = `${T.rose}50`}
-              onBlur={e => e.target.style.borderColor = `${T.rose}20`}
-            />
-            <button
-              type="button"
-              onClick={handleNewsletter}
-              disabled={nlLoading}
-              style={{ background: T.copper, border: "none", padding: "12px 20px", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".2em", textTransform: "uppercase", color: T.cream, cursor: nlLoading ? "default" : "pointer", transition: "background .3s", flexShrink: 0, opacity: nlLoading ? .6 : 1 }}
-              onMouseEnter={e => { if (!nlLoading) e.target.style.background = "rgba(160,80,37,.85)"; }}
-              onMouseLeave={e => e.target.style.background = T.copper}
-            >{nlLoading ? "..." : "Receive"}</button>
+          <div style={{ maxWidth: 360, margin: "0 auto" }}>
+            <NewsletterSignup variant="dark" />
           </div>
-          {nlMessage && (
-            <p style={{ fontFamily: F.body, fontSize: 11, fontWeight: 400, color: nlMessage.ok ? T.gold : T.rose, marginTop: 10, textAlign: "center" }}>
-              {nlMessage.text}
-            </p>
-          )}
           <p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, marginTop: 10, opacity: .5 }}>Letters only. Unsubscribe at any time.</p>
         </Rv></Mx>
       </section>
@@ -318,21 +276,21 @@ export default function HomePage() {
         </Mx>
       </section>
 
-      {/* Guest notes. social proof, anonymous */}
+      {/* Guest notes. social proof */}
       <section style={{ background: T.bg2, padding: "clamp(32px,4vh,48px) clamp(40px,6vw,80px)" }}>
         <Mx w={800}><Rv>
           <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: .4, textAlign: "center", marginBottom: 24, margin: "0 auto 24px" }}>From the Room</h2>
           <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,28px)" }}>
-            {[
-              { quote: "I have walked into a hundred rooms in this city. This was the first one where someone remembered my name the second time.", role: "A guest at the first table · London" },
-              { quote: "I came alone. I left with three people I now see monthly. That has never happened to me at any event in twenty years.", role: "A guest from the autumn season · London" },
-              { quote: "My wife said: you came home different. I think she meant more alive.", role: "Husband of a member · London" },
-            ].map((g, i) => <div key={i} style={{ borderLeft: `1px solid ${T.gold}20`, paddingLeft: 16 }}>
-              <p style={{ fontFamily: F.display, fontSize: "clamp(12px,3vw,14px)", fontWeight: 400, fontStyle: "italic", color: TX.onDarkSub, lineHeight: 1.55, marginBottom: 10 }}>"{g.quote}"</p>
-              <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.gold, opacity: .5, letterSpacing: ".1em" }}>{g.role}</div>
-            </div>)}
+            {getTestimonialsForPage(3, 0).map((g) => (
+              <div key={g.id} style={{ borderLeft: `1px solid ${T.gold}20`, paddingLeft: 16 }}>
+                <p style={{ fontFamily: F.display, fontSize: "clamp(12px,3vw,14px)", fontWeight: 400, fontStyle: "italic", color: TX.onDarkSub, lineHeight: 1.55, marginBottom: 10 }}>"{g.quote}"</p>
+                <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.gold, opacity: .5, letterSpacing: ".1em" }}>
+                  {g.name} · {g.location}
+                </div>
+              </div>
+            ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 16 }}><p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, fontStyle: "italic" }}>Shared with permission. Names withheld.</p></div>
+          <div style={{ textAlign: "center", marginTop: 16 }}><p style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, fontStyle: "italic" }}>Shared with permission.</p></div>
         </Rv></Mx>
       </section>
 

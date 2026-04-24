@@ -89,7 +89,7 @@ export default function FounderPage() {
                       { t: null },
                       { t: "Someone good to spend time with.", s: "e" },
                       { t: null },
-                      { t: "I have spent twenty years reading rooms in Dubai, Accra, Marrakech, and London. I speak three languages. I cook from two continents. I carry Ga warmth and Akan precision and the Italian conviction that nothing worth composing should ever feel rushed. I know how to place a retired general beside a poet of twenty three and watch three hours disappear. That is not a skill you learn in a course. It is a life spent paying attention to what happens when the right people are in the same room.", s: "b" },
+                      { t: "I have spent twenty years reading rooms in Dubai, Accra, Marrakech, and London. I speak three languages. I cook from two continents. I carry Ga warmth and Akan precision and the Italian conviction that nothing worth composing should ever feel rushed. That is not a skill you learn in a course. It is a life spent paying attention to what happens when the right people are in the same room.", s: "b" },
                       { t: null },
                       { t: <>The {AKAN_O}use is not my first room. It is the room I have been composing my entire life.</>, s: "e" },
                     ].map((ln, i) => {

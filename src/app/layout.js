@@ -12,6 +12,7 @@ import {
   ORG_SCHEMA,
   WEBSITE_SCHEMA,
 } from "@/lib/brand";
+import { SEOHead } from "@/components/SEOHead";
 
 /**
  * METADATA CONFIGURATION
@@ -92,6 +93,8 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
         />
         <meta name="google-site-verification" content="wzrmM0jaPyBKtzL2rnUYA8VDIo34eY16T_EsEFDh0yA" />
+        {/* Speculation Rules — prerender moderate for instant navigation */}
+        <SEOHead page="/" />
       </head>
       <body className="min-h-full">
         {/* Skip link for keyboard accessibility */}

@@ -7,6 +7,8 @@ import { useSiteChrome } from "@/components/layout/site-context";
 import { CW, FAQ_DATA, FOUNDERS } from "@/data/formats";
 import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
+import { Testimonials } from "@/components/Testimonials";
+import { ProgrammeComparison } from "@/components/ProgrammeComparison";
 
 export default function ProgrammePage() {
   const router = useRouter();
@@ -34,6 +36,17 @@ export default function ProgrammePage() {
     {/* Atmospheric. a composed evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
       <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="21/9"/></Rv></Mx>
+    </section>
+
+    {/* Compare Formats */}
+    <section style={{background:T.bg2,padding:"clamp(32px,4vh,48px) clamp(40px,6vw,80px) 0"}}>
+      <Mx w={900}>
+        <Rv>
+          <div style={{display:"flex",justifyContent:"center"}}>
+            <ProgrammeComparison />
+          </div>
+        </Rv>
+      </Mx>
     </section>
 
     {/* === THE SEVEN ROOMS === */}
@@ -242,6 +255,13 @@ export default function ProgrammePage() {
       </Rv></Mx>
     </section>
 
+    {/* Testimonials — before closing CTA */}
+    <section style={{ background: T.bg2 }}>
+      <Mx w={900}>
+        <Testimonials limit={4} />
+      </Mx>
+    </section>
+
     {/* === CLOSING === */}
     <section style={{background:`linear-gradient(145deg,${T.copper},#C47A3A,#8A4A1A)`,padding:"clamp(48px,7vh,72px) clamp(40px,6vw,80px)",position:"relative",overflow:"hidden",textAlign:"center"}}>
       <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,${T.gold},${T.copper},transparent)`}}/>
@@ -258,7 +278,7 @@ export default function ProgrammePage() {
           >Composed by Gigi Brown</Link>
         </div>
         <p style={{fontFamily:F.display,fontSize:"clamp(18px,2.5vw,24px)",fontWeight:400,fontStyle:"italic",lineHeight:1.45,color:T.copperDk,marginBottom:12}}>Twelve formats. One city for now.<br/>The next room is being composed.</p>
-        <p style={{fontFamily:F.body,fontSize:11,fontWeight:300,color:"rgba(13,1,24,.25)",fontStyle:"italic",marginBottom:28,maxWidth:"38ch",margin:"0 auto 28px"}}>Social architecture for people who have outgrown the rooms that go nowhere. Every room you enter makes the next one richer.</p>
+        <p style={{fontFamily:F.body,fontSize:11,fontWeight:300,color:"rgba(13,1,24,.25)",fontStyle:"italic",marginBottom:28,maxWidth:"38ch",margin:"0 auto 28px"}}>Every room you enter makes the next one richer.</p>
         <Link href={getHref("apply")} {...hp} className="btn-shine" aria-label="Introduce yourself" style={{background:"rgba(13,1,24,.05)",cursor:"none",border:`1px solid rgba(13,1,24,.12)`,padding:"14px 40px",fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".3em",textTransform:"uppercase",color:T.copperDk,transition:"border-color .4s,background .4s,color .4s,opacity .4s",textDecoration:"none",display:"inline-block"}}
         onMouseEnter={e=>{setHov(true);e.target.style.background="rgba(13,1,24,.1)";}}
         onMouseLeave={e=>{setHov(false);e.target.style.background="rgba(13,1,24,.05)";}}
