@@ -76,11 +76,14 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
                         <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 400, color: TX.onLightMuted, opacity: 0.5 }}>{article.date}</div>
                       </div>
                       <h2 style={{ fontFamily: F.display, fontSize: "clamp(28px,4vw,40px)", fontWeight: 400, lineHeight: 1.15, color: T.bg, marginBottom: 10 }}>{article.title}</h2>
-                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onLightMuted, opacity: 0.5, letterSpacing: ".08em", marginBottom: 14 }}>
-                        By <a href="/about/gigi-brown" style={{ color: TX.onLightMuted, textDecoration: "none" }}>Gigi Brown</a>
-                        {" · "}<time dateTime={article.publishedAt || "2026-06-01"}>{article.date}</time>
-                        {" · "}{readingTime(article.body)}
-                      </div>
+                      <p style={{ fontFamily: F.body, fontSize: 13, color: "#C9956C", marginBottom: 14, opacity: 0.85 }}>
+                        By <a href="/about/gigi-brown" style={{ color: "#C9956C", textDecoration: "none" }}>Gigi Brown</a>
+                        {"\u00A0·\u00A0"}
+                        <time dateTime={article.publishedAt ? article.publishedAt.slice(0, 10) : "2026-06-01"}>
+                          {article.date}
+                        </time>
+                        {"\u00A0·\u00A0"}{readingTime(article.body)}
+                      </p>
                       <div style={{ width: 48, height: 2, background: T.copper }} />
                     </div>
                     {article.body.map((line, index) => {
@@ -109,6 +112,19 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
                           <div style={{ fontFamily: F.display, fontSize: 15, fontWeight: 400, color: TX.onLight, lineHeight: 1.3 }}>{next.title}</div>
                         </Link>
                       ) : <div style={{ flex: 1 }} />}
+                    </div>
+
+                    {/* Author card */}
+                    <div style={{ borderTop: "1px solid rgba(201,149,108,0.2)", paddingTop: 32, marginTop: 48 }}>
+                      <p style={{ fontFamily: F.body, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9956C", marginBottom: 12 }}>Written by</p>
+                      <p style={{ fontFamily: F.display, fontSize: 20, color: TX.onLight, marginBottom: 12 }}>
+                        <a href="/about/gigi-brown" style={{ color: TX.onLight, textDecoration: "none", borderBottom: "1px solid rgba(201,149,108,0.3)" }}>
+                          Gigi Brown, founder of The House of Clio
+                        </a>
+                      </p>
+                      <Link href="/gatherings" {...hp} style={{ fontFamily: F.body, fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: "#C9956C", textDecoration: "none" }}>
+                        View forthcoming gatherings
+                      </Link>
                     </div>
                   </article>
                 </div>

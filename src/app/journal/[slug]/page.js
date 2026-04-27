@@ -75,8 +75,8 @@ export default async function JournalArticlePage({ params }) {
         url: "https://thehouseofclio.com/images/hoc-mark-v8.png",
       },
     },
-    datePublished: article.publishedAt || "2026-06-01",
-    dateModified: article.updatedAt || article.publishedAt || "2026-06-01",
+    datePublished: article.publishedAt,
+    dateModified: article.publishedAt,
     mainEntityOfPage: `https://thehouseofclio.com/journal/${article.slug}`,
     image: {
       "@type": "ImageObject",

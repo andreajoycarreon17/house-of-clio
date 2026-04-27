@@ -110,7 +110,11 @@ export const ORG_SCHEMA = {
   foundingDate: "2026",
   founder: { "@type": "Person", name: "Gigi Brown", jobTitle: "Host" },
   address: { "@type": "PostalAddress", addressLocality: "London", addressCountry: "GB" },
-  sameAs: ["https://instagram.com/thehouseofclio"],
+  sameAs: [
+    "https://www.instagram.com/thehouseofclio",
+    "https://www.linkedin.com/company/thehouseofclio",
+    // "https://www.wikidata.org/wiki/Q139487777" ← uncomment after Gigi confirms entity screenshot
+  ],
 };
 
 export const WEBSITE_SCHEMA = {
