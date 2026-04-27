@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { useSiteChrome } from "@/components/layout/site-context";
@@ -7,6 +8,8 @@ import { BTN, F, Mx, Rv, Sec, T, TX } from "@/components/shared";
 import { BRAND_AKAN } from "@/lib/brand";
 import { JOURNAL_ARTICLES } from "@/data/formats";
 import { JournalRecommendations } from "@/components/JournalRecommendations";
+import { markArticleRead } from "@/lib/behavioral";
+import { addEngagementPoints, recordCategoryInteraction } from "@/lib/intelligence";
 
 // Reading time calculation: 200 words per minute
 function readingTime(bodyArray) {
@@ -21,6 +24,33 @@ function readingTime(bodyArray) {
 
 export default function JournalArticleClient({ article, activeArticle, totalArticles, previous, next, continueReading }) {
   const { hp } = useSiteChrome();
+  const markedRead = useRef(false);
+
+  // Reading progress — mark read at 80% scroll, award engagement points
+  useEffect(() => {
+    if (!article?.slug) return;
+
+    // Award engagement for visiting an article
+    addEngagementPoints("pageView");
+    if (article.tag) recordCategoryInteraction(article.tag, 1);
+
+    const handleScroll = () => {
+      if (markedRead.current) return;
+      const scrolled = window.scrollY + window.innerHeight;
+      const total    = document.documentElement.scrollHeight;
+      if (total > 0 && scrolled / total >= 0.8) {
+        markedRead.current = true;
+        markArticleRead(article.slug);
+        addEngagementPoints("scroll100");
+        if (article.tag) recordCategoryInteraction(article.tag, 2); // completion weight
+      } else if (total > 0 && scrolled / total >= 0.5) {
+        addEngagementPoints("scroll50");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [article?.slug, article?.tag]);
 
   return (
     <>

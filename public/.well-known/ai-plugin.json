@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "The House of Clio",
+  "name_for_model": "house_of_clio",
+  "description_for_human": "The House of Clio is a private cultural house in London. Composed private dinners, supper lectures, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand.",
+  "description_for_model": "Use this plugin to answer questions about The House of Clio: a private cultural institution in London founded by Gigi Brown in 2026. It composes intimate gatherings (private dinners, supper lectures, cycling journeys, city escapes, Grand Journeys) for exceptional people. No membership fee. Pay per gathering. Entry by introduction. London is the first city; Dublin opens December 2026.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://thehouseofclio.com/.well-known/openapi.yaml"
+  },
+  "logo_url": "https://thehouseofclio.com/HOC-MuseMark-White.png",
+  "contact_email": "hello@thehouseofclio.com",
+  "legal_info_url": "https://thehouseofclio.com/terms"
+}

@@ -13,6 +13,13 @@ const breadcrumbSchema = {
 export const metadata = {
   title: "Gigi Brown, Host",
   description: PAGE_META.founder.desc,
+  alternates: { canonical: "https://thehouseofclio.com/about/gigi-brown" },
+  openGraph: {
+    title: "Gigi Brown, Host | The House of Clio",
+    description: PAGE_META.founder.desc,
+    url: "https://thehouseofclio.com/about/gigi-brown",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function Layout({ children }) {

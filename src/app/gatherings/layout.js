@@ -12,6 +12,13 @@ const breadcrumbSchema = {
 export const metadata = {
   title: "The Programme",
   description: PAGE_META.programme.desc,
+  alternates: { canonical: "https://thehouseofclio.com/gatherings" },
+  openGraph: {
+    title: "The Programme | The House of Clio",
+    description: PAGE_META.programme.desc,
+    url: "https://thehouseofclio.com/gatherings",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function Layout({ children }) {

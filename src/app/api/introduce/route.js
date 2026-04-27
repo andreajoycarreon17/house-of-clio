@@ -34,10 +34,11 @@ export async function POST(request) {
     name,
     email,
     city,
-    curiosity,   // "What are you curious about right now"
-    referral,    // how they found us (string) OR boolean (referral=true from URL)
-    event,       // event slug from ?event= param
-    formMode,    // "short" | "full"
+    curiosity,
+    referral,
+    event,
+    formMode,
+    utm,         // UTM attribution data from client localStorage
 
     // Full form extras
     preferredName,
@@ -97,6 +98,12 @@ export async function POST(request) {
       "Referred By":      clean(referredBy),
       "Event Enquiry":    clean(event),
       "Form Mode":        formMode === "full" ? "Full Portrait" : "Short Introduction",
+
+      // UTM attribution
+      ...(utm?.utm_source   ? { "UTM Source":   String(utm.utm_source).substring(0, 200) }   : {}),
+      ...(utm?.utm_medium   ? { "UTM Medium":   String(utm.utm_medium).substring(0, 200) }   : {}),
+      ...(utm?.utm_campaign ? { "UTM Campaign": String(utm.utm_campaign).substring(0, 200) } : {}),
+      ...(utm?.referrer     ? { "Referrer":     String(utm.referrer).substring(0, 500) }     : {}),
 
       // Metadata
       "IP Address":   ip,

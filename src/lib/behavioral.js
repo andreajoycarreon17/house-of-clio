@@ -116,3 +116,74 @@ export function getRecommendations(currentSlug, allArticles) {
 
   return shuffled.slice(0, 3);
 }
+
+/* ═══════════════════════════════════════════════════════════
+   READING PROGRESS — mark articles read at 80% scroll
+   ═══════════════════════════════════════════════════════════ */
+
+const READ_KEY     = "clio_read_articles";
+const BOOKMARK_KEY = "clio_bookmarks";
+
+function readSet(key) {
+  if (typeof window === "undefined") return new Set();
+  try {
+    return new Set(JSON.parse(localStorage.getItem(key) || "[]"));
+  } catch { return new Set(); }
+}
+
+function writeSet(key, set) {
+  if (typeof window === "undefined") return;
+  try { localStorage.setItem(key, JSON.stringify([...set])); } catch { }
+}
+
+/**
+ * Mark an article as read (call when 80% scroll reached).
+ * @param {string} slug
+ */
+export function markArticleRead(slug) {
+  const read = readSet(READ_KEY);
+  read.add(slug);
+  writeSet(READ_KEY, read);
+}
+
+/**
+ * Return the set of read article slugs.
+ * @returns {Set<string>}
+ */
+export function getReadArticles() {
+  return readSet(READ_KEY);
+}
+
+/**
+ * Return completion stats: { read, total, pct }
+ * @param {Array} allArticles
+ */
+export function getCompletionStats(allArticles) {
+  const read  = readSet(READ_KEY);
+  const total = allArticles?.length ?? 0;
+  const count = [...read].filter(s => allArticles?.some(a => a.slug === s)).length;
+  return { read: count, total, pct: total > 0 ? Math.round((count / total) * 100) : 0 };
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOKMARKS — save for later
+   ═══════════════════════════════════════════════════════════ */
+
+export function toggleBookmark(slug) {
+  const bookmarks = readSet(BOOKMARK_KEY);
+  if (bookmarks.has(slug)) {
+    bookmarks.delete(slug);
+  } else {
+    bookmarks.add(slug);
+  }
+  writeSet(BOOKMARK_KEY, bookmarks);
+  return bookmarks.has(slug);
+}
+
+export function isBookmarked(slug) {
+  return readSet(BOOKMARK_KEY).has(slug);
+}
+
+export function getBookmarks() {
+  return [...readSet(BOOKMARK_KEY)];
+}

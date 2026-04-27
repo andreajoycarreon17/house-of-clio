@@ -37,6 +37,12 @@ export const metadata = {
   title: "Journal",
   description: PAGE_META.journal.desc,
   alternates: { canonical: "https://thehouseofclio.com/journal" },
+  openGraph: {
+    title: "The Clio Journal | Essays on Adult Friendship",
+    description: PAGE_META.journal.desc,
+    url: "https://thehouseofclio.com/journal",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function Layout({ children }) {

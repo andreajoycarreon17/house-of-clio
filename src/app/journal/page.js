@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -14,10 +15,22 @@ import { NewsletterSignup } from "@/components/NewsletterSignup";
 export default function JournalPage() {
   const router = useRouter();
   const { hp, setHov, trackInteraction } = useSiteChrome();
-  const go = (target) => router.push(getHref(target));
   const articles = JOURNAL_ARTICLES;
   const featuredArticle =
     articles.find((article) => article.slug === "the-seven-minutes-before-you-walk-in") || articles[0];
+
+  // Category filter state
+  const [activeFilter, setActiveFilter] = useState(null);
+
+  // Build unique category list with counts
+  const categories = articles.reduce((acc, a) => {
+    if (a.tag) acc[a.tag] = (acc[a.tag] || 0) + 1;
+    return acc;
+  }, {});
+
+  const filteredArticles = activeFilter
+    ? articles.filter((a) => a.tag === activeFilter)
+    : articles;
 
   const openArticle = (article) => {
     if (!article) return;
@@ -34,7 +47,7 @@ export default function JournalPage() {
   };
 
   return (
-    <>
+    <main id="main-content">
       <Sec bg={T.bg}>
         <Mx w={900}>
           <Rv>
@@ -138,10 +151,61 @@ export default function JournalPage() {
               <div style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: 0.5 }}>What the Room Has Taught Us</div>
               <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${T.gold}20,transparent)` }} />
             </div>
+
+            {/* Category filters */}
+            <div
+              role="group"
+              aria-label="Filter by category"
+              style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 32 }}
+            >
+              <button
+                type="button"
+                onClick={() => setActiveFilter(null)}
+                aria-pressed={activeFilter === null}
+                style={{
+                  background: activeFilter === null ? `rgba(201,149,108,.12)` : "none",
+                  border: `1px solid ${activeFilter === null ? T.rose : "rgba(201,149,108,.2)"}`,
+                  padding: "6px 14px",
+                  fontFamily: F.body,
+                  fontSize: "clamp(9px,1.8vw,10px)",
+                  fontWeight: 500,
+                  letterSpacing: ".2em",
+                  textTransform: "uppercase",
+                  color: activeFilter === null ? T.rose : TX.onDarkMuted,
+                  cursor: "none",
+                  transition: "border-color .3s,background .3s,color .3s",
+                }}
+              >
+                All ({articles.length})
+              </button>
+              {Object.entries(categories).map(([cat, count]) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveFilter(activeFilter === cat ? null : cat)}
+                  aria-pressed={activeFilter === cat}
+                  style={{
+                    background: activeFilter === cat ? `rgba(201,149,108,.12)` : "none",
+                    border: `1px solid ${activeFilter === cat ? T.rose : "rgba(201,149,108,.2)"}`,
+                    padding: "6px 14px",
+                    fontFamily: F.body,
+                    fontSize: "clamp(9px,1.8vw,10px)",
+                    fontWeight: 500,
+                    letterSpacing: ".2em",
+                    textTransform: "uppercase",
+                    color: activeFilter === cat ? T.rose : TX.onDarkMuted,
+                    cursor: "none",
+                    transition: "border-color .3s,background .3s,color .3s",
+                  }}
+                >
+                  {cat} ({count})
+                </button>
+              ))}
+            </div>
           </Rv>
 
           <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,24px)" }}>
-            {articles.map((article, index) => {
+            {filteredArticles.map((article, index) => {
               const isDark = article.dark !== false;
               return (
                 <Rv key={article.slug} delay={Math.min(index, 8) * 60}>
@@ -195,6 +259,6 @@ export default function JournalPage() {
           </Rv>
         </Mx>
       </section>
-    </>
+    </main>
   );
 }

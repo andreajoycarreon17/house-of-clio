@@ -44,12 +44,26 @@ const SPECULATION_RULES = {
 /**
  * Build a Next.js metadata object for a given page path.
  *
+ * Used in page/layout files to generate canonical, og:site_name, twitter:site.
+ *
  * Usage in any page or layout:
+ *   import { buildPageMetadata } from "@/components/SEOHead";
  *   export const metadata = buildPageMetadata("/journal");
  *   export const metadata = buildPageMetadata("/journal/my-slug", {
  *     title: "My Article | The Clio Journal",
  *     description: "...",
+ *     openGraph: { images: [{ url: "..." }] },
  *   });
+ *
+ * Already applied to:
+ *   - src/app/apply/layout.js
+ *   - src/app/faq/layout.js
+ *   - src/app/about/layout.js
+ *   - src/app/circle/layout.js
+ *   - src/app/gatherings/layout.js
+ *   - src/app/journal/layout.js
+ *   - src/app/founder/layout.js
+ *   - src/app/about/gigi-brown/layout.js
  *
  * @param {string} page       - Absolute path, e.g. "/journal"
  * @param {object} overrides  - Any valid Next.js Metadata fields

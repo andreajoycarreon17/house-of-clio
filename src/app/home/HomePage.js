@@ -12,16 +12,25 @@ import { BRAND_AKAN, BRAND_AKAN_UPPER, BRAND_EST } from "@/lib/brand";
 import EditorialImage from "@/components/EditorialImage";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { getTestimonialsForPage } from "@/data/testimonials";
-import { Testimonials } from "@/components/Testimonials";
 
 
 export default function HomePage() {
   const router = useRouter();
   const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
 
+  // Testimonial rotation — cycles every 8s, SSR-safe (starts at 0)
+  const [testimonialOffset, setTestimonialOffset] = useState(0);
+  const allTestimonials = getTestimonialsForPage(8, 0); // all 8
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTestimonialOffset((prev) => (prev + 3) % allTestimonials.length);
+    }, 8000);
+    return () => clearInterval(id);
+  }, [allTestimonials.length]);
+
 
   return (
-    <>
+    <main id="main-content">
       {/* Hero. Tarka depth + Huybrecht typography */}
       <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: `radial-gradient(ellipse at 50% 35%,#3A1248 0%,${T.damson} 25%,${T.bg2} 65%,#050008 100%)`, marginTop: -88 }}>
         <Orb color={T.rose} size="600px" top="-12%" left="-5%" delay={0} /><Orb color={T.gold} size="480px" top="50%" left="70%" delay={3} /><Orb color={T.copper} size="400px" top="65%" left="5%" delay={7} /><Orb color="#5B2D8E" size="350px" top="20%" left="50%" delay={10} />
@@ -94,13 +103,6 @@ export default function HomePage() {
             ratio="21/9"
             priority
           />
-        </Mx>
-      </section>
-
-      {/* Founding member testimonials */}
-      <section style={{ background: T.bg2 }}>
-        <Mx w={900}>
-          <Testimonials category="founding_member" limit={3} />
         </Mx>
       </section>
 
@@ -276,13 +278,13 @@ export default function HomePage() {
         </Mx>
       </section>
 
-      {/* Guest notes. social proof */}
+      {/* Guest notes. social proof — rotates every 8s */}
       <section style={{ background: T.bg2, padding: "clamp(32px,4vh,48px) clamp(40px,6vw,80px)" }}>
         <Mx w={800}><Rv>
           <h2 style={{ fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".4em", textTransform: "uppercase", color: T.gold, opacity: .4, textAlign: "center", marginBottom: 24, margin: "0 auto 24px" }}>From the Room</h2>
           <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,28px)" }}>
-            {getTestimonialsForPage(3, 0).map((g) => (
-              <div key={g.id} style={{ borderLeft: `1px solid ${T.gold}20`, paddingLeft: 16 }}>
+            {getTestimonialsForPage(3, testimonialOffset).map((g) => (
+              <div key={g.id} style={{ borderLeft: `1px solid ${T.gold}20`, paddingLeft: 16, transition: "opacity 0.6s ease" }}>
                 <p style={{ fontFamily: F.display, fontSize: "clamp(12px,3vw,14px)", fontWeight: 400, fontStyle: "italic", color: TX.onDarkSub, lineHeight: 1.55, marginBottom: 10 }}>"{g.quote}"</p>
                 <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: T.gold, opacity: .5, letterSpacing: ".1em" }}>
                   {g.name} · {g.location}
@@ -369,6 +371,6 @@ export default function HomePage() {
           </div>
         </Rv></Mx>
       </section>
-    </>
+    </main>
   );
 }

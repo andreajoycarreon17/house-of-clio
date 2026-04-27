@@ -9,6 +9,7 @@ import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import EditorialImage from "@/components/EditorialImage";
 import { BRAND_AKAN } from "@/lib/brand";
+import { getUTMData } from "@/lib/intelligence";
 
 // Slug → readable event label
 const EVENT_LABELS = {
@@ -45,13 +46,31 @@ function ApplyForm() {
   const { hp, setHov, mouse, ld, trackInteraction } = useSiteChrome();
   const go = (target) => router.push(getHref(target));
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", city: "", curiosity: "", referral: "" });
+
+  // Draft save — restore from localStorage on mount
+  const DRAFT_KEY = "clio_apply_draft";
+  const [formData, setFormData] = useState(() => {
+    if (typeof window === "undefined") return { name: "", email: "", city: "", curiosity: "", referral: "" };
+    try {
+      const saved = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
+      return saved || { name: "", email: "", city: "", curiosity: "", referral: "" };
+    } catch { return { name: "", email: "", city: "", curiosity: "", referral: "" }; }
+  });
   const [formErrors, setFormErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formMode, setFormMode] = useState("short");
   const [checks, setChecks] = useState([false, false, false, false, false]);
   const toggleCheck = (i) => setChecks((prev) => { const next = [...prev]; next[i] = !next[i]; return next; });
+
+  // Confidence message — derived from formData, re-computes on every render
+  const filledCount = [formData.name, formData.email, formData.city, formData.curiosity]
+    .filter((v) => v && v.trim().length > 0).length;
+  const confidenceMessage =
+    filledCount === 4 ? "Strong introduction. A person will read every word." :
+    filledCount === 3 ? "Almost there. Add one more detail." :
+    filledCount >= 1 ? "Keep going. The more you share, the better the room." :
+    "A person reads every word.";
 
   const validateForm = () => {
     const errors = {};
@@ -64,7 +83,15 @@ function ApplyForm() {
   };
 
   const updateField = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const next = { ...prev, [field]: value };
+      // Auto-save draft (exclude honeypot)
+      try {
+        const { _hp, ...saveable } = next;
+        localStorage.setItem("clio_apply_draft", JSON.stringify(saveable));
+      } catch { }
+      return next;
+    });
     if (formErrors[field]) {
       setFormErrors((prev) => { const next = { ...prev }; delete next[field]; return next; });
     }
@@ -92,10 +119,13 @@ function ApplyForm() {
           event: eventSlug || null,
           referral: isReferral,
           formMode,
+          utm: getUTMData(),
         }),
       });
 
       if (res.ok) {
+        // Clear draft on successful submission
+        try { localStorage.removeItem("clio_apply_draft"); } catch { }
         router.push("/apply/received");
         return;
       }
@@ -226,7 +256,7 @@ function ApplyForm() {
 
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: T.bg, border: `1px solid rgba(201,149,108,.06)`, padding: "28px clamp(36px,4vw,48px)" }}>
                     <div>
-                      <p style={{ fontFamily: F.display, fontSize: 15, fontWeight: 400, fontStyle: "italic", color: "rgba(250,244,238,.6)", maxWidth: 340 }}>{sending ? "Composing your introduction..." : "Your words will be read by a person."}</p>
+                      <p style={{ fontFamily: F.display, fontSize: 15, fontWeight: 400, fontStyle: "italic", color: "rgba(250,244,238,.6)", maxWidth: 340 }}>{sending ? "Composing your introduction..." : confidenceMessage}</p>
                       {submitError && <p style={{ fontFamily: F.body, fontSize: 12, fontWeight: 400, color: T.err, marginTop: 8, maxWidth: 340 }}>{submitError}</p>}
                     </div>
                     <button type="button" aria-label="Submit" {...hp} className="hl" style={{ background: "none", cursor: "none", border: `1px solid rgba(201,149,108,.25)`, padding: "16px 44px", fontFamily: F.body, fontSize: "clamp(10px,2.2vw,11px)", fontWeight: 500, letterSpacing: ".32em", textTransform: "uppercase", color: T.rose, transition: "border-color .4s,background .4s,color .4s,opacity .4s", flexShrink: 0, opacity: sending ? .5 : 1 }} onClick={() => { if (window.clioData) window.clioData.interactions.push({ type: 'form_submit', page: 'apply', ts: Date.now() }); handleSubmit(); }} disabled={sending} onMouseEnter={e => { if (!sending) { setHov(true); e.target.style.background = "rgba(201,149,108,.06)"; } }} onMouseLeave={e => { setHov(false); e.target.style.background = "none"; }}>{sending ? "Composing..." : "Send"}</button>

@@ -52,11 +52,14 @@ export const metadata = {
     siteName: BRAND_PLAIN,
     locale: "en_GB",
     type: "website",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: BRAND_PLAIN,
     description: BRAND_TAGLINE,
+    site: "@thehouseofclio",
+    images: ["https://thehouseofclio.com/og-default.png"],
   },
   robots: {
     index: true,

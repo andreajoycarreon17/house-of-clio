@@ -16,6 +16,7 @@ import PageShell from "./page-shell";
 import { SiteChromeContext } from "./site-context";
 import { ExitIntent } from "@/components/ExitIntent";
 import { ScrollCTA } from "@/components/ScrollCTA";
+import { captureUTM, captureReferrer, markReturningVisitor, addEngagementPoints } from "@/lib/intelligence";
 
 export default function SiteShell({ children }) {
   const pathname = usePathname();
@@ -40,6 +41,14 @@ export default function SiteShell({ children }) {
     try {
       setCookieOk(localStorage.getItem("clio-cookies") === "1");
     } catch { }
+  }, []);
+
+  // Bootstrap intelligence on first mount
+  useEffect(() => {
+    captureUTM();
+    captureReferrer();
+    markReturningVisitor();
+    addEngagementPoints("pageView");
   }, []);
 
   useEffect(() => {

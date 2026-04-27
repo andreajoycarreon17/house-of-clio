@@ -32,6 +32,13 @@ const localBizSchema = {
 export const metadata = {
   title: "The House",
   description: PAGE_META.house.desc,
+  alternates: { canonical: "https://thehouseofclio.com/about" },
+  openGraph: {
+    title: "The House | The House of Clio",
+    description: PAGE_META.house.desc,
+    url: "https://thehouseofclio.com/about",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
+  },
 };
 
 export default function Layout({ children }) {

@@ -9,6 +9,7 @@ import { getHref } from "@/lib/routes";
 import { BTN, Dv, F, GoldLine, IMG, ImgPlace, Lbl, MarkLayer, Mx, Orb, PersonSilhouette, RealImg, Rv, Sec, T, TX, CI, CM } from "@/components/shared";
 import { Testimonials } from "@/components/Testimonials";
 import { ProgrammeComparison } from "@/components/ProgrammeComparison";
+import { GatheringsCalendar } from "@/components/GatheringsCalendar";
 
 export default function ProgrammePage() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function ProgrammePage() {
   
 
   return (
-    <>
+    <main id="main-content">
 {/* === INTRO === */}
     <Sec bg={T.bg}>
       <Mx w={560}><Rv>
@@ -36,6 +37,16 @@ export default function ProgrammePage() {
     {/* Atmospheric. a composed evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
       <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="21/9"/></Rv></Mx>
+    </section>
+
+    {/* Upcoming gatherings calendar */}
+    <section style={{background:T.bg2,padding:"clamp(32px,4vh,48px) clamp(40px,6vw,80px) 0"}}>
+      <Mx w={900}>
+        <Rv>
+          <div style={{fontFamily:F.body,fontSize:"clamp(9px,2vw,10px)",fontWeight:500,letterSpacing:".4em",textTransform:"uppercase",color:T.gold,opacity:.45,marginBottom:20}}>Forthcoming Dates</div>
+          <GatheringsCalendar />
+        </Rv>
+      </Mx>
     </section>
 
     {/* Compare Formats */}
@@ -286,6 +297,6 @@ export default function ProgrammePage() {
         <p style={{fontFamily:F.body,fontSize:10,fontWeight:300,color:TX.onCopperSub,marginTop:16,opacity:.5}}>No membership fee. The full season is open. <Link href={getHref("book")} style={{cursor:"pointer",borderBottom:"1px solid rgba(13,1,24,.08)",textDecoration:"none",color:"inherit"}}>See the season</Link>.</p>
       </Rv></Mx>
     </section>
-    </>
+    </main>
   );
 }
