@@ -187,3 +187,40 @@ export function isBookmarked(slug) {
 export function getBookmarks() {
   return [...readSet(BOOKMARK_KEY)];
 }
+
+/* ═══════════════════════════════════════════════════════════
+   VIEW COUNT TRACKING — for "most read" social proof
+   ═══════════════════════════════════════════════════════════ */
+
+const VIEW_COUNT_KEY = "clio_view_counts";
+
+/**
+ * Increment the view count for an article.
+ * Stores { slug: { count, lastViewed } } in localStorage.
+ * @param {string} slug
+ */
+export function incrementViewCount(slug) {
+  if (typeof window === "undefined" || !slug) return;
+  try {
+    const counts = JSON.parse(localStorage.getItem(VIEW_COUNT_KEY) || "{}");
+    const entry  = counts[slug] || { count: 0, lastViewed: 0 };
+    counts[slug] = { count: entry.count + 1, lastViewed: Date.now() };
+    localStorage.setItem(VIEW_COUNT_KEY, JSON.stringify(counts));
+  } catch { /* quota */ }
+}
+
+/**
+ * Return the top N most-viewed article slugs.
+ * @param {number} n
+ * @returns {string[]}
+ */
+export function getMostViewedSlugs(n = 3) {
+  if (typeof window === "undefined") return [];
+  try {
+    const counts = JSON.parse(localStorage.getItem(VIEW_COUNT_KEY) || "{}");
+    return Object.entries(counts)
+      .sort((a, b) => b[1].count - a[1].count)
+      .slice(0, n)
+      .map(([slug]) => slug);
+  } catch { return []; }
+}

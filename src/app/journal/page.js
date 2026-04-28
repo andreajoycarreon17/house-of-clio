@@ -11,6 +11,100 @@ import { CM, F, IMG, Lbl, Mx, RealImg, Rv, Sec, T, TX } from "@/components/share
 import EditorialImage from "@/components/EditorialImage";
 import { BRAND_AKAN, AKAN_O } from "@/lib/brand";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import {
+  JournalCompletionMeter,
+  BookmarkButton,
+  MostReadBadge,
+  SavedArticlesSection,
+  useMostRead,
+} from "@/components/JournalMeta";
+
+const LAUNCH_UNLOCK_COUNT = 10;
+
+// ArticleCard must be defined OUTSIDE JournalPage so React treats it as a
+// stable component identity. Defining it inside causes remount on every render,
+// which breaks click handlers and violates the Rules of Hooks (useMostRead).
+function ArticleCard({ article, articleIndex, onOpen }) {
+  const isMostRead = useMostRead(article.slug);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const publishDate = article.publishedAt ? new Date(article.publishedAt) : null;
+  if (publishDate) publishDate.setHours(0, 0, 0, 0);
+
+  const isLocked =
+    articleIndex >= LAUNCH_UNLOCK_COUNT &&
+    publishDate !== null &&
+    publishDate > today;
+
+  const unlockLabel = isLocked && article.publishedAt
+    ? `Unlocks ${new Date(article.publishedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long" })}`
+    : null;
+
+  return (
+    <div
+      className="card-glow"
+      style={{
+        background: T.bg2,
+        border:     "1px solid rgba(201,149,108,.06)",
+        overflow:   "hidden",
+        position:   "relative",
+        opacity:    isLocked ? 0.55 : 1,
+        transition: "opacity .3s",
+      }}
+    >
+      {isMostRead && !isLocked && (
+        <div style={{ position: "absolute", top: 8, left: 8, zIndex: 2 }}>
+          <MostReadBadge />
+        </div>
+      )}
+      {isLocked && (
+        <div style={{
+          position:      "absolute",
+          top:           8,
+          right:         8,
+          zIndex:        2,
+          fontFamily:    F.body,
+          fontSize:      "clamp(7px,1.4vw,8px)",
+          fontWeight:    500,
+          letterSpacing: ".15em",
+          textTransform: "uppercase",
+          color:         TX.onDarkMuted,
+          background:    "rgba(14,1,19,.8)",
+          border:        "1px solid rgba(201,149,108,.15)",
+          padding:       "3px 8px",
+        }}>
+          {unlockLabel}
+        </div>
+      )}
+      <div
+        role={isLocked ? undefined : "button"}
+        tabIndex={isLocked ? -1 : 0}
+        aria-disabled={isLocked}
+        onKeyDown={(e) => { if (!isLocked && e.key === "Enter") onOpen(article); }}
+        onClick={() => { if (!isLocked) onOpen(article); }}
+        style={{ cursor: isLocked ? "default" : "pointer" }}
+      >
+        <EditorialImage
+          src={`/images/journal/${article.slug}.jpg`}
+          alt={article.title}
+          ratio="3/2"
+        />
+        <div style={{ padding: "20px 20px 16px", textAlign: "center" }}>
+          <div style={{ fontFamily: F.display, fontSize: "clamp(16px,1.6vw,20px)", fontWeight: 400, color: T.cream, lineHeight: 1.3, marginBottom: 10 }}>{article.title}</div>
+          <div style={{ width: 24, height: 1, background: `linear-gradient(90deg,${T.gold}40,${T.rose}20)`, margin: "0 auto 10px" }} />
+          <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, letterSpacing: ".1em" }}>{article.date}</div>
+        </div>
+      </div>
+      {!isLocked && (
+        <div style={{ padding: "0 20px 16px", display: "flex", justifyContent: "center" }}>
+          <BookmarkButton slug={article.slug} title={article.title} />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function JournalPage() {
   const router = useRouter();
@@ -152,6 +246,10 @@ export default function JournalPage() {
               <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${T.gold}20,transparent)` }} />
             </div>
 
+            {/* Completion meter + saved articles */}
+            <JournalCompletionMeter allArticles={articles} />
+            <SavedArticlesSection allArticles={articles} onOpen={openArticle} />
+
             {/* Category filters */}
             <div
               role="group"
@@ -207,20 +305,12 @@ export default function JournalPage() {
           <div className="g3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,2vw,24px)" }}>
             {filteredArticles.map((article, index) => {
               const isDark = article.dark !== false;
+              // Use the article's position in the full array for unlock logic,
+              // so filtering never accidentally unlocks a future article
+              const articleIndex = articles.indexOf(article);
               return (
                 <Rv key={article.slug} delay={Math.min(index, 8) * 60}>
-                  <div className="card-glow" role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === "Enter") e.currentTarget.click(); }} onClick={() => openArticle(article)} style={{ background: T.bg2, border: "1px solid rgba(201,149,108,.06)", cursor: "pointer", overflow: "hidden" }}>
-                    <EditorialImage
-                      src={`/images/journal/${article.slug}.jpg`}
-                      alt={article.title}
-                      ratio="3/2"
-                    />
-                    <div style={{ padding: "20px 20px 24px", textAlign: "center" }}>
-                      <div style={{ fontFamily: F.display, fontSize: "clamp(16px,1.6vw,20px)", fontWeight: 400, color: T.cream, lineHeight: 1.3, marginBottom: 10 }}>{article.title}</div>
-                      <div style={{ width: 24, height: 1, background: `linear-gradient(90deg,${T.gold}40,${T.rose}20)`, margin: "0 auto 10px" }} />
-                      <div style={{ fontFamily: F.body, fontSize: 10, fontWeight: 300, color: TX.onDarkMuted, letterSpacing: ".1em" }}>{article.date}</div>
-                    </div>
-                  </div>
+                  <ArticleCard article={article} articleIndex={articleIndex} onOpen={openArticle} />
                 </Rv>
               );
             })}

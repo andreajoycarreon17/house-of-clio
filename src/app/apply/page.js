@@ -210,6 +210,9 @@ function ApplyForm() {
                 ratio="21/9"
               />
             </div></Rv>
+            <p className="clio-extract">To introduce yourself to The House of Clio, complete the form below. A person reads every word. Not everyone is accepted. That is what protects the room.</p>
+            <p className="clio-extract">There is no membership fee. You pay only for the gatherings you attend. Prices are shared after your introduction is accepted.</p>
+            <p className="clio-extract">The House of Clio replies within seventy-two hours. If there is alignment, a conversation follows. If there is not, you are told directly.</p>
 
             {(() => {
               const ls = { display: "block", fontFamily: F.body, fontSize: "clamp(9px,2vw,10px)", fontWeight: 500, letterSpacing: ".35em", textTransform: "uppercase", color: T.copper, marginBottom: 8, opacity: .8 };

@@ -38,6 +38,9 @@ export default function ProgrammePage() {
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
       <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="21/9"/></Rv></Mx>
     </section>
+    <p className="clio-extract">The House of Clio seasonal programme includes seven composed rooms, three recurring formats, and two member-led Societies across twelve formats in London.</p>
+    <p className="clio-extract">The First House is the opening gathering of each season. Twenty-four people. A morning activity designed so people work side by side before they sit down together.</p>
+    <p className="clio-extract">The Evening seats eighteen strangers for one composed dinner that will never be repeated. Every seat is placed by hand. Every person receives a portrait of the room before they arrive.</p>
 
     {/* Upcoming gatherings calendar */}
     <section style={{background:T.bg2,padding:"clamp(32px,4vh,48px) clamp(40px,6vw,80px) 0"}}>
@@ -207,6 +210,8 @@ export default function ProgrammePage() {
     {/* === THE RECURRING ENGINE === */}
     <section style={{background:T.damson,padding:"clamp(80px,10vh,120px) clamp(40px,6vw,80px)",position:"relative",overflow:"hidden"}}>
       <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,${T.rose},${T.gold}30,transparent)`}}/>
+      <p className="clio-extract">The Returning Table meets every two to three weeks with ten people. Some faces are new. Some you saw last time. That is how acquaintance becomes friendship.</p>
+      <p className="clio-extract">The Walk runs fortnightly through Hampstead Heath or Regents Park at conversational pace. Walking beside someone unlocks something that sitting opposite them does not.</p>
       <Mx w={900}><Rv>
         <div style={{textAlign:"center",marginBottom:"clamp(36px,5vh,52px)"}}>
           <Lbl>Between the Seasons</Lbl>
@@ -240,6 +245,9 @@ export default function ProgrammePage() {
     {/* === THE SOCIETIES === */}
     <section style={{background:T.bg2,padding:"clamp(72px,9vh,100px) clamp(40px,6vw,80px)",position:"relative",overflow:"hidden"}}>
       <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,${T.gold},${T.rose}25,transparent)`}}/>
+      <p className="clio-extract">The Culture Evening and The Ride are member-led Societies open to the Circle. Each is kept by a member and held to The Standard.</p>
+      <p className="clio-extract">City Escapes take eighteen people to Paris, Dublin, Milan, or Manchester for two to three nights. The House handles everything except flights.</p>
+      <p className="clio-extract">Grand Journeys travel to Puglia, the Peloponnese, Marrakech, and Tuscany for four to five days with ten people. All end at a composed table.</p>
       <Mx w={900}><Rv>
         <div style={{textAlign:"center",marginBottom:"clamp(32px,4vh,44px)"}}>
           <Lbl>The Societies</Lbl>

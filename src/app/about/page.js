@@ -23,6 +23,9 @@ export default function TheHousePage() {
         <h1 style={{ fontFamily: F.display, fontSize: "clamp(36px,5vw,64px)", fontWeight: 400, lineHeight: .9, color: T.cream, marginBottom: 28 }}>The feeling of being<br /><em style={{ color: T.rose }}>in exactly the right room.</em></h1>
         <Dv w="56px" m="0 0 36px" />
         <p data-speakable="true" style={{ fontFamily: F.body, fontSize: 12, fontWeight: 300, lineHeight: 2, color: TX.onDarkMuted, maxWidth: "52ch", marginBottom: 32, letterSpacing: ".02em" }}>{BRAND_AKAN} is a private cultural house in London with a seasonal programme of twelve formats: composed private dinners, supper lectures, cycling journeys, city escapes, and Grand Journeys. Every guest is selected. Every seat is placed by hand. Every person receives a written portrait of the room before they arrive. No membership fee. You pay only for the rooms you attend. Each person admitted strengthens the room for everyone who follows. Composed by Gigi Brown.</p>
+        <p className="clio-extract">The House of Clio is a private cultural house in London. It is not a members club, not a networking club, and not a supper club.</p>
+        <p className="clio-extract">Before every gathering at The House of Clio, a host reads every profile and decides who sits beside whom. You arrive knowing who is in the room.</p>
+        <p className="clio-extract">The House of Clio has no fixed premises. Every gathering is held in the right venue for that specific composition of people.</p>
         <p style={{ fontFamily: F.body, fontSize: 17, fontWeight: 400, lineHeight: 2.2, color: TX.onDark, marginBottom: 24, maxWidth: "62ch" }}>You know the feeling. You are at a dinner and within twenty minutes you are leaning forward. Within an hour, you have forgotten your phone exists. Within three, you are walking home with an idea you did not have when you arrived. The food was secondary. The venue was forgettable. What you remember is what was said and who said it.</p>
         <p style={{ fontFamily: F.body, fontSize: 17, fontWeight: 400, lineHeight: 2.2, color: TX.onDark, marginBottom: 24, maxWidth: "62ch" }}>Most people assume that evening was an accident. It was not. It was composition. Someone chose who was in the room. Someone considered who should be placed beside whom. The {AKAN_O}use exists to produce that feeling reliably, through a seasonal programme of composed gatherings, supper lectures, and journeys. There is no building. The rooms change. The standard does not. The format travels to extraordinary spaces across the city and, in time, beyond it. You arrive curious. You leave changed. That is the mechanism.</p>
         <p style={{ fontFamily: F.display, fontSize: "clamp(18px,3.5vw,22px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.5, color: T.cream }}>London is the first city. Dublin is the second. Each new city opens only when the host, the room, and the circle are right. The programme is underway.</p>
@@ -130,6 +133,9 @@ export default function TheHousePage() {
       {/* IMAGE SLOT — Before A Note on Scale */}
       <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}>
+        <p className="clio-extract">The House of Clio uses a composition method: every guest is selected, every seat is placed by hand, and every person receives a written portrait of the room before they arrive.</p>
+        <p className="clio-extract">The House of Clio programme creates over forty touchpoints per year across twelve formats including dinners, lectures, walks, city escapes, and Grand Journeys.</p>
+        <p className="clio-extract">The House of Clio scales through hosts, not buildings. Each new city opens with a trained host who applies the same standard of composition.</p>
           <EditorialImage
             src="/images/house/conversation.jpg"
             alt="Conversation at a composed gathering. The House of Clio."

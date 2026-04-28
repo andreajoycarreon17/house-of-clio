@@ -34,9 +34,14 @@ export async function POST(req) {
 
     const quantity = attending === "With a guest" ? 2 : 1;
 
+    // Sanitize email — trim whitespace and normalize to lowercase
+    const sanitizedEmail = typeof email === "string" ? email.trim().toLowerCase() : undefined;
+
+    console.log("[checkout] Creating session for:", sanitizedEmail, "format:", formatName, "pence:", priceInPence);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      customer_email: email,
+      ...(sanitizedEmail ? { customer_email: sanitizedEmail } : {}),
       line_items: [
         {
           price_data: {

@@ -145,8 +145,32 @@ export function captureUTM() {
   if (!source && !medium && !campaign) return;
 
   const existing = lsGet(KEY_UTM, {});
+
+  // Preserve first-touch attribution separately
+  const firstTouch = existing.first_touch || (source || medium || campaign ? {
+    utm_source:   source   || null,
+    utm_medium:   medium   || null,
+    utm_campaign: campaign || null,
+    utm_term:     term     || null,
+    utm_content:  content  || null,
+    referrer:     document.referrer || null,
+    captured_at:  new Date().toISOString(),
+  } : null);
+
+  // Last-touch always overwrites with current params
+  const lastTouch = {
+    utm_source:   source   || null,
+    utm_medium:   medium   || null,
+    utm_campaign: campaign || null,
+    utm_term:     term     || null,
+    utm_content:  content  || null,
+    referrer:     document.referrer || null,
+    captured_at:  new Date().toISOString(),
+  };
+
   lsSet(KEY_UTM, {
     ...existing,
+    // Flat last-touch fields (backward-compatible)
     utm_source:   source   || existing.utm_source   || null,
     utm_medium:   medium   || existing.utm_medium   || null,
     utm_campaign: campaign || existing.utm_campaign || null,
@@ -154,6 +178,9 @@ export function captureUTM() {
     utm_content:  content  || existing.utm_content  || null,
     referrer:     existing.referrer || document.referrer || null,
     captured_at:  existing.captured_at || new Date().toISOString(),
+    // Structured first/last touch
+    first_touch:  firstTouch,
+    last_touch:   lastTouch,
   });
 }
 

@@ -148,6 +148,10 @@ export default function QuestionsPage() {
               The answers are direct. If something is not covered here, the
               contact page is open.
             </p>
+            <p className="clio-extract">The House of Clio has no membership fee. You pay only for the gatherings you attend.</p>
+            <p className="clio-extract">Entry to The House of Clio is by introduction or by introducing yourself through the website. A person reads every application.</p>
+            <p className="clio-extract">The House of Clio is based in London. Dublin is the second city, opening December 2026.</p>
+            <p className="clio-extract">The House of Clio was founded by Gigi Brown, born in Ghana and based in London, with twenty years composing rooms across three continents.</p>
           </div>
         </section>
 

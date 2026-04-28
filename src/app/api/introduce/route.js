@@ -84,61 +84,16 @@ export async function POST(request) {
   const baseId = process.env.AIRTABLE_BASE_ID;
 
   if (token && baseId) {
-    // Core fields always written
+    // Only write fields that exist in the Airtable "The Circle" table
+    // (per the handoff spec: Name, Email, City, Curiosity, Source, Status)
     const fields = {
-      Name:     clean(name),
-      Email:    clean(email),
-      City:     clean(city),
-      Source:   "Website",
-      Status:   "Introduced",
-
-      // Map apply-page field names to Airtable column names
-      "What Fascinates":  clean(curiosity),
-      "How Found Us":     clean(typeof referral === "string" ? referral : hearAboutUs),
-      "Referred By":      clean(referredBy),
-      "Event Enquiry":    clean(event),
-      "Form Mode":        formMode === "full" ? "Full Portrait" : "Short Introduction",
-
-      // UTM attribution
-      ...(utm?.utm_source   ? { "UTM Source":   String(utm.utm_source).substring(0, 200) }   : {}),
-      ...(utm?.utm_medium   ? { "UTM Medium":   String(utm.utm_medium).substring(0, 200) }   : {}),
-      ...(utm?.utm_campaign ? { "UTM Campaign": String(utm.utm_campaign).substring(0, 200) } : {}),
-      ...(utm?.referrer     ? { "Referrer":     String(utm.referrer).substring(0, 500) }     : {}),
-
-      // Metadata
-      "IP Address":   ip,
-      "User Agent":   ua.substring(0, 200),
-      "Submitted At": new Date().toISOString(),
+      Name:       clean(name),
+      Email:      clean(email),
+      Source:     "Website",
+      Status:     "Introduced",
+      ...(city      ? { City:     clean(city) }      : {}),
+      ...(curiosity ? { Curiosity: clean(curiosity) } : {}),
     };
-
-    // Full-form extras — only include when present
-    if (formMode === "full") {
-      Object.assign(fields, {
-        "Preferred Name":        clean(preferredName),
-        "LinkedIn":              clean(linkedin),
-        "Instagram":             clean(instagram),
-        "Subjects":              clean(subjects),
-        "Topic":                 clean(topic),
-        "Best People":           clean(bestPeople),
-        "Recent Conversation":   clean(recentConversation),
-        "Shaping Experience":    clean(shapingExperience),
-        "Perspective Place":     clean(perspectivePlace),
-        "Unexpected Fact":       clean(unexpectedFact),
-        "Drew You Here":         clean(drewYouHere),
-        "Brilliant Strangers":   clean(brilliantStrangers),
-        "Your Perspectives":     clean(yourPerspectives),
-        "Dinner Invites":        clean(dinnerInvites),
-        "Three Subjects":        clean(threeSubjects),
-        "Three Themes":          clean(threeThemes),
-        "Unusual Fact":          clean(unusualFact),
-        "Wish Question":         clean(wishQuestion),
-      });
-    }
-
-    // Remove empty strings so Airtable doesn't complain about blank fields
-    for (const key of Object.keys(fields)) {
-      if (fields[key] === "") delete fields[key];
-    }
 
     try {
       const aRes = await fetch(

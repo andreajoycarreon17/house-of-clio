@@ -9,6 +9,7 @@ import { BRAND_AKAN } from "@/lib/brand";
 import { JOURNAL_ARTICLES } from "@/data/formats";
 import { JournalRecommendations } from "@/components/JournalRecommendations";
 import { markArticleRead } from "@/lib/behavioral";
+import { incrementViewCount } from "@/lib/behavioral";
 import { addEngagementPoints, recordCategoryInteraction } from "@/lib/intelligence";
 
 // Reading time calculation: 200 words per minute
@@ -32,6 +33,7 @@ export default function JournalArticleClient({ article, activeArticle, totalArti
 
     // Award engagement for visiting an article
     addEngagementPoints("pageView");
+    incrementViewCount(article.slug);
     if (article.tag) recordCategoryInteraction(article.tag, 1);
 
     const handleScroll = () => {
