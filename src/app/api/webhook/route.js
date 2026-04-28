@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import nodemailer from "nodemailer";
 
-// Stripe client — lazy so env var is read at request time
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: "2024-04-10",
@@ -10,29 +9,36 @@ function getStripe() {
 }
 
 async function airtablePost(table, fields) {
-  // Read env vars inside the function — not at module load time
   const token  = process.env.AIRTABLE_TOKEN;
   const baseId = process.env.AIRTABLE_BASE_ID;
 
-  if (!token || !baseId) throw new Error("Airtable not configured");
+  console.log(`[webhook] airtablePost → table: "${table}"`);
+  console.log(`[webhook] AIRTABLE_TOKEN set: ${!!token} | AIRTABLE_BASE_ID set: ${!!baseId}`);
+  console.log(`[webhook] fields: ${JSON.stringify(fields)}`);
 
-  const res = await fetch(
-    `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ fields }),
-    }
-  );
+  if (!token || !baseId) throw new Error("Airtable not configured — missing TOKEN or BASE_ID");
+
+  const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`;
+  console.log(`[webhook] POST ${url}`);
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ fields }),
+  });
+
   const data = await res.json();
+  console.log(`[webhook] Airtable HTTP ${res.status} for "${table}": ${JSON.stringify(data)}`);
+
   if (!res.ok) {
-    console.error(`[webhook] Airtable error (${table}):`, JSON.stringify(data));
-    throw new Error(data?.error?.message || "Airtable error");
+    throw new Error(
+      `Airtable "${table}" failed (${res.status}): ${data?.error?.type} — ${data?.error?.message}`
+    );
   }
-  console.log(`[webhook] Airtable record created in ${table}:`, data.id);
+
   return data;
 }
 
@@ -50,7 +56,6 @@ async function sendEmails({ name, email, formatName, attending, phone, dietary, 
     auth: { user: SMTP_USER, pass: SMTP_PASS },
   });
 
-  // Guest confirmation
   await transporter.sendMail({
     from: `"The House of Clio" <gigi@thehouseofclio.com>`,
     to: email,
@@ -69,7 +74,6 @@ async function sendEmails({ name, email, formatName, attending, phone, dietary, 
     ].join("\n"),
   });
 
-  // Host notification
   await transporter.sendMail({
     from: `"System" <system@thehouseofclio.com>`,
     to: "gigi@thehouseofclio.com",
@@ -87,9 +91,14 @@ async function sendEmails({ name, email, formatName, attending, phone, dietary, 
 }
 
 export async function POST(req) {
+  console.log("[webhook] POST received");
+
   const stripe = getStripe();
   const body = await req.text();
   const sig  = req.headers.get("stripe-signature");
+
+  console.log(`[webhook] stripe-signature present: ${!!sig}`);
+  console.log(`[webhook] STRIPE_WEBHOOK_SECRET set: ${!!process.env.STRIPE_WEBHOOK_SECRET}`);
 
   let event;
   try {
@@ -98,6 +107,7 @@ export async function POST(req) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
+    console.log(`[webhook] Event verified: ${event.type} | id: ${event.id}`);
   } catch (err) {
     console.error("[webhook] Signature verification failed:", err.message);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
@@ -107,30 +117,39 @@ export async function POST(req) {
     const session = event.data.object;
     const meta    = session.metadata || {};
 
+    console.log(`[webhook] session.id: ${session.id}`);
+    console.log(`[webhook] session.amount_total: ${session.amount_total}`);
+    console.log(`[webhook] session.payment_status: ${session.payment_status}`);
+    console.log(`[webhook] metadata: ${JSON.stringify(meta)}`);
+
     try {
-      // 1. Create person record in The Circle (identity only — no booking details)
+      // 1. Create person in The Circle
       const person = await airtablePost("The Circle", {
         Name:   meta.name,
         Email:  meta.email,
         Source: "Website",
         Status: "Active",
       });
+      console.log(`[webhook] Circle record created: ${person.id}`);
 
-      // 2. Create gathering record (booking details including dietary/phone)
+      // 2. Create gathering record
       await airtablePost("Gatherings", {
         Format:           meta.formatName,
         "Format ID":      meta.formatId,
         Person:           [person.id],
-        Attending:        meta.attending       || "Alone",
+        Attending:        meta.attending || "Alone",
         "Payment Status": "Paid",
         Amount:           (session.amount_total || 0) / 100,
         "Stripe Session": session.id,
         ...(meta.phone ? { Phone: String(meta.phone) } : {}),
-        ...(meta.dietary && JSON.parse(meta.dietary).length > 0 ? { Dietary: JSON.parse(meta.dietary) } : {}),
+        ...(meta.dietary && JSON.parse(meta.dietary).length > 0
+          ? { Dietary: JSON.parse(meta.dietary) }
+          : {}),
         ...(meta.dietaryNotes ? { "Dietary Notes": meta.dietaryNotes } : {}),
       });
+      console.log(`[webhook] Gatherings record created`);
 
-      // 3. Send confirmation emails
+      // 3. Send emails
       await sendEmails({
         name:       meta.name,
         email:      meta.email,
@@ -141,12 +160,13 @@ export async function POST(req) {
         amount:     session.amount_total || 0,
       });
 
-      console.log(`[webhook] Processed: ${meta.formatName} for ${meta.name}`);
+      console.log(`[webhook] ✓ Fully processed: ${meta.formatName} for ${meta.name}`);
     } catch (err) {
       console.error("[webhook] Processing error:", err.message);
-      // Return 200 so Stripe does not retry — log the error for manual review
       return NextResponse.json({ received: true, warning: err.message });
     }
+  } else {
+    console.log(`[webhook] Ignoring event type: ${event.type}`);
   }
 
   return NextResponse.json({ received: true });
