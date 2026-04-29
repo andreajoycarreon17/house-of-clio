@@ -19,6 +19,12 @@ export const metadata = {
     url: "https://thehouseofclio.com/gatherings",
     images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Programme | The House of Clio",
+    description: PAGE_META.programme.desc,
+    images: ["https://thehouseofclio.com/og-default.png"],
+  },
 };
 
 export default function Layout({ children }) {

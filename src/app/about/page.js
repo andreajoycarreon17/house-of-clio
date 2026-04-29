@@ -35,7 +35,7 @@ export default function TheHousePage() {
       <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv>
           <EditorialImage
-            src="/images/house/composed-room.jpg"
+            src="/images/house/Option-2_hoc_Full-dinner-table_2.jpg"
             alt="A composed room at The House of Clio. Long table set. Candles lit."
             ratio="21/9"
           />
@@ -88,7 +88,7 @@ export default function TheHousePage() {
       {/* Atmospheric image */}
       <section style={{ padding: 0, background: T.bg2 }}>
         <EditorialImage
-          src="/images/house/guests-warm.jpg"
+          src="/images/house/hoc_The-Hand-at-Work_Photo-1.png"
           alt="Guests at an intimate gathering at The House of Clio. Warm light."
           ratio="21/9"
         />
@@ -137,7 +137,7 @@ export default function TheHousePage() {
         <p className="clio-extract">The House of Clio programme creates over forty touchpoints per year across twelve formats including dinners, lectures, walks, city escapes, and Grand Journeys.</p>
         <p className="clio-extract">The House of Clio scales through hosts, not buildings. Each new city opens with a trained host who applies the same standard of composition.</p>
           <EditorialImage
-            src="/images/house/conversation.jpg"
+            src="/images/house/hoc_scale-through-people.png"
             alt="Conversation at a composed gathering. The House of Clio."
             ratio="21/9"
           />

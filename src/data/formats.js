@@ -3,16 +3,16 @@ import { AKAN_O } from "@/lib/brand";
 
 const IMG = {
   table:    "/images/table.png",
-  dinner:   "/images/dinner.png",
-  candles:  "/images/candles.png",
+  dinner:   "/images/circle/hoc_dining-table_circle.png",
+  candles:  "/images/circle/hoc_letter-introduction.png",
   hands:    "/images/hands.png",
-  vineyard: "/images/vineyard.png",
+  vineyard: "/images/programme/option1_hoc_dinner-plate.png",
   door:     "/images/door.png",
-  wine:     "/images/wine.png",
-  courtyard:"/images/courtyard.png",
+  wine:     "/images/programme/hoc_dinner.png",
+  courtyard:"/images/programme/hoc_The-Evening.jpg",
   pen:      "/images/pen.png",
   coast:    "/images/coast.png",
-  dessert:  "/images/dessert.png",
+  dessert:  "/images/journal/hoc_Table-stubs_2.jpg",
   hallway:  "/images/hallway.png",
 };
 /* === DATA === */

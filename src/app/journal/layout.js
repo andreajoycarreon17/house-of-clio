@@ -43,6 +43,12 @@ export const metadata = {
     url: "https://thehouseofclio.com/journal",
     images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Clio Journal | Essays on Adult Friendship",
+    description: PAGE_META.journal.desc,
+    images: ["https://thehouseofclio.com/og-default.png"],
+  },
 };
 
 export default function Layout({ children }) {

@@ -36,7 +36,7 @@ export default function ProgrammePage() {
 
     {/* Atmospheric. a composed evening */}
     <section style={{background:T.bg2,padding:"0 clamp(40px,6vw,80px)"}}>
-      <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="21/9"/></Rv></Mx>
+      <Mx w={900}><Rv><RealImg src={IMG.wine} alt="Wine being poured at a composed gathering. The Ɔuse ɔf Clio, London." h={240} aspect="16/9"/></Rv></Mx>
     </section>
     <p className="clio-extract">The House of Clio seasonal programme includes seven composed rooms, three recurring formats, and two member-led Societies across twelve formats in London.</p>
     <p className="clio-extract">The First House is the opening gathering of each season. Twenty-four people. A morning activity designed so people work side by side before they sit down together.</p>

@@ -33,7 +33,7 @@ export default function ProgrammePage() {
 
       {/* Atmospheric. a composed evening */}
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
-        <Mx w={900}><Rv><RealImg src={IMG.wine} alt={`Wine being poured at a composed gathering. ${BRAND_AKAN}, London.`} h={240} aspect="21/9" /></Rv></Mx>
+        <Mx w={900}><Rv><RealImg src={IMG.wine} alt={`Wine being poured at a composed gathering. ${BRAND_AKAN}, London.`} h={240} aspect="16/9" /></Rv></Mx>
       </section>
 
       {/* === THE SEVEN ROOMS === */}

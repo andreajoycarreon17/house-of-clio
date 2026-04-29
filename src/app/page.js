@@ -3,10 +3,21 @@ import HomePage from "./home/HomePage";
  
 // Home uses absolute title — no template suffix needed
 export const metadata = {
-  title: {
-    absolute: PAGE_META.home.title,
-  },
+  title: "The House of Clio | Private Cultural House in London",
   description: PAGE_META.home.desc,
+  alternates: { canonical: "https://thehouseofclio.com" },
+  openGraph: {
+    title: "The House of Clio | Private Cultural House in London",
+    description: PAGE_META.home.desc,
+    url: "https://thehouseofclio.com",
+    images: [{ url: "https://thehouseofclio.com/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The House of Clio | Private Cultural House in London",
+    description: PAGE_META.home.desc,
+    images: ["https://thehouseofclio.com/og-default.png"],
+  },
 };
  
 export default function Page() {
@@ -31,5 +42,3 @@ export default function Page() {
     </>
   );
 }
- 
- 

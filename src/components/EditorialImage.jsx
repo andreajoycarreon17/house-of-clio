@@ -21,6 +21,13 @@ const KNOWN_IMAGES = new Set([
   // "/images/home/empty-room.jpg",
   // "/images/home/guests-evening.jpg",
   // "/images/home/door-evening.jpg",
+  "/images/home/hoc_public_images_table.png",
+  "/images/home/hoc_invitation-dining-table.png",
+  "/images/home/hoc-home-email-capture-accent-handwrittennote-01-var-a.jpg",
+  "/images/house/Option-2_hoc_Full-dinner-table_2.jpg",
+  "/images/house/hoc_The-Hand-at-Work_Photo-1.png",
+  "/images/house/hoc_scale-through-people.png",
+  "/images/journal/hoc_Open-notebook-overhead_2.jpg"
 ]);
 
 function isAvailable(src) {

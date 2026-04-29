@@ -127,19 +127,19 @@ export default function HomePage() {
       <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}>
           <EditorialImage
-            src="/images/home/empty-room.jpg"
+            src="/images/home/hoc_invitation-dining-table.png"
             alt="An empty room before the gathering. The House of Clio."
-            ratio="21/9"
+            // ratio="21/9"
           />
         </Mx>
       </section>
 
       {/* Atmospheric image. The room before everyone arrives */}
-      <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
+      {/* <section style={{ background: T.cream, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv>
           <RealImg src={IMG.table} alt={`Candlelit table for twelve at ${BRAND_AKAN}. Crystal, linen, low warmth.`} h={320} aspect="21/9" />
         </Rv></Mx>
-      </section>
+      </section> */}
 
       {/* How it works. The mechanism. */}
       <section style={{ background: T.cream, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px) clamp(56px,8vh,80px)" }}>
@@ -277,7 +277,7 @@ export default function HomePage() {
       <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}>
           <EditorialImage
-            src="/images/home/guests-evening.jpg"
+            src="/images/home/hoc_public_images_table.png"
             alt="Guests at a composed gathering. The House of Clio, London."
             ratio="21/9"
           />
@@ -353,7 +353,7 @@ export default function HomePage() {
       <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}>
           <EditorialImage
-            src="/images/home/door-evening.jpg"
+            src="/images/home/hoc-home-email-capture-accent-handwrittennote-01-var-a.jpg"
             alt="The entrance to a composed gathering at The House of Clio. London at dusk."
             ratio="21/9"
           />
