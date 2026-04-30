@@ -128,8 +128,9 @@ export default function HomePage() {
         <Mx w={900}>
           <EditorialImage
             src="/images/home/hoc_invitation-dining-table.png"
-            alt="An empty room before the gathering. The House of Clio."
-            // ratio="21/9"
+            alt="An envelope with a wax seal resting on a dining table set for the gathering. The House of Clio."
+            ratio="4/3"
+            objectPosition="40% 70%"
           />
         </Mx>
       </section>
@@ -319,9 +320,9 @@ export default function HomePage() {
       </section>
 
       {/* Atmospheric. a doorway, warm light beyond */}
-      <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
+      {/* <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv><RealImg src={IMG.door} alt={`Georgian townhouse door at dusk. The entrance to a composed gathering at ${BRAND_AKAN}.`} h={260} aspect="21/9" /></Rv></Mx>
-      </section>
+      </section> */}
 
       {/* Warming. explore the ?use */}
       <section style={{ background: T.bg2, padding: "clamp(28px,4vh,40px) clamp(40px,6vw,80px)" }}>

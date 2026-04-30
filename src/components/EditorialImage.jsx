@@ -45,6 +45,7 @@ export default function EditorialImage({
   priority = false,
   caption,
   variant = "full",
+  objectPosition = "center",
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -67,6 +68,7 @@ export default function EditorialImage({
           priority={priority}
           onError={() => setFailed(true)}
           className="clio-editorial__img"
+          style={{ objectPosition }}
         />
       ) : (
         <div className="clio-editorial__placeholder" aria-hidden="true">
