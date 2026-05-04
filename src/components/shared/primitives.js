@@ -196,7 +196,7 @@ function RealImg({ src, h = 280, alt = "", aspect, overlay = .15 }) {
     <div ref={r} style={{ height: aspect ? undefined : h, aspectRatio: aspect || undefined, position: "relative", overflow: "hidden", background: `linear-gradient(155deg,#120618,${T.damson},#0C0310)`, clipPath: visible ? "inset(0 0% 0 0)" : "inset(0 100% 0 0)", transition: visible ? "clip-path 1.4s cubic-bezier(.16,1,.3,1)" : "none" }}>
       {!failed && (
         <div style={{ position: "absolute", inset: "-20px 0", height: "calc(100% + 40px)", transform: `translateY(${offset}px)`, transition: "transform .1s linear", filter: "saturate(.85) contrast(1.05)" }}>
-          <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 900px" loading="eager" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} style={{ objectFit: "cover", objectPosition: "center" }} />
+          <Image src={src}  unoptimized alt={alt} fill sizes="(max-width: 768px) 100vw, 900px" loading="eager" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} style={{ objectFit: "cover", objectPosition: "center" }} />
         </div>
       )}
       {!failed && <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg,rgba(26,8,32,${overlay}),rgba(26,8,32,${overlay * .6}))`, pointerEvents: "none" }} />}

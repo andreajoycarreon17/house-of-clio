@@ -7,7 +7,7 @@ const IMG = {
   candles:  "/images/circle/hoc_letter-introduction.png",
   hands:    "/images/hands.png",
   vineyard: "/images/programme/option1_hoc_dinner-plate.png",
-  door:     "/images/door.png",
+  door:     "/images/home/hoc-home-email-capture-accent-handwrittennote-01-var-a.jpg",
   wine:     "/images/programme/hoc_dinner.png",
   courtyard:"/images/programme/hoc_The-Evening.jpg",
   pen:      "/images/pen.png",

@@ -320,9 +320,9 @@ export default function HomePage() {
       </section>
 
       {/* Atmospheric. a doorway, warm light beyond */}
-      {/* <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
+      <section style={{ background: T.bg2, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}><Rv><RealImg src={IMG.door} alt={`Georgian townhouse door at dusk. The entrance to a composed gathering at ${BRAND_AKAN}.`} h={260} aspect="21/9" /></Rv></Mx>
-      </section> */}
+      </section>
 
       {/* Warming. explore the ?use */}
       <section style={{ background: T.bg2, padding: "clamp(28px,4vh,40px) clamp(40px,6vw,80px)" }}>
@@ -351,7 +351,7 @@ export default function HomePage() {
       </section>
 
       {/* IMAGE SLOT 4 — Before footer CTA */}
-      <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
+      {/* <section style={{ background: T.bg, padding: "0 clamp(40px,6vw,80px)" }}>
         <Mx w={900}>
           <EditorialImage
             src="/images/home/hoc-home-email-capture-accent-handwrittennote-01-var-a.jpg"
@@ -359,7 +359,7 @@ export default function HomePage() {
             ratio="21/9"
           />
         </Mx>
-      </section>
+      </section> */}
 
       {/* CTA. copper for warmth */}
       <section style={{ background: `linear-gradient(160deg,${T.copper},#C47A3A,#8A4A1A)`, padding: "clamp(40px,5vh,56px) clamp(40px,6vw,80px)", textAlign: "center", position: "relative", overflow: "hidden" }}>

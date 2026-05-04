@@ -60,7 +60,8 @@ export default function EditorialImage({
     <figure className={wrapperClass} style={{ aspectRatio: ratio }}>
       {showImage ? (
         <Image
-          src={src}
+          src={src} 
+          unoptimized
           alt={alt || ""}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
